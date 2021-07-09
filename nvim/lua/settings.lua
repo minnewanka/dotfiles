@@ -91,7 +91,7 @@ command ToggleGStatus :call ToggleGStatus()
 ]], false)
 
 vim.api.nvim_exec([[
-au BufReadPost *.fish set syntax=fish
+au BufReadPost *.fish set filetype=fish
 ]], false)
 
 
