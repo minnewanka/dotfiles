@@ -5,18 +5,8 @@ hi! link GitSignsCurrentLineBlame Comment
 highlight link YankHighlight Visual
 highlight Comment cterm=italic gui=italic
 
-highlight link TelescopeSelection Blue
-highlight link TelescopeSelectionCaret Red
-highlight link TelescopeMatching Blue
-
-
-highlight! link LspSagaDiagnosticBorder Fg
-highlight! link LspSagaDiagnosticHeader Fg
-highlight! link LspSagaDiagnosticTruncateLine Fg
-highlight! link LspSagaHoverBorder Fg
-highlight! link LspSagaSignatureHelpBorder Fg
-
-highlight link NvimTreeFolderIcon Blue
+highlight link TelescopeSelection TSTextReference
+highlight link TelescopeSelectionCaret TSTextReference
 
 ]], false)
 
