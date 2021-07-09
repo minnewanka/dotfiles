@@ -1,0 +1,7 @@
+{
+    "Style": {
+        "Selected": ["underline", "on_cyan", "black"]
+    },
+    "SelectionPrefix": ">",
+     "Use256Color": true
+}
