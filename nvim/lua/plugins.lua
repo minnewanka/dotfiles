@@ -58,5 +58,6 @@ return require('packer').startup(function()
   use 'Pocco81/AutoSave.nvim'
   use 'folke/zen-mode.nvim'
   use 'kshenoy/vim-signature'
+  use 'glepnir/lspsaga.nvim'
 
   end)

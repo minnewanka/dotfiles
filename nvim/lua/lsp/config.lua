@@ -59,5 +59,8 @@ vim.api.nvim_set_keymap('n', 'K',  [[<Cmd>lua vim.lsp.buf.hover()<CR>]], { norem
 vim.api.nvim_set_keymap('n', 'gs',  [[<Cmd>lua vim.lsp.buf.signature_help()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'ge',  [[<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "single" })<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ca',  [[<Cmd>lua vim.lsp.buf.code_action()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>rr',  [[<Cmd>lua vim.lsp.buf.rename()<CR>]], { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>rr',  [[<Cmd>lua vim.lsp.buf.rename()<CR>]], { noremap = true, silent = true })
+
+--Saga
+vim.api.nvim_set_keymap('n', '<Leader>rr',  [[<Cmd>lua require('lspsaga.rename').rename()<CR>]], { noremap = true, silent = true })
 
