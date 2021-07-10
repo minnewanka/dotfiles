@@ -14,6 +14,7 @@ return require('packer').startup(function()
   use 'onsails/lspkind-nvim'
   use 'ray-x/lsp_signature.nvim'
 
+
   -- git
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
@@ -21,6 +22,7 @@ return require('packer').startup(function()
 
   use 'tpope/vim-surround'
   use 'tpope/vim-unimpaired'
+  use 'tpope/vim-repeat'
   use 'b3nj5m1n/kommentary'
 
   -- Telescope
@@ -28,7 +30,6 @@ return require('packer').startup(function()
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
  -- theme
-  use 'sainnhe/sonokai'
   use 'folke/tokyonight.nvim'
 
   use 'hoob3rt/lualine.nvim'
