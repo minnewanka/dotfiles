@@ -2,6 +2,7 @@ vim.cmd('set shortmess+=c')
 vim.cmd('syntax on')
 vim.cmd('set foldmethod=expr')
 vim.cmd('set foldexpr=nvim_treesitter#foldexpr()')
+vim.cmd ("set inccommand=split")
 
 vim.opt.number                    =       true
 vim.opt.relativenumber            =       true
