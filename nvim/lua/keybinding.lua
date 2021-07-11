@@ -2,7 +2,11 @@ vim.g.mapleader = ' '
 
 -- selection
 vim.api.nvim_set_keymap('i', '<C-j>', '<C-n>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-k>', '<C-p>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-k>', '<C-p>', { noremap = true })
+
+vim.api.nvim_set_keymap('c', '<C-k>', 'pumvisible() ? "<C-p>" : "<Up>"', { noremap = true, expr = true, silent = false})
+vim.api.nvim_set_keymap('c', '<C-j>', 'pumvisible() ? "<C-n>" : "<Down>"', { noremap = true, expr = true, silent = false})
+
 
 -- paste
 vim.api.nvim_set_keymap('v', '<leader>p', '"_dP', { noremap = true, silent = true })
