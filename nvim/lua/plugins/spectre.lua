@@ -9,5 +9,4 @@ require('spectre').setup({
 })
 
 -- keymapping
-vim.api.nvim_set_keymap('n', '<Leader>S',  [[<Cmd>lua require('spectre').open()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>s',  [[<Cmd>lua require('spectre').open_file_search()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>s',  [[<Cmd>lua require('spectre').open()<CR>]], { noremap = true, silent = true })
