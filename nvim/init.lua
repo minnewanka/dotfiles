@@ -2,7 +2,6 @@ require('plugins')
 require('settings')
 
 require('keybinding')
-require('colorscheme')
 require('highlight')
 
 require('lsp/config')
