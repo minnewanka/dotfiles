@@ -1,64 +1,248 @@
 return require('packer').startup(function()
 
-  use 'wbthomason/packer.nvim'
+    use 'wbthomason/packer.nvim'
 
-  -- common
-  use 'nvim-lua/popup.nvim'
-  use 'nvim-lua/plenary.nvim'
-  use 'kyazdani42/nvim-web-devicons'
+    -- common
+    use 'nvim-lua/popup.nvim'
+    use 'nvim-lua/plenary.nvim'
+    use 'kyazdani42/nvim-web-devicons'
 
-  -- lsp
-  use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'onsails/lspkind-nvim'
-  use 'ray-x/lsp_signature.nvim'
+    -- lsp
+    use 'neovim/nvim-lspconfig'
+    use{  'hrsh7th/nvim-compe',
+    event = "InsertEnter",
+    config = function()
+        require("plugins.compe")
+    end
+}
+use { 'nvim-treesitter/nvim-treesitter',
+run = ':TSUpdate',
+config = function()
+    require("plugins.tresitter")
+end
+
+}
+use {  'onsails/lspkind-nvim',
+config = function()
+    require('lspkind').init()
+end
+}
+use 'ray-x/lsp_signature.nvim'
 
 
-  -- git
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'
-  use 'lewis6991/gitsigns.nvim'
+-- git
+use { 'tpope/vim-fugitive'}
 
-  use 'tpope/vim-surround'
-  use 'tpope/vim-unimpaired'
-  use 'tpope/vim-repeat'
-  use 'b3nj5m1n/kommentary'
+use { 'tpope/vim-rhubarb',
+cmd = 'GBrowse'
+    }
+    use{  'lewis6991/gitsigns.nvim' ,
+    event = "BufRead",
+    config = function()
+        require("plugins.gitsigns")
+    end
+}
 
-  -- Telescope
-  use 'nvim-telescope/telescope.nvim'
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+use 'tpope/vim-surround'
+use 'tpope/vim-repeat'
+use 'tpope/vim-commentary'
 
- -- theme
-  use 'folke/tokyonight.nvim'
 
-  use 'hoob3rt/lualine.nvim'
-  use 'ggandor/lightspeed.nvim'
+-- Telescope
+use { 'nvim-telescope/telescope.nvim',
+requires = {'nvim-telescope/telescope-fzf-native.nvim'},
+config = function()
+    require("plugins.telescope")
+end
+}
 
-  use 'windwp/nvim-autopairs'
-  use 'windwp/nvim-ts-autotag'
-  use 'p00f/nvim-ts-rainbow'
+-- theme
+use 'folke/tokyonight.nvim'
+use 'sainnhe/gruvbox-material'
 
-  use 'kyazdani42/nvim-tree.lua'
-  use 'norcalli/nvim-colorizer.lua'
-  use 'kevinhwang91/nvim-bqf'
-  use 'numToStr/Navigator.nvim'
+use{  'hoob3rt/lualine.nvim' ,
+config = function()
+    require("plugins.lualine")
+end
+}
+use{  'ggandor/lightspeed.nvim' ,
+config = function()
+    require'lightspeed'.setup {
+        jump_to_first_match = true,
+        jump_on_partial_input_safety_timeout = 400,
+        highlight_unique_chars = false,
+        grey_out_search_area = true,
+        match_only_the_start_of_same_char_seqs = true,
+        limit_ft_matches = 5,
+        full_inclusive_prefix_key = '<c-x>',
+    }
+end
+}
 
-  -- snippets
-  use 'hrsh7th/vim-vsnip'
-  use 'rafamadriz/friendly-snippets'
+use {  'windwp/nvim-autopairs',
+config = function()
+    require('nvim-autopairs').setup()
+end
+}
+use {  'windwp/nvim-ts-autotag',
+ft = {'javascriptreact','typescriptreact','html'},
+config = function()
+    require('nvim-ts-autotag').setup()
+end
+    }
+    use 'p00f/nvim-ts-rainbow'
 
-  --rice
-  use 'lukas-reineke/indent-blankline.nvim'
+    use{  'kyazdani42/nvim-tree.lua' ,
+    config = function()
+        local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
-  -- tools
-  use 'windwp/nvim-spectre'
-  use 'mbbill/undotree'
-  use "akinsho/nvim-toggleterm.lua"
-  use 'ThePrimeagen/harpoon'
-  use 'Pocco81/AutoSave.nvim'
-  use 'folke/zen-mode.nvim'
-  use 'kshenoy/vim-signature'
-  use 'glepnir/lspsaga.nvim'
+        vim.g.nvim_tree_window_picker_chars ='asdfjkl'
+        vim.g.nvim_tree_disable_netrw = 0
+        vim.g.nvim_tree_hijack_netrw = 0
+        vim.g.nvim_tree_width = 55
+        vim.g.nvim_tree_indent_markers = 1
 
-  end)
+        vim.g.nvim_tree_bindings = {
+            { key = "<C-g>",    cb = tree_cb("cd") },
+        }
+
+        vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
+        vim.api.nvim_set_keymap('n', '<Leader>n', ':NvimTreeFindFile<CR>', {noremap = true, silent = true})
+
+
+    end
+}
+
+use { 'norcalli/nvim-colorizer.lua',
+config = function()
+    require'colorizer'.setup(
+    {'*';},
+    {
+        RGB      = true;         -- #RGB hex codes --blue
+        RRGGBB   = true;         -- #RRGGBB hex codes
+        RRGGBBAA = true;         -- #RRGGBBAA hex codes
+        rgb_fn   = true;         -- CSS rgb() and rgba() functions
+        hsl_fn   = true;         -- CSS hsl() and hsla() functions
+        css      = true;         -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn   = true;         -- Enable all CSS *functions*: rgb_fn, hsl_fn
+    })
+end
+}
+use 'kevinhwang91/nvim-bqf'
+
+use { 'numToStr/Navigator.nvim' ,
+config = function()
+    require('Navigator').setup({
+        auto_save = 'current',
+        disable_on_zoom = true
+    })
+    local map = vim.api.nvim_set_keymap
+    local opts = { noremap = true, silent = true }
+
+    map('n', "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts)
+    map('n', "<C-k>", "<CMD>lua require('Navigator').up()<CR>", opts)
+    map('n', "<C-l>", "<CMD>lua require('Navigator').right()<CR>", opts)
+    map('n', "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts)
+end
+}
+
+use {
+    "hrsh7th/vim-vsnip",
+    event = "InsertEnter",
+    requires = { "rafamadriz/friendly-snippets" },
+}
+
+--rice
+use {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufRead",
+    setup = function()
+        vim.g.indent_blankline_char = '│'
+    end
+}
+
+use {
+    'kshenoy/vim-signature',
+    event = "BufRead",
+}
+
+
+-- tools
+use{ 'windwp/nvim-spectre',
+keys = '<leader>s',
+config = function()
+    require('spectre').setup({
+        mapping={
+            ['send_to_qf'] = {
+                map = "<C-q>",
+                cmd = "<cmd>lua require('spectre.actions').send_to_qf()<CR>",
+                desc = "send all item to quickfix"
+            },
+        }
+    })
+    vim.api.nvim_set_keymap('n', '<Leader>s',  [[<Cmd>lua require('spectre').open()<CR>]], { noremap = true, silent = true })
+end
+    }
+
+    use {
+        "mbbill/undotree",
+        cmd = "UndotreeToggle",
+        keys = "<leader>u",
+        config = function()
+            vim.api.nvim_set_keymap("n", "<leader>u", ":UndotreeToggle<CR>",  {silent = true, noremap = true})
+            vim.g.undotree_WindowLayout = 2
+            vim.g.undotree_SplitWidth = 50
+        end,
+    }
+
+    use {'ThePrimeagen/harpoon',
+    config = function()
+
+        require('harpoon').setup {
+            menu = {
+                width = 80,
+                height = 8,
+            }
+        }
+        vim.api.nvim_set_keymap('n', '<leader>h',  [[<Cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>]], { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<leader>a',  [[<Cmd>lua require("harpoon.mark").add_file()<CR>]], { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<leader>1',  [[<Cmd>lua require("harpoon.ui").nav_file(1)<CR>]], { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<leader>2',  [[<Cmd>lua require("harpoon.ui").nav_file(2)<CR>]], { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<leader>3',  [[<Cmd>lua require("harpoon.ui").nav_file(3)<CR>]], { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<leader>4',  [[<Cmd>lua require("harpoon.ui").nav_file(4)<CR>]], { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<leader>5',  [[<Cmd>lua require("harpoon.ui").nav_file(4)<CR>]], { noremap = true, silent = true })
+    end
+}
+
+use {  'Pocco81/AutoSave.nvim' ,
+config = function()
+    require("autosave").setup (
+    {
+        enabled = true,
+        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+        events = {"InsertLeave","FocusLost"},
+        conditions = {
+            exists = true,
+            filetype_is_not = {'fugitive'},
+            modifiable = true
+        },
+        write_all_buffers = false,
+        on_off_commands = true,
+        clean_command_line_interval = 2500
+    })
+end
+}
+
+use {'folke/zen-mode.nvim',
+keys=';z',
+config = function()
+    require("zen-mode").setup {
+        window = {
+            height = 0.9
+        }
+    }
+    vim.api.nvim_set_keymap('n', ';z', ':ZenMode<CR>', {noremap = true, silent = true})
+end
+}
+
+end)
