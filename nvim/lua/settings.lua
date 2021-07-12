@@ -1,7 +1,3 @@
-vim.cmd('set shortmess+=c')
-vim.cmd('syntax on')
-vim.cmd('set foldmethod=expr')
-vim.cmd('set foldexpr=nvim_treesitter#foldexpr()')
 vim.cmd ("set inccommand=split")
 
 vim.opt.number                    =       true
@@ -18,7 +14,6 @@ vim.opt.showmode                  =       false
 vim.opt.backup                    =       false
 vim.opt.timeout                   =       true
 vim.opt.timeoutlen                =       300
-vim.opt.ruler                     =       true
 vim.opt.hidden                    =       true
 vim.opt.smarttab                  =       true
 vim.opt.smartindent               =       true
@@ -29,7 +24,6 @@ vim.opt.tabstop                   =       4
 vim.opt.softtabstop               =       4
 vim.opt.softtabstop               =       4
 vim.opt.errorbells                =       false
-vim.opt.ruler                     =       true
 vim.opt.wrap                      =       false
 vim.opt.smartcase                 =       true
 vim.opt.ignorecase                =       true
@@ -43,7 +37,11 @@ vim.opt.signcolumn                =       "yes:1"
 vim.opt.autoindent                =       true
 vim.opt.scrolloff                 =       10
 vim.opt.formatoptions             =       vim.opt.formatoptions +{ "cro" }
-vim.o.foldenable                  =       false
+vim.opt.shortmess:append "c"
+
+vim.g.tokyonight_transparent = true
+vim.cmd 'colorscheme tokyonight'
+
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}'
@@ -66,13 +64,6 @@ vim.api.nvim_exec([[
 augroup FugitiveCustom
     autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
-]], false)
-
-vim.api.nvim_exec([[
-function! ClearQuickfixList()
-  call setqflist([])
-endfunction
-command! ClearQuickfixList call ClearQuickfixList()
 ]], false)
 
 vim.api.nvim_exec([[
