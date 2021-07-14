@@ -20,7 +20,7 @@ vim.api.nvim_set_keymap('v', '<Leader>y', '"*y', { noremap = true, silent = true
 vim.api.nvim_set_keymap('n', 'ghl', ':set hlsearch! hlsearch?<CR>', { noremap = true, silent = true })
 
 -- save & quit
-vim.api.nvim_set_keymap('n', '<Leader>q', ':q<CR>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<Leader>q', ':q!<CR>', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<Leader>z', ':wq<CR>', { noremap = true, silent = true })
 
 -- remap esc
