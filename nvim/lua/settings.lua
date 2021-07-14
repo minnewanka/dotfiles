@@ -6,31 +6,22 @@ vim.opt.number                    =       true
 vim.opt.relativenumber            =       true
 vim.opt.cursorline                =       true
 vim.opt.expandtab                 =       true
-vim.opt.expandtab                 =       true
 vim.opt.termguicolors             =       true
 vim.opt.mouse                     =       "a"
 vim.opt.splitbelow                =       true
 vim.opt.splitright                =       true
 vim.opt.fileencoding              =       "utf-8"
 vim.opt.showmode                  =       false
-vim.opt.backup                    =       false
 vim.opt.timeout                   =       true
 vim.opt.timeoutlen                =       300
 vim.opt.hidden                    =       true
 vim.opt.smartindent               =       true
 vim.opt.shiftwidth                =       4
-vim.opt.shiftwidth                =       4
-vim.opt.tabstop                   =       4
 vim.opt.tabstop                   =       4
 vim.opt.softtabstop               =       4
-vim.opt.softtabstop               =       4
-vim.opt.errorbells                =       false
-vim.opt.wrap                      =       false
 vim.opt.smartcase                 =       true
 vim.opt.ignorecase                =       true
 vim.opt.undofile                  =       true
-vim.opt.showmatch                 =       false
-vim.opt.swapfile                  =       false
 vim.opt.updatetime                =       300
 vim.opt.signcolumn                =       "yes:1"
 vim.opt.scrolloff                 =       10
@@ -54,11 +45,11 @@ vim.api.nvim_exec([[
 autocmd BufWinEnter * set  formatoptions-=cro
 ]], false)
 
-vim.api.nvim_exec([[
-augroup FugitiveCustom
-    autocmd BufReadPost fugitive://* set bufhidden=delete
-augroup END
-]], false)
+-- vim.api.nvim_exec([[
+-- augroup FugitiveCustom
+--     autocmd BufReadPost fugitive://* set bufhidden=delete
+-- augroup END
+-- ]], false)
 
 vim.api.nvim_exec([[
     command! BufOnly silent! execute "%bd|e#|bd#"
