@@ -1,4 +1,6 @@
 vim.cmd ("set inccommand=split")
+vim.cmd 'colorscheme tokyonight'
+vim.g.tokyonight_transparent = true
 
 vim.opt.number                    =       true
 vim.opt.relativenumber            =       true
@@ -34,10 +36,6 @@ vim.opt.signcolumn                =       "yes:1"
 vim.opt.scrolloff                 =       10
 vim.opt.formatoptions             =       vim.opt.formatoptions +{ "cro" }
 vim.opt.shortmess:append "c"
-
-vim.g.tokyonight_transparent = true
-vim.cmd 'colorscheme tokyonight'
-
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}'
