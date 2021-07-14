@@ -19,6 +19,7 @@ return require('packer').startup(function()
 
     use {
         'nvim-treesitter/nvim-treesitter',
+        event = "BufRead",
         run = ':TSUpdate',
         config = function()
             require("plugins.tresitter")
@@ -28,6 +29,7 @@ return require('packer').startup(function()
 
     use {
         'onsails/lspkind-nvim',
+        event = "BufRead",
         config = function()
             require('lspkind').init()
         end
@@ -36,8 +38,12 @@ return require('packer').startup(function()
     use 'ray-x/lsp_signature.nvim'
 
     -- git
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-rhubarb'
+    use{  'tpope/vim-fugitive',
+       cmd = 'Git'
+    }
+    use { 'tpope/vim-rhubarb',
+        after = "vim-fugitive",
+    }
 
 
     use {
@@ -48,13 +54,17 @@ return require('packer').startup(function()
         end
     }
 
-    use 'tpope/vim-surround'
-    use 'tpope/vim-commentary'
-
+    use {'tpope/vim-surround',
+        event = "BufRead",
+    }
+    use {'tpope/vim-commentary',
+        event = "BufRead",
+    }
 
     -- Telescope
     use {
         'nvim-telescope/telescope.nvim',
+        cmd = "Telescope",
         requires = {'nvim-telescope/telescope-fzf-native.nvim'},
         config = function()
             require("plugins.telescope")
@@ -65,11 +75,13 @@ return require('packer').startup(function()
     use 'folke/tokyonight.nvim'
 
     use { 'hoob3rt/lualine.nvim' ,
+        event = "BufRead",
         config = function()
             require("plugins.lualine")
         end
     }
     use { 'ggandor/lightspeed.nvim' ,
+        event = "BufRead",
         config = function()
             require'lightspeed'.setup {
                 jump_to_first_match = true,
@@ -85,6 +97,7 @@ return require('packer').startup(function()
 
     use {
         'windwp/nvim-autopairs',
+        after = "nvim-compe",
         config = function()
             require('nvim-autopairs').setup()
         end
@@ -96,6 +109,7 @@ return require('packer').startup(function()
         end
     }
     use{  'kyazdani42/nvim-tree.lua' ,
+        keys='<leader>e',
         config = function()
             local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
@@ -117,6 +131,7 @@ return require('packer').startup(function()
     }
 
     use { 'norcalli/nvim-colorizer.lua',
+        event = "BufRead",
         config = function()
             require'colorizer'.setup(
                 {'*';},
@@ -131,7 +146,8 @@ return require('packer').startup(function()
                 })
         end
     }
-    use 'kevinhwang91/nvim-bqf'
+    use{ 'kevinhwang91/nvim-bqf',
+        event = "BufRead" }
 
     use { 'numToStr/Navigator.nvim' ,
         config = function()
@@ -190,8 +206,8 @@ return require('packer').startup(function()
     }
 
     use {'ThePrimeagen/harpoon',
+        keys = { '<leader>h','<leader>a','<leader>1', '<leader>2' ,'<leader>3' ,'<leader>4' ,'<leader>5'  },
         config = function()
-
             require('harpoon').setup {
                 menu = {
                     width = 80,
@@ -210,6 +226,7 @@ return require('packer').startup(function()
 
     use {  'Pocco81/AutoSave.nvim' ,
         config = function()
+            event = "BufRead",
             require("autosave").setup (
                 {
                     enabled = true,
@@ -240,10 +257,16 @@ return require('packer').startup(function()
     }
 
     use {'kevinhwang91/nvim-hlslens',
+        event = "BufRead",
         config = function()
             require("plugins.hlslens")
         end
 
+    }
+
+    use {
+      "dstein64/vim-startuptime",
+      cmd = "StartupTime",
     }
 
 end)
