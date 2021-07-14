@@ -92,3 +92,13 @@ vim.api.nvim_set_keymap('n', '\'', '`', {noremap = true, silent = true})
 
 -- folding
 vim.api.nvim_set_keymap('n', '<BS>', 'za', {noremap = true, silent = true})
+
+
+-- Telescope
+vim.api.nvim_set_keymap('n', '<C-P>',  [[<Cmd>Telescope git_files<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>b',  [[<Cmd>Telescope buffers<CR>]], { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>o',  [[<Cmd>lua require('telescope.builtin').oldfiles({cwd_only=true,include_current_session=true})<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', 'gr',  [[<Cmd>lua require('telescope.builtin').lsp_references()<CR>]], { noremap = true, silent = true })
+
+
