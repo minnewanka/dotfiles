@@ -103,7 +103,8 @@ return require('packer').startup(function()
         end
     }
     use {  'windwp/nvim-ts-autotag',
-        ft = {'javascriptreact','typescriptreact','html'},
+        event = "BufRead",
+        after ="nvim-treesitter",
         config = function()
             require('nvim-ts-autotag').setup()
         end
