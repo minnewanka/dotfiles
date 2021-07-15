@@ -3,6 +3,11 @@ vim.g.mapleader = ' '
 --source file
 vim.api.nvim_set_keymap('n', '<leader>r', ':source %<CR>', { noremap = true, silent = false })
 
+
+-- remap macro
+vim.api.nvim_set_keymap('n', 'Q', 'q', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'q', '<NOP>', { noremap = true, silent = true })
+
 -- selection
 vim.api.nvim_set_keymap('i', '<C-j>', '<C-n>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<C-k>', '<C-p>', { noremap = true })
