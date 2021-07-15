@@ -65,7 +65,7 @@ return require('packer').startup(function()
     use {
         'nvim-telescope/telescope.nvim',
         cmd = "Telescope",
-        requires = {'nvim-telescope/telescope-fzf-native.nvim'},
+        requires = {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
         config = function()
             require("plugins.telescope")
         end
