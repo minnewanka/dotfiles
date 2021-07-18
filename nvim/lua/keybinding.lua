@@ -35,15 +35,15 @@ vim.api.nvim_set_keymap('i', 'jk', '<ESC>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', 'kj', '<ESC>', {noremap = true, silent = true})
 
 -- quickfix & local list
-vim.api.nvim_set_keymap('n', 'gfl', ':copen<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', 'gfq', ':cclose<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', 'gn', ':cn<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', 'gp', ':cp<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', ';l', ':copen<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', ';q', ':cclose<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', ';n', ':cn<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', ';p', ':cp<CR>', {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap('n', '<leader>T', ':lua vim.lsp.diagnostic.set_loclist()<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', 'gll', ':lopen<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', 'gln', ':lnext<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', 'glp', ':lprev<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', ';ll', ':lopen<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', ';ln', ':lnext<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', ';lp', ':lprev<CR>', {noremap = true, silent = true})
 
 -- delete current buffer
 vim.api.nvim_set_keymap('n', '<leader><BS>', ':Bdelete<CR>', {noremap = true, silent = true})
