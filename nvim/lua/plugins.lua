@@ -39,7 +39,7 @@ return require('packer').startup(function()
 
     -- git
     use{  'tpope/vim-fugitive',
-       cmd = 'Git'
+       cmd ={ 'Git', 'Glog'}
     }
     use { 'tpope/vim-rhubarb',
         after = "vim-fugitive",
