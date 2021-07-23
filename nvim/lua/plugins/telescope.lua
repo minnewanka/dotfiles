@@ -28,12 +28,17 @@ require('telescope').setup {
 
     },
     pickers = {
+        oldfiles = {
+            theme = "dropdown",
+            previewer = false,
+        },
         git_files = {
+            sort_mru = true,
             theme = "dropdown",
             previewer = false,
         },
         buffers = {
-            sort_lastused = true,
+            sort_mru = true,
             theme = "dropdown",
             previewer = false,
             mappings = {

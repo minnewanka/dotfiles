@@ -2,6 +2,7 @@ vim.cmd ("set inccommand=split")
 vim.cmd 'colorscheme tokyonight'
 vim.g.tokyonight_transparent = true
 
+vim.opt.clipboard = "unnamedplus"
 vim.opt.number                    =       true
 vim.opt.relativenumber            =       true
 vim.opt.cursorline                =       true
@@ -44,12 +45,6 @@ vim.api.nvim_exec([[
 vim.api.nvim_exec([[
 autocmd BufWinEnter * set  formatoptions-=cro
 ]], false)
-
--- vim.api.nvim_exec([[
--- augroup FugitiveCustom
---     autocmd BufReadPost fugitive://* set bufhidden=delete
--- augroup END
--- ]], false)
 
 vim.api.nvim_exec([[
     command! BufOnly silent! execute "%bd|e#|bd#"

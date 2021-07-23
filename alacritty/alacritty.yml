@@ -94,6 +94,7 @@ key_bindings:
   - { key: E, mods: Command, chars: ":lua require('telescope.builtin').oldfiles({cwd_only=true})\x0D" }
   - { key: J, mods: Command, chars: "\x04" }
   - { key: K, mods: Command, chars: "\x15" }
+  # - { key: C, mods: Command, chars: "\"*y'" }
   # - { key: F, mods: Command|Shift, chars: ":lua require('telescope.builtin').live_grep()\x0D" }
   - { key: LBracket, mods: Command|Shift, chars: ":BufferLineCyclePrev\x0D" }
   - { key: RBracket, mods: Command|Shift, chars: ":BufferLineCycleNext\x0D" }

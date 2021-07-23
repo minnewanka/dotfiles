@@ -19,7 +19,6 @@ return require('packer').startup(function()
 
     use {
         'nvim-treesitter/nvim-treesitter',
-        event = "BufRead",
         run = ':TSUpdate',
         config = function()
             require("plugins.tresitter")
@@ -151,6 +150,7 @@ return require('packer').startup(function()
         event = "BufRead" }
 
     use { 'numToStr/Navigator.nvim' ,
+        event = "BufRead",
         config = function()
             require('Navigator').setup({
                 auto_save = 'current',
@@ -226,8 +226,8 @@ return require('packer').startup(function()
     }
 
     use {  'Pocco81/AutoSave.nvim' ,
+        event = "BufRead",
         config = function()
-            event = "BufRead",
             require("autosave").setup (
                 {
                     enabled = true,
@@ -268,6 +268,35 @@ return require('packer').startup(function()
     use {
       "dstein64/vim-startuptime",
       cmd = "StartupTime",
+    }
+
+    use {"akinsho/nvim-toggleterm.lua",
+        keys=';t',
+        cmd = "ToggleTerm",
+        config = function()
+            require'toggleterm'.setup{
+                open_mapping = [[;t]],
+                direction ='horizontal',
+                size = 20,
+            }
+            local Terminal  = require('toggleterm.terminal').Terminal
+            local lazygit = Terminal:new({ direction='floaft', cmd = "lazygit", hidden = true })
+
+            function _lazygit_toggle()
+                lazygit:toggle()
+            end
+
+            vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+        end
+
+    }
+
+    use {'TimUntersberger/neogit',
+        cmd='Neogit',
+        -- keys=';g',
+        config = function()
+            require("neogit").setup {}
+        end
     }
 
 end)

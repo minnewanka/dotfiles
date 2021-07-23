@@ -65,21 +65,17 @@ vim.api.nvim_set_keymap('n', 'gd',  [[<Cmd>lua vim.lsp.buf.definition()<CR>]], {
 vim.api.nvim_set_keymap('n', 'gu',  [[<Cmd>lua vim.lsp.buf.implementation()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>",  {silent = true, noremap = true})
 
--- Toggle between file
-vim.api.nvim_set_keymap('n', '^', '<C-^>', { noremap = true, silent = true })
-
--- Go end of line in Insert Mode
-vim.api.nvim_set_keymap('i', '<C-e>', '<C-o>$', { noremap = true, silent = true })
-
 -- word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap=true, expr = true, silent = true})
 vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", {noremap= true, expr = true, silent = true})
 
 -- git diff
 vim.api.nvim_set_keymap('n', '<Leader>g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>gd',  ':Git difftool<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', ';g;', ':diffget //3<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', ';gj', ':diffget //2<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ';g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>gd',  ':Gdiffsplit<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>gD',  ':Git difftool<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>g;', ':diffget //3<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>gj', ':diffget //2<CR>', { noremap = true, silent = true })
 
 -- Tab
 vim.api.nvim_set_keymap('i', '<TAB>', "vsnip#available(1)?'<Plug>(vsnip-expand-or-jump)':'<Tab>'", { expr = true, silent = true})
@@ -91,12 +87,16 @@ vim.api.nvim_set_keymap('n', 'gy', "'`[' . strpart(getregtype(), 0, 1) . '`]'", 
 vim.api.nvim_set_keymap('n', '`', '\'', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '\'', '`', {noremap = true, silent = true})
 
--- folding
-vim.api.nvim_set_keymap('n', '<BS>', 'za', {noremap = true, silent = true})
-
 -- Telescope
 vim.api.nvim_set_keymap('n', '<C-P>',  [[<Cmd>Telescope git_files<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>b',  [[<Cmd>Telescope buffers<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
 
 
+-- serminal
+vim.api.nvim_set_keymap('t', 'jk', '<C-\\><C-n>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-N><C-w>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-N><C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-N><C-w>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-N><C-w>l', { noremap = true, silent = true })

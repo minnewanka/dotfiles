@@ -11,3 +11,4 @@ require'lspconfig'.tsserver.setup({
     on_attach(client)
   end
 })
+
