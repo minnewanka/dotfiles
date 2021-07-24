@@ -72,6 +72,7 @@ return require('packer').startup(function()
 
     -- theme
     use 'folke/tokyonight.nvim'
+    use 'sainnhe/gruvbox-material'
 
     use { 'hoob3rt/lualine.nvim' ,
         event = "BufRead",

@@ -1,5 +1,9 @@
 vim.cmd ("set inccommand=split")
-vim.cmd 'colorscheme tokyonight'
+
+vim.g.gruvbox_material_palette = 'mix'
+vim.g.gruvbox_material_visual = 'blue background'
+vim.g.gruvbox_material_better_performance = 1
+vim.cmd 'colorscheme gruvbox-material'
 vim.g.tokyonight_transparent = true
 
 vim.opt.clipboard = "unnamedplus"
@@ -28,6 +32,8 @@ vim.opt.signcolumn                =       "yes:1"
 vim.opt.scrolloff                 =       10
 vim.opt.formatoptions             =       vim.opt.formatoptions +{ "cro" }
 vim.opt.shortmess:append "c"
+vim.opt.swapfile                  =       false
+
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}'
