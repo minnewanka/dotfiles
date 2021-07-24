@@ -6,7 +6,6 @@ vim.g.gruvbox_material_better_performance = 1
 vim.cmd 'colorscheme gruvbox-material'
 vim.g.tokyonight_transparent = true
 
-vim.opt.clipboard = "unnamedplus"
 vim.opt.number                    =       true
 vim.opt.relativenumber            =       true
 vim.opt.cursorline                =       true
