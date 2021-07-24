@@ -7,6 +7,7 @@ highlight link TelescopeSelectionCaret TSTextReference
 highlight link LightspeedLabel Yellow
 highlight LightspeedShortcut guibg=#e9b143 guifg=#000000
 highlight LightspeedOneCharMatch guibg=#e9b143 guifg=#000000
+highlight IncSearch guibg=#e9b143 guifg=#000000
 highlight link LightspeedMaskedChar Pink
 
 endfunction
