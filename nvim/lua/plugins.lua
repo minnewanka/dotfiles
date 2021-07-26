@@ -76,7 +76,7 @@ return require('packer').startup(function()
 
     -- theme
    use 'folke/tokyonight.nvim'
-   use{  '~/Documents/Workspace/gruv.nvim', requires = {'rktjmp/lush.nvim'} }
+   -- use{  '~/Documents/Workspace/gruv.nvim', requires = {'rktjmp/lush.nvim'} }
 
     use { 'ggandor/lightspeed.nvim' ,
         event = "BufRead",

@@ -2,8 +2,11 @@
 style = 'blue bold'
 
 [git_branch]
-style = 'yellow bold'
+style = 'yellow'
 
 [cmd_duration]
 min_time = 500
-format = "took [$duration](bold cyan)"
+format = "took [$duration](bold purple)"
+
+[lua]
+style = 'cyan bold'
