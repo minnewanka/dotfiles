@@ -1,9 +1,11 @@
 vim.cmd ("set inccommand=split")
 
+vim.g.gruvbox_material_background = 'soft'
 vim.g.gruvbox_material_palette = 'mix'
 vim.g.gruvbox_material_visual = 'blue background'
+-- vim.g.gruvbox_material_transparent_background = 1
 vim.g.gruvbox_material_better_performance = 1
-vim.cmd 'colorscheme gruvbox-material'
+vim.cmd 'colorscheme gruv'
 vim.g.tokyonight_transparent = true
 
 vim.opt.number                    =       true
@@ -32,6 +34,8 @@ vim.opt.scrolloff                 =       10
 vim.opt.formatoptions             =       vim.opt.formatoptions +{ "cro" }
 vim.opt.shortmess:append "c"
 vim.opt.swapfile                  =       false
+vim.opt.statusline='%f  %m%r%h%w%=[%l,%v]      [%L,%p%%] %n'
+
 
 
 -- Highlight on yank
@@ -70,6 +74,4 @@ command ToggleGStatus :call ToggleGStatus()
 vim.api.nvim_exec([[
 au BufReadPost *.fish set filetype=fish
 ]], false)
-
-
 

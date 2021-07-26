@@ -1,0 +1,9 @@
+[directory]
+style = 'blue bold'
+
+[git_branch]
+style = 'yellow bold'
+
+[cmd_duration]
+min_time = 500
+format = "took [$duration](bold cyan)"

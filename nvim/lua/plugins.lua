@@ -26,6 +26,10 @@ return require('packer').startup(function()
 
     }
 
+    use {'nvim-treesitter/playground',
+        cmd = {'TSHighlightCapturesUnderCursor','TSPlaygroundToggle'}
+    }
+
     use {
         'onsails/lspkind-nvim',
         event = "BufRead",
@@ -71,15 +75,9 @@ return require('packer').startup(function()
     }
 
     -- theme
-    use 'folke/tokyonight.nvim'
-    use 'sainnhe/gruvbox-material'
+   use 'folke/tokyonight.nvim'
+   use{  '~/Documents/Workspace/gruv.nvim', requires = {'rktjmp/lush.nvim'} }
 
-    use { 'hoob3rt/lualine.nvim' ,
-        event = "BufRead",
-        config = function()
-            require("plugins.lualine")
-        end
-    }
     use { 'ggandor/lightspeed.nvim' ,
         event = "BufRead",
         config = function()
