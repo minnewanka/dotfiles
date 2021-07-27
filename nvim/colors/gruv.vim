@@ -39,7 +39,7 @@ highlight Yellow guifg=#E9B244 guibg=NONE  gui=NONE
 highlight Green guifg=#B1B946 guibg=NONE  gui=NONE
 highlight Aqua guifg=#8AB97E guibg=NONE  gui=NONE
 highlight Purple guifg=#D4879C guibg=NONE  gui=NONE
-highlight CurrentWord guifg=#E2CBA7 guibg=#3B3735  gui=NONE
+highlight CurrentWord guibg=#3c3836 gui=bold
 highlight ErrorText guifg=#F2584A guibg=NONE  gui=underline
 highlight WarningText guifg=#E9B244 guibg=NONE  gui=underline
 highlight InfoText guifg=#7EA99D guibg=NONE  gui=underline

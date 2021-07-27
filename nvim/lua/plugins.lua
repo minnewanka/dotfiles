@@ -121,7 +121,7 @@ return require('packer').startup(function()
     }
 
     use { 'norcalli/nvim-colorizer.lua',
-        cmd = "colorizerToggle",
+        cmd = "ColorizerToggle",
         config = function()
             require'colorizer'.setup(
                 {'*';},
