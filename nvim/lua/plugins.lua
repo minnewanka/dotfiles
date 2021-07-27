@@ -20,13 +20,9 @@ return require('packer').startup(function()
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         config = function()
-            require("plugins.tresitter")
+            require("plugins.treesitter")
         end
 
-    }
-
-    use {'nvim-treesitter/playground',
-        cmd = {'TSHighlightCapturesUnderCursor','TSPlaygroundToggle'}
     }
 
     use {
@@ -72,10 +68,6 @@ return require('packer').startup(function()
             require("plugins.telescope")
         end
     }
-
-    -- theme
-   use 'folke/tokyonight.nvim'
-   -- use{  '~/Documents/Workspace/gruv.nvim', requires = {'rktjmp/lush.nvim'} }
 
     use { 'ggandor/lightspeed.nvim' ,
         event = "BufRead",
@@ -175,20 +167,11 @@ return require('packer').startup(function()
         event = "BufRead",
     }
 
-
     -- tools
     use{ 'windwp/nvim-spectre',
         keys = '<leader>s',
         config = function()
-            require('spectre').setup({
-                mapping={
-                    ['send_to_qf'] = {
-                        map = "<C-q>",
-                        cmd = "<cmd>lua require('spectre.actions').send_to_qf()<CR>",
-                        desc = "send all item to quickfix"
-                    },
-                }
-            })
+            require('spectre').setup()
             vim.api.nvim_set_keymap('n', '<Leader>s',  [[<Cmd>lua require('spectre').open()<CR>]], { noremap = true, silent = true })
         end
     }
@@ -223,26 +206,6 @@ return require('packer').startup(function()
         end
     }
 
-    use {  'Pocco81/AutoSave.nvim' ,
-        event = "BufRead",
-        config = function()
-            require("autosave").setup (
-                {
-                    enabled = true,
-                    execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-                    events = {"InsertLeave","FocusLost"},
-                    conditions = {
-                        exists = true,
-                        filetype_is_not = {'fugitive'},
-                        modifiable = true
-                    },
-                    write_all_buffers = false,
-                    on_off_commands = true,
-                    clean_command_line_interval = 2500
-                })
-        end
-    }
-
     use {'folke/zen-mode.nvim',
         keys=';z',
         config = function()
@@ -257,44 +220,6 @@ return require('packer').startup(function()
 
     use {'kevinhwang91/nvim-hlslens',
         event = "BufRead",
-        config = function()
-            require("plugins.hlslens")
-        end
-
-    }
-
-    use {
-      "dstein64/vim-startuptime",
-      cmd = "StartupTime",
-    }
-
-    use {"akinsho/nvim-toggleterm.lua",
-        keys=';t',
-        cmd = "ToggleTerm",
-        config = function()
-            require'toggleterm'.setup{
-                open_mapping = [[;t]],
-                direction ='horizontal',
-                size = 20,
-            }
-            local Terminal  = require('toggleterm.terminal').Terminal
-            local lazygit = Terminal:new({ direction='floaft', cmd = "lazygit", hidden = true })
-
-            function _lazygit_toggle()
-                lazygit:toggle()
-            end
-
-            vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-        end
-
-    }
-
-    use {'TimUntersberger/neogit',
-        cmd='Neogit',
-        -- keys=';g',
-        config = function()
-            require("neogit").setup {}
-        end
     }
 
 end)

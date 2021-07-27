@@ -91,12 +91,3 @@ vim.api.nvim_set_keymap('n', '\'', '`', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<C-P>',  [[<Cmd>Telescope git_files<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>b',  [[<Cmd>Telescope buffers<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
-
-
--- serminal
-vim.api.nvim_set_keymap('t', 'jk', '<C-\\><C-n>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-N><C-w>h', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-N><C-w>j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-N><C-w>k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-N><C-w>l', { noremap = true, silent = true })

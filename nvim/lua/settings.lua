@@ -2,8 +2,6 @@ vim.cmd ("set inccommand=split")
 vim.cmd ("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")
 vim.cmd ("set grepformat=%f:%l:%c:%m")
 
-
-
 vim.opt.autowriteall              =       true
 vim.opt.number                    =       true
 vim.opt.relativenumber            =       true
@@ -32,8 +30,6 @@ vim.opt.shortmess:append "c"
 vim.opt.swapfile                  =       false
 vim.opt.statusline='%f  %m%r%h%w%=[%l,%v]      [%L,%p%%] %n'
 
-
-
 -- Highlight on yank
 vim.cmd 'au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}'
 
@@ -49,6 +45,10 @@ vim.api.nvim_exec([[
 
 vim.api.nvim_exec([[
 autocmd BufWinEnter * set  formatoptions-=cro
+]], false)
+
+vim.api.nvim_exec([[
+autocmd FocusLost,InsertLeave,TextChanged * wa
 ]], false)
 
 vim.api.nvim_exec([[
