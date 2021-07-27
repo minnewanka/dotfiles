@@ -32,7 +32,7 @@ require('telescope').setup {
             theme = "dropdown",
             previewer = false,
         },
-        git_files = {
+        find_files = {
             sort_mru = true,
             theme = "dropdown",
             previewer = false,
