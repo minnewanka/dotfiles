@@ -1,32 +1,82 @@
-highlight Blue guifg=#7EA99D guibg=NONE guisp=NONE gui=NONE blend=NONE
+hi clear
+syntax reset
+
+let colors_name = 'gruv'
+
+highlight Blue guifg=#7EA99D guibg=NONE  gui=NONE
+highlight Normal guifg=#E2CBA7 guibg=NONE  gui=NONE
+highlight Pmenu guifg=#E2CBA7 guibg=NONE  gui=NONE
+highlight PmenuSel guifg=#443F3C guibg=#A89985  gui=NONE
+highlight PmenuSbar guifg=NONE guibg=#443F3C  gui=NONE
+highlight PmenuThumb guifg=NONE guibg=#7D6F64  gui=NONE
+highlight Search guifg=#292929 guibg=#B1B946  gui=NONE
+highlight SpecialKey guifg=#5B534D guibg=NONE  gui=NONE
+highlight StatusLine guifg=#E2CBA7 guibg=#443F3C  gui=NONE
+highlight StatusLineNC guifg=#A89985 guibg=NONE  gui=NONE
+highlight TabLine guifg=#A89985 guibg=#3a3735  gui=NONE
+highlight TabLineFill guifg=#A89985 guibg=#292929  gui=NONE
+highlight TabLineSel guifg=#292929 guibg=#A89985  gui=NONE
+highlight Visual guifg=NONE guibg=#384242  gui=NONE
+highlight Constant guifg=#8AB97E guibg=NONE  gui=NONE
+highlight String guifg=#B1B946 guibg=NONE  gui=NONE
+highlight Statement guifg=#F2584A guibg=NONE  gui=italic
+highlight PreProc guifg=#D4879C guibg=NONE  gui=italic
+highlight TSConstBuiltin guifg=#7EA99D guibg=NONE  gui=italic
+highlight TSConstMacro guifg=#7EA99D guibg=NONE  gui=italic
+highlight TSError guifg=#F2584A guibg=NONE  gui=underline
+highlight TSNamespace guifg=#E9B244 guibg=NONE  gui=italic
+highlight Comment guifg=#918273 guibg=NONE  gui=italic
+highlight TSTypeBuiltin guifg=#E9B244 guibg=NONE  gui=italic
+highlight TSVariableBuiltin guifg=#7EA99D guibg=NONE  gui=italic
+highlight TSEmphasis guifg=NONE guibg=NONE  gui=bold
+highlight TSUnderline guifg=NONE guibg=NONE  gui=underline
+highlight TSURI guifg=#7EA99D guibg=NONE  gui=underline
+highlight Fg guifg=#E2CBA7 guibg=NONE  gui=NONE
+highlight Grey guifg=#918273 guibg=NONE  gui=NONE
+highlight Red guifg=#F2584A guibg=NONE  gui=NONE
+highlight Orange guifg=#F28736 guibg=NONE  gui=NONE
+highlight Yellow guifg=#E9B244 guibg=NONE  gui=NONE
+highlight Green guifg=#B1B946 guibg=NONE  gui=NONE
+highlight Aqua guifg=#8AB97E guibg=NONE  gui=NONE
+highlight Purple guifg=#D4879C guibg=NONE  gui=NONE
+highlight CurrentWord guifg=#E2CBA7 guibg=#3B3735  gui=NONE
+highlight ErrorText guifg=#F2584A guibg=NONE  gui=underline
+highlight WarningText guifg=#E9B244 guibg=NONE  gui=underline
+highlight InfoText guifg=#7EA99D guibg=NONE  gui=underline
+highlight HintText guifg=#B1B946 guibg=NONE  gui=underline
+highlight ColorColumn guifg=NONE guibg=NONE  gui=NONE
+highlight Conceal guifg=NONE guibg=#5B534D  gui=NONE
+highlight Cursor guifg=NONE guibg=NONE  gui=NONE
+highlight lCursor guifg=NONE guibg=NONE  gui=reverse
+highlight CursorColumn guifg=NONE guibg=#32302F  gui=NONE
+highlight CursorLine guifg=NONE guibg=#443F3C  gui=NONE
+highlight DiffAdd guifg=NONE guibg=#33371B  gui=NONE
+highlight DiffChange guifg=NONE guibg=#0E363E  gui=NONE
+highlight DiffDelete guifg=NONE guibg=#402220  gui=NONE
+highlight DiffText guifg=#292929 guibg=#7EA99D  gui=NONE
+highlight EndOfBuffer guifg=#5B534D guibg=#32302F  gui=NONE
+highlight VertSplit guifg=#5B534D guibg=NONE  gui=NONE
+highlight Folded guifg=#918273 guibg=NONE  gui=NONE
+highlight FoldColumn guifg=#5B534D guibg=NONE  gui=NONE
+highlight SignColumn guifg=#E2CBA7 guibg=NONE  gui=NONE
+highlight IncSearch guifg=#292929 guibg=#E9B244  gui=NONE
+highlight LineNr guifg=#5B534D guibg=NONE  gui=NONE
+highlight CursorLineNr guifg=#E9B244 guibg=NONE  gui=NONE
+highlight MatchParen guifg=#F28736 guibg=NONE  gui=bold
+highlight NeogitDiffContextHighlight guifg=NONE guibg=#443F3C  gui=NONE
+highlight NonText guifg=#5B534D guibg=NONE  gui=NONE
+highlight WindowPicker guifg=#E2CBA7 guibg=#7EA99D  gui=bold
 highlight! link YankHighlight Visual
-highlight Normal guifg=#E2CBA7 guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight Pmenu guifg=#E2CBA7 guibg=NONE guisp=NONE gui=NONE blend=NONE
 highlight! link NeogitHunkHeaderHighlight Blue
-highlight PmenuSel guifg=#443F3C guibg=#A89985 guisp=NONE gui=NONE blend=NONE
-highlight PmenuSbar guifg=NONE guibg=#443F3C guisp=NONE gui=NONE blend=NONE
-highlight PmenuThumb guifg=NONE guibg=#7D6F64 guisp=NONE gui=NONE blend=NONE
 highlight! link Question Yellow
-highlight Search guifg=#292929 guibg=#B1B946 guisp=NONE gui=NONE blend=NONE
-highlight SpecialKey guifg=#5B534D guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight StatusLine guifg=#E2CBA7 guibg=#443F3C guisp=NONE gui=NONE blend=NONE
-highlight StatusLineNC guifg=#A89985 guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight TabLine guifg=#A89985 guibg=#3a3735 guisp=NONE gui=NONE blend=NONE
 highlight! link NeogitHunkHeader Blue
-highlight TabLineFill guifg=#A89985 guibg=#292929 guisp=NONE gui=NONE blend=NONE
-highlight TabLineSel guifg=#292929 guibg=#A89985 guisp=NONE gui=NONE blend=NONE
 highlight! link Title Orange
-highlight Visual guifg=NONE guibg=#384242 guisp=NONE gui=NONE blend=NONE
 highlight! link WildMenu PmenuSel
-highlight Constant guifg=#8AB97E guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight String guifg=#B1B946 guibg=NONE guisp=NONE gui=NONE blend=NONE
 highlight! link Character Green
 highlight! link Number Purple
 highlight! link Boolean Purple
 highlight! link Identifier Blue
 highlight! link Function Green
-highlight Statement guifg=#F2584A guibg=NONE guisp=NONE gui=italic blend=NONE
-highlight PreProc guifg=#D4879C guibg=NONE guisp=NONE gui=italic blend=NONE
 highlight! link Type Green
 highlight! link Special Yellow
 highlight! link Error Red
@@ -54,9 +104,6 @@ highlight! link TSComment Comment
 highlight! link TSConstructor Yellow
 highlight! link TSConditional Red
 highlight! link TSConstant Fg
-highlight TSConstBuiltin guifg=#7EA99D guibg=NONE guisp=NONE gui=italic blend=NONE
-highlight TSConstMacro guifg=#7EA99D guibg=NONE guisp=NONE gui=italic blend=NONE
-highlight TSError guifg=#F2584A guibg=NONE guisp=NONE gui=underline blend=NONE
 highlight! link TSException Red
 highlight! link TSField Green
 highlight! link TSFloat Purple
@@ -68,7 +115,6 @@ highlight! link TSKeyword Red
 highlight! link TSKeywordFunction Red
 highlight! link TSLabel Orange
 highlight! link TSMethod Green
-highlight TSNamespace guifg=#E9B244 guibg=NONE guisp=NONE gui=italic blend=NONE
 highlight! link TSNone Fg
 highlight! link TSNumber Purple
 highlight! link TSOperator Orange
@@ -81,68 +127,27 @@ highlight! link TSPunctSpecial Blue
 highlight! link TSRepeat Red
 highlight! link TSString Aqua
 highlight! link TSStringRegex Green
-highlight Comment guifg=#918273 guibg=NONE guisp=NONE gui=italic blend=NONE
 highlight! link TSSymbol Fg
 highlight! link ErrorMsg Red
-highlight TSTypeBuiltin guifg=#E9B244 guibg=NONE guisp=NONE gui=italic blend=NONE
 highlight! link TSVariable Fg
-highlight TSVariableBuiltin guifg=#7EA99D guibg=NONE guisp=NONE gui=italic blend=NONE
 highlight! link TSTag Orange
 highlight! link TSTagDelimiter Green
 highlight! link TSText Green
-highlight TSEmphasis guifg=NONE guibg=NONE guisp=NONE gui=bold blend=NONE
-highlight TSUnderline guifg=NONE guibg=NONE guisp=NONE gui=underline blend=NONE
 highlight! link TSTitle Purple
-highlight TSURI guifg=#7EA99D guibg=NONE guisp=NONE gui=underline blend=NONE
 highlight! link GitSignsAdd Green
 highlight! link GitSignsChange Blue
 highlight! link GitSignsDelete Red
-highlight Fg guifg=#E2CBA7 guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight Grey guifg=#918273 guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight Red guifg=#F2584A guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight Orange guifg=#F28736 guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight Yellow guifg=#E9B244 guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight Green guifg=#B1B946 guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight Aqua guifg=#8AB97E guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight Purple guifg=#D4879C guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight CurrentWord guifg=#E2CBA7 guibg=#3B3735 guisp=NONE gui=NONE blend=NONE
-highlight ErrorText guifg=#F2584A guibg=NONE guisp=NONE gui=underline blend=NONE
 highlight! link NvimTreeImageFile Fg
-highlight WarningText guifg=#E9B244 guibg=NONE guisp=NONE gui=underline blend=NONE
-highlight InfoText guifg=#7EA99D guibg=NONE guisp=NONE gui=underline blend=NONE
-highlight HintText guifg=#B1B946 guibg=NONE guisp=NONE gui=underline blend=NONE
 highlight! link NvimTreeGitStaged Blue
-highlight ColorColumn guifg=NONE guibg=NONE guisp=NONE gui=NONE blend=NONE
 highlight! link NvimTreeGitRenamed Purple
-highlight Conceal guifg=NONE guibg=#5B534D guisp=NONE gui=NONE blend=NONE
-highlight Cursor guifg=NONE guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight lCursor guifg=NONE guibg=NONE guisp=NONE gui=reverse blend=NONE
-highlight CursorColumn guifg=NONE guibg=#32302F guisp=NONE gui=NONE blend=NONE
-highlight CursorLine guifg=NONE guibg=#443F3C guisp=NONE gui=NONE blend=NONE
 highlight! link Directory Green
-highlight DiffAdd guifg=NONE guibg=#33371B guisp=NONE gui=NONE blend=NONE
-highlight DiffChange guifg=NONE guibg=#0E363E guisp=NONE gui=NONE blend=NONE
-highlight DiffDelete guifg=NONE guibg=#402220 guisp=NONE gui=NONE blend=NONE
-highlight DiffText guifg=#292929 guibg=#7EA99D guisp=NONE gui=NONE blend=NONE
-highlight EndOfBuffer guifg=#5B534D guibg=#32302F guisp=NONE gui=NONE blend=NONE
-highlight VertSplit guifg=#5B534D guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight Folded guifg=#918273 guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight FoldColumn guifg=#5B534D guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight SignColumn guifg=#E2CBA7 guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight IncSearch guifg=#292929 guibg=#E9B244 guisp=NONE gui=NONE blend=NONE
-highlight LineNr guifg=#5B534D guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight CursorLineNr guifg=#E9B244 guibg=NONE guisp=NONE gui=NONE blend=NONE
-highlight MatchParen guifg=#F28736 guibg=NONE guisp=NONE gui=bold blend=NONE
-highlight NeogitDiffContextHighlight guifg=NONE guibg=#443F3C guisp=NONE gui=NONE blend=NONE
 highlight! link MoreMsg Yellow
-highlight NonText guifg=#5B534D guibg=NONE guisp=NONE gui=NONE blend=NONE
 highlight! link NeogitDiffDeleteHighlight DiffDelete
 highlight! link NeogitDiffAddHighlight DiffAdd
 highlight! link TelescopeSelectionCaret Green
 highlight! link TelescopeSelection Green
 highlight! link TelescopePromptPrefix Orange
 highlight! link TelescopeBorder Grey
-highlight WindowPicker guifg=#E2CBA7 guibg=#7EA99D guisp=NONE gui=bold blend=NONE
 highlight! link NvimTreeGitDeleted Red
 highlight! link NvimTreeGitNew Aqua
 highlight! link NvimTreeGitMerge Orange

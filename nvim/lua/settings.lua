@@ -1,7 +1,10 @@
 vim.cmd ("set inccommand=split")
+vim.cmd ("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")
+vim.cmd ("set grepformat=%f:%l:%c:%m")
 
-vim.g.tokyonight_transparent = true
 
+
+vim.opt.autowriteall              =       true
 vim.opt.number                    =       true
 vim.opt.relativenumber            =       true
 vim.opt.cursorline                =       true
@@ -11,7 +14,6 @@ vim.opt.mouse                     =       "a"
 vim.opt.splitbelow                =       true
 vim.opt.splitright                =       true
 vim.opt.fileencoding              =       "utf-8"
-vim.opt.showmode                  =       false
 vim.opt.timeout                   =       true
 vim.opt.timeoutlen                =       300
 vim.opt.hidden                    =       true
@@ -25,7 +27,7 @@ vim.opt.undofile                  =       true
 vim.opt.updatetime                =       300
 vim.opt.signcolumn                =       "yes:1"
 vim.opt.scrolloff                 =       10
-vim.opt.formatoptions             =       vim.opt.formatoptions +{ "cro" }
+vim.opt.formatoptions             =       vim.opt.formatoptions + { "cro" }
 vim.opt.shortmess:append "c"
 vim.opt.swapfile                  =       false
 vim.opt.statusline='%f  %m%r%h%w%=[%l,%v]      [%L,%p%%] %n'
@@ -69,7 +71,4 @@ vim.api.nvim_exec([[
 au BufReadPost *.fish set filetype=fish
 ]], false)
 
-vim.api.nvim_exec([[
- autocmd VimEnter * colorscheme gruv
-]], false)
 

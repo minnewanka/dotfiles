@@ -5,7 +5,6 @@ return require('packer').startup(function()
     -- common
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
-    use 'kyazdani42/nvim-web-devicons'
 
     -- lsp
     use 'neovim/nvim-lspconfig'
@@ -68,7 +67,7 @@ return require('packer').startup(function()
     use {
         'nvim-telescope/telescope.nvim',
         cmd = "Telescope",
-        requires = {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
+        requires = {"kyazdani42/nvim-web-devicons", {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}},
         config = function()
             require("plugins.telescope")
         end
@@ -130,7 +129,7 @@ return require('packer').startup(function()
     }
 
     use { 'norcalli/nvim-colorizer.lua',
-        event = "BufRead",
+        cmd = "colorizerToggle",
         config = function()
             require'colorizer'.setup(
                 {'*';},
