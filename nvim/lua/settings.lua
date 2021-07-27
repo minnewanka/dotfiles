@@ -48,7 +48,7 @@ autocmd BufWinEnter * set  formatoptions-=cro
 ]], false)
 
 vim.api.nvim_exec([[
-autocmd FocusLost,InsertLeave,TextChanged * wa
+autocmd FocusLost,InsertLeave * wa
 ]], false)
 
 vim.api.nvim_exec([[
