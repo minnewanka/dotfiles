@@ -8,13 +8,41 @@ return require('packer').startup(function()
 
     -- lsp
     use 'neovim/nvim-lspconfig'
+
     use {
-        'hrsh7th/nvim-compe',
+        "hrsh7th/nvim-compe",
         event = "InsertEnter",
         config = function()
-            require("plugins.compe")
-        end
+            require "plugins.compe"
+        end,
+        wants = "LuaSnip",
+        requires = {
+            {
+                "L3MON4D3/LuaSnip",
+                wants = "friendly-snippets",
+                event = "InsertCharPre",
+                config = function()
+                    local present, luasnip = pcall(require, "luasnip")
+                    if not present then
+                        return
+                    end
+
+                    luasnip.config.set_config(
+                        {
+                            history = true,
+                            updateevents = "TextChanged,TextChangedI"
+                        }
+                    )
+                    require("luasnip/loaders/from_vscode").load()
+                end
+            },
+            {
+                "rafamadriz/friendly-snippets",
+                event = "InsertCharPre"
+            }
+        },
     }
+
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -37,7 +65,7 @@ return require('packer').startup(function()
 
     -- git
     use{  'tpope/vim-fugitive',
-       cmd ={ 'Git', 'Glog'}
+        cmd ={ 'Git', 'Glog'}
     }
     use { 'tpope/vim-rhubarb',
         after = "vim-fugitive",
@@ -104,8 +132,6 @@ return require('packer').startup(function()
             local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
             vim.g.nvim_tree_window_picker_chars ='asdfjkl'
-            vim.g.nvim_tree_disable_netrw = 0
-            vim.g.nvim_tree_hijack_netrw = 0
             vim.g.nvim_tree_width = 55
             vim.g.nvim_tree_indent_markers = 1
 
@@ -154,12 +180,6 @@ return require('packer').startup(function()
             map('n', "<C-l>", "<CMD>lua require('Navigator').right()<CR>", opts)
             map('n', "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts)
         end
-    }
-
-    use {
-        "hrsh7th/vim-vsnip",
-        event = "InsertEnter",
-        requires = { "rafamadriz/friendly-snippets" },
     }
 
     use {

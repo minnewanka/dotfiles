@@ -15,7 +15,7 @@ highlight StatusLine guifg=#E2CBA7 guibg=#443F3C  gui=NONE
 highlight StatusLineNC guifg=#A89985 guibg=NONE  gui=NONE
 highlight TabLine guifg=#A89985 guibg=#3a3735  gui=NONE
 highlight TabLineFill guifg=#A89985 guibg=#292929  gui=NONE
-highlight TabLineSel guifg=#292929 guibg=#A89985  gui=NONE
+highlight TabLineSel guifg=#292929 guibg=#7EA99D  gui=NONE
 highlight Visual guifg=NONE guibg=#384242  gui=NONE
 highlight Constant guifg=#8AB97E guibg=NONE  gui=NONE
 highlight String guifg=#B1B946 guibg=NONE  gui=NONE
@@ -39,7 +39,7 @@ highlight Yellow guifg=#E9B244 guibg=NONE  gui=NONE
 highlight Green guifg=#B1B946 guibg=NONE  gui=NONE
 highlight Aqua guifg=#8AB97E guibg=NONE  gui=NONE
 highlight Purple guifg=#D4879C guibg=NONE  gui=NONE
-highlight CurrentWord guibg=#3c3836 gui=bold
+highlight CurrentWord guibg=#4a433f
 highlight ErrorText guifg=#F2584A guibg=NONE  gui=underline
 highlight WarningText guifg=#E9B244 guibg=NONE  gui=underline
 highlight InfoText guifg=#7EA99D guibg=NONE  gui=underline
@@ -70,7 +70,7 @@ highlight! link YankHighlight Visual
 highlight! link NeogitHunkHeaderHighlight Blue
 highlight! link Question Yellow
 highlight! link NeogitHunkHeader Blue
-highlight! link Title Orange
+highlight! link Title Blue
 highlight! link WildMenu PmenuSel
 highlight! link Character Green
 highlight! link Number Purple

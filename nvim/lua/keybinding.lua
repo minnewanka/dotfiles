@@ -49,9 +49,9 @@ vim.api.nvim_set_keymap('n', ';lp', ':lprev<CR>', {noremap = true, silent = true
 vim.api.nvim_set_keymap('n', '<leader><BS>', ':Bdelete<CR>', {noremap = true, silent = true})
 
 -- tab
-vim.api.nvim_set_keymap('n', '<C-t>n', ':tabnew %<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-t>o', ':tabonly<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-t>q', ':tabclose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ';tn', ':tabnew %<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ';to', ':tabonly<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ';tq', ':tabclose<CR>', { noremap = true, silent = true })
 
 -- line text object
 vim.api.nvim_set_keymap('x', 'il', 'g_o^', { noremap = true, silent = true })
