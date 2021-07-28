@@ -46,6 +46,7 @@ return require('packer').startup(function()
 
     use {
         'nvim-treesitter/nvim-treesitter',
+        event = 'BufRead',
         run = ':TSUpdate',
         config = function()
             require("plugins.treesitter")
@@ -131,6 +132,13 @@ return require('packer').startup(function()
         config = function()
             local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
+            vim.g.nvim_tree_git_hl = 0
+            vim.g.nvim_tree_gitignore = 0
+            vim.g.nvim_tree_show_icons = {
+                git = 0,
+                folders = 1,
+                files = 1,
+            }
             vim.g.nvim_tree_window_picker_chars ='asdfjkl'
             vim.g.nvim_tree_width = 55
             vim.g.nvim_tree_indent_markers = 1
