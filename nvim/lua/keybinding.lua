@@ -49,9 +49,9 @@ vim.api.nvim_set_keymap('n', ';lp', ':lprev<CR>', {noremap = true, silent = true
 vim.api.nvim_set_keymap('n', '<leader><BS>', ':Bdelete<CR>', {noremap = true, silent = true})
 
 -- tab
-vim.api.nvim_set_keymap('n', ';tn', ':tabnew %<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', ';to', ':tabonly<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', ';tq', ':tabclose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tn', ':tabnew %<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>to', ':tabonly<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tq', ':tabclose<CR>', { noremap = true, silent = true })
 
 -- line text object
 vim.api.nvim_set_keymap('x', 'il', 'g_o^', { noremap = true, silent = true })
@@ -78,7 +78,7 @@ vim.api.nvim_set_keymap('n', '<Leader>g;', ':diffget //3<CR>', { noremap = true,
 vim.api.nvim_set_keymap('n', '<Leader>gj', ':diffget //2<CR>', { noremap = true, silent = true })
 
 -- Tab
-vim.api.nvim_set_keymap('i', '<TAB>', "vsnip#available(1)?'<Plug>(vsnip-expand-or-jump)':'<Tab>'", { expr = true, silent = true})
+vim.api.nvim_set_keymap('i', '<TAB>', "luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump':'<Tab>'", { expr = true, silent = true})
 
 -- reselect map
 vim.api.nvim_set_keymap('n', 'gy', "'`[' . strpart(getregtype(), 0, 1) . '`]'", { noremap = true ,expr = true, silent = true})
@@ -91,3 +91,23 @@ vim.api.nvim_set_keymap('n', '\'', '`', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<C-P>',  [[<Cmd>Telescope git_files<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>b',  [[<Cmd>Telescope buffers<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
+
+-- serminal
+vim.api.nvim_set_keymap('t', 'jk', '<C-\\><C-n>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-N><C-w>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-N><C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-N><C-w>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-N><C-w>l', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+
+--undo break point
+vim.api.nvim_set_keymap('i', ',', ',<c-g>u', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '.', '.<c-g>u', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '!', '!<c-g>u', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '?', '?<c-g>u', { noremap = true, silent = true })
+

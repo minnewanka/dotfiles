@@ -28,7 +28,18 @@ vim.opt.scrolloff                 =       10
 vim.opt.formatoptions             =       vim.opt.formatoptions + { "cro" }
 vim.opt.shortmess:append "c"
 vim.opt.swapfile                  =       false
+vim.opt.lazyredraw                =       true
 vim.opt.statusline='%f  %m%r%h%w%=[%l,%v]      [%L,%p%%] %n'
+
+-- don't load the plugins below
+vim.g.loaded_gzip = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_matchit = 1
+vim.g.loaded_matchparen = 1
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}'
@@ -71,4 +82,8 @@ vim.api.nvim_exec([[
 au BufReadPost *.fish set filetype=fish
 ]], false)
 
-
+-- show cursor line only in active window
+vim.cmd([[
+  autocmd InsertLeave,WinEnter * set cursorline
+  autocmd InsertEnter,WinLeave * set nocursorline
+]])

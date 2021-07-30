@@ -7,7 +7,14 @@ return require('packer').startup(function()
     use 'nvim-lua/plenary.nvim'
 
     -- lsp
-    use 'neovim/nvim-lspconfig'
+    use{
+        'neovim/nvim-lspconfig',
+        config = function()
+            require('lsp/config')
+            require('lsp/efm')
+            require('lsp/tsserver')
+        end
+    }
 
     use {
         "hrsh7th/nvim-compe",
@@ -248,6 +255,19 @@ return require('packer').startup(function()
 
     use {'kevinhwang91/nvim-hlslens',
         event = "BufRead",
+    }
+
+    use {"akinsho/nvim-toggleterm.lua",
+        keys=';t',
+        cmd = "ToggleTerm",
+        config = function()
+            require'toggleterm'.setup{
+                open_mapping = [[;t]],
+                direction ='horizontal',
+                size = 20,
+            }
+        end
+
     }
 
 end)
