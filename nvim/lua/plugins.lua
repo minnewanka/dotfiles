@@ -53,12 +53,15 @@ return require('packer').startup(function()
 
     use {
         'nvim-treesitter/nvim-treesitter',
-        event = 'BufRead',
         run = ':TSUpdate',
         config = function()
             require("plugins.treesitter")
         end
 
+    }
+
+    use {'nvim-treesitter/playground',
+        cmd = {'TSHighlightCapturesUnderCursor','TSPlaygroundToggle'}
     }
 
     use {
@@ -72,11 +75,14 @@ return require('packer').startup(function()
     use 'ray-x/lsp_signature.nvim'
 
     -- git
-    use{  'tpope/vim-fugitive',
-        cmd ={ 'Git', 'Glog'}
+    use {  'tpope/vim-fugitive',
+        cmd ={ 'Git', 'Glog', }
     }
-    use { 'tpope/vim-rhubarb',
-        after = "vim-fugitive",
+    use {'ruifm/gitlinker.nvim',
+        keys = '<leader>gy',
+        config = function()
+            require"gitlinker".setup()
+        end
     }
 
 
@@ -263,11 +269,12 @@ return require('packer').startup(function()
         config = function()
             require'toggleterm'.setup{
                 open_mapping = [[;t]],
-                direction ='horizontal',
-                size = 20,
+                direction ='window',
+                -- size = 20,
             }
         end
 
     }
+
 
 end)

@@ -3,6 +3,12 @@ syntax reset
 
 let colors_name = 'gruv'
 
+highlight diffAdded guifg=#B1B946 guibg=NONE  gui=NONE
+highlight diffRemoved guifg=#F2584A guibg=NONE  gui=NONE
+highlight diffOldFile guifg=#E9B244 guibg=NONE  gui=NONE
+highlight diffNewFile guifg=#7EA99D guibg=NONE  gui=NONE
+highlight diffFile guifg=#F28736 guibg=NONE  gui=NONE
+
 highlight Blue guifg=#7EA99D guibg=NONE  gui=NONE
 highlight Normal guifg=#E2CBA7 guibg=NONE  gui=NONE
 highlight Pmenu guifg=#E2CBA7 guibg=NONE  gui=NONE
