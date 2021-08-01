@@ -70,7 +70,7 @@ time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   LuaSnip = {
-    config = { "\27LJ\2\n∆\1\0\0\5\0\b\0\0176\0\0\0006\2\1\0'\3\2\0B\0\3\3\14\0\0\0X\2\1ÄK\0\1\0009\2\3\0019\2\4\0025\4\5\0B\2\2\0016\2\1\0'\4\6\0B\2\2\0029\2\a\2B\2\1\1K\0\1\0\tload luasnip/loaders/from_vscode\1\0\2\fhistory\2\17updateevents\29TextChanged,TextChangedI\15set_config\vconfig\fluasnip\frequire\npcall\0" },
+    config = { "\27LJ\2\n∆\1\0\0\5\0\b\0\0176\0\0\0006\2\1\0'\3\2\0B\0\3\3\14\0\0\0X\2\1ÄK\0\1\0009\2\3\0019\2\4\0025\4\5\0B\2\2\0016\2\1\0'\4\6\0B\2\2\0029\2\a\2B\2\1\1K\0\1\0\tload luasnip/loaders/from_vscode\1\0\2\17updateevents\29TextChanged,TextChangedI\fhistory\2\15set_config\vconfig\fluasnip\frequire\npcall\0" },
     loaded = false,
     needs_bufread = false,
     path = "/Users/philippe/.local/share/nvim/site/pack/packer/opt/LuaSnip",
@@ -106,6 +106,11 @@ _G.packer_plugins = {
     loaded = false,
     needs_bufread = false,
     path = "/Users/philippe/.local/share/nvim/site/pack/packer/opt/harpoon"
+  },
+  kommentary = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/philippe/.local/share/nvim/site/pack/packer/opt/kommentary"
   },
   ["lightspeed.nvim"] = {
     config = { "\27LJ\2\nÖ\2\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\a\25grey_out_search_area\2\27highlight_unique_chars\1)jump_on_partial_input_safety_timeout\3ê\3\24jump_to_first_match\2\30full_inclusive_prefix_key\n<c-x>\21limit_ft_matches\3\5+match_only_the_start_of_same_char_seqs\2\nsetup\15lightspeed\frequire\0" },
@@ -219,10 +224,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/philippe/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
-  ["telescope-fzf-native.nvim"] = {
-    loaded = true,
-    path = "/Users/philippe/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
-  },
   ["telescope.nvim"] = {
     commands = { "Telescope" },
     config = { "\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22plugins.telescope\frequire\0" },
@@ -238,25 +239,11 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/Users/philippe/.local/share/nvim/site/pack/packer/opt/undotree"
   },
-  ["vim-commentary"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/philippe/.local/share/nvim/site/pack/packer/opt/vim-commentary"
-  },
   ["vim-fugitive"] = {
-    after = { "vim-rhubarb" },
     commands = { "Git", "Glog" },
     loaded = false,
     needs_bufread = true,
     path = "/Users/philippe/.local/share/nvim/site/pack/packer/opt/vim-fugitive"
-  },
-  ["vim-rhubarb"] = {
-    load_after = {
-      ["vim-fugitive"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/philippe/.local/share/nvim/site/pack/packer/opt/vim-rhubarb"
   },
   ["vim-signature"] = {
     after_files = { "/Users/philippe/.local/share/nvim/site/pack/packer/opt/vim-signature/after/plugin/signature.vim" },
@@ -290,40 +277,40 @@ time([[Config for nvim-lspconfig]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Glog lua require("packer.load")({'vim-fugitive'}, { cmd = "Glog", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file ToggleTerm lua require("packer.load")({'nvim-toggleterm.lua'}, { cmd = "ToggleTerm", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file UndotreeToggle lua require("packer.load")({'undotree'}, { cmd = "UndotreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file ColorizerToggle lua require("packer.load")({'nvim-colorizer.lua'}, { cmd = "ColorizerToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file TSHighlightCapturesUnderCursor lua require("packer.load")({'playground'}, { cmd = "TSHighlightCapturesUnderCursor", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Glog lua require("packer.load")({'vim-fugitive'}, { cmd = "Glog", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file ColorizerToggle lua require("packer.load")({'nvim-colorizer.lua'}, { cmd = "ColorizerToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file UndotreeToggle lua require("packer.load")({'undotree'}, { cmd = "UndotreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Git lua require("packer.load")({'vim-fugitive'}, { cmd = "Git", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file TSPlaygroundToggle lua require("packer.load")({'playground'}, { cmd = "TSPlaygroundToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Telescope lua require("packer.load")({'telescope.nvim'}, { cmd = "Telescope", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Git lua require("packer.load")({'vim-fugitive'}, { cmd = "Git", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
+vim.cmd [[noremap <silent> <leader>3 <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>3", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> ;t <cmd>lua require("packer.load")({'nvim-toggleterm.lua'}, { keys = ";t", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>s <cmd>lua require("packer.load")({'nvim-spectre'}, { keys = "<lt>leader>s", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>u <cmd>lua require("packer.load")({'undotree'}, { keys = "<lt>leader>u", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>gy <cmd>lua require("packer.load")({'gitlinker.nvim'}, { keys = "<lt>leader>gy", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> ;z <cmd>lua require("packer.load")({'zen-mode.nvim'}, { keys = ";z", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>u <cmd>lua require("packer.load")({'undotree'}, { keys = "<lt>leader>u", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>4 <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>4", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>5 <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>5", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>a <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>a", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>h <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>h", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>e <cmd>lua require("packer.load")({'nvim-tree.lua'}, { keys = "<lt>leader>e", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> ;t <cmd>lua require("packer.load")({'nvim-toggleterm.lua'}, { keys = ";t", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>1 <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>1", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>2 <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>2", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>h <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>h", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>a <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>a", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>3 <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>3", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>s <cmd>lua require("packer.load")({'nvim-spectre'}, { keys = "<lt>leader>s", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>5 <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>5", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>4 <cmd>lua require("packer.load")({'harpoon'}, { keys = "<lt>leader>4", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au InsertCharPre * ++once lua require("packer.load")({'LuaSnip', 'friendly-snippets'}, { event = "InsertCharPre *" }, _G.packer_plugins)]]
 vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-compe'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'nvim-ts-autotag', 'nvim-bqf', 'nvim-hlslens', 'Navigator.nvim', 'vim-commentary', 'lspkind-nvim', 'gitsigns.nvim', 'vim-signature', 'vim-surround', 'lightspeed.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'lspkind-nvim', 'vim-surround', 'nvim-bqf', 'lightspeed.nvim', 'Navigator.nvim', 'gitsigns.nvim', 'nvim-hlslens', 'nvim-ts-autotag', 'vim-signature', 'kommentary'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertCharPre * ++once lua require("packer.load")({'LuaSnip', 'friendly-snippets'}, { event = "InsertCharPre *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

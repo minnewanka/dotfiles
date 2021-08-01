@@ -4,7 +4,7 @@ return require('packer').startup(function()
 
     -- common
     use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
+     use { "nvim-lua/plenary.nvim", branch = 'async_jobs_v2' }
 
     -- lsp
     use{
@@ -97,15 +97,16 @@ return require('packer').startup(function()
     use {'tpope/vim-surround',
         event = "BufRead",
     }
-    use {'tpope/vim-commentary',
+    use {'b3nj5m1n/kommentary',
         event = "BufRead",
     }
 
     -- Telescope
     use {
         'nvim-telescope/telescope.nvim',
+        branch = 'async_v2',
         cmd = "Telescope",
-        requires = {"kyazdani42/nvim-web-devicons", {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}},
+        requires = {"kyazdani42/nvim-web-devicons" },
         config = function()
             require("plugins.telescope")
         end
