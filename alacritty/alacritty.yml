@@ -5,8 +5,8 @@ dynamic_title: true
 #
 cursor:
   style:
-    blinking: Always
-  blink_interval: 530
+   blinking: Always
+   blink_interval: 530
 
 env:
   TERM: xterm-256color
@@ -16,7 +16,7 @@ window:
   dynamic_padding: true
   padding:
     x: 10
-    y: 0
+    y: 5
 
 
   # Startup Mode (changes require restart)
@@ -54,7 +54,7 @@ font:
 
   # Font size
   size: 12
-
+  draw_bold_text_with_bright_colors: true
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing
@@ -94,10 +94,6 @@ key_bindings:
   - { key: E, mods: Command, chars: ":Telescope oldfiles cwd_only=true\x0D" }
   - { key: J, mods: Command, chars: "\x04" }
   - { key: K, mods: Command, chars: "\x15" }
-  # - { key: C, mods: Command, chars: "\"*y'" }
-  # - { key: F, mods: Command|Shift, chars: ":lua require('telescope.builtin').live_grep()\x0D" }
-  - { key: LBracket, mods: Command|Shift, chars: ":BufferLineCyclePrev\x0D" }
-  - { key: RBracket, mods: Command|Shift, chars: ":BufferLineCycleNext\x0D" }
   - { key: J, mods: Alt, chars: "\x1bj" }
   - { key: K, mods: Alt, chars: "\x1bk" }
   - { key: H, mods: Alt, chars: "\x1bh" }

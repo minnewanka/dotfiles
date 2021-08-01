@@ -5,16 +5,19 @@ local map = vim.api.nvim_set_keymap
 map('n', '<leader>r', ':source %<CR>', { noremap = true, silent = false })
 
 
--- remap macro
+--remap toggle file
+map('n', '<BS>', '<C-^>', { noremap = true, silent = true })
+
 map('n', 'Q', 'q', { noremap = true, silent = true })
-map('n', 'q', '<NOP>', { noremap = true, silent = true })
 
 -- selection
 map('i', '<C-j>', '<C-n>', { noremap = true, silent = true })
 map('i', '<C-k>', '<C-p>', { noremap = true })
 
-map('c', '<C-k>', 'pumvisible() ? "<C-p>" : "<Up>"', { noremap = true, expr = true, silent = false})
-map('c', '<C-j>', 'pumvisible() ? "<C-n>" : "<Down>"', { noremap = true, expr = true, silent = false})
+map('c', '<C-k>', 'pumvisible() ? "<C-p>" : "<C-k>"', { noremap = true, expr = true, silent = false})
+map('c', '<C-j>', 'pumvisible() ? "<C-n>" : "<C-j>"', { noremap = true, expr = true, silent = false})
+map('c', '<Up>', 'pumvisible() ? "<C-p>" : "<Up>"', { noremap = true, expr = true, silent = false})
+map('c', '<Down>', 'pumvisible() ? "<C-n>" : "<Down>"', { noremap = true, expr = true, silent = false})
 
 -- paste
 map('v', '<leader>p', '"_dP', { noremap = true, silent = true })
@@ -28,6 +31,7 @@ map('v', '<Leader>y', '"*y', { noremap = true, silent = true })
 map('n', 'ghl', ':set hlsearch! hlsearch?<CR>', { noremap = true, silent = true })
 
 -- save & quit
+map('n', '<Leader>Q', ':qa!<CR>', { noremap = true, silent = false })
 map('n', '<Leader>q', ':q!<CR>', { noremap = true, silent = false })
 map('n', '<Leader>z', ':wq<CR>', { noremap = true, silent = true })
 
@@ -46,8 +50,6 @@ map('n', ';ll', ':lopen<CR>', {noremap = true, silent = true})
 map('n', ';ln', ':lnext<CR>', {noremap = true, silent = true})
 map('n', ';lp', ':lprev<CR>', {noremap = true, silent = true})
 
--- delete current buffer
-map('n', '<leader><BS>', ':Bdelete<CR>', {noremap = true, silent = true})
 
 -- tab
 map('n', '<leader>tn', ':tabnew %<CR>', { noremap = true, silent = true })
@@ -71,7 +73,7 @@ map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap=true, expr = true, silent =
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", {noremap= true, expr = true, silent = true})
 
 -- git diff
-map('n', '<Leader>g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
+-- map('n', '<Leader>g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
 map('n', ';g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
 map('n', '<Leader>gd',  ':Gdiffsplit<CR>', { noremap = true, silent = true })
 map('n', '<Leader>gD',  ':Git difftool<CR>', { noremap = true, silent = true })
@@ -89,22 +91,12 @@ map('n', '`', '\'', {noremap = true, silent = true})
 map('n', '\'', '`', {noremap = true, silent = true})
 
 -- Telescope
-map('n', '<C-P>',  [[<Cmd>Telescope git_files<CR>]], { noremap = true, silent = true })
+map('n', '<C-P>',  [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent = true })
+map('n', '<leader>M',  [[<Cmd>Telescope marks<CR>]], { noremap = true, silent = true })
 map('n', '<Leader>b',  [[<Cmd>Telescope buffers<CR>]], { noremap = true, silent = true })
 map('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
-
--- serminal
-map('t', 'jk', '<C-\\><C-n>', { noremap = true, silent = true })
-map('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
-map('t', '<C-h>', '<C-\\><C-N><C-w>h', { noremap = true, silent = true })
-map('t', '<C-j>', '<C-\\><C-N><C-w>j', { noremap = true, silent = true })
-map('t', '<C-k>', '<C-\\><C-N><C-w>k', { noremap = true, silent = true })
-map('t', '<C-l>', '<C-\\><C-N><C-w>l', { noremap = true, silent = true })
-
-map('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-map('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
-map('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
-map('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+map('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
+map('n', '<leader>cc',[[<Cmd>lua require("telescope").extensions.neoclip.default()<CR>]], { noremap = true, silent = true })
 
 --undo break point
 map('i', ',', ',<c-g>u', { noremap = true, silent = true })
@@ -112,3 +104,10 @@ map('i', '.', '.<c-g>u', { noremap = true, silent = true })
 map('i', '!', '!<c-g>u', { noremap = true, silent = true })
 map('i', '?', '?<c-g>u', { noremap = true, silent = true })
 
+map('n', '<F1>', ':lua require"dap".toggle_breakpoint()<CR>', { noremap = true })
+map('n', '<F2>', ':lua require"dap".continue()<CR>', { noremap = true })
+
+map('n', '<A-h>', ':vertical resize -5<CR>', { noremap = true, silent = true })
+map('n', '<A-l>', ':vertical resize +5<CR>', { noremap = true, silent = true })
+map('n', '<A-j>', ':resize -5<CR>', { noremap = true, silent = true })
+map('n', '<A-k>', ':resize +5<CR>', { noremap = true, silent = true })

@@ -3,9 +3,9 @@ function! MyHighlights() abort
 
 highlight link LightspeedLabel Yellow
 highlight LightspeedShortcut guibg=#e9b143 guifg=#000000
-highlight LightspeedOneCharMatch guibg=#e9b143 guifg=#000000
+highlight LightspeedOneCharMatch guibg=#A89985 guifg=#000000
 highlight link LightspeedMaskedChar Pink
-highlight LightspeedCursor gui=reverse
+highlight LightspeedCursor guibg=#e9b143 guifg=#000000
 
 endfunction
 
@@ -15,4 +15,4 @@ augroup custom_highlight
 augroup END
     ]], false)
 
-vim.cmd 'colorscheme gruv'
+ vim.cmd 'colorscheme gruv'

@@ -1,12 +1,30 @@
+vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
+
 return require('packer').startup(function()
 
-    use 'wbthomason/packer.nvim'
+    use { 'wbthomason/packer.nvim' }
+    use 'lewis6991/impatient.nvim'
 
     -- common
     use 'nvim-lua/popup.nvim'
-     use { "nvim-lua/plenary.nvim", branch = 'async_jobs_v2' }
+    use { "nvim-lua/plenary.nvim" }
+
+    -- debugger
+    use 'mfussenegger/nvim-dap'
+    use { "rcarriga/nvim-dap-ui",
+        requires = {"mfussenegger/nvim-dap"},
+        config = function ()
+            require("dapui").setup()
+        end}
 
     -- lsp
+    use {
+        'mfussenegger/nvim-jdtls' ,
+        config = function()
+            require('lsp.java')
+        end
+    }
+
     use{
         'neovim/nvim-lspconfig',
         config = function()
@@ -17,66 +35,37 @@ return require('packer').startup(function()
     }
 
     use {
-        "hrsh7th/nvim-compe",
-        event = "InsertEnter",
-        config = function()
-            require "plugins.compe"
-        end,
-        wants = "LuaSnip",
-        requires = {
-            {
-                "L3MON4D3/LuaSnip",
-                wants = "friendly-snippets",
-                event = "InsertCharPre",
-                config = function()
-                    local present, luasnip = pcall(require, "luasnip")
-                    if not present then
-                        return
-                    end
-
-                    luasnip.config.set_config(
-                        {
-                            history = true,
-                            updateevents = "TextChanged,TextChangedI"
-                        }
-                    )
-                    require("luasnip/loaders/from_vscode").load()
-                end
-            },
-            {
-                "rafamadriz/friendly-snippets",
-                event = "InsertCharPre"
-            }
-        },
-    }
-
-
-    use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         config = function()
             require("plugins.treesitter")
         end
-
     }
 
     use {'nvim-treesitter/playground',
         cmd = {'TSHighlightCapturesUnderCursor','TSPlaygroundToggle'}
     }
 
-    use {
-        'onsails/lspkind-nvim',
-        event = "BufRead",
-        config = function()
-            require('lspkind').init()
-        end
-    }
-
-    use 'ray-x/lsp_signature.nvim'
+    -- use 'ray-x/lsp_signature.nvim'
 
     -- git
     use {  'tpope/vim-fugitive',
-        cmd ={ 'Git', 'Glog', }
+        event = "BufRead",
+        cmd ={ 'Git', 'Glog', 'Gdiffsplit', 'GBlame' },
+            config = function()
+            local fn, cmd = vim.fn, vim.cmd
+                function my_statusline()
+                        local branch = fn.FugitiveHead()
+
+                        if branch and #branch > 0 then
+                            branch = '  '..branch ..' |'
+                        end
+
+                        return branch..'    %f  %m%r%h%w%=[%l,%v]      [%L,%p%%] %n'
+                end
+
+cmd[[ set statusline=%!luaeval('my_statusline()') ]]
+            end
     }
     use {'ruifm/gitlinker.nvim',
         keys = '<leader>gy',
@@ -85,7 +74,36 @@ return require('packer').startup(function()
         end
     }
 
+    use {  "akinsho/toggleterm.nvim",
+        keys = '<leader>g',
+        config = function()
+            local Terminal  = require('toggleterm.terminal').Terminal
+            local lazygit = Terminal:new({
+                cmd = "lazygit",
+                dir = "git_dir",
+                direction = "float",
+                float_opts = {
+                    border = "double",
+                },
+                -- function to run on opening the terminal
+                on_open = function(term)
+                    vim.cmd("startinsert!")
+                    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+                end,
+                -- function to run on closing the terminal
+                on_close = function(term)
+                    vim.cmd("Closing terminal")
+                end,
+            })
 
+            function _lazygit_toggle()
+                lazygit:toggle()
+            end
+
+            vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+        end
+
+    }
     use {
         'lewis6991/gitsigns.nvim' ,
         event = "BufRead",
@@ -100,13 +118,30 @@ return require('packer').startup(function()
     use {'b3nj5m1n/kommentary',
         event = "BufRead",
     }
+    use{  'sindrets/winshift.nvim',
+        event = 'BufRead',
+        config = function()
+            require("winshift").setup({
+                highlight_moving_win = true,  -- Highlight the window being moved
+                focused_hl_group = "BlueVisual",  -- The highlight group used for the moving window
+                moving_win_options = {
+                    -- These are local options applied to the moving window while it's
+                    -- being moved. They are unset when you leave Win-Move mode.
+                    wrap = false,
+                    cursorline = false,
+                    cursorcolumn = false,
+                    colorcolumn = "",
+                }
+            })
+            vim.api.nvim_set_keymap('n', '<C-W>m', ':WinShift<CR>', {noremap = true, silent = true})
+        end
+    }
 
     -- Telescope
     use {
         'nvim-telescope/telescope.nvim',
-        branch = 'async_v2',
         cmd = "Telescope",
-        requires = {"kyazdani42/nvim-web-devicons" },
+        requires = {"kyazdani42/nvim-web-devicons", "nvim-telescope/telescope-project.nvim" },
         config = function()
             require("plugins.telescope")
         end
@@ -127,9 +162,10 @@ return require('packer').startup(function()
         end
     }
 
+
     use {
         'windwp/nvim-autopairs',
-        after = "nvim-compe",
+        after = "nvim-cmp",
         config = function()
             require('nvim-autopairs').setup()
         end
@@ -204,6 +240,7 @@ return require('packer').startup(function()
         end
     }
 
+
     use {
         'kshenoy/vim-signature',
         event = "BufRead",
@@ -262,20 +299,102 @@ return require('packer').startup(function()
 
     use {'kevinhwang91/nvim-hlslens',
         event = "BufRead",
+        config = function()
+            require('hlslens').setup({
+                calm_down = true,
+                nearest_only = true,
+                nearest_float_when = 'always'
+            })
+        end
     }
 
-    use {"akinsho/nvim-toggleterm.lua",
-        keys=';t',
-        cmd = "ToggleTerm",
+    use { 'alvarosevilla95/luatab.nvim', requires='kyazdani42/nvim-web-devicons' }
+
+    use 'onsails/lspkind-nvim'
+    use "rafamadriz/friendly-snippets"
+    use { 'L3MON4D3/LuaSnip',
+        after = 'nvim-cmp',
         config = function()
-            require'toggleterm'.setup{
-                open_mapping = [[;t]],
-                direction ='window',
-                -- size = 20,
-            }
+            local present, luasnip = pcall(require, "luasnip")
+            if not present then
+                return
+            end
+
+            luasnip.config.set_config(
+                {
+                    history = true,
+                    updateevents = "TextChanged,TextChangedI"
+                }
+            )
+            require("luasnip/loaders/from_vscode").load()
         end
 
     }
 
+      -- completion engine
+    use {
+        'hrsh7th/nvim-cmp',
+        event = "BufRead",
+        requires = {
+            { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', },
+            { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', },
+            { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', },
+            { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip', },
+        },
+        config = function()
+            local lspkind = require('lspkind')
+            local cmp = require'cmp'
+            local check_back_space = function()
+                local col = vim.fn.col '.' - 1
+                return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' ~= nil
+            end
 
+            local t = function(str)
+                return vim.api.nvim_replace_termcodes(str, true, true, true)
+            end
+            cmp.setup({
+                completion = {
+                    completeopt = 'menu,menuone,noinsert',
+                },
+                formatting = {
+                    format = function(entry, vim_item)
+                        -- fancy icons and a name of kind
+                        vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+
+                        -- set a name for each source
+                        vim_item.menu = ({
+                            buffer = "[Buffer]",
+                            nvim_lsp = "[LSP]",
+                            luasnip = "[LuaSnip]",
+                            nvim_lua = "[Lua]",
+                            latex_symbols = "[Latex]",
+                        })[entry.source.name]
+                        return vim_item
+                    end,
+                },
+
+                snippet = {
+                    expand = function(args)
+                        local luasnip = require("luasnip")
+                        if not luasnip then
+                            return
+                        end
+                        luasnip.lsp_expand(args.body)
+                    end,
+                },
+                mapping = {
+                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                },
+                sources = {
+                    { name = 'luasnip' },
+                    { name = 'buffer' },
+                    { name = 'nvim_lsp' },
+                },
+                documentation = {
+                    border = 'single'
+                }
+            })
+        end,
+    }
 end)
+

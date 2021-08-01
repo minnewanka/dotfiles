@@ -35,6 +35,11 @@ opt.shortmess:append "c"
 opt.swapfile                  =       false
 opt.lazyredraw                =       true
 opt.statusline='%f  %m%r%h%w%=[%l,%v]      [%L,%p%%] %n'
+vim.o.tabline = '%!v:lua.require\'luatab\'.tabline()'
+vim.opt.shell = "/bin/bash"
+
+local fn, cmd = vim.fn, vim.cmd
+
 
 -- don't load the plugins below
 g.loaded_gzip = 1
@@ -43,8 +48,8 @@ g.loaded_tarPlugin = 1
 g.loaded_zipPlugin = 1
 g.loaded_2html_plugin = 1
 g.loaded_netrwPlugin = 1
--- vim.g.loaded_matchit = 1
-g.loaded_matchparen = 1
+g.loaded_matchit = 0
+g.loaded_matchparen = 0
 
 -- Highlight on yank
 cmd 'au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}'
@@ -72,14 +77,6 @@ nvim_exec([[
     command! TSFix :write | edit | TSBufEnable highlight
 ]], false)
 
-nvim_exec([[
-function! SynStack()
-if !exists("*synstack")
-return
-endif
-echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-    ]], false)
 
 nvim_exec([[
 function! ToggleGStatus()
@@ -93,7 +90,7 @@ command ToggleGStatus :call ToggleGStatus()
 ]], false)
 
 -- show cursor line only in active window
-cmd([[
+ cmd([[
   autocmd InsertLeave,WinEnter * set cursorline
   autocmd InsertEnter,WinLeave * set nocursorline
 ]])

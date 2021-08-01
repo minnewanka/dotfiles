@@ -13,6 +13,8 @@ require('telescope').setup {
 
         mappings = {
             i = {
+                ["<C-e>"] = require('telescope.actions').cycle_history_next,
+                ["<C-f>"] = require('telescope.actions').cycle_history_prev,
                 ["<C-q>"] = actions.smart_send_to_qflist,
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,

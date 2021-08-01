@@ -11,18 +11,20 @@ highlight diffFile guifg=#F28736 guibg=NONE  gui=NONE
 
 highlight Blue guifg=#7EA99D guibg=NONE  gui=NONE
 highlight Normal guifg=#E2CBA7 guibg=NONE  gui=NONE
-highlight Pmenu guifg=#E2CBA7 guibg=NONE  gui=NONE
+highlight NormalFloat guifg=#E2CBA7 guibg=NONE  gui=NONE
+highlight Pmenu guifg=#E2CBA7 guibg=#45403d  gui=NONE
 highlight PmenuSel guifg=#443F3C guibg=#A89985  gui=NONE
 highlight PmenuSbar guifg=NONE guibg=#443F3C  gui=NONE
 highlight PmenuThumb guifg=NONE guibg=#7D6F64  gui=NONE
 highlight Search guifg=#292929 guibg=#B1B946  gui=NONE
 highlight SpecialKey guifg=#5B534D guibg=NONE  gui=NONE
-highlight StatusLine guifg=#E2CBA7 guibg=#443F3C  gui=NONE
-highlight StatusLineNC guifg=#A89985 guibg=NONE  gui=NONE
+highlight StatusLine guifg=#E2CBA7 guibg=#3b4439  gui=NONE
+highlight StatusLineNC guifg=#A89985 guibg=#3a3735  gui=NONE
 highlight TabLine guifg=#A89985 guibg=#3a3735  gui=NONE
 highlight TabLineFill guifg=#A89985 guibg=#292929  gui=NONE
-highlight TabLineSel guifg=#292929 guibg=#7EA99D  gui=NONE
-highlight Visual guifg=NONE guibg=#384242  gui=NONE
+highlight TabLineSel guifg=#F28736 guibg=#3a3735  gui=NONE
+highlight Visual guifg=NONE guibg=#45403d gui=NONE
+highlight BlueVisual guifg=NONE guibg=#2e3b3b gui=NONE
 highlight Constant guifg=#8AB97E guibg=NONE  gui=NONE
 highlight String guifg=#B1B946 guibg=NONE  gui=NONE
 highlight Statement guifg=#F2584A guibg=NONE  gui=italic
@@ -68,14 +70,19 @@ highlight SignColumn guifg=#E2CBA7 guibg=NONE  gui=NONE
 highlight IncSearch guifg=#292929 guibg=#E9B244  gui=NONE
 highlight LineNr guifg=#5B534D guibg=NONE  gui=NONE
 highlight CursorLineNr guifg=#E9B244 guibg=NONE  gui=NONE
-highlight MatchParen guifg=#F28736 guibg=NONE  gui=bold
+highlight MatchParen guifg=#F28736 guibg=NONE  gui=NONE
 highlight NeogitDiffContextHighlight guifg=NONE guibg=#443F3C  gui=NONE
+hi link NeogitDiffAddHighlight Green
+hi link NeogitDiffDeleteHighlight Red
+hi def NeogitDiffContextHighlight guibg=#333333 guifg=#b2b2b2
+highlight! link NeogitHunkHeaderHighlight Blue
+highlight! link NeogitHunkHeader Blue
 highlight NonText guifg=#5B534D guibg=NONE  gui=NONE
 highlight WindowPicker guifg=#E2CBA7 guibg=#7EA99D  gui=bold
-highlight! link YankHighlight Visual
-highlight! link NeogitHunkHeaderHighlight Blue
+highlight QuickScopePrimary guifg='#F28736' gui=underline
+highlight QuickScopeSecondary guifg='#7EA99D' gui=underline
+highlight! link YankHighlight IncSearch
 highlight! link Question Yellow
-highlight! link NeogitHunkHeader Blue
 highlight! link Title Blue
 highlight! link WildMenu PmenuSel
 highlight! link Character Green
@@ -87,6 +94,7 @@ highlight! link Type Green
 highlight! link Special Yellow
 highlight! link Error Red
 highlight! link Todo Purple
+highlight! link FloatBorder Blue
 highlight! link LspReferenceText CurrentWord
 highlight! link LspReferenceRead CurrentWord
 highlight! link LspReferenceWrite CurrentWord
@@ -148,8 +156,6 @@ highlight! link NvimTreeGitStaged Blue
 highlight! link NvimTreeGitRenamed Purple
 highlight! link Directory Green
 highlight! link MoreMsg Yellow
-highlight! link NeogitDiffDeleteHighlight DiffDelete
-highlight! link NeogitDiffAddHighlight DiffAdd
 highlight! link TelescopeSelectionCaret Green
 highlight! link TelescopeSelection Green
 highlight! link TelescopePromptPrefix Orange
@@ -173,3 +179,14 @@ highlight! link GitSignsChangeDelete Purple
 highlight! link WarningMsg Yellow
 highlight! link TSStringEscape Green
 highlight! link TSType Yellow
+highlight! link QuickFixLine CursorLine
+highlight! link OrgHeadlineLevel1 Orange
+highlight! link OrgHeadlineLevel2 Yellow
+highlight! link OrgHeadlineLevel3 Blue
+
+highlight! link VimwikiHeader1 Orange
+highlight! link VimwikiHeader2 Yellow
+highlight! link VimwikiHeader3 Blue
+highlight! link VimwikiHeader4 Green
+highlight! link VimwikiHeader5 Purple
+highlight! link VimwikiHeader6 Aqua
