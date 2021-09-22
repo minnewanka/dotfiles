@@ -1,8 +1,12 @@
 vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
 
-return require('packer').startup(function()
+local packer = require('packer')
 
-    use { 'wbthomason/packer.nvim' }
+packer.startup(function()
+
+    use { 'wbthomason/packer.nvim',
+    }
+
     use 'lewis6991/impatient.nvim'
 
     -- common
@@ -34,6 +38,91 @@ return require('packer').startup(function()
         end
     }
 
+    use {'famiu/feline.nvim',
+        config = function()
+            local colors = {
+                fg = '#E2CBA7',
+                bg = '#3b4439'
+            }
+            local components = {
+                active = {},
+                inactive = {}
+            }
+            table.insert(components.active, {})
+            table.insert(components.active, {})
+            table.insert(components.active, {})
+
+            table.insert(components.inactive, {})
+
+            components.active[1][1] = {
+                provider = {
+                    name = 'file_info',
+                    opts = {
+                        type = 'unique',
+                    }
+                },
+                left_sep = ' ',
+                right_sep = ' ',
+            }
+            components.active[1][2] = {
+                provider = 'git_branch',
+                left_sep = ' ',
+                right_sep = ' ',
+            }
+
+            components.active[1][3] = {
+                provider = 'git_diff_added',
+                left_sep = ' ',
+                hl = {
+                    fg = '#B1B946'
+                }
+            }
+            components.active[1][4] = {
+                provider = 'git_diff_changed',
+                hl = {
+                    fg = '#7EA99D'
+                }
+            }
+            components.active[1][5] = {
+                provider = 'git_diff_removed',
+                hl = {
+                    fg = '#F2584A'
+                }
+            }
+
+            components.active[3][1] = {
+                provider = 'position',
+                right_sep = {
+                    str = ' ',
+                },
+            }
+            components.active[3][2] = {
+                provider = 'line_percentage',
+                left_sep = ' ',
+                right_sep = ' ',
+            }
+
+
+            components.inactive[1][1] = {
+                provider = {
+                    name = 'file_info',
+                    opts = {
+                        type = 'unique',
+                    }
+                },
+                provider = 'file_info',
+                hl = {
+                    fg = '#A89985',
+                    bg = '#3a3735',
+                },
+                                                left_sep = ' ',
+
+            }
+
+            require('feline').setup({colors = colors,components = components})
+        end
+    }
+
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -51,21 +140,7 @@ return require('packer').startup(function()
     -- git
     use {  'tpope/vim-fugitive',
         event = "BufRead",
-        cmd ={ 'Git', 'Glog', 'Gdiffsplit', 'GBlame' },
-            config = function()
-            local fn, cmd = vim.fn, vim.cmd
-                function my_statusline()
-                        local branch = fn.FugitiveHead()
-
-                        if branch and #branch > 0 then
-                            branch = '  '..branch ..' |'
-                        end
-
-                        return branch..'    %f  %m%r%h%w%=[%l,%v]      [%L,%p%%] %n'
-                end
-
-cmd[[ set statusline=%!luaeval('my_statusline()') ]]
-            end
+        cmd = { 'Git', 'Glog', 'Gdiffsplit', 'GBlame' },
     }
     use {'ruifm/gitlinker.nvim',
         keys = '<leader>gy',
@@ -181,6 +256,14 @@ cmd[[ set statusline=%!luaeval('my_statusline()') ]]
         keys='<leader>e',
         config = function()
             local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+            require'nvim-tree'.setup({
+                view = {
+                    width = 55,
+                    mapping = {
+                        { key = "<C-g>",    cb = tree_cb("cd") },
+                    }
+                },
+            })
 
             vim.g.nvim_tree_git_hl = 0
             vim.g.nvim_tree_gitignore = 0
@@ -190,13 +273,7 @@ cmd[[ set statusline=%!luaeval('my_statusline()') ]]
                 files = 1,
             }
             vim.g.nvim_tree_window_picker_chars ='asdfjkl'
-            vim.g.nvim_tree_width = 55
             vim.g.nvim_tree_indent_markers = 1
-
-            vim.g.nvim_tree_bindings = {
-                { key = "<C-g>",    cb = tree_cb("cd") },
-            }
-
             vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
             vim.api.nvim_set_keymap('n', '<Leader>n', ':NvimTreeFindFile<CR>', {noremap = true, silent = true})
 
@@ -396,5 +473,5 @@ cmd[[ set statusline=%!luaeval('my_statusline()') ]]
             })
         end,
     }
-end)
+end )
 

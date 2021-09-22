@@ -19,7 +19,7 @@ highlight PmenuThumb guifg=NONE guibg=#7D6F64  gui=NONE
 highlight Search guifg=#292929 guibg=#B1B946  gui=NONE
 highlight SpecialKey guifg=#5B534D guibg=NONE  gui=NONE
 highlight StatusLine guifg=#E2CBA7 guibg=#3b4439  gui=NONE
-highlight StatusLineNC guifg=#A89985 guibg=#3a3735  gui=NONE
+" highlight StatusLineNC guifg=#A89985 guibg=#3a3735  gui=NONE
 highlight TabLine guifg=#A89985 guibg=#3a3735  gui=NONE
 highlight TabLineFill guifg=#A89985 guibg=#292929  gui=NONE
 highlight TabLineSel guifg=#F28736 guibg=#3a3735  gui=NONE

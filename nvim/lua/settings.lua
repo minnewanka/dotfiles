@@ -34,9 +34,9 @@ opt.formatoptions             =       vim.opt.formatoptions + { "cro" }
 opt.shortmess:append "c"
 opt.swapfile                  =       false
 opt.lazyredraw                =       true
-opt.statusline='%f  %m%r%h%w%=[%l,%v]      [%L,%p%%] %n'
 vim.o.tabline = '%!v:lua.require\'luatab\'.tabline()'
 vim.opt.shell = "/bin/bash"
+opt.laststatus=2
 
 local fn, cmd = vim.fn, vim.cmd
 
