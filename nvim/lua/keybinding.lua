@@ -50,6 +50,10 @@ map('n', ';ll', ':lopen<CR>', {noremap = true, silent = true})
 map('n', ';ln', ':lnext<CR>', {noremap = true, silent = true})
 map('n', ';lp', ':lprev<CR>', {noremap = true, silent = true})
 
+-- buffers
+    nearest_float_when = 'always'
+map('n', '<Right>', ':bn<CR>', {noremap = true, silent = true})
+map('n', '<Left>', ':bp<CR>', {noremap = true, silent = true})
 
 -- tab
 map('n', '<leader>tn', ':tabnew %<CR>', { noremap = true, silent = true })

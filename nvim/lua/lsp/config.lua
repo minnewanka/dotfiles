@@ -58,6 +58,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
 vim.api.nvim_set_keymap('n', 'K',  [[<Cmd>lua vim.lsp.buf.hover()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gs',  [[<Cmd>lua vim.lsp.buf.signature_help()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'ge',  [[<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "single" })<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<space>ca',  [[<Cmd>lua vim.lsp.buf.code_action()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<space>ca',  [[<Cmd>CodeActionMenu<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<space>rr',  [[<Cmd>lua vim.lsp.buf.rename()<CR>]], { noremap = true, silent = true })
 

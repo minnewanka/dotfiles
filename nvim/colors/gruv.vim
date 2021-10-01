@@ -19,7 +19,7 @@ highlight PmenuThumb guifg=NONE guibg=#7D6F64  gui=NONE
 highlight Search guifg=#292929 guibg=#B1B946  gui=NONE
 highlight SpecialKey guifg=#5B534D guibg=NONE  gui=NONE
 highlight StatusLine guifg=#E2CBA7 guibg=#3b4439  gui=NONE
-" highlight StatusLineNC guifg=#A89985 guibg=#3a3735  gui=NONE
+highlight StatusLineNC guifg=#A89985 guibg=#3a3735  gui=NONE
 highlight TabLine guifg=#A89985 guibg=#3a3735  gui=NONE
 highlight TabLineFill guifg=#A89985 guibg=#292929  gui=NONE
 highlight TabLineSel guifg=#F28736 guibg=#3a3735  gui=NONE
@@ -81,7 +81,7 @@ highlight NonText guifg=#5B534D guibg=NONE  gui=NONE
 highlight WindowPicker guifg=#E2CBA7 guibg=#7EA99D  gui=bold
 highlight QuickScopePrimary guifg='#F28736' gui=underline
 highlight QuickScopeSecondary guifg='#7EA99D' gui=underline
-highlight! link YankHighlight IncSearch
+highlight YankHighlight guifg=NONE guibg=#473c29 gui=NONE
 highlight! link Question Yellow
 highlight! link Title Blue
 highlight! link WildMenu PmenuSel
@@ -184,9 +184,24 @@ highlight! link OrgHeadlineLevel1 Orange
 highlight! link OrgHeadlineLevel2 Yellow
 highlight! link OrgHeadlineLevel3 Blue
 
-highlight! link VimwikiHeader1 Orange
-highlight! link VimwikiHeader2 Yellow
-highlight! link VimwikiHeader3 Blue
+
+highlight! link  VimwikiHeader1 Red
+highlight! link VimwikiHeader2 Orange
+highlight! link VimwikiHeader3 Yellow
 highlight! link VimwikiHeader4 Green
-highlight! link VimwikiHeader5 Purple
-highlight! link VimwikiHeader6 Aqua
+highlight! link VimwikiHeader5 Blue
+highlight! link VimwikiHeader6 Purple
+highlight! link VimwikiLink Blue
+highlight! link VimwikiList Blue
+highlight! link VimwikiTag Aqua
+highlight! link VimwikiCode Green
+highlight! link VimwikiHR Yellow
+highlight! link VimwikiHeaderChar Grey
+highlight! link VimwikiMarkers Grey
+highlight! link VimwikiPre Green
+highlight! link VimwikiPreDelim Green
+highlight! link VimwikiNoExistsLink red
+
+highlight! link CmpItemAbbr Pmenu
+highlight! link CmpItemKind Pmenu
+highlight! link CmpItemMenu Pmenu

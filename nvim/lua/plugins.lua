@@ -4,18 +4,15 @@ local packer = require('packer')
 
 packer.startup(function()
 
-    use { 'wbthomason/packer.nvim',
-    }
-
+    use 'wbthomason/packer.nvim'
     use 'lewis6991/impatient.nvim'
-
-    -- common
     use 'nvim-lua/popup.nvim'
-    use { "nvim-lua/plenary.nvim" }
+    use 'nvim-lua/plenary.nvim'
 
     -- debugger
     use 'mfussenegger/nvim-dap'
-    use { "rcarriga/nvim-dap-ui",
+    use {
+        "rcarriga/nvim-dap-ui",
         requires = {"mfussenegger/nvim-dap"},
         config = function ()
             require("dapui").setup()
@@ -29,7 +26,7 @@ packer.startup(function()
         end
     }
 
-    use{
+    use {
         'neovim/nvim-lspconfig',
         config = function()
             require('lsp/config')
@@ -38,88 +35,10 @@ packer.startup(function()
         end
     }
 
-    use {'famiu/feline.nvim',
+    use {
+        'famiu/feline.nvim',
         config = function()
-            local colors = {
-                fg = '#E2CBA7',
-                bg = '#3b4439'
-            }
-            local components = {
-                active = {},
-                inactive = {}
-            }
-            table.insert(components.active, {})
-            table.insert(components.active, {})
-            table.insert(components.active, {})
-
-            table.insert(components.inactive, {})
-
-            components.active[1][1] = {
-                provider = {
-                    name = 'file_info',
-                    opts = {
-                        type = 'unique',
-                    }
-                },
-                left_sep = ' ',
-                right_sep = ' ',
-            }
-            components.active[1][2] = {
-                provider = 'git_branch',
-                left_sep = ' ',
-                right_sep = ' ',
-            }
-
-            components.active[1][3] = {
-                provider = 'git_diff_added',
-                left_sep = ' ',
-                hl = {
-                    fg = '#B1B946'
-                }
-            }
-            components.active[1][4] = {
-                provider = 'git_diff_changed',
-                hl = {
-                    fg = '#7EA99D'
-                }
-            }
-            components.active[1][5] = {
-                provider = 'git_diff_removed',
-                hl = {
-                    fg = '#F2584A'
-                }
-            }
-
-            components.active[3][1] = {
-                provider = 'position',
-                right_sep = {
-                    str = ' ',
-                },
-            }
-            components.active[3][2] = {
-                provider = 'line_percentage',
-                left_sep = ' ',
-                right_sep = ' ',
-            }
-
-
-            components.inactive[1][1] = {
-                provider = {
-                    name = 'file_info',
-                    opts = {
-                        type = 'unique',
-                    }
-                },
-                provider = 'file_info',
-                hl = {
-                    fg = '#A89985',
-                    bg = '#3a3735',
-                },
-                                                left_sep = ' ',
-
-            }
-
-            require('feline').setup({colors = colors,components = components})
+            require('plugins.feline')
         end
     }
 
@@ -131,51 +50,33 @@ packer.startup(function()
         end
     }
 
-    use {'nvim-treesitter/playground',
+    use {
+        'nvim-treesitter/playground',
         cmd = {'TSHighlightCapturesUnderCursor','TSPlaygroundToggle'}
     }
 
     -- use 'ray-x/lsp_signature.nvim'
 
     -- git
-    use {  'tpope/vim-fugitive',
+    use {
+        'tpope/vim-fugitive',
         event = "BufRead",
         cmd = { 'Git', 'Glog', 'Gdiffsplit', 'GBlame' },
     }
-    use {'ruifm/gitlinker.nvim',
+
+    use {
+        'ruifm/gitlinker.nvim',
         keys = '<leader>gy',
         config = function()
             require"gitlinker".setup()
         end
     }
 
-    use {  "akinsho/toggleterm.nvim",
+    use {
+        "akinsho/toggleterm.nvim",
         keys = '<leader>g',
         config = function()
-            local Terminal  = require('toggleterm.terminal').Terminal
-            local lazygit = Terminal:new({
-                cmd = "lazygit",
-                dir = "git_dir",
-                direction = "float",
-                float_opts = {
-                    border = "double",
-                },
-                -- function to run on opening the terminal
-                on_open = function(term)
-                    vim.cmd("startinsert!")
-                    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
-                end,
-                -- function to run on closing the terminal
-                on_close = function(term)
-                    vim.cmd("Closing terminal")
-                end,
-            })
-
-            function _lazygit_toggle()
-                lazygit:toggle()
-            end
-
-            vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+            require("plugins.toggleterm")
         end
 
     }
@@ -187,28 +88,19 @@ packer.startup(function()
         end
     }
 
-    use {'tpope/vim-surround',
+    use {
+        'tpope/vim-surround',
         event = "BufRead",
     }
-    use {'b3nj5m1n/kommentary',
+    use {
+        'b3nj5m1n/kommentary',
         event = "BufRead",
     }
-    use{  'sindrets/winshift.nvim',
+    use {
+        'sindrets/winshift.nvim',
         event = 'BufRead',
         config = function()
-            require("winshift").setup({
-                highlight_moving_win = true,  -- Highlight the window being moved
-                focused_hl_group = "BlueVisual",  -- The highlight group used for the moving window
-                moving_win_options = {
-                    -- These are local options applied to the moving window while it's
-                    -- being moved. They are unset when you leave Win-Move mode.
-                    wrap = false,
-                    cursorline = false,
-                    cursorcolumn = false,
-                    colorcolumn = "",
-                }
-            })
-            vim.api.nvim_set_keymap('n', '<C-W>m', ':WinShift<CR>', {noremap = true, silent = true})
+            require("plugins.winshift")
         end
     }
 
@@ -222,18 +114,11 @@ packer.startup(function()
         end
     }
 
-    use { 'ggandor/lightspeed.nvim' ,
+    use {
+        'ggandor/lightspeed.nvim' ,
         event = "BufRead",
         config = function()
-            require'lightspeed'.setup {
-                jump_to_first_match = true,
-                jump_on_partial_input_safety_timeout = 400,
-                highlight_unique_chars = false,
-                grey_out_search_area = true,
-                match_only_the_start_of_same_char_seqs = true,
-                limit_ft_matches = 5,
-                full_inclusive_prefix_key = '<c-x>',
-            }
+            require("plugins.lightspeed")
         end
     }
 
@@ -242,93 +127,59 @@ packer.startup(function()
         'windwp/nvim-autopairs',
         after = "nvim-cmp",
         config = function()
-            require('nvim-autopairs').setup()
+            require("nvim-autopairs").setup()
         end
     }
-    use {  'windwp/nvim-ts-autotag',
+    use {
+        'windwp/nvim-ts-autotag',
         event = "BufRead",
         after ="nvim-treesitter",
         config = function()
-            require('nvim-ts-autotag').setup()
+            require("nvim-ts-autotag").setup()
         end
     }
-    use{  'kyazdani42/nvim-tree.lua' ,
-        keys='<leader>e',
+    use {
+        'kyazdani42/nvim-tree.lua' ,
+        keys={ '<leader>e', '<leader>n' },
         config = function()
-            local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-            require'nvim-tree'.setup({
-                view = {
-                    width = 55,
-                    mapping = {
-                        { key = "<C-g>",    cb = tree_cb("cd") },
-                    }
-                },
-            })
-
-            vim.g.nvim_tree_git_hl = 0
-            vim.g.nvim_tree_gitignore = 0
-            vim.g.nvim_tree_show_icons = {
-                git = 0,
-                folders = 1,
-                files = 1,
-            }
-            vim.g.nvim_tree_window_picker_chars ='asdfjkl'
-            vim.g.nvim_tree_indent_markers = 1
-            vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
-            vim.api.nvim_set_keymap('n', '<Leader>n', ':NvimTreeFindFile<CR>', {noremap = true, silent = true})
-
-
+            require("plugins.nvimtree")
         end
     }
-
-    use { 'norcalli/nvim-colorizer.lua',
-        cmd = "ColorizerToggle",
-        config = function()
-            require'colorizer'.setup(
-                {'*';},
-                {
-                    RGB      = true;         -- #RGB hex codes --blue
-                    RRGGBB   = true;         -- #RRGGBB hex codes
-                    RRGGBBAA = true;         -- #RRGGBBAA hex codes
-                    rgb_fn   = true;         -- CSS rgb() and rgba() functions
-                    hsl_fn   = true;         -- CSS hsl() and hsla() functions
-                    css      = true;         -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-                    css_fn   = true;         -- Enable all CSS *functions*: rgb_fn, hsl_fn
-                })
-        end
-    }
-    use{ 'kevinhwang91/nvim-bqf',
-        event = "BufRead" }
-
-    use { 'numToStr/Navigator.nvim' ,
-        event = "BufRead",
-        config = function()
-            require('Navigator').setup({
-                auto_save = 'current',
-                disable_on_zoom = true
-            })
-            local map = vim.api.nvim_set_keymap
-            local opts = { noremap = true, silent = true }
-
-            map('n', "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts)
-            map('n', "<C-k>", "<CMD>lua require('Navigator').up()<CR>", opts)
-            map('n', "<C-l>", "<CMD>lua require('Navigator').right()<CR>", opts)
-            map('n', "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts)
-        end
-    }
-
 
     use {
-        'kshenoy/vim-signature',
+        'norcalli/nvim-colorizer.lua',
+        cmd = "ColorizerToggle",
+        config = function()
+            require("plugins.colorizer")
+        end
+    }
+    use {
+        'kevinhwang91/nvim-bqf',
+        event = "BufRead"
+    }
+
+    use {
+        'numToStr/Navigator.nvim' ,
         event = "BufRead",
+        config = function()
+            require("plugins.navigator")
+        end
+    }
+
+    use {
+        'chentau/marks.nvim',
+        config = function()
+            require'marks'.setup {
+            }
+        end
     }
 
     -- tools
-    use{ 'windwp/nvim-spectre',
+    use {
+        'windwp/nvim-spectre',
         keys = '<leader>s',
         config = function()
-            require('spectre').setup()
-            vim.api.nvim_set_keymap('n', '<Leader>s',  [[<Cmd>lua require('spectre').open()<CR>]], { noremap = true, silent = true })
+            require("plugins.spectre")
         end
     }
 
@@ -337,73 +188,42 @@ packer.startup(function()
         cmd = "UndotreeToggle",
         keys = "<leader>u",
         config = function()
-            vim.api.nvim_set_keymap("n", "<leader>u", ":UndotreeToggle<CR>",  {silent = true, noremap = true})
-            vim.g.undotree_WindowLayout = 2
-            vim.g.undotree_SplitWidth = 50
+            require("plugins.undotree")
         end,
     }
 
-    use {'ThePrimeagen/harpoon',
+    use {
+        'ThePrimeagen/harpoon',
         keys = { '<leader>h','<leader>a','<leader>1', '<leader>2' ,'<leader>3' ,'<leader>4' ,'<leader>5'  },
         config = function()
-            require('harpoon').setup {
-                menu = {
-                    width = 80,
-                    height = 8,
-                }
-            }
-            vim.api.nvim_set_keymap('n', '<leader>h',  [[<Cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>]], { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<leader>a',  [[<Cmd>lua require("harpoon.mark").add_file()<CR>]], { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<leader>1',  [[<Cmd>lua require("harpoon.ui").nav_file(1)<CR>]], { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<leader>2',  [[<Cmd>lua require("harpoon.ui").nav_file(2)<CR>]], { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<leader>3',  [[<Cmd>lua require("harpoon.ui").nav_file(3)<CR>]], { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<leader>4',  [[<Cmd>lua require("harpoon.ui").nav_file(4)<CR>]], { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<leader>5',  [[<Cmd>lua require("harpoon.ui").nav_file(4)<CR>]], { noremap = true, silent = true })
+            require("plugins.harpoon")
         end
     }
 
-    use {'folke/zen-mode.nvim',
+    use {
+        'folke/zen-mode.nvim',
         keys=';z',
         config = function()
-            require("zen-mode").setup {
-                window = {
-                    height = 0.9
-                }
-            }
-            vim.api.nvim_set_keymap('n', ';z', ':ZenMode<CR>', {noremap = true, silent = true})
+            require("plugins.zenmode")
         end
     }
 
-    use {'kevinhwang91/nvim-hlslens',
+    use {
+        'kevinhwang91/nvim-hlslens',
         event = "BufRead",
         config = function()
-            require('hlslens').setup({
-                calm_down = true,
-                nearest_only = true,
-                nearest_float_when = 'always'
-            })
+            require("plugins.hlslens")
         end
     }
 
-    use { 'alvarosevilla95/luatab.nvim', requires='kyazdani42/nvim-web-devicons' }
-
     use 'onsails/lspkind-nvim'
-    use "rafamadriz/friendly-snippets"
-    use { 'L3MON4D3/LuaSnip',
+    use 'rafamadriz/friendly-snippets'
+
+    use {
+        'L3MON4D3/LuaSnip',
         after = 'nvim-cmp',
         config = function()
-            local present, luasnip = pcall(require, "luasnip")
-            if not present then
-                return
-            end
-
-            luasnip.config.set_config(
-                {
-                    history = true,
-                    updateevents = "TextChanged,TextChangedI"
-                }
-            )
-            require("luasnip/loaders/from_vscode").load()
+            require("plugins.luasnip")
         end
 
     }
@@ -419,59 +239,22 @@ packer.startup(function()
             { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip', },
         },
         config = function()
-            local lspkind = require('lspkind')
-            local cmp = require'cmp'
-            local check_back_space = function()
-                local col = vim.fn.col '.' - 1
-                return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' ~= nil
-            end
-
-            local t = function(str)
-                return vim.api.nvim_replace_termcodes(str, true, true, true)
-            end
-            cmp.setup({
-                completion = {
-                    completeopt = 'menu,menuone,noinsert',
-                },
-                formatting = {
-                    format = function(entry, vim_item)
-                        -- fancy icons and a name of kind
-                        vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
-
-                        -- set a name for each source
-                        vim_item.menu = ({
-                            buffer = "[Buffer]",
-                            nvim_lsp = "[LSP]",
-                            luasnip = "[LuaSnip]",
-                            nvim_lua = "[Lua]",
-                            latex_symbols = "[Latex]",
-                        })[entry.source.name]
-                        return vim_item
-                    end,
-                },
-
-                snippet = {
-                    expand = function(args)
-                        local luasnip = require("luasnip")
-                        if not luasnip then
-                            return
-                        end
-                        luasnip.lsp_expand(args.body)
-                    end,
-                },
-                mapping = {
-                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                },
-                sources = {
-                    { name = 'luasnip' },
-                    { name = 'buffer' },
-                    { name = 'nvim_lsp' },
-                },
-                documentation = {
-                    border = 'single'
-                }
-            })
+            require("plugins.cmp")
         end,
     }
+
+
+    use {
+        'weilbith/nvim-code-action-menu',
+        cmd = 'CodeActionMenu',
+    }
+
+    use {
+        'nanozuki/tabby.nvim',
+          config = function() require("tabby").setup() end,
+    }
+
+    use 'jlanzarotta/bufexplorer'
+
 end )
 
