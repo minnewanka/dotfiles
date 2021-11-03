@@ -51,18 +51,18 @@ highlight CurrentWord guibg=#4a433f
 highlight ErrorText guifg=#F2584A guibg=NONE  gui=underline
 highlight WarningText guifg=#E9B244 guibg=NONE  gui=underline
 highlight InfoText guifg=#7EA99D guibg=NONE  gui=underline
-highlight HintText guifg=#B1B946 guibg=NONE  gui=underline
+highlight HintText guifg=#7EA99D guibg=NONE  gui=underline
 highlight ColorColumn guifg=NONE guibg=NONE  gui=NONE
 highlight Conceal guifg=NONE guibg=#5B534D  gui=NONE
 highlight Cursor guifg=NONE guibg=NONE  gui=NONE
 highlight lCursor guifg=NONE guibg=NONE  gui=reverse
-highlight CursorColumn guifg=NONE guibg=#32302F  gui=NONE
-highlight CursorLine guifg=NONE guibg=#443F3C  gui=NONE
+highlight CursorColumn guifg=NONE guibg=#2a2a2a  gui=NONE
+highlight CursorLine guifg=NONE guibg=#373737  gui=NONE
 highlight DiffAdd guifg=NONE guibg=#33371B  gui=NONE
 highlight DiffChange guifg=NONE guibg=#0E363E  gui=NONE
 highlight DiffDelete guifg=NONE guibg=#402220  gui=NONE
 highlight DiffText guifg=#292929 guibg=#7EA99D  gui=NONE
-highlight EndOfBuffer guifg=#5B534D guibg=#32302F  gui=NONE
+highlight EndOfBuffer guifg=#2a2a2a guibg=#2a2a2a  gui=NONE
 highlight VertSplit guifg=#5B534D guibg=NONE  gui=NONE
 highlight Folded guifg=#918273 guibg=NONE  gui=NONE
 highlight FoldColumn guifg=#5B534D guibg=NONE  gui=NONE
@@ -81,7 +81,7 @@ highlight NonText guifg=#5B534D guibg=NONE  gui=NONE
 highlight WindowPicker guifg=#E2CBA7 guibg=#7EA99D  gui=bold
 highlight QuickScopePrimary guifg='#F28736' gui=underline
 highlight QuickScopeSecondary guifg='#7EA99D' gui=underline
-highlight YankHighlight guifg=NONE guibg=#473c29 gui=NONE
+highlight link YankHighlight IncSearch
 highlight! link Question Yellow
 highlight! link Title Blue
 highlight! link WildMenu PmenuSel
@@ -98,18 +98,21 @@ highlight! link FloatBorder Blue
 highlight! link LspReferenceText CurrentWord
 highlight! link LspReferenceRead CurrentWord
 highlight! link LspReferenceWrite CurrentWord
-highlight! link LspDiagnosticsDefaultError ErrorText
-highlight! link LspDiagnosticsDefaultWarning WarningText
-highlight! link LspDiagnosticsDefaultInformation InfoText
-highlight! link LspDiagnosticsDefaultHint HintText
-highlight! link LspDiagnosticsFloatingError Red
-highlight! link LspDiagnosticsFloatingWarning Yellow
-highlight! link LspDiagnosticsFloatingInformation Blue
-highlight! link LspDiagnosticsFloatingHint Blue
-highlight! link LspDiagnosticsSignError Red
-highlight! link LspDiagnosticsSignWarning Yellow
-highlight! link LspDiagnosticsSignInformation Blue
-highlight! link LspDiagnosticsSignHint Blue
+highlight! link DiagnosticError ErrorText
+highlight! link DiagnosticWarn WarningText
+highlight! link DiagnosticInfo InfoText
+highlight! link DiagnosticHint HintText
+highlight! link DiagnosticFloatingError Red
+highlight! link DiagnosticFloatingWarn Yellow
+highlight! link DiagnosticFloatingInfo Blue
+highlight! link DiagnosticFloatingHint Blue
+highlight! link DiagnosticSignError Red
+highlight! link DiagnosticSignWarn Yellow
+highlight! link DiagnosticSignInfo Blue
+highlight! link DiagnosticSignHint Blue
+highlight! LspReferenceRead gui=NONE  guibg=#45403d
+highlight! LspReferenceText gui=NONE  guibg=#45403d
+highlight! LspReferenceWrite gui=NONE guibg=#45403d
 highlight! link TSAnnotation Purple
 highlight! link TSAttribute Purple
 highlight! link TSBoolean Purple
@@ -205,3 +208,5 @@ highlight! link VimwikiNoExistsLink red
 highlight! link CmpItemAbbr Pmenu
 highlight! link CmpItemKind Pmenu
 highlight! link CmpItemMenu Pmenu
+
+highlight IndentBlanklineContextChar guifg=#928374 gui=nocombine

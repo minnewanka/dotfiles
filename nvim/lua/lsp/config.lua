@@ -1,7 +1,7 @@
-vim.fn.sign_define("LspDiagnosticsSignError", {  text = "", numhl = "LspDiagnosticsSignError" })
-vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", numhl = "LspDiagnosticsSignWarning" })
-vim.fn.sign_define("LspDiagnosticsSignInformation", {  text = "", numhl = "LspDiagnosticsSignInformation" })
-vim.fn.sign_define("LspDiagnosticsSignHint", {  text = "", numhl = "LspDiagnosticsSignHint" })
+vim.fn.sign_define("DiagnosticSignError", {  text = "", numhl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "", numhl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInformation", {  text = "", numhl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint", {  text = "", numhl = "DiagnosticSignHint" })
 
 vim.lsp.protocol.CompletionItemKind = {
     "   (Text) ",
@@ -53,11 +53,9 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
   }
 )
 
-
-
 vim.api.nvim_set_keymap('n', 'K',  [[<Cmd>lua vim.lsp.buf.hover()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gs',  [[<Cmd>lua vim.lsp.buf.signature_help()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'ge',  [[<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "single" })<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<space>ca',  [[<Cmd>CodeActionMenu<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<space>rr',  [[<Cmd>lua vim.lsp.buf.rename()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<space>ca',  [[<Cmd>Lspsaga code_action<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<space>rr',  [[<Cmd>Lspsaga rename<CR>]], { noremap = true, silent = true })
 

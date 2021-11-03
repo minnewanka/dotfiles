@@ -180,7 +180,7 @@ key_bindings:
 # Colors (Gruvbox Material Dark Medium)
 colors:
     primary:
-      background: '0x32302f'
+      background: '0x2a2a2a'
       foreground: '0xd4be98'
     normal:
       black:   '0x45403d'

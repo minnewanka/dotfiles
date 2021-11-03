@@ -14,7 +14,6 @@ function start_jdt()
       bundles = bundles,
     },
     on_attach = function(client)
-    --on_attach_common(client)
     on_attach_java(client)
     end
     })

@@ -50,10 +50,6 @@ map('n', ';ll', ':lopen<CR>', {noremap = true, silent = true})
 map('n', ';ln', ':lnext<CR>', {noremap = true, silent = true})
 map('n', ';lp', ':lprev<CR>', {noremap = true, silent = true})
 
--- buffers
-    nearest_float_when = 'always'
-map('n', '<Right>', ':bn<CR>', {noremap = true, silent = true})
-map('n', '<Left>', ':bp<CR>', {noremap = true, silent = true})
 
 -- tab
 map('n', '<leader>tn', ':tabnew %<CR>', { noremap = true, silent = true })
@@ -69,7 +65,7 @@ map('o', 'al', ':normal val<CR>', { noremap = true, silent = true })
 -- LSP
 map('n', '<Leader><Leader>',  [[<Cmd>lua vim.lsp.buf.formatting()<CR>]], { noremap = true, silent = true })
 map('n', 'gd',  [[<Cmd>lua vim.lsp.buf.definition()<CR>]], { noremap = true, silent = true })
-map('n', 'gu',  [[<Cmd>lua vim.lsp.buf.implementation()<CR>]], { noremap = true, silent = true })
+map('n', 'gi',  [[<Cmd>lua vim.lsp.buf.implementation()<CR>]], { noremap = true, silent = true })
 map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>",  {silent = true, noremap = true})
 
 -- word wrap
@@ -99,7 +95,6 @@ map('n', '<C-P>',  [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent =
 map('n', '<leader>M',  [[<Cmd>Telescope marks<CR>]], { noremap = true, silent = true })
 map('n', '<Leader>b',  [[<Cmd>Telescope buffers<CR>]], { noremap = true, silent = true })
 map('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
-map('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
 map('n', '<leader>cc',[[<Cmd>lua require("telescope").extensions.neoclip.default()<CR>]], { noremap = true, silent = true })
 
 --undo break point
@@ -113,3 +108,17 @@ map('n', '<F2>', ':lua require"dap".continue()<CR>', { noremap = true })
 
 map('n', '<leader>j', ':vertical resize -5<CR>', { noremap = true, silent = true })
 map('n', '<leader>k', ':vertical resize +5<CR>', { noremap = true, silent = true })
+
+
+-- HlsLens
+map('n', 'n', "<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>", { noremap = true, silent = true })
+map('n', 'N', "<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>", { noremap = true, silent = true })
+map('n', '*', "*<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
+map('n', '#', "#<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
+map('n', 'g*', "g*<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
+map('n', 'g#', "g#<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
+
+
+map('n', '<Left>',":lua require('bufjump').backward()<CR>", { noremap = true, silent = true })
+map('n', '<Right>',":lua require('bufjump').forward()<CR>", { noremap = true , silent = true})
+

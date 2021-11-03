@@ -6,31 +6,34 @@ packer.startup(function()
 
     use 'wbthomason/packer.nvim'
     use 'lewis6991/impatient.nvim'
-    use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
+    use 'github/copilot.vim'
+    use "antoinemadec/FixCursorHold.nvim"
+    use { 'alvarosevilla95/luatab.nvim', requires='kyazdani42/nvim-web-devicons' }
+    use "tpope/vim-repeat"
+
 
     -- debugger
-    use 'mfussenegger/nvim-dap'
+    --[[ use 'mfussenegger/nvim-dap'
     use {
         "rcarriga/nvim-dap-ui",
         requires = {"mfussenegger/nvim-dap"},
         config = function ()
             require("dapui").setup()
-        end}
+        end} ]]
 
     -- lsp
-    use {
+    --[[ use {
         'mfussenegger/nvim-jdtls' ,
         config = function()
             require('lsp.java')
         end
-    }
+    } ]]
 
     use {
         'neovim/nvim-lspconfig',
         config = function()
             require('lsp/config')
-            require('lsp/efm')
             require('lsp/tsserver')
         end
     }
@@ -55,9 +58,6 @@ packer.startup(function()
         cmd = {'TSHighlightCapturesUnderCursor','TSPlaygroundToggle'}
     }
 
-    -- use 'ray-x/lsp_signature.nvim'
-
-    -- git
     use {
         'tpope/vim-fugitive',
         event = "BufRead",
@@ -93,22 +93,18 @@ packer.startup(function()
         event = "BufRead",
     }
     use {
-        'b3nj5m1n/kommentary',
+        'numToStr/Comment.nvim',
         event = "BufRead",
-    }
-    use {
-        'sindrets/winshift.nvim',
-        event = 'BufRead',
         config = function()
-            require("plugins.winshift")
+            require('Comment').setup()
         end
-    }
+}
 
     -- Telescope
     use {
         'nvim-telescope/telescope.nvim',
         cmd = "Telescope",
-        requires = {"kyazdani42/nvim-web-devicons", "nvim-telescope/telescope-project.nvim" },
+        requires = {"kyazdani42/nvim-web-devicons" },
         config = function()
             require("plugins.telescope")
         end
@@ -169,8 +165,7 @@ packer.startup(function()
     use {
         'chentau/marks.nvim',
         config = function()
-            require'marks'.setup {
-            }
+            require("plugins.marks")
         end
     }
 
@@ -236,6 +231,8 @@ packer.startup(function()
             { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', },
             { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', },
             { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', },
+            { 'hrsh7th/cmp-path', after = 'nvim-cmp', },
+            { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', },
             { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip', },
         },
         config = function()
@@ -244,17 +241,30 @@ packer.startup(function()
     }
 
 
+    use { 'tami5/lspsaga.nvim' }
+
     use {
-        'weilbith/nvim-code-action-menu',
-        cmd = 'CodeActionMenu',
+        'jose-elias-alvarez/null-ls.nvim',
+        config = function()
+            require('lsp/null-ls')
+        end
     }
 
     use {
-        'nanozuki/tabby.nvim',
-          config = function() require("tabby").setup() end,
+        "kwkarlwang/bufjump.nvim",
+        config = function()
+            require("bufjump").setup({})
+        end
     }
 
-    use 'jlanzarotta/bufexplorer'
+    use {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("plugins.indent-blankline")
+        end
+    }
+
+
 
 end )
 

@@ -8,6 +8,7 @@ require'lspconfig'.tsserver.setup({
   on_attach = function(client)
     client.resolved_capabilities.document_formatting = false
     capabilities = capabilities
+    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
     on_attach(client)
   end
 })

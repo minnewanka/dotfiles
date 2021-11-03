@@ -3,6 +3,8 @@ local opt = vim.opt
 local g = vim.g
 local nvim_exec = vim.api.nvim_exec
 
+cmd ("set title")
+cmd ("set titlestring=\\ %-25.55f\\ %a%r%m titlelen=70")
 cmd ("set inccommand=split")
 cmd ("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")
 cmd ("set grepformat=%f:%l:%c:%m")

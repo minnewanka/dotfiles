@@ -16,7 +16,7 @@ components.active[1][1] = {
     provider = {
         name = 'file_info',
         opts = {
-            type = 'unique',
+            type = 'relative',
         }
     },
     left_sep = ' ',
@@ -65,7 +65,7 @@ components.inactive[1][1] = {
     provider = {
         name = 'file_info',
         opts = {
-            type = 'unique',
+            type = 'relative',
         }
     },
     provider = 'file_info',
