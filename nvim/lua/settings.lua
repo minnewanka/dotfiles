@@ -48,8 +48,6 @@ g.loaded_tarPlugin = 1
 g.loaded_zipPlugin = 1
 g.loaded_2html_plugin = 1
 g.loaded_netrwPlugin = 1
-g.loaded_matchit = 0
-g.loaded_matchparen = 0
 
 -- Highlight on yank
 cmd 'au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}'
