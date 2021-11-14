@@ -67,7 +67,7 @@ autocmd BufWinEnter * set  formatoptions-=cro
 
 nvim_exec([[
 autocmd FocusLost,InsertLeave * wa
-autocmd WinNew * lua win=vim.api.nvim_get_current_win() vim.defer_fn(function()vim.api.nvim_set_current_win(win) end, 50)
+autocmd WinNew * lua win=vim.api.nvim_get_current_win() vim.defer_fn(function()vim.api.nvim_set_current_win(win) end, 200)
 ]], false)
 
 nvim_exec([[
