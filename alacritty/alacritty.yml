@@ -20,7 +20,7 @@ window:
 
 
   # Startup Mode (changes require restart)
-  startup_mode: Fullscreen
+  startup_mode: Maximized
 # Sample Font configuration for font: Fira Code.
 # Feel free to use different font configuration family & face for each sections
 font:
