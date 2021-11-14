@@ -5,5 +5,4 @@ require'lightspeed'.setup {
     grey_out_search_area = true,
     match_only_the_start_of_same_char_seqs = true,
     full_inclusive_prefix_key = '<c-x>',
-    exit_after_idle_msecs = { labeled = 1000, unlabeled = 1000 },
 }
