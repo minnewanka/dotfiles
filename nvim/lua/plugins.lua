@@ -4,13 +4,21 @@ local packer = require('packer')
 
 packer.startup(function()
 
-    use 'wbthomason/packer.nvim'
-    use 'lewis6991/impatient.nvim'
-    use 'nvim-lua/plenary.nvim'
-    use 'github/copilot.vim'
-    use "antoinemadec/FixCursorHold.nvim"
-    use { 'alvarosevilla95/luatab.nvim', requires='kyazdani42/nvim-web-devicons' }
-    use "tpope/vim-repeat"
+     use 'wbthomason/packer.nvim'
+     use 'lewis6991/impatient.nvim'
+     use 'nvim-lua/plenary.nvim'
+     use {
+         'antoinemadec/FixCursorHold.nvim',
+         event = "BufRead",
+     }
+     use {
+         'alvarosevilla95/luatab.nvim',
+         requires='kyazdani42/nvim-web-devicons',
+         config = function()
+         require('luatab').setup{}
+         end
+     }
+     use "tpope/vim-repeat"
 
 
     -- debugger
@@ -63,42 +71,46 @@ packer.startup(function()
         event = "BufRead",
         cmd = { 'Git', 'Glog', 'Gdiffsplit', 'GBlame' },
     }
+    use {
+         'tpope/vim-unimpaired',
+         event = "BufRead",
+     }
 
-    use {
-        'ruifm/gitlinker.nvim',
-        keys = '<leader>gy',
-        config = function()
-            require"gitlinker".setup()
-        end
-    }
+     use {
+         'ruifm/gitlinker.nvim',
+         keys = '<leader>gy',
+         config = function()
+             require"gitlinker".setup()
+         end
+     }
 
-    use {
-        "akinsho/toggleterm.nvim",
-        keys = '<leader>g',
-        config = function()
-            require("plugins.toggleterm")
-        end
+     use {
+         "akinsho/toggleterm.nvim",
+         keys = '<leader>g',
+         config = function()
+             require("plugins.toggleterm")
+         end
 
-    }
-    use {
-        'lewis6991/gitsigns.nvim' ,
-        event = "BufRead",
-        config = function()
-            require("plugins.gitsigns")
-        end
-    }
+     }
+     use {
+         'lewis6991/gitsigns.nvim' ,
+         event = "BufRead",
+         config = function()
+             require("plugins.gitsigns")
+         end
+     }
 
-    use {
-        'tpope/vim-surround',
-        event = "BufRead",
-    }
-    use {
-        'numToStr/Comment.nvim',
-        event = "BufRead",
-        config = function()
-            require('Comment').setup()
-        end
-}
+     use {
+         'tpope/vim-surround',
+         event = "BufRead",
+     }
+     use {
+         'numToStr/Comment.nvim',
+         event = "BufRead",
+         config = function()
+             require('Comment').setup()
+         end
+ }
 
     -- Telescope
     use {
@@ -112,6 +124,8 @@ packer.startup(function()
 
     use {
         'ggandor/lightspeed.nvim' ,
+        branch = 'smart-autojump',
+        keys = 's',
         event = "BufRead",
         config = function()
             require("plugins.lightspeed")
@@ -164,6 +178,7 @@ packer.startup(function()
 
     use {
         'chentau/marks.nvim',
+        event = "BufRead",
         config = function()
             require("plugins.marks")
         end
@@ -241,7 +256,11 @@ packer.startup(function()
     }
 
 
-    use { 'tami5/lspsaga.nvim' }
+    use {
+        'tami5/lspsaga.nvim',
+        event = "BufRead",
+
+    }
 
     use {
         'jose-elias-alvarez/null-ls.nvim',
@@ -259,9 +278,20 @@ packer.startup(function()
 
     use {
         "lukas-reineke/indent-blankline.nvim",
+        event = "BufRead",
         config = function()
             require("plugins.indent-blankline")
         end
+    }
+
+    use {
+	"luukvbaal/stabilize.nvim",
+	config = function() require("stabilize").setup() end
+    }
+
+    use {
+        'github/copilot.vim',
+        event = "BufRead",
     }
 
 

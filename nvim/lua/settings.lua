@@ -1,7 +1,8 @@
-local cmd = vim.cmd
+local cmd = vim.cm
 local opt = vim.opt
 local g = vim.g
 local nvim_exec = vim.api.nvim_exec
+local fn, cmd = vim.fn, vim.cmd
 
 cmd ("set title")
 cmd ("set titlestring=\\ %-25.55f\\ %a%r%m titlelen=70")
@@ -36,12 +37,8 @@ opt.formatoptions             =       vim.opt.formatoptions + { "cro" }
 opt.shortmess:append "c"
 opt.swapfile                  =       false
 opt.lazyredraw                =       true
-vim.o.tabline = '%!v:lua.require\'luatab\'.tabline()'
 vim.opt.shell = "/bin/bash"
 opt.laststatus=2
-
-local fn, cmd = vim.fn, vim.cmd
-
 
 -- don't load the plugins below
 g.loaded_gzip = 1
@@ -70,6 +67,7 @@ autocmd BufWinEnter * set  formatoptions-=cro
 
 nvim_exec([[
 autocmd FocusLost,InsertLeave * wa
+autocmd WinNew * lua win=vim.api.nvim_get_current_win() vim.defer_fn(function()vim.api.nvim_set_current_win(win) end, 50)
 ]], false)
 
 nvim_exec([[
