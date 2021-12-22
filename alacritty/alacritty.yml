@@ -1,7 +1,7 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 # Setup term for programs to be able to use it
-dynamic_title: true
+dynamic_title: false
 #
 cursor:
   style:

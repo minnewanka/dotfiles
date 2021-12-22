@@ -3,7 +3,7 @@ local actions = require('telescope.actions')
 require('telescope').setup {
     defaults = {
         file_sorter = require('telescope.sorters').get_fzy_sorter,
-        file_ignore_patterns = {"*.bundle.js"},
+        file_ignore_patterns = {"docs","docs-dev"},
         prompt_prefix = ' > ',
         color_devicons = true,
 
@@ -54,5 +54,8 @@ require('telescope').setup {
         },
     },
 }
+
+require('telescope').load_extension('fzf')
+
 
 

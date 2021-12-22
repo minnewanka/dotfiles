@@ -1,5 +1,5 @@
 jorgebucaran/fisher
-map('n', "<C-p>", "<CMD>lua require('Navigator').previous()<CR>", opts)
 jethrokuan/z
 oh-my-fish/plugin-bang-bang
 jethrokuan/fzf
+jorgebucaran/nvm.fish

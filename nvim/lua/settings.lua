@@ -22,7 +22,7 @@ opt.splitright                =       true
 opt.fileencoding              =       "utf-8"
 opt.timeout                   =       true
 opt.timeoutlen                =       300
-opt.hidden                    =       true
+-- opt.hidden                    =       true
 opt.smartindent               =       true
 opt.shiftwidth                =       4
 opt.tabstop                   =       4
@@ -32,7 +32,7 @@ opt.ignorecase                =       true
 opt.undofile                  =       true
 opt.updatetime                =       300
 opt.signcolumn                =       "yes:1"
-opt.scrolloff                 =       10
+opt.scrolloff                 =       999
 opt.formatoptions             =       vim.opt.formatoptions + { "cro" }
 opt.shortmess:append "c"
 opt.swapfile                  =       false

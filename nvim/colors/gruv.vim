@@ -210,3 +210,10 @@ highlight! link CmpItemKind Pmenu
 highlight! link CmpItemMenu Pmenu
 
 highlight IndentBlanklineContextChar guifg=#928374 gui=nocombine
+
+highlight! link CmpItemKindFunction Green
+highlight! link CmpItemKindMethod Green
+highlight! link CmpItemKindVariable Fg
+highlight! link CmpItemKindKeyword Red
+highlight! link CmpItemKindText Aqua
+highlight! link CmpItemKindSnippet Purple

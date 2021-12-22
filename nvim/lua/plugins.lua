@@ -115,6 +115,7 @@ packer.startup(function()
     -- Telescope
     use {
         'nvim-telescope/telescope.nvim',
+        after = "telescope-fzf-native.nvim",
         cmd = "Telescope",
         requires = {"kyazdani42/nvim-web-devicons" },
         config = function()
@@ -123,8 +124,13 @@ packer.startup(function()
     }
 
     use {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make',
+        cmd = "Telescope",
+    }
+
+    use {
         'ggandor/lightspeed.nvim' ,
-        branch = 'smart-autojump',
         keys = 's',
         event = "BufRead",
         config = function()
@@ -293,6 +299,13 @@ packer.startup(function()
         'github/copilot.vim',
         event = "BufRead",
     }
+
+    use {'pwntester/octo.nvim',
+        cmd='Octo',
+        config = function()
+        require"octo".setup()
+    end}
+
 
 
 

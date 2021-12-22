@@ -3,6 +3,10 @@ require'nvim-tree'.setup({
     update_focused_file = {
         update_focused_file = true,
     },
+    filters = {
+        dotfiles = false,
+        custom = {}
+    },
     view = {
         width = 55,
         mappings = {
@@ -47,7 +51,6 @@ require'nvim-tree'.setup({
 })
 
 vim.g.nvim_tree_git_hl = 0
-vim.g.nvim_tree_gitignore = 0
 vim.g.nvim_tree_show_icons = {
     git = 0,
     folders = 1,

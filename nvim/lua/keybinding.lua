@@ -23,7 +23,7 @@ map('c', '<Down>', 'pumvisible() ? "<C-n>" : "<Down>"', { noremap = true, expr =
 map('v', '<leader>p', '"_dP', { noremap = true, silent = true })
 
 -- yank
-map('n', 'Y', 'y$', { noremap = true, silent = true })
+-- map('n', 'Y', 'y$', { noremap = true, silent = true })
 map('n', '<Leader>y', '"*y', { noremap = true, silent = true })
 map('v', '<Leader>y', '"*y', { noremap = true, silent = true })
 
@@ -122,3 +122,9 @@ map('n', 'g#', "g#<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
 map('n', '<Left>',":lua require('bufjump').backward()<CR>", { noremap = true, silent = true })
 map('n', '<Right>',":lua require('bufjump').forward()<CR>", { noremap = true , silent = true})
 
+
+--  Center stuff
+map('n', 'n', 'nzz', { noremap = true, silent = true })
+map('n', 'N', 'Nzz', { noremap = true, silent = true })
+map('n', '*', '*zz', { noremap = true, silent = true })
+map('n', '#', '#zz', { noremap = true, silent = true })
