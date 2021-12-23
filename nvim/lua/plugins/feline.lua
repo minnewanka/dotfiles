@@ -1,4 +1,4 @@
-local colors = {
+local theme = {
     fg = '#E2CBA7',
     bg = '#3b4439'
 }
@@ -77,4 +77,4 @@ components.inactive[1][1] = {
 
 }
 
-require('feline').setup({colors = colors,components = components})
+require('feline').setup({theme = theme,components = components})
