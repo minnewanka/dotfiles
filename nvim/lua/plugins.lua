@@ -117,7 +117,7 @@ packer.startup(function()
         'nvim-telescope/telescope.nvim',
         after = "telescope-fzf-native.nvim",
         cmd = "Telescope",
-        requires = {"kyazdani42/nvim-web-devicons" },
+        requires = {"kyazdani42/nvim-web-devicons", "nvim-telescope/telescope-live-grep-raw.nvim", "nvim-telescope/telescope-file-browser.nvim" },
         config = function()
             require("plugins.telescope")
         end
@@ -306,7 +306,7 @@ packer.startup(function()
         require"octo".setup()
     end}
 
-
+    use "Pocco81/AutoSave.nvim"
 
 
 end )

@@ -7,6 +7,9 @@ require'nvim-tree'.setup({
         dotfiles = false,
         custom = {}
     },
+    git = {
+        ignore = false
+      },
     view = {
         width = 55,
         mappings = {

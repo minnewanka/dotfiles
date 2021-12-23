@@ -1,9 +1,9 @@
-local function buf_option(...)
-  vim.api.nvim_buf_set_option(bufnr, ...)
-end
+-- local function buf_option(...)
+--   vim.api.nvim_buf_set_option(bufnr, ...)
+-- end
 
 local function on_attach(client)
-  buf_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- buf_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
    -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then

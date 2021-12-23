@@ -9,6 +9,7 @@ cmd ("set titlestring=\\ %-25.55f\\ %a%r%m titlelen=70")
 cmd ("set inccommand=split")
 cmd ("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")
 cmd ("set grepformat=%f:%l:%c:%m")
+cmd ("set clipboard=unnamedplus")
 
 opt.autowriteall              =       true
 opt.number                    =       true
@@ -65,10 +66,11 @@ nvim_exec([[
 autocmd BufWinEnter * set  formatoptions-=cro
 ]], false)
 
-nvim_exec([[
-autocmd FocusLost,InsertLeave * wa
-autocmd WinNew * lua win=vim.api.nvim_get_current_win() vim.defer_fn(function()vim.api.nvim_set_current_win(win) end, 200)
-]], false)
+-- -- auto save
+-- nvim_exec([[
+-- autocmd FocusLost,InsertLeave * wa
+-- autocmd WinNew * lua win=vim.api.nvim_get_current_win() vim.defer_fn(function()vim.api.nvim_set_current_win(win) end, 200)
+-- ]], false)
 
 nvim_exec([[
     command! BufOnly silent! execute "%bd|e#|bd#"

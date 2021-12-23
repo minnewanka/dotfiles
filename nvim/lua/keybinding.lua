@@ -95,6 +95,7 @@ map('n', '<C-P>',  [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent =
 map('n', '<leader>M',  [[<Cmd>Telescope marks<CR>]], { noremap = true, silent = true })
 map('n', '<Leader>b',  [[<Cmd>Telescope buffers<CR>]], { noremap = true, silent = true })
 map('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
+map('n', '<Leader>F',  [[<Cmd>lua require("telescope").extensions.live_grep_raw.live_grep_raw()<CR>]], { noremap = true, silent = true })
 map('n', '<leader>cc',[[<Cmd>lua require("telescope").extensions.neoclip.default()<CR>]], { noremap = true, silent = true })
 
 --undo break point
