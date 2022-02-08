@@ -53,7 +53,7 @@ font:
     style: Bold Italic
 
   # Font size
-  size: 12
+  size: 11
   draw_bold_text_with_bright_colors: true
 
   # Offset is the extra space around each character. `offset.y` can be thought of
@@ -91,6 +91,7 @@ key_bindings:
   - { key: 36, mods: Command, action: ToggleFullscreen }
   - { key: S, mods: Command, chars: ":w\x0D" }
   - { key: P, mods: Command, chars: ":Telescope find_files\x0D" }
+  - { key: O, mods: Command, chars: ":Telescope find_files\x0D" }
   - { key: E, mods: Command, chars: ":Telescope oldfiles cwd_only=true\x0D" }
   - { key: J, mods: Command, chars: "\x04" }
   - { key: K, mods: Command, chars: "\x15" }

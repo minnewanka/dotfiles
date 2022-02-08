@@ -26,7 +26,7 @@ require('gitsigns').setup {
     ['o ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>',
     ['x ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>'
   },
-  watch_index = {
+  watch_gitdir = {
     interval = 1000
     },
     current_line_blame = false,
@@ -34,5 +34,4 @@ require('gitsigns').setup {
     sign_priority = 6,
     update_debounce = 100,
     status_formatter = nil, -- Use default
-  use_internal_diff = true,  -- If luajit is present
 }

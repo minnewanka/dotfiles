@@ -1,3 +1,4 @@
+vim.g.nvim_tree_respect_buf_cwd = 1
 vim.g.cursorhold_updatetime = 100
 vim.g.copilot_filetypes = {
     ['*'] = false,

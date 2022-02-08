@@ -129,3 +129,7 @@ map('n', 'n', 'nzz', { noremap = true, silent = true })
 map('n', 'N', 'Nzz', { noremap = true, silent = true })
 map('n', '*', '*zz', { noremap = true, silent = true })
 map('n', '#', '#zz', { noremap = true, silent = true })
+
+map("n", "<leader>g", "<cmd>LazyGit<CR>", {noremap = true, silent = true})
+map('n', 's', "<Plug>Lightspeed_omni_s", { silent = true})
+

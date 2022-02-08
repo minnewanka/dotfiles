@@ -18,7 +18,7 @@ highlight PmenuSbar guifg=NONE guibg=#443F3C  gui=NONE
 highlight PmenuThumb guifg=NONE guibg=#7D6F64  gui=NONE
 highlight Search guifg=#292929 guibg=#B1B946  gui=NONE
 highlight SpecialKey guifg=#5B534D guibg=NONE  gui=NONE
-highlight StatusLine guifg=#E2CBA7 guibg=#3b4439  gui=NONE
+highlight StatusLine guifg=#E2CBA7 guibg=#32302f  gui=NONE
 highlight StatusLineNC guifg=#A89985 guibg=#3a3735  gui=NONE
 highlight TabLine guifg=#A89985 guibg=#3a3735  gui=NONE
 highlight TabLineFill guifg=#A89985 guibg=#292929  gui=NONE
@@ -31,7 +31,7 @@ highlight Statement guifg=#F2584A guibg=NONE  gui=italic
 highlight PreProc guifg=#D4879C guibg=NONE  gui=italic
 highlight TSConstBuiltin guifg=#7EA99D guibg=NONE  gui=italic
 highlight TSConstMacro guifg=#7EA99D guibg=NONE  gui=italic
-highlight TSError guifg=#F2584A guibg=NONE  gui=underline
+" highlight TSError guifg=#F2584A guisp=#F2584A guibg=NONE  gui=undercurl
 highlight TSNamespace guifg=#E9B244 guibg=NONE  gui=italic
 highlight Comment guifg=#918273 guibg=NONE  gui=italic
 highlight TSTypeBuiltin guifg=#E9B244 guibg=NONE  gui=italic
@@ -188,7 +188,7 @@ highlight! link OrgHeadlineLevel2 Yellow
 highlight! link OrgHeadlineLevel3 Blue
 
 
-highlight! link  VimwikiHeader1 Red
+highlight! link VimwikiHeader1 Red
 highlight! link VimwikiHeader2 Orange
 highlight! link VimwikiHeader3 Yellow
 highlight! link VimwikiHeader4 Green

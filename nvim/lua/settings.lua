@@ -1,4 +1,4 @@
-local cmd = vim.cm
+local cmd = vim.cmd
 local opt = vim.opt
 local g = vim.g
 local nvim_exec = vim.api.nvim_exec
@@ -33,7 +33,7 @@ opt.ignorecase                =       true
 opt.undofile                  =       true
 opt.updatetime                =       300
 opt.signcolumn                =       "yes:1"
-opt.scrolloff                 =       999
+opt.scrolloff                 =       10
 opt.formatoptions             =       vim.opt.formatoptions + { "cro" }
 opt.shortmess:append "c"
 opt.swapfile                  =       false
@@ -86,11 +86,13 @@ function! ToggleGStatus()
         Git
     endif
 endfunction
+
 command ToggleGStatus :call ToggleGStatus()
 ]], false)
 
--- show cursor line only in active window
- cmd([[
-  autocmd InsertLeave,WinEnter * set cursorline
-  autocmd InsertEnter,WinLeave * set nocursorline
-]])
+-- -- show cursor line only in active window
+cmd([[
+autocmd InsertEnter * highlight  CursorLine guifg=NONE guibg=#2e3b3b
+autocmd InsertLeave * highlight  CursorLine guifg=NONE guibg=#373737
+ ]])
+

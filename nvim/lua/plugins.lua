@@ -47,11 +47,19 @@ packer.startup(function()
     }
 
     use {
-        'famiu/feline.nvim',
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         config = function()
-            require('plugins.feline')
+            require('plugins.lualine')
         end
     }
+
+    -- use {
+    --     'famiu/feline.nvim',
+    --     config = function()
+    --         require('plugins.feline')
+    --     end
+    -- }
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -61,10 +69,10 @@ packer.startup(function()
         end
     }
 
-    use {
-        'nvim-treesitter/playground',
-        cmd = {'TSHighlightCapturesUnderCursor','TSPlaygroundToggle'}
-    }
+    -- use {
+    --     'nvim-treesitter/playground',
+    --     cmd = {'TSHighlightCapturesUnderCursor','TSPlaygroundToggle'}
+    -- }
 
     use {
         'tpope/vim-fugitive',
@@ -84,14 +92,15 @@ packer.startup(function()
          end
      }
 
-     use {
-         "akinsho/toggleterm.nvim",
-         keys = '<leader>g',
-         config = function()
-             require("plugins.toggleterm")
-         end
+     -- use {
+     --     "akinsho/toggleterm.nvim",
+     --     keys = '<leader>g',
+     --     config = function()
+     --         require("plugins.toggleterm")
+     --     end
+     --
+     -- }
 
-     }
      use {
          'lewis6991/gitsigns.nvim' ,
          event = "BufRead",
@@ -117,7 +126,8 @@ packer.startup(function()
         'nvim-telescope/telescope.nvim',
         after = "telescope-fzf-native.nvim",
         cmd = "Telescope",
-        requires = {"kyazdani42/nvim-web-devicons", "nvim-telescope/telescope-live-grep-raw.nvim", "nvim-telescope/telescope-file-browser.nvim" },
+        module = 'telescope',
+        requires = {"kyazdani42/nvim-web-devicons", "nvim-telescope/telescope-live-grep-raw.nvim" },
         config = function()
             require("plugins.telescope")
         end
@@ -131,7 +141,7 @@ packer.startup(function()
 
     use {
         'ggandor/lightspeed.nvim' ,
-        keys = 's',
+        commit = '4d8359a30b26ee5316d0e7c79af08b10cb17a57b',
         event = "BufRead",
         config = function()
             require("plugins.lightspeed")
@@ -280,7 +290,7 @@ packer.startup(function()
         config = function()
             require("bufjump").setup({})
         end
-    }
+   }
 
     use {
         "lukas-reineke/indent-blankline.nvim",
@@ -300,14 +310,12 @@ packer.startup(function()
         event = "BufRead",
     }
 
-    use {'pwntester/octo.nvim',
-        cmd='Octo',
-        config = function()
-        require"octo".setup()
-    end}
-
     use "Pocco81/AutoSave.nvim"
 
+    use {
+        'kdheepak/lazygit.nvim',
+        event = "BufRead",
+    }
 
 end )
 
