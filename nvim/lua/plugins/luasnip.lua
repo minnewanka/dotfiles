@@ -9,4 +9,5 @@ luasnip.config.set_config(
         updateevents = "TextChanged,TextChangedI"
     }
 )
+require'luasnip'.filetype_extend("typescript", {"javascript"})
 require("luasnip/loaders/from_vscode").load()

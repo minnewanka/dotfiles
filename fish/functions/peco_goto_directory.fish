@@ -15,7 +15,8 @@ end
 
 function peco_goto_directory
   begin
-  echo '/Users/philippe/Documents/Workspace/FRONTEND-MONO/apps/time'
+    ls -ad /Users/philippe/Documents/Workspace/FRONTEND-MONO/apps/*
+    ls -ad /Users/philippe/Documents/Workspace/FRONTEND-MONO/libs/*
     ls -ad $HOME/dotfiles/*
     ls -ad $HOME/Documents/Workspace/*
   end | sed -e 's/\/$//' | awk '!a[$0]++' | _peco_goto_directory $argv

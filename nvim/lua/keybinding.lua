@@ -1,9 +1,6 @@
 vim.g.mapleader = ' '
 local map = vim.api.nvim_set_keymap
 
---source file
-map('n', '<leader>r', ':source %<CR>', { noremap = true, silent = false })
-
 
 --remap toggle file
 map('n', '<BS>', '<C-^>', { noremap = true, silent = true })
@@ -52,7 +49,7 @@ map('n', ';lp', ':lprev<CR>', {noremap = true, silent = true})
 
 
 -- tab
-map('n', '<leader>tn', ':tabnew %<CR>', { noremap = true, silent = true })
+map('n', '<leader>tn', ':tabnew<CR>', { noremap = true, silent = true })
 map('n', '<leader>to', ':tabonly<CR>', { noremap = true, silent = true })
 map('n', '<leader>tq', ':tabclose<CR>', { noremap = true, silent = true })
 
@@ -131,5 +128,12 @@ map('n', '*', '*zz', { noremap = true, silent = true })
 map('n', '#', '#zz', { noremap = true, silent = true })
 
 map("n", "<leader>g", "<cmd>LazyGit<CR>", {noremap = true, silent = true})
-map('n', 's', "<Plug>Lightspeed_omni_s", { silent = true})
+-- map('n', 's', "<Plug>Lightspeed_omni_s", { silent = true})
+-- map('n', 's', "<Plug>leap_omni", { silent = true})
 
+map(
+    "v",
+    "<leader>rr",
+    ":lua require('refactoring').select_refactor()<CR>",
+    { noremap = true, silent = true, expr = false }
+)

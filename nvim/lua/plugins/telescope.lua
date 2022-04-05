@@ -2,6 +2,7 @@ local actions = require('telescope.actions')
 
 require('telescope').setup {
     defaults = {
+        path_display={"smart"},
         file_sorter = require('telescope.sorters').get_fzy_sorter,
         file_ignore_patterns = {"docs","docs-dev"},
         prompt_prefix = ' > ',

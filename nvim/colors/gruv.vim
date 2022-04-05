@@ -37,8 +37,8 @@ highlight Comment guifg=#918273 guibg=NONE  gui=italic
 highlight TSTypeBuiltin guifg=#E9B244 guibg=NONE  gui=italic
 highlight TSVariableBuiltin guifg=#7EA99D guibg=NONE  gui=italic
 highlight TSEmphasis guifg=NONE guibg=NONE  gui=bold
-highlight TSUnderline guifg=NONE guibg=NONE  gui=underline
-highlight TSURI guifg=#7EA99D guibg=NONE  gui=underline
+highlight TSUnderline guifg=NONE guibg=NONE  gui=undercurl
+highlight TSURI guifg=#7EA99D guibg=NONE  gui=undercurl
 highlight Fg guifg=#E2CBA7 guibg=NONE  gui=NONE
 highlight Grey guifg=#918273 guibg=NONE  gui=NONE
 highlight Red guifg=#F2584A guibg=NONE  gui=NONE
@@ -48,13 +48,13 @@ highlight Green guifg=#B1B946 guibg=NONE  gui=NONE
 highlight Aqua guifg=#8AB97E guibg=NONE  gui=NONE
 highlight Purple guifg=#D4879C guibg=NONE  gui=NONE
 highlight CurrentWord guibg=#4a433f
-highlight ErrorText guifg=#F2584A guibg=NONE  gui=underline
-highlight WarningText guifg=#E9B244 guibg=NONE  gui=underline
-highlight InfoText guifg=#7EA99D guibg=NONE  gui=underline
-highlight HintText guifg=#7EA99D guibg=NONE  gui=underline
+highlight ErrorText guifg=#F2584A guibg=NONE  gui=undercurl
+highlight WarningText guifg=#E9B244 guibg=NONE  gui=undercurl
+highlight InfoText guifg=#7EA99D guibg=NONE  gui=undercurl
+highlight HintText guifg=#7EA99D guibg=NONE  gui=undercurl
 highlight ColorColumn guifg=NONE guibg=NONE  gui=NONE
 highlight Conceal guifg=NONE guibg=#5B534D  gui=NONE
-highlight Cursor guifg=NONE guibg=NONE  gui=NONE
+highlight Cursor guifg=NONE guibg=NONE  gui=reverse
 highlight lCursor guifg=NONE guibg=NONE  gui=reverse
 highlight CursorColumn guifg=NONE guibg=#2a2a2a  gui=NONE
 highlight CursorLine guifg=NONE guibg=#373737  gui=NONE
@@ -79,8 +79,8 @@ highlight! link NeogitHunkHeaderHighlight Blue
 highlight! link NeogitHunkHeader Blue
 highlight NonText guifg=#5B534D guibg=NONE  gui=NONE
 highlight WindowPicker guifg=#E2CBA7 guibg=#7EA99D  gui=bold
-highlight QuickScopePrimary guifg='#F28736' gui=underline
-highlight QuickScopeSecondary guifg='#7EA99D' gui=underline
+highlight QuickScopePrimary guifg='#F28736' gui=undercurl
+highlight QuickScopeSecondary guifg='#7EA99D' gui=undercurl
 highlight link YankHighlight IncSearch
 highlight! link Question Yellow
 highlight! link Title Blue
@@ -110,6 +110,10 @@ highlight! link DiagnosticSignError Red
 highlight! link DiagnosticSignWarn Yellow
 highlight! link DiagnosticSignInfo Blue
 highlight! link DiagnosticSignHint Blue
+highlight! DiagnosticUnderlineError gui=undercurl  guisp=#F2584A
+highlight! DiagnosticUnderlineWarn gui=undercurl  guisp=#E9B244
+highlight! DiagnosticUnderlineInfo gui=undercurl  guisp=#7EA99D
+highlight! DiagnosticUnderlineHint gui=undercurl  guisp=#7EA99D
 highlight! LspReferenceRead gui=NONE  guibg=#45403d
 highlight! LspReferenceText gui=NONE  guibg=#45403d
 highlight! LspReferenceWrite gui=NONE guibg=#45403d

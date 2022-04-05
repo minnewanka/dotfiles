@@ -4,8 +4,6 @@ local g = vim.g
 local nvim_exec = vim.api.nvim_exec
 local fn, cmd = vim.fn, vim.cmd
 
-cmd ("set title")
-cmd ("set titlestring=\\ %-25.55f\\ %a%r%m titlelen=70")
 cmd ("set inccommand=split")
 cmd ("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")
 cmd ("set grepformat=%f:%l:%c:%m")
@@ -38,16 +36,16 @@ opt.formatoptions             =       vim.opt.formatoptions + { "cro" }
 opt.shortmess:append "c"
 opt.swapfile                  =       false
 opt.lazyredraw                =       true
-vim.opt.shell = "/bin/bash"
-opt.laststatus=2
+vim.opt.shell                 =       "/bin/bash"
+opt.laststatus                =       3
 
 -- don't load the plugins below
-g.loaded_gzip = 1
-g.loaded_tar = 1
-g.loaded_tarPlugin = 1
-g.loaded_zipPlugin = 1
-g.loaded_2html_plugin = 1
-g.loaded_netrwPlugin = 1
+g.loaded_gzip                 =       1
+g.loaded_tar                  =       1
+g.loaded_tarPlugin            =       1
+g.loaded_zipPlugin            =       1
+g.loaded_2html_plugin         =       1
+g.loaded_netrwPlugin          =       1
 
 -- Highlight on yank
 cmd 'au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}'

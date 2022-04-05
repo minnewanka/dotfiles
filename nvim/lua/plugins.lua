@@ -54,13 +54,6 @@ packer.startup(function()
         end
     }
 
-    -- use {
-    --     'famiu/feline.nvim',
-    --     config = function()
-    --         require('plugins.feline')
-    --     end
-    -- }
-
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -68,11 +61,6 @@ packer.startup(function()
             require("plugins.treesitter")
         end
     }
-
-    -- use {
-    --     'nvim-treesitter/playground',
-    --     cmd = {'TSHighlightCapturesUnderCursor','TSPlaygroundToggle'}
-    -- }
 
     use {
         'tpope/vim-fugitive',
@@ -127,7 +115,7 @@ packer.startup(function()
         after = "telescope-fzf-native.nvim",
         cmd = "Telescope",
         module = 'telescope',
-        requires = {"kyazdani42/nvim-web-devicons", "nvim-telescope/telescope-live-grep-raw.nvim" },
+        requires = {"kyazdani42/nvim-web-devicons", "nvim-telescope/telescope-live-grep-raw.nvim",'nvim-telescope/telescope-fzf-native.nvim', "harpoon"},
         config = function()
             require("plugins.telescope")
         end
@@ -136,17 +124,16 @@ packer.startup(function()
     use {
         'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make',
-        cmd = "Telescope",
     }
 
-    use {
-        'ggandor/lightspeed.nvim' ,
-        commit = '4d8359a30b26ee5316d0e7c79af08b10cb17a57b',
-        event = "BufRead",
-        config = function()
-            require("plugins.lightspeed")
-        end
-    }
+    -- use {
+    --     'ggandor/lightspeed.nvim' ,
+    --     commit = '4d8359a30b26ee5316d0e7c79af08b10cb17a57b',
+    --     event = "BufRead",
+    --     config = function()
+    --         require("plugins.lightspeed")
+    --     end
+    -- }
 
 
     use {
@@ -307,15 +294,44 @@ packer.startup(function()
 
     use {
         'github/copilot.vim',
-        event = "BufRead",
+        event = "VimEnter",
     }
 
-    use "Pocco81/AutoSave.nvim"
+    use {
+        "Pocco81/AutoSave.nvim",
+        config = function()
+            require("plugins.autosave")
+        end,
+        event = "VimEnter",
+    }
 
     use {
         'kdheepak/lazygit.nvim',
-        event = "BufRead",
+        event = "VimEnter",
     }
+
+    -- use {
+    --     "ThePrimeagen/refactoring.nvim",
+    --     event = "BufRead",
+    --     requires = {
+    --     {"nvim-lua/plenary.nvim"},
+    --     {"nvim-treesitter/nvim-treesitter"}
+    --     },
+    --     config = function() require("plugins.refactoring") end
+    -- }
+
+    use {
+        'rhysd/clever-f.vim',
+        event = "BufRead",
+        config = function()
+            vim.g.clever_f_across_no_line = 1;
+            vim.g.clever_f_mark_char_color = 'LeapMatch';
+        end
+    }
+
+    use { 'ggandor/leap.nvim', event = "BufRead" , config = function() require("plugins.leap") end }
+
+    use {'sainnhe/everforest'}
 
 end )
 
