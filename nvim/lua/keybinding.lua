@@ -25,7 +25,7 @@ map('n', '<Leader>y', '"*y', { noremap = true, silent = true })
 map('v', '<Leader>y', '"*y', { noremap = true, silent = true })
 
 -- hlsearch
-map('n', 'ghl', ':set hlsearch! hlsearch?<CR>', { noremap = true, silent = true })
+map('n', 'ghl', ':noh<CR>', { noremap = true, silent = true })
 
 -- save & quit
 map('n', '<Leader>Q', ':qa!<CR>', { noremap = true, silent = false })
@@ -49,7 +49,7 @@ map('n', ';lp', ':lprev<CR>', {noremap = true, silent = true})
 
 
 -- tab
-map('n', '<leader>tn', ':tabnew<CR>', { noremap = true, silent = true })
+map('n', '<leader>tn', ':tabnew %<CR>', { noremap = true, silent = true })
 map('n', '<leader>to', ':tabonly<CR>', { noremap = true, silent = true })
 map('n', '<leader>tq', ':tabclose<CR>', { noremap = true, silent = true })
 
@@ -90,7 +90,7 @@ map('n', '\'', '`', {noremap = true, silent = true})
 -- Telescope
 map('n', '<C-P>',  [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent = true })
 map('n', '<leader>M',  [[<Cmd>Telescope marks<CR>]], { noremap = true, silent = true })
-map('n', '<Leader>b',  [[<Cmd>Telescope buffers<CR>]], { noremap = true, silent = true })
+map('n', '<Leader>b',  [[<Cmd>Telescope buffers initial_mode=normal<CR>]], { noremap = true, silent = true })
 map('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
 map('n', '<Leader>F',  [[<Cmd>lua require("telescope").extensions.live_grep_raw.live_grep_raw()<CR>]], { noremap = true, silent = true })
 map('n', '<leader>cc',[[<Cmd>lua require("telescope").extensions.neoclip.default()<CR>]], { noremap = true, silent = true })
@@ -137,3 +137,8 @@ map(
     ":lua require('refactoring').select_refactor()<CR>",
     { noremap = true, silent = true, expr = false }
 )
+
+map('n', '<leader>m', "<cmd>MarksQFListBuf<cr>", { silent = true})
+map('n', '<leader>M', "<cmd>MarksQFListGlobal<cr>", { silent = true})
+
+map('n', 'gb', "<cmd>ScrollbarToggle<cr>", { silent = true})

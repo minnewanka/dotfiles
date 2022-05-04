@@ -1,10 +1,11 @@
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
 vim.g.nvim_tree_respect_buf_cwd = 1
 vim.g.cursorhold_updatetime = 100
 vim.g.copilot_filetypes = {
     ['*'] = false,
     ['javascript'] = true,
     ['typescript'] = true,
-    ['vue'] = true,
     ['lua'] = true,
     ['html'] = true,
 }

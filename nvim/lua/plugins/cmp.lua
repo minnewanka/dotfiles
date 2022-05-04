@@ -120,9 +120,10 @@ cmp.setup({
         { name = 'buffer' },
         { name = 'nvim_lsp' },
     },
-    documentation = {
-        border = 'single'
-    }
+ window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
 })
 
 -- -- Use buffer source for `/`.

@@ -12,7 +12,7 @@ highlight diffFile guifg=#F28736 guibg=NONE  gui=NONE
 highlight Blue guifg=#7EA99D guibg=NONE  gui=NONE
 highlight Normal guifg=#E2CBA7 guibg=NONE  gui=NONE
 highlight NormalFloat guifg=#E2CBA7 guibg=NONE  gui=NONE
-highlight Pmenu guifg=#E2CBA7 guibg=#45403d  gui=NONE
+highlight Pmenu guifg=#E2CBA7 guibg=NONE  gui=NONE
 highlight PmenuSel guifg=#443F3C guibg=#A89985  gui=NONE
 highlight PmenuSbar guifg=NONE guibg=#443F3C  gui=NONE
 highlight PmenuThumb guifg=NONE guibg=#7D6F64  gui=NONE

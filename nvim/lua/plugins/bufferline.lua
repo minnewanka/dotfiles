@@ -1,8 +1,17 @@
- require('bufferline').setup {
-   options = {
-     -- NOTE: this will be called a lot so don't do any heavy processing here
-     custom_filter = function(buf_number)
-       return vim.fn.getbufinfo(buf_number)[1].hidden == 0
-     end,
-   }
- }
+require('bufferline').setup {
+    options = {
+        mode = 'tabs',
+        indicator_icon = '',
+        show_buffer_close_icons = false,
+        show_close_icon = false,
+        separator_style = "thick",
+        offsets = {
+            {
+                filetype = "NvimTree",
+                text = "File Explorer",
+                highlight = "Directory",
+                text_align = "center"
+            }
+        }
+    }
+}

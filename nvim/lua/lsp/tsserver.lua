@@ -8,7 +8,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require'lspconfig'.tsserver.setup({
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
     on_attach = function(client)
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = false
     capabilities = capabilities
     on_attach(client)
   end

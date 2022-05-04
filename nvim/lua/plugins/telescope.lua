@@ -2,7 +2,7 @@ local actions = require('telescope.actions')
 
 require('telescope').setup {
     defaults = {
-        path_display={"smart"},
+        path_display={"truncate"},
         file_sorter = require('telescope.sorters').get_fzy_sorter,
         file_ignore_patterns = {"docs","docs-dev"},
         prompt_prefix = ' > ',
@@ -32,8 +32,7 @@ require('telescope').setup {
     },
     pickers = {
         oldfiles = {
-            theme = "dropdown",
-            previewer = false,
+            theme = "ivy",
         },
         find_files = {
             sort_mru = true,
@@ -42,8 +41,7 @@ require('telescope').setup {
         },
         buffers = {
             sort_mru = true,
-            theme = "dropdown",
-            previewer = false,
+            theme = "ivy",
             mappings = {
                 i = {
                     ["<c-d>"] = require("telescope.actions").delete_buffer,

@@ -20,24 +20,6 @@ packer.startup(function()
      }
      use "tpope/vim-repeat"
 
-
-    -- debugger
-    --[[ use 'mfussenegger/nvim-dap'
-    use {
-        "rcarriga/nvim-dap-ui",
-        requires = {"mfussenegger/nvim-dap"},
-        config = function ()
-            require("dapui").setup()
-        end} ]]
-
-    -- lsp
-    --[[ use {
-        'mfussenegger/nvim-jdtls' ,
-        config = function()
-            require('lsp.java')
-        end
-    } ]]
-
     use {
         'neovim/nvim-lspconfig',
         config = function()
@@ -80,15 +62,6 @@ packer.startup(function()
          end
      }
 
-     -- use {
-     --     "akinsho/toggleterm.nvim",
-     --     keys = '<leader>g',
-     --     config = function()
-     --         require("plugins.toggleterm")
-     --     end
-     --
-     -- }
-
      use {
          'lewis6991/gitsigns.nvim' ,
          event = "BufRead",
@@ -102,12 +75,9 @@ packer.startup(function()
          event = "BufRead",
      }
      use {
-         'numToStr/Comment.nvim',
+         'b3nj5m1n/kommentary',
          event = "BufRead",
-         config = function()
-             require('Comment').setup()
-         end
- }
+     }
 
     -- Telescope
     use {
@@ -126,19 +96,9 @@ packer.startup(function()
         run = 'make',
     }
 
-    -- use {
-    --     'ggandor/lightspeed.nvim' ,
-    --     commit = '4d8359a30b26ee5316d0e7c79af08b10cb17a57b',
-    --     event = "BufRead",
-    --     config = function()
-    --         require("plugins.lightspeed")
-    --     end
-    -- }
-
-
     use {
         'windwp/nvim-autopairs',
-        after = "nvim-cmp",
+        -- after = "nvim-cmp",
         config = function()
             require("nvim-autopairs").setup()
         end
@@ -234,7 +194,7 @@ packer.startup(function()
 
     use {
         'L3MON4D3/LuaSnip',
-        after = 'nvim-cmp',
+        -- after = 'nvim-cmp',
         config = function()
             require("plugins.luasnip")
         end
@@ -245,6 +205,7 @@ packer.startup(function()
     use {
         'hrsh7th/nvim-cmp',
         event = "BufRead",
+        commit = '74284cffb675bb2fe0fc5c332e0cddd0a80db59b',
         requires = {
             { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', },
             { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', },
@@ -288,20 +249,7 @@ packer.startup(function()
     }
 
     use {
-	"luukvbaal/stabilize.nvim",
-	config = function() require("stabilize").setup() end
-    }
-
-    use {
         'github/copilot.vim',
-        event = "VimEnter",
-    }
-
-    use {
-        "Pocco81/AutoSave.nvim",
-        config = function()
-            require("plugins.autosave")
-        end,
         event = "VimEnter",
     }
 
@@ -310,15 +258,6 @@ packer.startup(function()
         event = "VimEnter",
     }
 
-    -- use {
-    --     "ThePrimeagen/refactoring.nvim",
-    --     event = "BufRead",
-    --     requires = {
-    --     {"nvim-lua/plenary.nvim"},
-    --     {"nvim-treesitter/nvim-treesitter"}
-    --     },
-    --     config = function() require("plugins.refactoring") end
-    -- }
 
     use {
         'rhysd/clever-f.vim',
@@ -330,8 +269,14 @@ packer.startup(function()
     }
 
     use { 'ggandor/leap.nvim', event = "BufRead" , config = function() require("plugins.leap") end }
+    use { 'EdenEast/nightfox.nvim' }
+    use({
+        'mvllow/modes.nvim',
+        config = function()
+            require('modes').setup()
+        end
+    })
 
-    use {'sainnhe/everforest'}
 
 end )
 
