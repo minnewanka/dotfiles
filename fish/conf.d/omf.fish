@@ -9,4 +9,4 @@ set -g theme_color_scheme gruvbox
 starship init fish | source
 
 #Variable
-export JAVA_HOME="/usr/local/Cellar/openjdk@11/11.0.10/libexec/openjdk.jdk/Contents/Home/"
+export JAVA_HOME="/usr/local/Cellar/openjdk@11/11.0.15/libexec/openjdk.jdk/Contents/Home/"

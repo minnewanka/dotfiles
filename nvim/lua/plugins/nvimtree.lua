@@ -1,7 +1,9 @@
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup({
+    update_cwd = true,
+    respect_buf_cwd = true,
     update_focused_file = {
-        update_focused_file = true,
+        update_cwd = true,
     },
     filters = {
         dotfiles = false,
@@ -51,13 +53,11 @@ require'nvim-tree'.setup({
             { key = "q",                            action = "close" },
             { key = "g?",                           action = "toggle_help" },
             { key = "W",                            action = "collapse_all" },
-            { key = "S",                            action = "search_node" },
             { key = "<C-k>",                        action = "toggle_file_info" },
             },
         }
     },
 })
-
 vim.g.nvim_tree_git_hl = 0
 vim.g.nvim_tree_show_icons = {
     git = 0,

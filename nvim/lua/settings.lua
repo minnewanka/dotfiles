@@ -38,6 +38,8 @@ opt.swapfile                  =       false
 opt.lazyredraw                =       true
 vim.opt.shell                 =       "/bin/bash"
 opt.laststatus                =       3
+opt.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
+opt.showtabline               =       1
 
 -- don't load the plugins below
 g.loaded_gzip                 =       1
@@ -47,28 +49,29 @@ g.loaded_zipPlugin            =       1
 g.loaded_2html_plugin         =       1
 g.loaded_netrwPlugin          =       1
 
--- Highlight on yank
-cmd 'au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}'
 
-nvim_exec([[
-autocmd BufWinEnter * set  formatoptions-=cro
-]], false)
+vim.api.nvim_create_autocmd({"TextYankPost"}, {
+  pattern = "*",
+  command = 'silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}',
+})
 
-nvim_exec([[
-    command! BufOnly silent! execute "%bd|e#|bd#"
-    command! TSFix :write | edit | TSBufEnable highlight
-]], false)
+vim.api.nvim_create_autocmd({"BufWinEnter"}, {
+  pattern = "*",
+  command = 'set formatoptions-=cro',
+})
+
+vim.api.nvim_create_user_command("BufOnly", 'silent! execute "%bd|e#|bd#"',{})
+vim.api.nvim_create_user_command("TSFix", ':write | edit | TSBufEnable highlight',{})
 
 
-nvim_exec([[
-function! ToggleGStatus()
-    if buflisted(bufname('.git/index'))
-        bd .git/index
-    else
-        Git
-    endif
-endfunction
-
-command ToggleGStatus :call ToggleGStatus()
-]], false)
-
+vim.api.nvim_create_user_command(
+    'ToggleGStatus',
+    function()
+        if vim.fn.buflisted(vim.fn.bufname('.git/index')) ~= 0
+        then vim.cmd("bd .git/index")
+        else
+            vim.cmd("Git")
+        end
+    end,
+    {}
+)

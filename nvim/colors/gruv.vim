@@ -221,3 +221,4 @@ highlight! link CmpItemKindVariable Fg
 highlight! link CmpItemKindKeyword Red
 highlight! link CmpItemKindText Aqua
 highlight! link CmpItemKindSnippet Purple
+

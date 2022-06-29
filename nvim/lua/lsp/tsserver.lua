@@ -15,20 +15,24 @@ require'lspconfig'.tsserver.setup({
 })
 
 require'lspconfig'.jsonls.setup {
-  on_attach = on_attach,
-  settings = {
-    json = {
-      schemas = {
-        {
-          fileMatch = { 'package.json' },
-          url = 'https://json.schemastore.org/package.json',
+    on_attach = function(client)
+        client.server_capabilities.textDocument.documentSymbol = false
+        capabilities = capabilities
+        on_attach(client)
+    end,
+    settings = {
+        json = {
+            schemas = {
+                {
+                    fileMatch = { 'package.json' },
+                    url = 'https://json.schemastore.org/package.json',
+                },
+                {
+                    fileMatch = { 'tsconfig.json', 'tsconfig.*.json' },
+                    url = 'http://json.schemastore.org/tsconfig',
+                },
+            },
         },
-        {
-          fileMatch = { 'tsconfig.json', 'tsconfig.*.json' },
-          url = 'http://json.schemastore.org/tsconfig',
-        },
-      },
     },
-  },
 }
 

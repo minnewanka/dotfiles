@@ -28,7 +28,7 @@ map('v', '<Leader>y', '"*y', { noremap = true, silent = true })
 map('n', 'ghl', ':noh<CR>', { noremap = true, silent = true })
 
 -- save & quit
-map('n', '<Leader>Q', ':qa!<CR>', { noremap = true, silent = false })
+map('n', '<Leader>w', ':qa!<CR>', { noremap = true, silent = false })
 map('n', '<Leader>q', ':q!<CR>', { noremap = true, silent = false })
 map('n', '<Leader>z', ':wq<CR>', { noremap = true, silent = true })
 
@@ -60,10 +60,8 @@ map('x', 'al', '$o0', { noremap = true, silent = true })
 map('o', 'al', ':normal val<CR>', { noremap = true, silent = true })
 
 -- LSP
-map('n', '<Leader><Leader>',  [[<Cmd>lua vim.lsp.buf.formatting()<CR>]], { noremap = true, silent = true })
-map('n', 'gd',  [[<Cmd>lua vim.lsp.buf.definition()<CR>]], { noremap = true, silent = true })
+map('n', '<Leader><Leader>',  [[<Cmd>lua vim.lsp.buf.format()<CR>]], { noremap = true, silent = true })
 map('n', 'gi',  [[<Cmd>lua vim.lsp.buf.implementation()<CR>]], { noremap = true, silent = true })
-map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>",  {silent = true, noremap = true})
 
 -- word wrap
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap=true, expr = true, silent = true})

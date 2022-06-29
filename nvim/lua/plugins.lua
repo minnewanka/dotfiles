@@ -11,14 +11,13 @@ packer.startup(function()
          'antoinemadec/FixCursorHold.nvim',
          event = "BufRead",
      }
-     use {
-         'alvarosevilla95/luatab.nvim',
-         requires='kyazdani42/nvim-web-devicons',
-         config = function()
-         require('luatab').setup{}
-         end
-     }
-     use "tpope/vim-repeat"
+    use {
+        "nanozuki/tabby.nvim",
+        config = function()
+            require('plugins.tabby')        
+        end,
+    }
+    use "tpope/vim-repeat"
 
     use {
         'neovim/nvim-lspconfig',
@@ -50,34 +49,34 @@ packer.startup(function()
         cmd = { 'Git', 'Glog', 'Gdiffsplit', 'GBlame' },
     }
     use {
-         'tpope/vim-unimpaired',
-         event = "BufRead",
-     }
+        'tpope/vim-unimpaired',
+        event = "BufRead",
+    }
 
-     use {
-         'ruifm/gitlinker.nvim',
-         keys = '<leader>gy',
-         config = function()
-             require"gitlinker".setup()
-         end
-     }
+    use {
+        'ruifm/gitlinker.nvim',
+        keys = '<leader>gy',
+        config = function()
+            require"gitlinker".setup()
+        end
+    }
 
-     use {
-         'lewis6991/gitsigns.nvim' ,
-         event = "BufRead",
-         config = function()
-             require("plugins.gitsigns")
-         end
-     }
+    use {
+        'lewis6991/gitsigns.nvim' ,
+        event = "BufRead",
+        config = function()
+            require("plugins.gitsigns")
+        end
+    }
 
-     use {
-         'tpope/vim-surround',
-         event = "BufRead",
-     }
-     use {
-         'b3nj5m1n/kommentary',
-         event = "BufRead",
-     }
+    use {
+        'tpope/vim-surround',
+        event = "BufRead",
+    }
+    use {
+        'b3nj5m1n/kommentary',
+        event = "BufRead",
+    }
 
     -- Telescope
     use {
@@ -98,7 +97,7 @@ packer.startup(function()
 
     use {
         'windwp/nvim-autopairs',
-        -- after = "nvim-cmp",
+        after = "nvim-cmp",
         config = function()
             require("nvim-autopairs").setup()
         end
@@ -140,7 +139,7 @@ packer.startup(function()
     }
 
     use {
-        'chentau/marks.nvim',
+        'chentoast/marks.nvim',
         event = "BufRead",
         config = function()
             require("plugins.marks")
@@ -194,18 +193,17 @@ packer.startup(function()
 
     use {
         'L3MON4D3/LuaSnip',
-        -- after = 'nvim-cmp',
+        after = 'nvim-cmp',
         config = function()
             require("plugins.luasnip")
         end
 
     }
 
-      -- completion engine
+    -- completion engine
     use {
         'hrsh7th/nvim-cmp',
         event = "BufRead",
-        commit = '74284cffb675bb2fe0fc5c332e0cddd0a80db59b',
         requires = {
             { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', },
             { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', },
@@ -220,11 +218,15 @@ packer.startup(function()
     }
 
 
-    use {
-        'tami5/lspsaga.nvim',
+    use({
+        "glepnir/lspsaga.nvim",
         event = "BufRead",
-
-    }
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        branch = "main",
+        config = function()
+            require("plugins.saga")
+        end,
+    })
 
     use {
         'jose-elias-alvarez/null-ls.nvim',
@@ -238,7 +240,7 @@ packer.startup(function()
         config = function()
             require("bufjump").setup({})
         end
-   }
+    }
 
     use {
         "lukas-reineke/indent-blankline.nvim",
@@ -248,10 +250,10 @@ packer.startup(function()
         end
     }
 
-    use {
+    --[[ use {
         'github/copilot.vim',
         event = "VimEnter",
-    }
+    } ]]
 
     use {
         'kdheepak/lazygit.nvim',
@@ -270,13 +272,13 @@ packer.startup(function()
 
     use { 'ggandor/leap.nvim', event = "BufRead" , config = function() require("plugins.leap") end }
     use { 'EdenEast/nightfox.nvim' }
+    use { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end }
     use({
         'mvllow/modes.nvim',
         config = function()
             require('modes').setup()
         end
     })
-
 
 end )
 
