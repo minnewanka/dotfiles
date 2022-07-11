@@ -38,7 +38,7 @@ opt.swapfile                  =       false
 opt.lazyredraw                =       true
 vim.opt.shell                 =       "/bin/bash"
 opt.laststatus                =       3
-opt.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
+vim.o.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
 opt.showtabline               =       1
 
 -- don't load the plugins below

@@ -23,7 +23,7 @@ packer.startup(function()
         'neovim/nvim-lspconfig',
         config = function()
             require('lsp/config')
-            require('lsp/tsserver')
+            require('lsp/server')
         end
     }
 
@@ -172,13 +172,13 @@ packer.startup(function()
         end
     }
 
-    use {
+    --[[ use {
         'folke/zen-mode.nvim',
         keys=';z',
         config = function()
             require("plugins.zenmode")
         end
-    }
+    } ]]
 
     use {
         'kevinhwang91/nvim-hlslens',
@@ -261,24 +261,43 @@ packer.startup(function()
     }
 
 
-    use {
+    --[[ use {
         'rhysd/clever-f.vim',
         event = "BufRead",
         config = function()
             vim.g.clever_f_across_no_line = 1;
             vim.g.clever_f_mark_char_color = 'LeapMatch';
         end
-    }
+    } ]]
 
     use { 'ggandor/leap.nvim', event = "BufRead" , config = function() require("plugins.leap") end }
     use { 'EdenEast/nightfox.nvim' }
-    use { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end }
+    use { 'j-hui/fidget.nvim', config = function() require"fidget".setup{
+        sources = {
+            ["null-ls"] = {
+                ignore = true,
+            },
+  },
+    } end }
     use({
         'mvllow/modes.nvim',
         config = function()
             require('modes').setup()
         end
     })
-
+    use {
+        'jose-elias-alvarez/typescript.nvim',
+    }
+    use {'folke/trouble.nvim'}
+    --[[ use {
+        'jinh0/eyeliner.nvim',
+        config = function ()
+            require('eyeliner').setup {
+                bold = false, 
+                underline = false 
+            }
+        end
+    } ]]
 end )
+
 

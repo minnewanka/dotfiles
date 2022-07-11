@@ -9,6 +9,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
+vim.diagnostic.config({
+    virtual_text = false,
+})
+
 vim.lsp.handlers["textDocument/hover"] =
   vim.lsp.with(
   vim.lsp.handlers.hover,
@@ -25,6 +29,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
   }
 )
 
-vim.api.nvim_set_keymap('n', '[d',  [[<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', ']d',  [[<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,  { noremap=true, silent=true })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next,  { noremap=true, silent=true })
 

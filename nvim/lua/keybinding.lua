@@ -92,6 +92,7 @@ map('n', '<Leader>b',  [[<Cmd>Telescope buffers initial_mode=normal<CR>]], { nor
 map('n', '<Leader>f',  [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
 map('n', '<Leader>F',  [[<Cmd>lua require("telescope").extensions.live_grep_raw.live_grep_raw()<CR>]], { noremap = true, silent = true })
 map('n', '<leader>cc',[[<Cmd>lua require("telescope").extensions.neoclip.default()<CR>]], { noremap = true, silent = true })
+map('n', '<leader>o',  [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent = true })
 
 --undo break point
 map('i', ',', ',<c-g>u', { noremap = true, silent = true })
@@ -129,14 +130,12 @@ map("n", "<leader>g", "<cmd>LazyGit<CR>", {noremap = true, silent = true})
 -- map('n', 's', "<Plug>Lightspeed_omni_s", { silent = true})
 -- map('n', 's', "<Plug>leap_omni", { silent = true})
 
-map(
-    "v",
-    "<leader>rr",
-    ":lua require('refactoring').select_refactor()<CR>",
-    { noremap = true, silent = true, expr = false }
-)
-
 map('n', '<leader>m', "<cmd>MarksQFListBuf<cr>", { silent = true})
 map('n', '<leader>M', "<cmd>MarksQFListGlobal<cr>", { silent = true})
 
 map('n', 'gb', "<cmd>ScrollbarToggle<cr>", { silent = true})
+
+--Trouble
+map("n", "<leader>d", "<cmd>Trouble<cr>",
+  {silent = true, noremap = true}
+)

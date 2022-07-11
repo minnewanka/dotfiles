@@ -5,63 +5,65 @@ times in msec
  clock   elapsed:              other lines
 
 000.006  000.006: --- NVIM STARTING ---
-000.513  000.507: locale set
-013.586  013.073: inits 1
-013.612  000.026: window checked
-013.619  000.007: parsing arguments
-014.287  000.668: init lua interpreter
-014.559  000.271: expanding arguments
-014.635  000.077: inits 2
-015.158  000.523: init highlight
-015.160  000.002: waiting for UI
-017.444  002.284: done waiting for UI
-017.462  000.018: init screen for UI
-017.501  000.039: init default mappings
-017.561  000.060: init default autocommands
-019.007  000.090  000.090: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/ftplugin.vim
-019.239  000.048  000.048: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/indent.vim
-032.104  002.200  002.200: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nightfox.nvim/colors/nordfox.vim
-032.197  012.802  010.601: sourcing /Users/philippe/.config/nvim/init.lua
-032.231  001.729: sourcing vimrc file(s)
-032.959  000.426  000.426: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/filetype.lua
-033.053  000.025  000.025: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/filetype.vim
-033.488  000.172  000.172: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/syntax/synload.vim
-033.607  000.485  000.314: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/syntax/syntax.vim
-035.408  000.025  000.025: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/gzip.vim
-035.482  000.019  000.019: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/health.vim
-035.585  000.050  000.050: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/man.vim
-036.704  000.250  000.250: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
-036.994  001.353  001.103: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/matchit.vim
-037.282  000.214  000.214: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/matchparen.vim
-037.375  000.028  000.028: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/netrwPlugin.vim
-037.671  000.015  000.015: sourcing /Users/philippe/.local/share/nvim/rplugin.vim
-037.681  000.242  000.227: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/rplugin.vim
-037.818  000.083  000.083: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/shada.vim
-037.922  000.038  000.038: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/spellfile.vim
-038.011  000.030  000.030: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/tarPlugin.vim
-038.091  000.022  000.022: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/tohtml.vim
-038.176  000.031  000.031: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/tutor.vim
-038.259  000.028  000.028: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/zipPlugin.vim
-060.111  021.573  021.573: sourcing /Users/philippe/.config/nvim/plugin/packer_compiled.lua
-060.695  003.789: loading rtp plugins
-063.523  000.538  000.538: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/copilot.vim/autoload/copilot.vim
-063.572  002.239  001.701: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/copilot.vim/plugin/copilot.vim
-064.239  000.155  000.155: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/lazygit.nvim/plugin/lazygit.vim
-064.977  000.050  000.050: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nightfox.nvim/plugin/nightfox.vim
-065.481  000.089  000.089: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-lspconfig/plugin/lspconfig.vim
-067.401  001.472  001.472: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-treesitter/plugin/nvim-treesitter.lua
-067.715  000.051  000.051: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-web-devicons/plugin/nvim-web-devicons.vim
-068.375  000.048  000.048: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/plenary.nvim/plugin/plenary.vim
-068.758  000.030  000.030: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/tabby.nvim/plugin/tabby.vim
-069.504  004.677: loading packages
-069.507  000.004: loading after plugins
-069.524  000.017: inits 3
-071.113  001.589: reading ShaDa
-071.227  000.113: opening buffers
-071.334  000.108: BufEnter autocommands
-071.337  000.003: editing files in windows
-082.511  000.325  000.325: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/copilot.vim/autoload/copilot/agent.vim
-082.822  000.094  000.094: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/copilot.vim/autoload/copilot/job.vim
+000.101  000.095: event init
+000.227  000.126: early init
+000.844  000.617: locale set
+000.939  000.095: init first window
+014.593  013.654: inits 1
+014.616  000.024: window checked
+014.623  000.007: parsing arguments
+015.141  000.078  000.078: require('vim.shared')
+015.330  000.110  000.110: require('vim._meta')
+015.333  000.187  000.077: require('vim._editor')
+015.335  000.320  000.055: require('vim._init_packages')
+015.337  000.394: init lua interpreter
+015.639  000.302: expanding arguments
+015.710  000.071: inits 2
+015.971  000.262: init highlight
+015.973  000.002: waiting for UI
+018.487  002.514: done waiting for UI
+018.517  000.030: init screen for UI
+018.539  000.022: init default mappings
+018.566  000.027: init default autocommands
+018.567  000.002: sourcing vimrc file(s)
+018.581  000.013: inits 3
+021.768  003.188: reading ShaDa
+021.861  000.093: opening buffers
+021.866  000.005: BufEnter autocommands
+021.873  000.007: editing files in windows
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.005  000.005: --- NVIM STARTING ---
+000.096  000.091: event init
+000.216  000.120: early init
+000.453  000.237: locale set
+000.502  000.049: init first window
+017.121  016.620: inits 1
+017.146  000.024: window checked
+017.152  000.007: parsing arguments
+017.722  000.062  000.062: require('vim.shared')
+017.883  000.084  000.084: require('vim._meta')
+017.886  000.159  000.075: require('vim._editor')
+017.888  000.278  000.056: require('vim._init_packages')
+017.889  000.459: init lua interpreter
+018.168  000.279: expanding arguments
+018.245  000.076: inits 2
+018.517  000.273: init highlight
+018.519  000.002: waiting for UI
+024.304  005.785: done waiting for UI
+024.331  000.027: init screen for UI
+024.354  000.023: init default mappings
+024.372  000.018: init default autocommands
+024.373  000.001: sourcing vimrc file(s)
+024.385  000.012: inits 3
+027.409  003.024: reading ShaDa
+027.517  000.108: opening buffers
+027.523  000.006: BufEnter autocommands
+027.530  000.007: editing files in windows
 
 
 times in msec
@@ -69,117 +71,29 @@ times in msec
  clock   elapsed:              other lines
 
 000.006  000.006: --- NVIM STARTING ---
-000.480  000.474: locale set
-013.777  013.297: inits 1
-013.804  000.028: window checked
-013.811  000.007: parsing arguments
-014.469  000.657: init lua interpreter
-014.884  000.415: expanding arguments
-014.954  000.071: inits 2
-015.462  000.508: init highlight
-015.464  000.002: waiting for UI
-017.660  002.196: done waiting for UI
-017.679  000.019: init screen for UI
-017.716  000.037: init default mappings
-017.771  000.055: init default autocommands
-019.133  000.093  000.093: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/ftplugin.vim
-019.349  000.047  000.047: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/indent.vim
-032.647  002.099  002.099: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nightfox.nvim/colors/nordfox.vim
-032.739  013.228  011.129: sourcing /Users/philippe/.config/nvim/init.lua
-032.756  001.616: sourcing vimrc file(s)
-033.416  000.376  000.376: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/filetype.lua
-033.519  000.025  000.025: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/filetype.vim
-033.911  000.119  000.119: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/syntax/synload.vim
-034.014  000.413  000.293: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/syntax/syntax.vim
-036.001  000.030  000.030: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/gzip.vim
-036.091  000.021  000.021: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/health.vim
-036.199  000.047  000.047: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/man.vim
-037.306  000.247  000.247: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
-037.502  001.239  000.991: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/matchit.vim
-037.767  000.196  000.196: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/matchparen.vim
-037.889  000.031  000.031: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/netrwPlugin.vim
-038.210  000.016  000.016: sourcing /Users/philippe/.local/share/nvim/rplugin.vim
-038.221  000.267  000.251: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/rplugin.vim
-038.365  000.082  000.082: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/shada.vim
-038.469  000.037  000.037: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/spellfile.vim
-038.561  000.028  000.028: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/tarPlugin.vim
-038.648  000.023  000.023: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/tohtml.vim
-038.742  000.032  000.032: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/tutor.vim
-038.834  000.030  000.030: sourcing /usr/local/Cellar/neovim/HEAD-504d7de/share/nvim/runtime/plugin/zipPlugin.vim
-061.048  021.883  021.883: sourcing /Users/philippe/.config/nvim/plugin/packer_compiled.lua
-061.756  004.240: loading rtp plugins
-062.944  000.063  000.063: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nightfox.nvim/plugin/nightfox.vim
-063.554  000.101  000.101: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-lspconfig/plugin/lspconfig.vim
-065.524  001.494  001.494: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-treesitter/plugin/nvim-treesitter.lua
-065.896  000.051  000.051: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-web-devicons/plugin/nvim-web-devicons.vim
-066.416  000.050  000.050: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/plenary.nvim/plugin/plenary.vim
-066.901  000.031  000.031: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/tabby.nvim/plugin/tabby.vim
-067.505  003.959: loading packages
-068.751  001.246: loading after plugins
-068.769  000.018: inits 3
-070.449  001.680: reading ShaDa
-070.566  000.117: opening buffers
-070.653  000.088: BufEnter autocommands
-070.656  000.003: editing files in windows
-
-
-times in msec
- clock   self+sourced   self:  sourced script
- clock   elapsed:              other lines
-
-000.006  000.006: --- NVIM STARTING ---
-000.104  000.098: event init
-000.223  000.119: early init
-000.467  000.244: locale set
-000.520  000.053: init first window
-014.554  014.034: inits 1
-014.579  000.025: window checked
-014.584  000.005: parsing arguments
-015.227  000.643: init lua interpreter
-015.368  000.141: expanding arguments
-015.435  000.067: inits 2
-015.685  000.249: init highlight
-015.686  000.001: waiting for UI
-018.506  002.820: done waiting for UI
-018.535  000.029: init screen for UI
-018.598  000.063: init default mappings
-018.640  000.042: init default autocommands
-020.086  000.113  000.113: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/ftplugin.vim
-020.294  000.047  000.047: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/indent.vim
-037.311  001.747  001.747: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nightfox.nvim/colors/nordfox.vim
-037.394  016.938  015.190: sourcing /Users/philippe/.config/nvim/init.lua
-037.409  001.671: sourcing vimrc file(s)
-038.045  000.382  000.382: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/filetype.lua
-038.153  000.026  000.026: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/filetype.vim
-038.486  000.091  000.091: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/syntax/synload.vim
-038.581  000.359  000.268: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/syntax/syntax.vim
-040.423  000.028  000.028: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/gzip.vim
-040.506  000.019  000.019: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/health.vim
-040.599  000.044  000.044: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/man.vim
-041.530  000.174  000.174: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
-041.760  001.109  000.935: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/matchit.vim
-042.006  000.181  000.181: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/matchparen.vim
-042.110  000.028  000.028: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/netrwPlugin.vim
-042.384  000.016  000.016: sourcing /Users/philippe/.local/share/nvim/rplugin.vim
-042.393  000.230  000.214: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/rplugin.vim
-042.526  000.082  000.082: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/shada.vim
-042.644  000.053  000.053: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/spellfile.vim
-042.731  000.026  000.026: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/tarPlugin.vim
-042.806  000.022  000.022: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/tohtml.vim
-042.894  000.030  000.030: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/tutor.vim
-042.977  000.031  000.031: sourcing /usr/local/Cellar/neovim/HEAD-8ea09fc/share/nvim/runtime/plugin/zipPlugin.vim
-065.000  021.721  021.721: sourcing /Users/philippe/.config/nvim/plugin/packer_compiled.lua
-065.695  003.914: loading rtp plugins
-066.873  000.044  000.044: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nightfox.nvim/plugin/nightfox.vim
-067.619  000.319  000.319: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-lspconfig/plugin/lspconfig.vim
-070.696  002.612  002.612: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-treesitter/plugin/nvim-treesitter.lua
-071.064  000.051  000.051: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-web-devicons/plugin/nvim-web-devicons.vim
-071.529  000.039  000.039: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/plenary.nvim/plugin/plenary.vim
-071.888  000.027  000.027: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/tabby.nvim/plugin/tabby.vim
-072.873  004.086: loading packages
-074.155  001.282: loading after plugins
-074.174  000.019: inits 3
-076.496  002.322: reading ShaDa
-076.610  000.114: opening buffers
-076.702  000.092: BufEnter autocommands
-076.707  000.005: editing files in windows
+000.125  000.119: event init
+000.271  000.147: early init
+000.472  000.200: locale set
+000.513  000.042: init first window
+010.253  009.740: inits 1
+010.277  000.024: window checked
+010.283  000.006: parsing arguments
+010.700  000.062  000.062: require('vim.shared')
+010.811  000.055  000.055: require('vim._meta')
+010.813  000.109  000.054: require('vim._editor')
+010.814  000.217  000.045: require('vim._init_packages')
+010.816  000.316: init lua interpreter
+011.044  000.228: expanding arguments
+011.103  000.059: inits 2
+011.301  000.198: init highlight
+011.302  000.001: waiting for UI
+013.239  001.937: done waiting for UI
+013.264  000.025: init screen for UI
+013.282  000.018: init default mappings
+013.298  000.017: init default autocommands
+013.300  000.001: sourcing vimrc file(s)
+013.311  000.011: inits 3
+014.949  001.639: reading ShaDa
+015.022  000.073: opening buffers
+015.025  000.002: BufEnter autocommands
+015.028  000.003: editing files in windows

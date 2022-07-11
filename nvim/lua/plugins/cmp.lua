@@ -126,20 +126,14 @@ cmp.setup({
     },
 })
 
--- -- Use buffer source for `/`.
--- cmp.setup.cmdline('/', {
---     sources = {
---         { name = 'buffer' }
---     }
--- })
---
--- -- Use buffer source for `/`.
--- cmp.setup.cmdline('?', {
---     sources = {
---         { name = 'buffer' }
---     }
--- })
---
+-- Use buffer source for `/`.
+--[[ cmp.setup.cmdline('/', {
+    sources = {
+        { name = 'buffer' }
+    }
+}) ]]
+
+
 require'cmp'.setup.cmdline(':', {
   sources = {
     { name = 'cmdline' }
