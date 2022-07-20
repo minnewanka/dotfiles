@@ -9,6 +9,7 @@ local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 cmp.setup({
+    experimental = {ghost_text  = true},
     completion = {
         completeopt = 'menu,menuone,noinsert',
     },

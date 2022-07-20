@@ -53,26 +53,30 @@ packer.startup(function()
         event = "BufRead",
     }
 
-    use {
+    --[[ use {
         'ruifm/gitlinker.nvim',
         keys = '<leader>gy',
         config = function()
             require"gitlinker".setup()
         end
-    }
+    } ]]
 
     use {
         'lewis6991/gitsigns.nvim' ,
-        event = "BufRead",
         config = function()
             require("plugins.gitsigns")
         end
     }
 
-    use {
-        'tpope/vim-surround',
-        event = "BufRead",
-    }
+use({
+    "kylechui/nvim-surround",
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+})
+
     use {
         'b3nj5m1n/kommentary',
         event = "BufRead",
@@ -250,25 +254,19 @@ packer.startup(function()
         end
     }
 
-    --[[ use {
-        'github/copilot.vim',
-        event = "VimEnter",
-    } ]]
-
     use {
         'kdheepak/lazygit.nvim',
         event = "VimEnter",
     }
 
-
-    --[[ use {
+    use {
         'rhysd/clever-f.vim',
         event = "BufRead",
         config = function()
             vim.g.clever_f_across_no_line = 1;
             vim.g.clever_f_mark_char_color = 'LeapMatch';
         end
-    } ]]
+    }
 
     use { 'ggandor/leap.nvim', event = "BufRead" , config = function() require("plugins.leap") end }
     use { 'EdenEast/nightfox.nvim' }
@@ -289,15 +287,14 @@ packer.startup(function()
         'jose-elias-alvarez/typescript.nvim',
     }
     use {'folke/trouble.nvim'}
-    --[[ use {
-        'jinh0/eyeliner.nvim',
-        config = function ()
-            require('eyeliner').setup {
-                bold = false, 
-                underline = false 
-            }
+    use {
+        'anuvyklack/hydra.nvim',
+        config = function()
+            require('plugins.hydras.git')
+            require('plugins.hydras.tab')
         end
-    } ]]
+    } 
+
 end )
 
 

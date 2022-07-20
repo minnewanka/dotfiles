@@ -48,11 +48,6 @@ map('n', ';ln', ':lnext<CR>', {noremap = true, silent = true})
 map('n', ';lp', ':lprev<CR>', {noremap = true, silent = true})
 
 
--- tab
-map('n', '<leader>tn', ':tabnew %<CR>', { noremap = true, silent = true })
-map('n', '<leader>to', ':tabonly<CR>', { noremap = true, silent = true })
-map('n', '<leader>tq', ':tabclose<CR>', { noremap = true, silent = true })
-
 -- line text object
 map('x', 'il', 'g_o^', { noremap = true, silent = true })
 map('o', 'il', ':normal vil<CR>', { noremap = true, silent = true })
@@ -70,10 +65,10 @@ map('n', 'j', "v:count == 0 ? 'gj' : 'j'", {noremap= true, expr = true, silent =
 -- git diff
 -- map('n', '<Leader>g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
 map('n', ';g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
-map('n', '<Leader>gd',  ':Gdiffsplit<CR>', { noremap = true, silent = true })
+--[[ map('n', '<Leader>gd',  ':Gdiffsplit<CR>', { noremap = true, silent = true })
 map('n', '<Leader>gD',  ':Git difftool<CR>', { noremap = true, silent = true })
 map('n', '<Leader>g;', ':diffget //3<CR>', { noremap = true, silent = true })
-map('n', '<Leader>gj', ':diffget //2<CR>', { noremap = true, silent = true })
+map('n', '<Leader>gj', ':diffget //2<CR>', { noremap = true, silent = true }) ]]
 
 -- Tab
 map('i', '<TAB>', "luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump':'<Tab>'", { expr = true, silent = true})
@@ -126,7 +121,6 @@ map('n', 'N', 'Nzz', { noremap = true, silent = true })
 map('n', '*', '*zz', { noremap = true, silent = true })
 map('n', '#', '#zz', { noremap = true, silent = true })
 
-map("n", "<leader>g", "<cmd>LazyGit<CR>", {noremap = true, silent = true})
 -- map('n', 's', "<Plug>Lightspeed_omni_s", { silent = true})
 -- map('n', 's', "<Plug>leap_omni", { silent = true})
 
