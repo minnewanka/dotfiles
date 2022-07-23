@@ -25,13 +25,10 @@ Hydra({
       on_key = function() vim.wait(50) end,
       on_enter = function()
          vim.cmd('silent! %foldopen!')
-         gitsigns.toggle_signs(true)
          gitsigns.toggle_linehl(true)
       end,
       on_exit = function()
-         gitsigns.toggle_signs(false)
          gitsigns.toggle_linehl(false)
-         gitsigns.toggle_deleted(false)
       end,
    },
    mode = {'n','x'},
