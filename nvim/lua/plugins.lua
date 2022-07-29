@@ -290,7 +290,6 @@ use({
     use {
         'anuvyklack/hydra.nvim',
         config = function()
-            require('plugins.hydras.git')
             require('plugins.hydras.tab')
         end
     } 

@@ -65,10 +65,11 @@ map('n', 'j', "v:count == 0 ? 'gj' : 'j'", {noremap= true, expr = true, silent =
 -- git diff
 -- map('n', '<Leader>g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
 map('n', ';g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
---[[ map('n', '<Leader>gd',  ':Gdiffsplit<CR>', { noremap = true, silent = true })
+map('n', '<leader>g',  ':LazyGit<CR>', { noremap = true, silent = true })
+map('n', '<Leader>gd',  ':Gdiffsplit<CR>', { noremap = true, silent = true })
 map('n', '<Leader>gD',  ':Git difftool<CR>', { noremap = true, silent = true })
 map('n', '<Leader>g;', ':diffget //3<CR>', { noremap = true, silent = true })
-map('n', '<Leader>gj', ':diffget //2<CR>', { noremap = true, silent = true }) ]]
+map('n', '<Leader>gj', ':diffget //2<CR>', { noremap = true, silent = true })
 
 -- Tab
 map('i', '<TAB>', "luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump':'<Tab>'", { expr = true, silent = true})
