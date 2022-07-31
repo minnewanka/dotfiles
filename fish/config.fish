@@ -11,4 +11,5 @@ if status is-interactive
     set -gx PATH $HOME/.cargo/bin $PATH
 
     alias notifyme "echo 'Job Done!' | terminal-notifier -sound default"
+    
 end

@@ -49,17 +49,12 @@ packer.startup(function()
         cmd = { 'Git', 'Glog', 'Gdiffsplit', 'GBlame' },
     }
     use {
+        'tpope/vim-rhubarb'
+    }
+    use {
         'tpope/vim-unimpaired',
         event = "BufRead",
     }
-
-    --[[ use {
-        'ruifm/gitlinker.nvim',
-        keys = '<leader>gy',
-        config = function()
-            require"gitlinker".setup()
-        end
-    } ]]
 
     use {
         'lewis6991/gitsigns.nvim' ,
