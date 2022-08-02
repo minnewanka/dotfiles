@@ -136,9 +136,15 @@ map("n", "<leader>d", "<cmd>Trouble<cr>",
 )
 
 -- Win shift
+map('n', '<C-W>w', "<cmd>WinShift<cr>", { silent = true})
 map('n', '<C-W>m', "<cmd>SmartResizeMode<cr>", { silent = true})
 
 vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<A-j>', require('smart-splits').resize_down)
 vim.keymap.set('n', '<A-k>', require('smart-splits').resize_up)
 vim.keymap.set('n', '<A-l>', require('smart-splits').resize_right)
+
+-- tab
+map('n', '<leader>tn', ':tabnew %<CR>', { noremap = true, silent = true })
+map('n', '<leader>to', ':tabonly<CR>', { noremap = true, silent = true })
+map('n', '<leader>tq', ':tabclose<CR>', { noremap = true, silent = true })

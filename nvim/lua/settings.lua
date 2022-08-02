@@ -4,11 +4,13 @@ local g = vim.g
 local nvim_exec = vim.api.nvim_exec
 local fn, cmd = vim.fn, vim.cmd
 
+cmd ("set nomodeline")
 cmd ("set inccommand=split")
 cmd ("set noshowmode")
 cmd ("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")
 cmd ("set grepformat=%f:%l:%c:%m")
 cmd ("set clipboard=unnamedplus")
+cmd (" set statusline=%<\\ %{FugitiveStatusline()}%=%-14.(%l,%c%V%)\\ %P")
 
 opt.autowriteall              =       true
 opt.number                    =       true
@@ -30,7 +32,6 @@ opt.smartcase                 =       true
 opt.ignorecase                =       true
 opt.undofile                  =       true
 opt.updatetime                =       300
-opt.signcolumn                =       "yes:1"
 opt.scrolloff                 =       10
 opt.formatoptions             =       vim.opt.formatoptions + { "cro" }
 opt.shortmess:append "c"
@@ -39,7 +40,6 @@ opt.lazyredraw                =       true
 vim.opt.shell                 =       "/bin/bash"
 opt.laststatus                =       3
 vim.o.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
-opt.showtabline               =       1
 
 -- don't load the plugins below
 g.loaded_gzip                 =       1
