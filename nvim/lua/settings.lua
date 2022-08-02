@@ -38,7 +38,7 @@ opt.shortmess:append "c"
 opt.swapfile                  =       false
 opt.lazyredraw                =       true
 vim.opt.shell                 =       "/bin/bash"
-opt.laststatus                =       3
+opt.laststatus                =       2
 vim.o.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
 
 -- don't load the plugins below

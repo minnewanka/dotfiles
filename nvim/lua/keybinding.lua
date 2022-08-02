@@ -137,6 +137,7 @@ map("n", "<leader>d", "<cmd>Trouble<cr>",
 
 -- Win shift
 map('n', '<C-W>w', "<cmd>WinShift<cr>", { silent = true})
+map('n', '<C-W>i', "<cmd>WinShift swap<cr>", { silent = true})
 map('n', '<C-W>m', "<cmd>SmartResizeMode<cr>", { silent = true})
 
 vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)
