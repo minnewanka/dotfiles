@@ -282,12 +282,20 @@ use({
         'jose-elias-alvarez/typescript.nvim',
     }
     use {'folke/trouble.nvim'}
-    use {
+    --[[ use {
         'anuvyklack/hydra.nvim',
         config = function()
-            require('plugins.hydras.tab')
+            require('plugins.hydras.window')
         end
-    } 
+    }  ]]
+    -- use {'Pocco81/auto-save.nvim'}
+    use {
+        'mrjones2014/smart-splits.nvim',
+        config = function()
+            require('smart-splits').setup({});
+        end
+    }
+
 
 end )
 
