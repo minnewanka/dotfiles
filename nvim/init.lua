@@ -7,6 +7,7 @@ vim.g.copilot_filetypes = {
     ['html'] = true,
 }
 
+
 require('impatient')
 require('plugins')
 require('settings')

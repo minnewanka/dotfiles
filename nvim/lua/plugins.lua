@@ -288,6 +288,7 @@ use({
             require('smart-splits').setup({});
         end
     }
+    use 'sainnhe/gruvbox-material'
 
 
 end )

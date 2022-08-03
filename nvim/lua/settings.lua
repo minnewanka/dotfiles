@@ -40,6 +40,8 @@ opt.lazyredraw                =       true
 vim.opt.shell                 =       "/bin/bash"
 opt.laststatus                =       2
 vim.o.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
+opt.fillchars:append { eob = " " }
+vim.opt.signcolumn = 'yes'
 
 -- don't load the plugins below
 g.loaded_gzip                 =       1

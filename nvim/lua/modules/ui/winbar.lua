@@ -14,9 +14,7 @@ winbar.eval = function()
         return ""
     end
     return '%#' .. f_hl .. '#' .. f_icon .. '%*'
-        .. "%#WinBarContent#"
         .. vim.fn.expand('%:.')
-        .. '%*'
         .. "%m"
 end
 
