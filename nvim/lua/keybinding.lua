@@ -122,9 +122,6 @@ map('n', 'N', 'Nzz', { noremap = true, silent = true })
 map('n', '*', '*zz', { noremap = true, silent = true })
 map('n', '#', '#zz', { noremap = true, silent = true })
 
--- map('n', 's', "<Plug>Lightspeed_omni_s", { silent = true})
--- map('n', 's', "<Plug>leap_omni", { silent = true})
-
 map('n', '<leader>m', "<cmd>MarksQFListBuf<cr>", { silent = true})
 map('n', '<leader>M', "<cmd>MarksQFListGlobal<cr>", { silent = true})
 
@@ -136,9 +133,7 @@ map("n", "<leader>d", "<cmd>Trouble<cr>",
 )
 
 -- Win shift
-map('n', '<C-W>w', "<cmd>WinShift<cr>", { silent = true})
-map('n', '<C-W>i', "<cmd>WinShift swap<cr>", { silent = true})
-map('n', '<C-W>m', "<cmd>SmartResizeMode<cr>", { silent = true})
+map('n', '<C-W>w', "<cmd>SmartResizeMode<cr>", { silent = true})
 
 vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<A-j>', require('smart-splits').resize_down)

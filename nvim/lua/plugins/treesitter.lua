@@ -14,10 +14,10 @@ require'nvim-treesitter.configs'.setup {
     indent = { enable = true },
     incremental_selection = {
     enable = true,
-    keymaps = {
+    --[[ keymaps = {
       init_selection = '<CR>',
       scope_incremental = '<CR>',
-    },
+    }, ]]
   },
     playground = {
     enable = true,
