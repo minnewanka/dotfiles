@@ -75,3 +75,9 @@ vim.api.nvim_create_user_command(
     end,
     {}
 )
+
+-- command abbreviation
+cmd (":command PI PackerInstall")
+cmd (":command PU PackerUpdate")
+cmd (":command PC PackerCompile")
+
