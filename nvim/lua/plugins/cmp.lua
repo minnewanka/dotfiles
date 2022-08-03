@@ -135,8 +135,8 @@ cmp.setup({
 }) ]]
 
 
-require'cmp'.setup.cmdline(':', {
+--[[ require'cmp'.setup.cmdline(':', {
   sources = {
     { name = 'cmdline' }
   }
-})
+}) ]]
