@@ -36,7 +36,6 @@ opt.scrolloff                 =       10
 opt.formatoptions             =       vim.opt.formatoptions + { "cro" }
 opt.shortmess:append "c"
 opt.swapfile                  =       false
-opt.lazyredraw                =       true
 vim.opt.shell                 =       "/bin/bash"
 opt.laststatus                =       2
 vim.o.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"

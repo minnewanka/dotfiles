@@ -1,6 +1,5 @@
 local winbar = {}
 
-local palette = require('nightfox.palette').load("nordfox")
 local filename = vim.fn.fnamemodify(vim.fn.expand('%:h'), ':p:~:.')
 
 vim.api.nvim_set_hl(0, "WinBarContent", { fg = '#bbc2cf', bold=true })
@@ -13,9 +12,7 @@ winbar.eval = function()
         return ""
     end
     return '%#' .. f_hl .. '#' .. f_icon .. '%*'
-        .. "%#WinBarContent#"
         .. vim.fn.expand('%:.')
-        .. '%*'
         .. "%m"
 end
 

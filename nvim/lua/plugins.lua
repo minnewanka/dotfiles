@@ -4,8 +4,8 @@ local packer = require('packer')
 
 packer.startup(function()
 
-     use 'wbthomason/packer.nvim'
-     use 'lewis6991/impatient.nvim'
+    use 'wbthomason/packer.nvim'
+    use 'lewis6991/impatient.nvim'
      use 'nvim-lua/plenary.nvim'
      use {
          'antoinemadec/FixCursorHold.nvim',
@@ -41,9 +41,9 @@ packer.startup(function()
         config = function()
             require("plugins.treesitter")
         end
-    }
+    } 
 
-    use {
+     use {
         'tpope/vim-fugitive',
         event = "BufRead",
         cmd = { 'Git', 'Glog', 'Gdiffsplit', 'GBlame' },
@@ -61,9 +61,9 @@ packer.startup(function()
         config = function()
             require("plugins.gitsigns")
         end
-    }
+    } 
 
-use({
+ use({
     "kylechui/nvim-surround",
     config = function()
         require("nvim-surround").setup({
@@ -92,9 +92,9 @@ use({
     use {
         'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make',
-    }
+    } 
 
-    use {
+     use {
         'windwp/nvim-autopairs',
         after = "nvim-cmp",
         config = function()
@@ -127,9 +127,9 @@ use({
     use {
         'kevinhwang91/nvim-bqf',
         event = "BufRead"
-    }
+    } 
 
-    use {
+     use {
         'numToStr/Navigator.nvim' ,
         event = "BufRead",
         config = function()
@@ -169,17 +169,17 @@ use({
         config = function()
             require("plugins.harpoon")
         end
-    }
+    } 
 
-    --[[ use {
+     use {
         'folke/zen-mode.nvim',
         keys=';z',
         config = function()
             require("plugins.zenmode")
         end
-    } ]]
+    } 
 
-    use {
+     use {
         'kevinhwang91/nvim-hlslens',
         event = "BufRead",
         config = function()
@@ -263,12 +263,7 @@ use({
         end
     }
 
-    use { 'ggandor/leap.nvim', event = "BufRead" , config = function() require("plugins.leap") end }
-    use { 'EdenEast/nightfox.nvim',
-        config = function ()
-            require("plugins.nightfox")
-        end
-    }
+    use { 'ggandor/leap.nvim', config = function() require("plugins.leap") end }
     use { 'j-hui/fidget.nvim', config = function() require"fidget".setup{
         sources = {
             ["null-ls"] = {
@@ -290,6 +285,30 @@ use({
         'mrjones2014/smart-splits.nvim',
         config = function()
             require('smart-splits').setup({});
+        end
+    } 
+    use { 
+        "catppuccin/nvim",
+        as = "catppuccin",
+        config = function()
+            require("catppuccin").setup({
+                dim_inactive = {
+                    enabled = true,
+                    shade = "dark",
+                    percentage = 0.15,
+                },
+                compile = {
+                    enabled = true,
+                    path = vim.fn.stdpath "cache" .. "/catppuccin",
+                },
+                integrations = {
+                    leap = true,
+                    lsp_saga = true
+                },
+            })
+
+            vim.g.catppuccin_flavour = "macchiato"
+            vim.cmd 'colorscheme catppuccin'
         end
     }
 
