@@ -264,7 +264,7 @@ use({
     }
 
     use { 'ggandor/leap.nvim', event = "BufRead" , config = function() require("plugins.leap") end }
-    -- use { 'EdenEast/nightfox.nvim' }
+    use { 'EdenEast/nightfox.nvim' }
     use { 'j-hui/fidget.nvim', config = function() require"fidget".setup{
         sources = {
             ["null-ls"] = {
@@ -288,7 +288,6 @@ use({
             require('smart-splits').setup({});
         end
     }
-    use 'sainnhe/gruvbox-material'
 
 
 end )
