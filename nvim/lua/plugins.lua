@@ -264,11 +264,11 @@ use({
     }
 
     use { 'ggandor/leap.nvim', event = "BufRead" , config = function() require("plugins.leap") end }
-    use { 'EdenEast/nightfox.nvim',
+    --[[ use { 'EdenEast/nightfox.nvim',
         config = function ()
             require("plugins.nightfox")
         end
-    }
+    } ]]
     use { 'j-hui/fidget.nvim', config = function() require"fidget".setup{
         sources = {
             ["null-ls"] = {
@@ -276,12 +276,12 @@ use({
             },
   },
     } end }
-    use({
+    --[[ use({
         'mvllow/modes.nvim',
         config = function()
             require('modes').setup()
         end
-    })
+    }) ]]
     use {
         'jose-elias-alvarez/typescript.nvim',
     }
@@ -290,6 +290,12 @@ use({
         'mrjones2014/smart-splits.nvim',
         config = function()
             require('smart-splits').setup({});
+        end
+    }
+    use {
+        'sainnhe/gruvbox-material',
+        config = function()
+            require('plugins.gruvbox')
         end
     }
 

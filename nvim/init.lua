@@ -12,5 +12,7 @@ require('impatient')
 require('plugins')
 require('settings')
 require('keybinding')
--- require('colorscheme')
+require('colorscheme')
+
+
 
