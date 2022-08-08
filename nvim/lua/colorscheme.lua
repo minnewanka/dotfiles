@@ -6,7 +6,7 @@ highlight LightspeedShortcut guibg=#e9b143 guifg=#000000
 highlight LightspeedOneCharMatch guibg=#A89985 guifg=#000000
 highlight link LightspeedMaskedChar Pink
 highlight LightspeedCursor guibg=#e9b143 guifg=#000000
-highlight link YankHighlight IncSearch
+highlight YankHighlight guibg=#e9b143 guifg=#282828
 
 endfunction
 
