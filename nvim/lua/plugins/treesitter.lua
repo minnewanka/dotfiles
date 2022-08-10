@@ -9,7 +9,10 @@ parser_configs.norg = {
 }
 
 require'nvim-treesitter.configs'.setup {
-    highlight = { enable = true },
+    highlight = { 
+        enable = true,
+        additional_vim_regex_highlighting = {"markdown"}
+    },
     autotag = { enable = true },
     indent = { enable = true },
     incremental_selection = {

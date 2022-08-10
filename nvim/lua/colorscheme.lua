@@ -1,12 +1,10 @@
 vim.api.nvim_exec([[
 function! MyHighlights() abort
 
-highlight link LightspeedLabel Yellow
-highlight LightspeedShortcut guibg=#e9b143 guifg=#000000
-highlight LightspeedOneCharMatch guibg=#A89985 guifg=#000000
-highlight link LightspeedMaskedChar Pink
-highlight LightspeedCursor guibg=#e9b143 guifg=#000000
 highlight YankHighlight guibg=#e9b143 guifg=#282828
+highlight link TSProperty Green 
+highlight link TSConstructor Yellow 
+highlight! link NvimTreeFolderIcon Red
 
 endfunction
 

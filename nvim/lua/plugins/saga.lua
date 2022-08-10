@@ -3,7 +3,7 @@ local saga = require("lspsaga")
 saga.init_lsp_saga({
      move_in_saga = { prev = 'k',next = 'j'},
     code_action_lightbulb = {
-        enable = true,
+        enable = false,
         sign = false,
         sign_priority = 20,
         virtual_text = true,

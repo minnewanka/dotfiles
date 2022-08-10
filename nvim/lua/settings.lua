@@ -12,6 +12,7 @@ cmd ("set grepformat=%f:%l:%c:%m")
 cmd ("set clipboard=unnamedplus")
 cmd (" set statusline=%<\\ %{FugitiveStatusline()}%=%-14.(%l,%c%V%)\\ %P")
 
+opt.conceallevel              =       2
 opt.autowriteall              =       true
 opt.number                    =       true
 opt.relativenumber            =       true

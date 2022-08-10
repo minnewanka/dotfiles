@@ -3,17 +3,17 @@
 # Setup term for programs to be able to use it
 dynamic_title: false
 #
-cursor:
-  style:
-    blinking: Always
-    blink_interval: 530
+# cursor:
+  # style:
+  #   blinking: Always
+  #   blink_interval: 530
 
 env:
   TERM: alacritty
-window_opacity: 1
 window:
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: true
+  opacity: 1
   padding:
     x: 10
     y: 5

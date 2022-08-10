@@ -11,12 +11,12 @@ packer.startup(function()
          'antoinemadec/FixCursorHold.nvim',
          event = "BufRead",
      }
-    use {
+    --[[ use {
         "nanozuki/tabby.nvim",
         config = function()
             require('plugins.tabby')        
         end,
-    }
+    } ]]
     use "tpope/vim-repeat"
 
     use {
@@ -42,6 +42,7 @@ packer.startup(function()
             require("plugins.treesitter")
         end
     }
+    use 'nvim-treesitter/playground'
 
     use {
         'tpope/vim-fugitive',
@@ -296,6 +297,23 @@ use({
         'sainnhe/gruvbox-material',
         config = function()
             require('plugins.gruvbox')
+        end
+    }
+
+    use {
+        'mickael-menu/zk-nvim',
+        config = function()
+            require("zk").setup({
+                picker = "telescope",
+            })
+        end
+    }
+    use {
+        'preservim/vim-markdown',
+        config = function()
+            vim.g.vim_markdown_conceal = 2
+            vim.g.vim_markdown_folding_disabled = 1
+            vim.g.vim_markdown_conceal_code_blocks = 0
         end
     }
 
