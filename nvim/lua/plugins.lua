@@ -255,15 +255,6 @@ use({
         event = "VimEnter",
     }
 
-    use {
-        'rhysd/clever-f.vim',
-        event = "BufRead",
-        config = function()
-            vim.g.clever_f_across_no_line = 1;
-            vim.g.clever_f_mark_char_color = 'LeapMatch';
-        end
-    }
-
     use { 'ggandor/leap.nvim', event = "BufRead" , config = function() require("plugins.leap") end }
     --[[ use { 'EdenEast/nightfox.nvim',
         config = function ()
@@ -314,6 +305,15 @@ use({
             vim.g.vim_markdown_conceal = 2
             vim.g.vim_markdown_folding_disabled = 1
             vim.g.vim_markdown_conceal_code_blocks = 0
+        end
+    }
+    use {
+        'ggandor/flit.nvim',
+        after = 'leap.nvim',
+        config = function()
+            require('flit').setup {
+                multiline = false,
+            }
         end
     }
 
