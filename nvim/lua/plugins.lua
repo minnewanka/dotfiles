@@ -11,12 +11,12 @@ packer.startup(function()
          'antoinemadec/FixCursorHold.nvim',
          event = "BufRead",
      }
-    --[[ use {
+    use {
         "nanozuki/tabby.nvim",
         config = function()
             require('plugins.tabby')        
         end,
-    } ]]
+    }
     use "tpope/vim-repeat"
 
     use {
