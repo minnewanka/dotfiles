@@ -9,10 +9,10 @@ vim.g.copilot_filetypes = {
 
 
 require('impatient')
+require('colorscheme')
 require('plugins')
 require('settings')
 require('keybinding')
-require('colorscheme')
 
 
 
