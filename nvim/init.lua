@@ -1,3 +1,6 @@
+vim.g.gruvbox_material_better_performance = 1
+vim.g.gruvbox_material_foreground = "mix"
+
 vim.g.cursorhold_updatetime = 100
 vim.g.copilot_filetypes = {
     ['*'] = false,

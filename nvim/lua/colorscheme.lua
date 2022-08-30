@@ -14,3 +14,5 @@ augroup custom_highlight
 augroup END
     ]], false)
 
+vim.cmd 'colorscheme gruvbox-material'
+

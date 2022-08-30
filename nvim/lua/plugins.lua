@@ -42,7 +42,10 @@ packer.startup(function()
             require("plugins.treesitter")
         end
     }
-    use 'nvim-treesitter/playground'
+    use {
+        'nvim-treesitter/playground',
+        cmd ={'TSHighlightCapturesUnderCursor', 'TSPlaygroundToggle'}
+    }
 
     use {
         'tpope/vim-fugitive',
@@ -50,7 +53,8 @@ packer.startup(function()
         cmd = { 'Git', 'Glog', 'Gdiffsplit', 'GBlame' },
     }
     use {
-        'tpope/vim-rhubarb'
+        'tpope/vim-rhubarb',
+        event = "BufRead",
     }
     use {
         'tpope/vim-unimpaired',
@@ -172,14 +176,6 @@ use({
         end
     }
 
-    --[[ use {
-        'folke/zen-mode.nvim',
-        keys=';z',
-        config = function()
-            require("plugins.zenmode")
-        end
-    } ]]
-
     use {
         'kevinhwang91/nvim-hlslens',
         event = "BufRead",
@@ -252,15 +248,10 @@ use({
 
     use {
         'kdheepak/lazygit.nvim',
-        event = "VimEnter",
+        cmd='LazyGit'
     }
 
     use { 'ggandor/leap.nvim', event = "BufRead" , config = function() require("plugins.leap") end }
-    --[[ use { 'EdenEast/nightfox.nvim',
-        config = function ()
-            require("plugins.nightfox")
-        end
-    } ]]
     use { 'j-hui/fidget.nvim', config = function() require"fidget".setup{
         sources = {
             ["null-ls"] = {
@@ -268,21 +259,12 @@ use({
             },
   },
     } end }
-    --[[ use({
-        'mvllow/modes.nvim',
-        config = function()
-            require('modes').setup()
-        end
-    }) ]]
     use {
         'jose-elias-alvarez/typescript.nvim',
     }
-    use {'folke/trouble.nvim'}
     use {
-        'mrjones2014/smart-splits.nvim',
-        config = function()
-            require('smart-splits').setup({});
-        end
+        'folke/trouble.nvim',
+        cmd='Trouble'
     }
     use {
         'sainnhe/gruvbox-material',
@@ -291,14 +273,6 @@ use({
         end
     }
 
-    use {
-        'preservim/vim-markdown',
-        config = function()
-            vim.g.vim_markdown_conceal = 2
-            vim.g.vim_markdown_folding_disabled = 1
-            vim.g.vim_markdown_conceal_code_blocks = 0
-        end
-    }
     use {
         'ggandor/flit.nvim',
         after = 'leap.nvim',
