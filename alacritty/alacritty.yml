@@ -3,10 +3,10 @@
 # Setup term for programs to be able to use it
 dynamic_title: false
 #
-# cursor:
-  # style:
-  #   blinking: Always
-  #   blink_interval: 530
+cursor:
+  style:
+    blinking: Always
+    blink_interval: 530
 
 env:
   TERM: alacritty
