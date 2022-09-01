@@ -232,13 +232,6 @@ use({
     }
 
     use {
-        "kwkarlwang/bufjump.nvim",
-        config = function()
-            require("bufjump").setup({})
-        end
-    }
-
-    use {
         "lukas-reineke/indent-blankline.nvim",
         event = "BufRead",
         config = function()

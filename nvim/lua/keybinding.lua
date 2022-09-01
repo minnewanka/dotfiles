@@ -112,8 +112,8 @@ map('n', 'g*', "g*<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
 map('n', 'g#', "g#<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
 
 
-map('n', '<Left>',":lua require('bufjump').backward()<CR>", { noremap = true, silent = true })
-map('n', '<Right>',":lua require('bufjump').forward()<CR>", { noremap = true , silent = true})
+map('n', '<Left>',":lua require('plugins.bufjump').backward()<CR>", { noremap = true, silent = true })
+map('n', '<Right>',":lua require('plugins.bufjump').forward()<CR>", { noremap = true , silent = true})
 
 
 --  Center stuff
