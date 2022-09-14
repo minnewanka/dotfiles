@@ -5,6 +5,7 @@ local packer = require('packer')
 packer.startup(function()
 
      use 'wbthomason/packer.nvim'
+     use 'kyazdani42/nvim-web-devicons'
      use 'lewis6991/impatient.nvim'
      use 'nvim-lua/plenary.nvim'
      use {
@@ -13,6 +14,7 @@ packer.startup(function()
      }
     use {
         "nanozuki/tabby.nvim",
+        event = "BufRead",
         config = function()
             require('plugins.tabby')        
         end,
@@ -63,6 +65,8 @@ packer.startup(function()
 
     use {
         'lewis6991/gitsigns.nvim' ,
+        event = "BufRead",
+        branch = "main",
         config = function()
             require("plugins.gitsigns")
         end
@@ -205,7 +209,6 @@ use({
             { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', },
             { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp', },
             { 'hrsh7th/cmp-path', after = 'nvim-cmp', },
-            { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', },
             { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip', },
         },
         config = function()
@@ -274,6 +277,13 @@ use({
                 multiline = false,
             }
         end
+    }
+    use {
+      "folke/zen-mode.nvim",
+      keys={';z'},
+      config = function()
+        require("plugins.zenmode")
+      end
     }
 
 

@@ -7,7 +7,7 @@ highlight link NormalFloat Normal
 highlight link TSProperty Green 
 highlight link TSConstructor Yellow 
 highlight! link NvimTreeFolderIcon Red
-highlight link packerStatusSuccess orange
+highlight link packerStatusSuccess Orange
 
 endfunction
 

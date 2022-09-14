@@ -61,6 +61,14 @@ vim.api.nvim_create_autocmd({"BufWinEnter"}, {
   pattern = "*",
   command = 'set formatoptions-=cro',
 })
+
+vim.api.nvim_create_autocmd({"WinEnter"}, {
+  command = 'setlocal cursorline',
+})
+vim.api.nvim_create_autocmd({"WinLeave"}, {
+  command = 'setlocal nocursorline',
+})
+
 vim.api.nvim_create_autocmd({"InsertEnter"}, {
   command = 'highlight CursorLine guibg=#374141',
 })
