@@ -23,6 +23,7 @@ packer.startup(function()
 
     use {
         'neovim/nvim-lspconfig',
+        after = "nvim-cmp",
         config = function()
             require('lsp/config')
             require('lsp/server')
@@ -92,7 +93,7 @@ use({
         after = "telescope-fzf-native.nvim",
         cmd = "Telescope",
         module = 'telescope',
-        requires = {"kyazdani42/nvim-web-devicons", "nvim-telescope/telescope-live-grep-raw.nvim",'nvim-telescope/telescope-fzf-native.nvim', "harpoon"},
+        requires = {"kyazdani42/nvim-web-devicons",'nvim-telescope/telescope-fzf-native.nvim', "harpoon"},
         config = function()
             require("plugins.telescope")
         end
@@ -105,7 +106,6 @@ use({
 
     use {
         'windwp/nvim-autopairs',
-        after = "nvim-cmp",
         config = function()
             require("nvim-autopairs").setup()
         end
@@ -203,6 +203,7 @@ use({
     -- completion engine
     use {
         'hrsh7th/nvim-cmp',
+        after = "nvim-autopairs",
         event = "BufRead",
         requires = {
             { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', },

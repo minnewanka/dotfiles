@@ -96,4 +96,5 @@ vim.api.nvim_create_user_command(
 cmd ("command PI PackerInstall")
 cmd ("command PU PackerUpdate")
 cmd ("command PC PackerCompile")
+cmd ("command PS PackerStatus")
 
