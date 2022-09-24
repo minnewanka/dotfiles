@@ -4756,3 +4756,161 @@ times in msec
 038.277  000.054: opening buffers
 038.321  000.043: BufEnter autocommands
 038.322  000.001: editing files in windows
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.006  000.006: --- NVIM STARTING ---
+000.119  000.113: event init
+000.288  000.168: early init
+000.531  000.243: locale set
+000.577  000.046: init first window
+012.511  011.934: inits 1
+012.534  000.023: window checked
+012.538  000.004: parsing arguments
+012.945  000.066  000.066: require('vim.shared')
+013.048  000.046  000.046: require('vim._meta')
+013.049  000.101  000.055: require('vim._editor')
+013.051  000.209  000.041: require('vim._init_packages')
+013.052  000.305: init lua interpreter
+013.332  000.280: expanding arguments
+013.426  000.094: inits 2
+013.670  000.245: init highlight
+013.671  000.001: waiting for UI
+015.507  001.836: done waiting for UI
+015.521  000.015: init screen for UI
+015.662  000.141: init default mappings
+015.676  000.013: init default autocommands
+016.885  000.076  000.076: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/ftplugin.vim
+017.030  000.023  000.023: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/indent.vim
+020.599  003.388  003.388: require('impatient')
+021.011  000.085  000.085: require('packer.util')
+021.042  000.236  000.151: require('packer')
+021.255  000.212  000.212: require('packer.log')
+021.418  000.065  000.065: require('packer.async')
+021.552  000.063  000.063: require('packer.result')
+021.554  000.135  000.072: require('packer.jobs')
+021.558  000.275  000.074: require('packer.plugin_utils')
+021.635  000.067  000.067: require('packer.snapshot')
+021.759  001.158  000.368: require('plugins')
+022.884  001.124  001.124: require('settings')
+023.087  000.201  000.201: require('keybinding')
+023.525  000.163  000.163: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/gruvbox-material/autoload/gruvbox_material.vim
+028.607  005.327  005.164: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/gruvbox-material/colors/gruvbox-material.vim
+028.633  005.545  000.218: require('colorscheme')
+028.650  011.494  000.077: sourcing /Users/philippe/.config/nvim/init.lua
+028.668  001.400: sourcing vimrc file(s)
+029.127  000.263  000.263: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/filetype.lua
+029.182  000.011  000.011: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/filetype.vim
+029.410  000.071  000.071: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/syntax/synload.vim
+029.465  000.242  000.171: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/syntax/syntax.vim
+030.709  000.010  000.010: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/gzip.vim
+030.750  000.008  000.008: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/health.vim
+031.382  000.111  000.111: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+031.499  000.717  000.606: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/matchit.vim
+031.644  000.112  000.112: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/matchparen.vim
+031.692  000.013  000.013: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/netrwPlugin.vim
+031.857  000.006  000.006: sourcing /Users/philippe/.local/share/nvim/rplugin.vim
+031.861  000.128  000.121: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/rplugin.vim
+031.937  000.043  000.043: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/shada.vim
+031.989  000.016  000.016: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/spellfile.vim
+032.035  000.013  000.013: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/tarPlugin.vim
+032.081  000.011  000.011: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/tohtml.vim
+032.129  000.015  000.015: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/tutor.vim
+033.449  000.017  000.017: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/zipPlugin.vim
+034.223  000.140  000.140: require('plugins.gruvbox')
+034.507  000.154  000.154: require('fidget.log')
+034.512  000.287  000.133: require('fidget')
+034.628  000.095  000.095: require('fidget.spinners')
+034.971  000.089  000.089: require('vim.lsp.log')
+035.539  000.005  000.005: require('vim.F')
+035.541  000.568  000.563: require('vim.lsp.protocol')
+035.757  000.104  000.104: require('vim.lsp._snippet')
+035.833  000.075  000.075: require('vim.highlight')
+035.845  000.303  000.124: require('vim.lsp.util')
+035.857  001.069  000.109: require('vim.lsp.handlers')
+035.970  000.111  000.111: require('vim.lsp.rpc')
+036.039  000.068  000.068: require('vim.lsp.sync')
+036.122  000.082  000.082: require('vim.lsp.buf')
+036.299  000.176  000.176: require('vim.lsp.diagnostic')
+036.445  000.144  000.144: require('vim.lsp.codelens')
+036.505  001.875  000.226: require('vim.lsp')
+037.043  000.049  000.049: require('vim.treesitter.language')
+037.049  000.140  000.091: require('vim.treesitter.query')
+037.110  000.060  000.060: require('vim.treesitter.languagetree')
+037.158  000.360  000.161: require('vim.treesitter')
+037.232  000.571  000.211: require('nvim-treesitter.parsers')
+037.563  000.091  000.091: require('nvim-treesitter.utils')
+037.570  000.162  000.070: require('nvim-treesitter.ts_utils')
+037.573  000.212  000.051: require('nvim-treesitter.tsrange')
+037.617  000.043  000.043: require('nvim-treesitter.caching')
+037.624  000.319  000.064: require('nvim-treesitter.query')
+037.632  000.398  000.079: require('nvim-treesitter.configs')
+037.684  001.161  000.192: require('plugins.treesitter')
+037.838  000.073  000.073: require('nvim-autopairs._log')
+037.906  000.067  000.067: require('nvim-autopairs.utils')
+038.078  000.056  000.056: require('nvim-autopairs.conds')
+038.082  000.106  000.049: require('nvim-autopairs.rule')
+038.083  000.176  000.071: require('nvim-autopairs.rules.basic')
+038.087  000.402  000.086: require('nvim-autopairs')
+038.489  000.075  000.075: require('nvim-surround.config')
+038.492  000.124  000.050: require('nvim-surround.buffer')
+038.537  000.044  000.044: require('nvim-surround.cache')
+038.628  000.047  000.047: require('nvim-surround.patterns')
+038.630  000.092  000.044: require('nvim-surround.utils')
+038.632  000.320  000.060: require('nvim-surround')
+038.798  000.004  000.004: require('vim.keymap')
+039.161  000.050  000.050: require('lualine_require')
+039.391  000.336  000.287: require('lualine')
+042.473  000.082  000.082: require('lualine.utils.mode')
+042.732  003.750  003.332: require('plugins.lualine')
+042.867  000.058  000.058: require('lsp.on_attach')
+043.140  000.104  000.104: require('null-ls.methods')
+043.159  000.181  000.076: require('null-ls.utils')
+043.305  000.145  000.145: require('vim.diagnostic')
+043.379  000.458  000.132: require('null-ls.config')
+043.481  000.047  000.047: require('null-ls.helpers.cache')
+043.543  000.060  000.060: require('null-ls.helpers.diagnostics')
+043.589  000.045  000.045: require('null-ls.helpers.formatter_factory')
+043.697  000.050  000.050: require('null-ls.logger')
+043.754  000.056  000.056: require('null-ls.state')
+043.756  000.166  000.061: require('null-ls.helpers.generator_factory')
+043.860  000.049  000.049: require('null-ls.helpers.command_resolver')
+043.861  000.104  000.055: require('null-ls.helpers.make_builtin')
+043.912  000.050  000.050: require('null-ls.helpers.range_formatting_args_factory')
+043.913  000.533  000.060: require('null-ls.helpers')
+044.046  000.063  000.063: require('null-ls.diagnostics')
+044.051  000.137  000.074: require('null-ls.sources')
+044.100  000.048  000.048: require('null-ls.builtins')
+044.102  001.234  000.058: require('null-ls')
+044.258  000.108  000.108: require('null-ls.builtins.code_actions.eslint')
+044.292  000.189  000.081: require('null-ls.builtins.code_actions.eslint_d')
+044.410  000.069  000.069: require('null-ls.builtins.diagnostics.eslint')
+044.437  000.143  000.075: require('null-ls.builtins.diagnostics.eslint_d')
+044.577  000.120  000.120: require('null-ls.builtins.formatting.eslint_d')
+044.632  000.053  000.053: require('null-ls.builtins.formatting.prettierd')
+044.988  000.061  000.061: require('null-ls.client')
+045.004  002.270  000.411: require('lsp/null-ls')
+045.545  011.932  001.629: sourcing /Users/philippe/.config/nvim/plugin/packer_compiled.lua
+046.036  000.035  000.035: sourcing /opt/homebrew/Cellar/neovim/HEAD-e63538f_1/share/nvim/runtime/plugin/man.lua
+046.059  003.809: loading rtp plugins
+047.167  000.070  000.070: require('nvim-treesitter.info')
+047.234  000.065  000.065: require('nvim-treesitter.shell_command_selectors')
+047.251  000.221  000.086: require('nvim-treesitter.install')
+047.299  000.047  000.047: require('nvim-treesitter.statusline')
+047.356  000.056  000.056: require('nvim-treesitter.query_predicates')
+047.357  000.380  000.056: require('nvim-treesitter')
+048.179  000.190  000.190: require('vim.treesitter.highlighter')
+048.293  000.407  000.217: require('nvim-treesitter.highlight')
+048.547  001.587  000.800: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-treesitter/plugin/nvim-treesitter.lua
+048.714  000.022  000.022: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/nvim-web-devicons/plugin/nvim-web-devicons.vim
+048.975  000.018  000.018: sourcing /Users/philippe/.local/share/nvim/site/pack/packer/start/plenary.nvim/plugin/plenary.vim
+049.399  001.712: loading packages
+050.192  000.793: loading after plugins
+050.199  000.007: inits 3
+051.621  001.421: reading ShaDa
+051.821  000.200: opening buffers
+051.939  000.118: BufEnter autocommands
+051.941  000.002: editing files in windows

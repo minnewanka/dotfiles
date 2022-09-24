@@ -69,4 +69,6 @@ vim.g.nvim_tree_indent_markers = 1
 vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>n', ':NvimTreeFindFile<CR>', {noremap = true, silent = true})
 
-
+vim.api.nvim_exec([[
+highlight! link NvimTreeFolderIcon Red
+]], false)
