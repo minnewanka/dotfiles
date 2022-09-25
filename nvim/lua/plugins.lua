@@ -4,14 +4,10 @@ local packer = require('packer')
 
 packer.startup(function()
 
-     use 'wbthomason/packer.nvim'
-     use 'kyazdani42/nvim-web-devicons'
-     use 'lewis6991/impatient.nvim'
-     use 'nvim-lua/plenary.nvim'
-     use {
-         'antoinemadec/FixCursorHold.nvim',
-         event = "BufRead",
-     }
+    use 'wbthomason/packer.nvim'
+    use 'kyazdani42/nvim-web-devicons'
+    use 'lewis6991/impatient.nvim'
+    use 'nvim-lua/plenary.nvim'
     use {
         "nanozuki/tabby.nvim",
         event = "BufRead",
@@ -73,14 +69,14 @@ packer.startup(function()
         end
     }
 
-use({
-    "kylechui/nvim-surround",
-    config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
-    end
-})
+    use({
+        "kylechui/nvim-surround",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    })
 
     use {
         'b3nj5m1n/kommentary',
@@ -254,7 +250,7 @@ use({
             ["null-ls"] = {
                 ignore = true,
             },
-  },
+        },
     } end }
     use {
         'jose-elias-alvarez/typescript.nvim',
@@ -280,11 +276,11 @@ use({
         end
     }
     use {
-      "folke/zen-mode.nvim",
-      keys={';z'},
-      config = function()
-        require("plugins.zenmode")
-      end
+        "folke/zen-mode.nvim",
+        keys={';z'},
+        config = function()
+            require("plugins.zenmode")
+        end
     }
 
 
