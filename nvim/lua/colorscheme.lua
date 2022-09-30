@@ -8,6 +8,7 @@ vim.api.nvim_create_autocmd("ColorScheme",
             vim.api.nvim_set_hl(0, "TSProperty", { link="Green" })
             vim.api.nvim_set_hl(0, "TSConstructor", { link="Yellow" })
             vim.api.nvim_set_hl(0, "packerStatusSuccess", { link="Orange" })
+            vim.api.nvim_set_hl(0, "LeapBackdrop", { fg="#777777" })
         end,
     }
 )
