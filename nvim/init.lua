@@ -1,7 +1,6 @@
 vim.g.gruvbox_material_foreground = "mix"
 vim.g.gruvbox_material_background = "hard"
 
-vim.g.cursorhold_updatetime = 100
 vim.g.copilot_filetypes = {
     ['*'] = false,
     ['javascript'] = true,

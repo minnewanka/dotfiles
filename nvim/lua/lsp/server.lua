@@ -19,6 +19,14 @@ require("typescript").setup({
     },
 })
 
+require'lspconfig'.html.setup{
+     capabilities = capabilities,
+}
+
+require'lspconfig'.cssls.setup {
+  capabilities = capabilities,
+}
+
 require'lspconfig'.jsonls.setup {
     on_attach =  on_attach,
     capabilities = capabilities,

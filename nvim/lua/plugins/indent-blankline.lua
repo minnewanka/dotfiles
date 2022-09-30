@@ -5,7 +5,7 @@ require("indent_blankline").setup {
     space_char_blankline = " ",
      show_first_indent_level = true,
     show_current_context = true,
-    buftype_exclude = {'terminal', 'nofile', 'NvimTree'},
+    buftype_exclude = {'terminal', 'nofile', 'NvimTree', 'alpha'},
     filetype_exclude = {'help', 'packer', 'startify', 'NvimTree', 'alpha', 'git',  "fugitive", "gitcommit",'TelescopePrompt'},
     context_patterns = {
         'class',

@@ -10,7 +10,6 @@ cmd ("set noshowmode")
 cmd ("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")
 cmd ("set grepformat=%f:%l:%c:%m")
 cmd ("set clipboard=unnamedplus")
-cmd (" set statusline=%<\\ %{FugitiveStatusline()}%=%-14.(%l,%c%V%)\\ %P")
 
 opt.autowriteall              =       true
 opt.number                    =       true
