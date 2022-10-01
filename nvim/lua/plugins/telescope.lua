@@ -31,6 +31,18 @@ require('telescope').setup {
 
     },
     pickers = {
+        live_grep = {
+        sorting_strategy = "ascending",
+            layout_config = {
+                prompt_position = "top",
+                width = 0.87,
+                height = 0.80,
+                preview_cutoff = 120,
+                horizontal = {mirror = false},
+                vertical = {mirror = false}
+            },
+
+        },
         oldfiles = {
             theme = "ivy",
         },
