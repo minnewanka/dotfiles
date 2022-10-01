@@ -12,6 +12,18 @@ require("typescript").setup({
     },
 })
 
+require'lspconfig'.emmet_ls.setup({
+    capabilities = capabilities,
+    filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+    init_options = {
+      html = {
+        options = {
+          ["bem.enabled"] = true,
+        },
+      },
+    }
+})
+
 require'lspconfig'.html.setup{
      capabilities = capabilities,
 }
