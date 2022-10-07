@@ -69,14 +69,7 @@ packer.startup(function()
         end
     }
 
-    use({
-        "kylechui/nvim-surround",
-        config = function()
-            require("nvim-surround").setup({
-                -- Configuration here, or leave empty to use defaults
-            })
-        end
-    })
+    use 'tpope/vim-surround'
 
     use {
         'b3nj5m1n/kommentary',
