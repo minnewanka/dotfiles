@@ -3,11 +3,10 @@ if not present then
     return
 end
 
-luasnip.config.set_config(
-    {
-        history = true,
-        updateevents = "TextChanged,TextChangedI"
-    }
-)
+luasnip.setup({
+    region_check_events = "CursorHold,InsertLeave",
+    delete_check_events = "TextChanged,InsertEnter",
+})
+
 require'luasnip'.filetype_extend("typescript", {"javascript"})
 require("luasnip/loaders/from_vscode").load()
