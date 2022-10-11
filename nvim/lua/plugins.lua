@@ -268,6 +268,7 @@ packer.startup(function()
             }
         end
     }
+
     use {
         "folke/zen-mode.nvim",
         keys={';z'},
