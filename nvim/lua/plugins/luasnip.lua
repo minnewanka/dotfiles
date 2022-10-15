@@ -1,13 +1,13 @@
 local present, luasnip = pcall(require, "luasnip")
 if not present then
-    return
+	return
 end
 
 luasnip.setup({
-    region_check_events = "CursorHold,InsertLeave",
-    delete_check_events = "TextChanged,InsertEnter",
+	region_check_events = "CursorHold,InsertLeave",
+	delete_check_events = "TextChanged,InsertEnter",
 })
 
 require("luasnip/loaders/from_vscode").load()
-require("luasnip").filetype_extend("typescript", {"javascript"})
-require("luasnip").filetype_extend("typescriptreact", {"javascript"})
+require("luasnip").filetype_extend("typescript", { "javascript" })
+require("luasnip").filetype_extend("typescriptreact", { "javascript" })

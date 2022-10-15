@@ -1,7 +1,7 @@
 local Hydra = require("hydra")
 
 local function cmd(command)
-   return table.concat({ '<Cmd>', command, '<CR>' })
+	return table.concat({ "<Cmd>", command, "<CR>" })
 end
 
 local hint = [[
@@ -10,26 +10,28 @@ local hint = [[
 ]]
 
 Hydra({
-   name = 'Tab',
-   hint = hint,
-   config = {
-      buffer = bufnr,
-      color = 'red',
-      invoke_on_body = true,
-      hint = {
-         border = 'rounded'
-      },
-      on_key = function() vim.wait(50) end,
-   },
-   mode = {'n'},
-   body = '<leader>t',
-   heads = {
-      { 'n', cmd ':tabnew %<CR>', {exit = true} },
-      { 'o', cmd ':tabonly<CR>', {exit = true} },
-      { 'c', cmd ':tabclose<CR>', {exit = true} },
-      { 'j', 'gt' },
-      { 'k', 'gT' },
-      { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
-      { '<Enter>', nil, { exit = true, nowait = true, desc = 'exit' } },
-   }
+	name = "Tab",
+	hint = hint,
+	config = {
+		buffer = bufnr,
+		color = "red",
+		invoke_on_body = true,
+		hint = {
+			border = "rounded",
+		},
+		on_key = function()
+			vim.wait(50)
+		end,
+	},
+	mode = { "n" },
+	body = "<leader>t",
+	heads = {
+		{ "n", cmd(":tabnew %<CR>"), { exit = true } },
+		{ "o", cmd(":tabonly<CR>"), { exit = true } },
+		{ "c", cmd(":tabclose<CR>"), { exit = true } },
+		{ "j", "gt" },
+		{ "k", "gT" },
+		{ "q", nil, { exit = true, nowait = true, desc = "exit" } },
+		{ "<Enter>", nil, { exit = true, nowait = true, desc = "exit" } },
+	},
 })
