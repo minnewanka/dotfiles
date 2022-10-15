@@ -1,8 +1,7 @@
 local on_attach = require('lsp.on_attach')
 local util = require 'lspconfig/util'
 local root_pattern = util.root_pattern
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require("typescript").setup({
     disable_commands = false, -- prevent the plugin from creating Vim commands
