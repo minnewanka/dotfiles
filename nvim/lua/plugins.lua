@@ -245,6 +245,16 @@ packer.startup(function()
             },
         },
     } end }
+
+    use {
+        'MunifTanjim/prettier.nvim',
+        config = function()
+            require("prettier").setup({
+                bin = 'prettierd',
+            })  
+        end
+
+    }
     use {
         'jose-elias-alvarez/typescript.nvim',
     }

@@ -12,23 +12,26 @@ require("typescript").setup({
 })
 
 require'lspconfig'.emmet_ls.setup({
+    on_attach =  on_attach,
     capabilities = capabilities,
     filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
     init_options = {
-      html = {
-        options = {
-          ["bem.enabled"] = true,
+        html = {
+            options = {
+                ["bem.enabled"] = true,
+            },
         },
-      },
     }
 })
 
 require'lspconfig'.html.setup{
-     capabilities = capabilities,
+    on_attach =  on_attach,
+    capabilities = capabilities,
 }
 
 require'lspconfig'.cssls.setup {
-  capabilities = capabilities,
+    on_attach =  on_attach,
+    capabilities = capabilities,
 }
 
 require'lspconfig'.jsonls.setup {

@@ -54,10 +54,6 @@ map('o', 'il', ':normal vil<CR>', { noremap = true, silent = true })
 map('x', 'al', '$o0', { noremap = true, silent = true })
 map('o', 'al', ':normal val<CR>', { noremap = true, silent = true })
 
--- LSP
-map('n', '<Leader><Leader>',  [[<Cmd>lua vim.lsp.buf.format()<CR>]], { noremap = true, silent = true })
-map('n', 'gi',  [[<Cmd>lua vim.lsp.buf.implementation()<CR>]], { noremap = true, silent = true })
-
 -- word wrap
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap=true, expr = true, silent = true})
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", {noremap= true, expr = true, silent = true})

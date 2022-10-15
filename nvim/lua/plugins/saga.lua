@@ -33,6 +33,4 @@ vim.api.nvim_set_keymap('n', '<leader>r',  [[<Cmd>Lspsaga rename<CR>]], { norema
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
 vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true,noremap = true })
 vim.keymap.set("n", "gD", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap=true, silent=true })
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, { noremap=true, silent=true })
 vim.keymap.set("n", "ge", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true,noremap= true })
