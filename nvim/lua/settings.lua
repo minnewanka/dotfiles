@@ -1,3 +1,5 @@
+local indent = 2
+
 local cmd = vim.cmd
 local opt = vim.opt
 local g = vim.g
@@ -11,7 +13,6 @@ cmd("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")
 cmd("set grepformat=%f:%l:%c:%m")
 cmd("set clipboard=unnamedplus")
 
-opt.autowriteall = true
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
@@ -24,9 +25,9 @@ opt.fileencoding = "utf-8"
 opt.timeout = true
 opt.timeoutlen = 300
 opt.smartindent = true
-opt.shiftwidth = 4
-opt.tabstop = 4
-opt.softtabstop = 4
+opt.shiftwidth = indent
+opt.tabstop = indent
+opt.softtabstop = indent
 opt.smartcase = true
 opt.ignorecase = true
 opt.undofile = true
