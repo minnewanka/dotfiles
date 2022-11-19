@@ -17,6 +17,7 @@ packer.startup(function()
 	use("tpope/vim-repeat")
 
 	use("hrsh7th/cmp-nvim-lsp")
+	use("jose-elias-alvarez/typescript.nvim")
 	use({
 		"neovim/nvim-lspconfig",
 		config = function()

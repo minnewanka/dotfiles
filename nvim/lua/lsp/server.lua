@@ -3,9 +3,16 @@ local util = require("lspconfig/util")
 local root_pattern = util.root_pattern
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-require("lspconfig").tsserver.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
+require("typescript").setup({
+	disable_commands = false,
+	debug = false,
+	go_to_source_definition = {
+		fallback = true,
+	},
+	server = {
+		on_attach = on_attach,
+		capabilities = capabilities,
+	},
 })
 
 require("lspconfig").emmet_ls.setup({
