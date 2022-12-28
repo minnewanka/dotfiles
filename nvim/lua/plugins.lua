@@ -290,4 +290,5 @@ packer.startup(function()
 			require("plugins.zenmode")
 		end,
 	})
+	use("andymass/vim-matchup")
 end)
