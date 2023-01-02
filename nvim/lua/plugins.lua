@@ -7,6 +7,7 @@ packer.startup(function()
 	use("kyazdani42/nvim-web-devicons")
 	use("lewis6991/impatient.nvim")
 	use("nvim-lua/plenary.nvim")
+	use("github/copilot.vim")
 	use({
 		"nanozuki/tabby.nvim",
 		event = "BufRead",
