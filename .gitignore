@@ -2,4 +2,6 @@ fish_variables
 **/fisher.fish
 **/fish/conf.d/
 **/__*.fish
+**/fzf*.fish
+**/nvm*.fish
 **/_*.fish
