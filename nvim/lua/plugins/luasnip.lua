@@ -1,9 +1,4 @@
-local present, luasnip = pcall(require, "luasnip")
-if not present then
-	return
-end
-
-luasnip.setup({
+require("luasnip").setup({
 	region_check_events = "CursorHold,InsertLeave",
 	delete_check_events = "TextChanged,InsertEnter",
 })

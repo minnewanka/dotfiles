@@ -1,249 +1,220 @@
-vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
+vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
 
-local packer = require("packer")
-
-packer.startup(function()
-	use("wbthomason/packer.nvim")
-	use("kyazdani42/nvim-web-devicons")
-	use("lewis6991/impatient.nvim")
-	use("nvim-lua/plenary.nvim")
-	use("github/copilot.vim")
-	use({
+require("lazy").setup({
+	"kyazdani42/nvim-web-devicons",
+	"nvim-lua/plenary.nvim",
+	{ "github/copilot.vim", event = "VeryLazy" },
+	{ "tpope/vim-repeat", event = "VeryLazy" },
+	"hrsh7th/cmp-nvim-lsp",
+	{ "jose-elias-alvarez/typescript.nvim", event = "VeryLazy" },
+	{ "onsails/lspkind-nvim", event = "VeryLazy" },
+	{ "rafamadriz/friendly-snippets", event = "VeryLazy" },
+	{ "tpope/vim-surround", event = "VeryLazy" },
+	{
 		"nanozuki/tabby.nvim",
-		event = "BufRead",
+		event = "VeryLazy",
 		config = function()
 			require("plugins.tabby")
 		end,
-	})
-	use("tpope/vim-repeat")
-
-	use("hrsh7th/cmp-nvim-lsp")
-	use("jose-elias-alvarez/typescript.nvim")
-	use({
+	},
+	{
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("lsp/config")
 			require("lsp/server")
 		end,
-	})
+	},
 
-	use({
+	{
 		"nvim-lualine/lualine.nvim",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		event = "VeryLazy",
+		dependencies = { "kyazdani42/nvim-web-devicons" },
 		config = function()
 			require("plugins.lualine")
 		end,
-	})
+	},
 
-	use({
+	{
 		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
+		build = ":TSUpdate",
 		config = function()
 			require("plugins.treesitter")
 		end,
-	})
-	use({
+	},
+	{
 		"nvim-treesitter/playground",
 		cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" },
-	})
+	},
 
-	use({
+	{
 		"tpope/vim-fugitive",
-		event = "BufRead",
 		cmd = { "Git", "Glog", "Gdiffsplit", "GBlame" },
-	})
-	use({
-		"tpope/vim-rhubarb",
-		event = "BufRead",
-	})
-	use({
+		dependencies = { "tpope/vim-rhubarb" },
+	},
+	{
 		"tpope/vim-unimpaired",
-		event = "BufRead",
-	})
+		event = "VeryLazy",
+	},
 
-	use({
+	{
 		"lewis6991/gitsigns.nvim",
-		event = "BufRead",
+		event = "BufReadPre",
 		branch = "main",
 		config = function()
 			require("plugins.gitsigns")
 		end,
-	})
-
-	use("tpope/vim-surround")
-
-	use({
+	},
+	{
 		"b3nj5m1n/kommentary",
-		event = "BufRead",
-	})
-
-	-- Telescope
-	use({
+		event = "VeryLazy",
+	},
+	{
 		"nvim-telescope/telescope.nvim",
-		after = "telescope-fzf-native.nvim",
 		cmd = "Telescope",
 		module = "telescope",
-		requires = { "kyazdani42/nvim-web-devicons", "nvim-telescope/telescope-fzf-native.nvim", "harpoon" },
 		config = function()
 			require("plugins.telescope")
 		end,
-	})
-
-	use({
-		"nvim-telescope/telescope-fzf-native.nvim",
-		run = "make",
-	})
-
-	use({
+	},
+	{
 		"windwp/nvim-autopairs",
+		event = "VeryLazy",
 		config = function()
 			require("nvim-autopairs").setup()
 		end,
-	})
-	use({
+	},
+	{
 		"windwp/nvim-ts-autotag",
-		event = "BufRead",
-		after = "nvim-treesitter",
+		event = "VeryLazy",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
 			require("nvim-ts-autotag").setup()
 		end,
-	})
-	use({
+	},
+	{
 		"kyazdani42/nvim-tree.lua",
 		keys = { "<leader>e", "<leader>n" },
 		config = function()
 			require("plugins.nvimtree")
 		end,
-	})
+	},
 
-	use({
+	{
 		"norcalli/nvim-colorizer.lua",
 		cmd = "ColorizerToggle",
 		config = function()
 			require("plugins.colorizer")
 		end,
-	})
-	use({
+	},
+	{
 		"kevinhwang91/nvim-bqf",
-		event = "BufRead",
-	})
+		event = "VeryLazy",
+	},
 
-	use({
+	{
 		"numToStr/Navigator.nvim",
-		event = "BufRead",
 		config = function()
 			require("plugins.navigator")
 		end,
-	})
-
-	use({
+	},
+	{
 		"chentoast/marks.nvim",
-		event = "BufRead",
+		event = "VeryLazy",
 		config = function()
 			require("plugins.marks")
 		end,
-	})
-
-	-- tools
-	use({
+	},
+	{
 		"windwp/nvim-spectre",
 		keys = "<leader>s",
 		config = function()
 			require("plugins.spectre")
 		end,
-	})
-
-	use({
+	},
+	{
 		"mbbill/undotree",
 		cmd = "UndotreeToggle",
 		keys = "<leader>u",
 		config = function()
 			require("plugins.undotree")
 		end,
-	})
-
-	use({
+	},
+	{
 		"ThePrimeagen/harpoon",
 		keys = { "<leader>h", "<leader>a", "<leader>1", "<leader>2", "<leader>3", "<leader>4", "<leader>5" },
 		config = function()
 			require("plugins.harpoon")
 		end,
-	})
-
-	use({
+	},
+	{
 		"kevinhwang91/nvim-hlslens",
-		event = "BufRead",
+		event = "VeryLazy",
 		config = function()
 			require("plugins.hlslens")
 		end,
-	})
-
-	use("onsails/lspkind-nvim")
-	use("rafamadriz/friendly-snippets")
-
-	use({
+	},
+	{
 		"L3MON4D3/LuaSnip",
-		after = "nvim-cmp",
+		event = "VeryLazy",
 		config = function()
 			require("plugins.luasnip")
 		end,
-	})
-
-	-- completion engine
-	use({
+	},
+	{
 		"hrsh7th/nvim-cmp",
-		after = "nvim-autopairs",
-		event = "BufRead",
-		requires = {
-			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
-			{ "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
+		event = "InsertEnter",
+		dependencies = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-path",
+			"saadparwaiz1/cmp_luasnip",
 		},
 		config = function()
 			require("plugins.cmp")
 		end,
-	})
+	},
 
-	use({
+	{
 		"glepnir/lspsaga.nvim",
-		event = "BufRead",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		event = "VeryLazy",
+		dependencies = { "kyazdani42/nvim-web-devicons" },
 		branch = "main",
 		config = function()
 			require("plugins.saga")
 		end,
-	})
+	},
 
-	use({
+	{
 		"jose-elias-alvarez/null-ls.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("lsp/null-ls")
 		end,
-	})
+	},
 
-	use({
+	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = "BufRead",
+		event = "VeryLazy",
 		config = function()
 			require("plugins.indent-blankline")
 		end,
-	})
+	},
 
-	use({
+	{
 		"kdheepak/lazygit.nvim",
 		cmd = "LazyGit",
-	})
+	},
 
-	use({
+	{
 		"ggandor/leap.nvim",
-		event = "BufRead",
+		event = "VeryLazy",
 		config = function()
 			require("plugins.leap")
 		end,
-	})
-	use({
+	},
+	{
 		"j-hui/fidget.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("fidget").setup({
 				sources = {
@@ -253,42 +224,42 @@ packer.startup(function()
 				},
 			})
 		end,
-	})
+	},
 
-	use({
+	{
 		"MunifTanjim/prettier.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("prettier").setup({
 				bin = "prettierd",
 			})
 		end,
-	})
-	use({
+	},
+	{
 		"folke/trouble.nvim",
 		cmd = "Trouble",
-	})
-	use({
+	},
+	{
 		"sainnhe/gruvbox-material",
 		config = function()
 			require("plugins.gruvbox")
 		end,
-	})
+	},
 
-	use({
+	{
 		"ggandor/flit.nvim",
-		after = "leap.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("flit").setup({
 				multiline = false,
 			})
 		end,
-	})
-
-	use({
+	},
+	{
 		"folke/zen-mode.nvim",
 		keys = { ";z" },
 		config = function()
 			require("plugins.zenmode")
 		end,
-	})
-end)
+	},
+})
