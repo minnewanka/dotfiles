@@ -11,6 +11,7 @@ return {
 	{ "rafamadriz/friendly-snippets", event = "VeryLazy" },
 	{ "tpope/vim-surround", event = "VeryLazy" },
 	{ "kwkarlwang/bufjump.nvim", event = "VeryLazy" },
+	{ "andymass/vim-matchup", event = "VeryLazy" },
 	{
 		"nanozuki/tabby.nvim",
 		event = "VeryLazy",
