@@ -13,6 +13,13 @@ return {
 	{ "kwkarlwang/bufjump.nvim", event = "VeryLazy" },
 	{ "andymass/vim-matchup", event = "VeryLazy" },
 	{
+		"chrisgrieser/nvim-various-textobjs",
+		config = function()
+			require("various-textobjs").setup({ useDefaultKeymaps = true })
+		end,
+	},
+
+	{
 		"nanozuki/tabby.nvim",
 		event = "VeryLazy",
 		config = function()

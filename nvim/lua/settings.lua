@@ -43,14 +43,6 @@ vim.o.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
 opt.fillchars:append({ eob = " " })
 vim.opt.signcolumn = "yes"
 
--- don't load the plugins below
-g.loaded_gzip = 1
-g.loaded_tar = 1
-g.loaded_tarPlugin = 1
-g.loaded_zipPlugin = 1
-g.loaded_2html_plugin = 1
-g.loaded_netrwPlugin = 1
-
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	pattern = "*",
 	command = 'silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}',
@@ -85,9 +77,3 @@ vim.api.nvim_create_user_command("ToggleGStatus", function()
 		vim.cmd("Git")
 	end
 end, {})
-
--- command abbreviation
-cmd("command PI PackerInstall")
-cmd("command PU PackerUpdate")
-cmd("command PC PackerCompile")
-cmd("command PS PackerStatus")
