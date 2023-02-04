@@ -264,6 +264,7 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
+		dependencies = { "ahmedkhalf/project.nvim" },
 		cmd = "Telescope",
 		module = "telescope",
 		config = function()
@@ -333,6 +334,7 @@ return {
 					},
 				},
 			})
+			require("telescope").load_extension("projects")
 		end,
 	},
 	{
@@ -343,15 +345,26 @@ return {
 		end,
 	},
 	{
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("project_nvim").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	},
+	{
 		"kyazdani42/nvim-tree.lua",
 		keys = { "<leader>e", "<leader>n" },
 		config = function()
 			local tree_cb = require("nvim-tree.config").nvim_tree_callback
 			require("nvim-tree").setup({
-				update_cwd = true,
+				sync_root_with_cwd = true,
 				respect_buf_cwd = true,
 				update_focused_file = {
-					update_cwd = true,
+					enable = true,
+					update_root = true,
 				},
 				filters = {
 					dotfiles = false,

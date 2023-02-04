@@ -54,6 +54,8 @@ if vim.g.neovide then
 		vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 		vim.keymap.set("n", "<D-e>", "<cmd>Telescope oldfiles cwd_only=true<CR>") -- Paste insert mode
 		vim.keymap.set("n", "<D-p>", "<cmd>Telescope find_files<CR>") -- Paste insert mode
+		vim.keymap.set("n", "<D-j>", "<C-d>")
+		vim.keymap.set("n", "<D-k>", "<C-u>")
 	end
 
 	-- Allow clipboard copy paste in neovim
