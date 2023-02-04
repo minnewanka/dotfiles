@@ -13,6 +13,18 @@ return {
 	{ "kwkarlwang/bufjump.nvim", event = "VeryLazy" },
 	{ "andymass/vim-matchup", event = "VeryLazy" },
 	{
+		"pwntester/octo.nvim",
+		cmd = { "Octo" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"kyazdani42/nvim-web-devicons",
+		},
+		config = function()
+			require("octo").setup()
+		end,
+	},
+	{
 		"chrisgrieser/nvim-various-textobjs",
 		config = function()
 			require("various-textobjs").setup({ useDefaultKeymaps = true })
@@ -142,14 +154,9 @@ return {
 					enable = true,
 					additional_vim_regex_highlighting = { "markdown" },
 				},
-				autotag = { enable = true },
 				indent = { enable = true },
 				incremental_selection = {
 					enable = true,
-					--[[ keymaps = {
-      init_selection = '<CR>',
-      scope_incremental = '<CR>',
-    }, ]]
 				},
 				playground = {
 					enable = true,
@@ -333,14 +340,6 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("nvim-autopairs").setup()
-		end,
-	},
-	{
-		"windwp/nvim-ts-autotag",
-		event = "VeryLazy",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("nvim-ts-autotag").setup()
 		end,
 	},
 	{
@@ -696,29 +695,18 @@ highlight! link NvimTreeFolderIcon Red
 		config = function()
 			local saga = require("lspsaga")
 
-			saga.init_lsp_saga({
-				move_in_saga = { prev = "k", next = "j" },
-				code_action_lightbulb = {
-					enable = false,
-					sign = false,
-					sign_priority = 20,
-					virtual_text = true,
-				},
-				finder_action_keys = {
-					open = "<CR>",
-					vsplit = "v",
-					split = "s",
-					tabe = "t",
-					quit = "q",
-					scroll_down = "<C-f>",
-					scroll_up = "<C-b>", -- quit can be a table
-				},
-				symbol_in_winbar = {
-					in_custom = false,
-					enable = false,
-					separator = "  ",
-					show_file = false,
-					click_support = false,
+			saga.setup({
+				callhierarchy = {
+					show_detail = false,
+					keys = {
+						edit = "<CR>",
+						vsplit = "s",
+						split = "i",
+						tabe = "t",
+						jump = "o",
+						quit = "q",
+						expand_collapse = "u",
+					},
 				},
 			})
 
@@ -735,6 +723,8 @@ highlight! link NvimTreeFolderIcon Red
 			vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true, noremap = true })
 			vim.keymap.set("n", "gD", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
 			vim.keymap.set("n", "ge", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true, noremap = true })
+			vim.keymap.set("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
+			vim.keymap.set("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 		end,
 	},
 

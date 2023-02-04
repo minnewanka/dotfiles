@@ -83,7 +83,7 @@ map("n", "'", "`", { noremap = true, silent = true })
 -- Telescope
 map("n", "<C-P>", [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent = true })
 map("n", "<leader>M", [[<Cmd>Telescope marks<CR>]], { noremap = true, silent = true })
-map("n", "<Leader>b", [[<Cmd>Telescope buffers initial_mode=normal<CR>]], { noremap = true, silent = true })
+map("n", "<Leader>b", [[<Cmd>Telescope buffers initial_mode=insert<CR>]], { noremap = true, silent = true })
 map("n", "<Leader>f", [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
 map(
 	"n",
