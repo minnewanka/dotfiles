@@ -179,7 +179,13 @@ return {
 			})
 		end,
 	},
-	{
+    {     "windwp/nvim-ts-autotag",
+        dependencies = {'nvim-treesitter/nvim-treesitter'},
+        config = function()
+            require("nvim-ts-autotag").setup()
+        end
+    },
+    {
 		"nvim-treesitter/playground",
 		cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" },
 	},
@@ -264,7 +270,6 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
-		dependencies = { "ahmedkhalf/project.nvim" },
 		cmd = "Telescope",
 		module = "telescope",
 		config = function()
@@ -738,6 +743,7 @@ highlight! link NvimTreeFolderIcon Red
 			vim.keymap.set("n", "ge", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true, noremap = true })
 			vim.keymap.set("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
 			vim.keymap.set("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+			vim.keymap.set("n", "<Leader>tt", "<cmd>Lspsaga term_toggle<CR>")
 		end,
 	},
 

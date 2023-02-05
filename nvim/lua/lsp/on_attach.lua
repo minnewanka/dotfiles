@@ -52,7 +52,7 @@ local function on_attach(client, bufnr)
 				prefix = " ",
 				scope = "cursor",
 			}
-			vim.diagnostic.open_float(nil, opts)
+			vim.cmd("Lspsaga show_line_diagnostics")
 		end,
 	})
 end
