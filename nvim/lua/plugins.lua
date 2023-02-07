@@ -8,11 +8,12 @@ return {
 	"hrsh7th/cmp-nvim-lsp",
 	{ "jose-elias-alvarez/typescript.nvim", event = "VeryLazy" },
 	{ "onsails/lspkind-nvim", event = "VeryLazy" },
-	{ "rafamadriz/friendly-snippets", event = "VeryLazy" },
 	{ "tpope/vim-surround", event = "VeryLazy" },
 	{ "kwkarlwang/bufjump.nvim", event = "VeryLazy" },
 	{ "andymass/vim-matchup", event = "VeryLazy" },
+	{ "arturgoms/moonbow.nvim" },
 	{
+
 		"pwntester/octo.nvim",
 		cmd = { "Octo" },
 		dependencies = {
@@ -158,6 +159,9 @@ return {
 				incremental_selection = {
 					enable = true,
 				},
+				matchup = {
+					enable = true,
+				},
 				playground = {
 					enable = true,
 					disable = {},
@@ -179,13 +183,14 @@ return {
 			})
 		end,
 	},
-    {     "windwp/nvim-ts-autotag",
-        dependencies = {'nvim-treesitter/nvim-treesitter'},
-        config = function()
-            require("nvim-ts-autotag").setup()
-        end
-    },
-    {
+	{
+		"windwp/nvim-ts-autotag",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	},
+	{
 		"nvim-treesitter/playground",
 		cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" },
 	},
@@ -339,7 +344,6 @@ return {
 					},
 				},
 			})
-			require("telescope").load_extension("projects")
 		end,
 	},
 	{
@@ -350,27 +354,17 @@ return {
 		end,
 	},
 	{
-		"ahmedkhalf/project.nvim",
-		config = function()
-			require("project_nvim").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
-		end,
-	},
-	{
 		"kyazdani42/nvim-tree.lua",
 		keys = { "<leader>e", "<leader>n" },
 		config = function()
 			local tree_cb = require("nvim-tree.config").nvim_tree_callback
 			require("nvim-tree").setup({
-				sync_root_with_cwd = true,
+				--[[ sync_root_with_cwd = true,
 				respect_buf_cwd = true,
 				update_focused_file = {
 					enable = true,
 					update_root = true,
-				},
+				}, ]]
 				filters = {
 					dotfiles = false,
 					custom = {},
@@ -437,8 +431,8 @@ return {
 
 			vim.api.nvim_exec(
 				[[
-highlight! link NvimTreeFolderIcon Red
-]],
+                    highlight! link NvimTreeFolderIcon Red
+                ]],
 				false
 			)
 		end,
@@ -582,11 +576,14 @@ highlight! link NvimTreeFolderIcon Red
 		"kevinhwang91/nvim-hlslens",
 		event = "VeryLazy",
 		config = function()
-			require("hlslens").setup({})
+			require("hlslens").setup({ calm_down = true })
 		end,
 	},
 	{
 		"L3MON4D3/LuaSnip",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+		},
 		event = "VeryLazy",
 		config = function()
 			require("luasnip").setup({
@@ -760,7 +757,7 @@ highlight! link NvimTreeFolderIcon Red
 		event = "VeryLazy",
 		config = function()
 			vim.opt.list = true
-			vim.opt.listchars:append("space:⋅")
+			-- vim.opt.listchars:append("space:⋅")
 
 			require("indent_blankline").setup({
 				space_char_blankline = " ",

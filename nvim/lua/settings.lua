@@ -1,4 +1,4 @@
-local indent = 2
+local indent = 4
 
 local cmd = vim.cmd
 local opt = vim.opt
@@ -69,6 +69,8 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 
 vim.api.nvim_create_user_command("BufOnly", 'silent! execute "%bd|e#|bd#"', {})
 vim.api.nvim_create_user_command("TSFix", ":write | edit | TSBufEnable highlight", {})
+vim.api.nvim_create_user_command("Pr", ":Octo search archived:false is:pr state:open review-requested:minnewanka", {})
+vim.api.nvim_create_user_command("MyPr", ":Octo search assignee:minnewanka is:pr", {})
 
 vim.api.nvim_create_user_command("ToggleGStatus", function()
 	if vim.fn.buflisted(vim.fn.bufname(".git/index")) ~= 0 then

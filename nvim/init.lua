@@ -45,7 +45,8 @@ vim.g.gruvbox_material_better_performance = 1
 if vim.g.neovide then
 	vim.opt.guifont = { "MonoLisa Nerd Font", ":h12" }
 	if vim.g.neovide then
-		vim.g.neovide_input_use_logo = 1 -- enable use of the logo (cmd) key
+		vim.g.neovide_cursor_trail_size = 0
+		vim.g.neovide_cursor_animation_length = 0
 		vim.keymap.set("n", "<D-s>", "<cmd>w<CR>") -- Save
 		vim.keymap.set("v", "<D-c>", '"+y') -- Copy
 		vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
