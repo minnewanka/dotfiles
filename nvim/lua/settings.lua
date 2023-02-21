@@ -7,6 +7,7 @@ local nvim_exec = vim.api.nvim_exec
 local fn, cmd = vim.fn, vim.cmd
 
 cmd("set nomodeline")
+cmd("set jumpoptions+=stack")
 cmd("set inccommand=split")
 cmd("set noshowmode")
 cmd("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")

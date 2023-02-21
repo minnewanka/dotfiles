@@ -94,7 +94,11 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
 		config = function()
+			require("mason").setup()
+			require("mason-lspconfig").setup()
+
 			require("lsp/config")
 			require("lsp/server")
 		end,
@@ -746,9 +750,16 @@ return {
 
 	{
 		"jose-elias-alvarez/null-ls.nvim",
+		dependencies = { "jay-babu/mason-null-ls.nvim" },
 		event = "VeryLazy",
 		config = function()
 			require("lsp/null-ls")
+
+			require("mason-null-ls").setup({
+				ensure_installed = nil,
+				automatic_installation = true,
+				automatic_setup = false,
+			})
 		end,
 	},
 
