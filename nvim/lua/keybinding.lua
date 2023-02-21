@@ -52,9 +52,10 @@ map("o", "il", ":normal vil<CR>", { noremap = true, silent = true })
 map("x", "al", "$o0", { noremap = true, silent = true })
 map("o", "al", ":normal val<CR>", { noremap = true, silent = true })
 
--- word wrap
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+vim.cmd([[
+    nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
+    nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+]])
 
 -- git diff
 -- map('n', '<Leader>g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
@@ -146,6 +147,8 @@ map("n", "gb", "<cmd>ScrollbarToggle<cr>", { silent = true })
 map("n", "<leader>d", "<cmd>Trouble<cr>", { silent = true, noremap = true })
 
 -- tab
-map("n", "<leader>tn", ":tabnew %<CR>", { noremap = true, silent = true })
-map("n", "<leader>to", ":tabonly<CR>", { noremap = true, silent = true })
-map("n", "<leader>tq", ":tabclose<CR>", { noremap = true, silent = true })
+map("n", "<leader>tn", "<cmd>tabnew %<CR>", { noremap = true, silent = true })
+map("n", "<leader>to", "<cmd>tabonly<CR>", { noremap = true, silent = true })
+map("n", "<leader>tq", "<cmd>tabclose<CR>", { noremap = true, silent = true })
+
+map("n", "<C-w>m", "<cmd> lua require('smart-splits').start_resize_mode()<cr>", { noremap = true, silent = true })
