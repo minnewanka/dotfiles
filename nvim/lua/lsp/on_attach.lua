@@ -41,7 +41,7 @@ local function on_attach(client, bufnr)
 		})
 	end
 
-	vim.api.nvim_create_autocmd("CursorHold", {
+	--[[ vim.api.nvim_create_autocmd("CursorHold", {
 		buffer = bufnr,
 		callback = function()
 			local opts = {
@@ -52,9 +52,9 @@ local function on_attach(client, bufnr)
 				prefix = " ",
 				scope = "cursor",
 			}
-			vim.diagnostic.open_float(nil, opts)
+			vim.cmd("Lspsaga show_line_diagnostics")
 		end,
-	})
+	}) ]]
 end
 
 return on_attach

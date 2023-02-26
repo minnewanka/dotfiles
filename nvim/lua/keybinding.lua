@@ -27,9 +27,9 @@ map("v", "<Leader>y", '"*y', { noremap = true, silent = true })
 map("n", "ghl", ":noh<CR>", { noremap = true, silent = true })
 
 -- save & quit
-map("n", "<Leader>w", ":qa!<CR>", { noremap = true, silent = false })
-map("n", "<Leader>q", ":q!<CR>", { noremap = true, silent = false })
-map("n", "<Leader>z", ":wq<CR>", { noremap = true, silent = true })
+map("n", "<Leader>w", "<cmd>qa!<CR>", { noremap = true, silent = false })
+map("n", "<Leader>q", "<cmd>q!<CR>", { noremap = true, silent = false })
+map("n", "<Leader>z", "<cmd>wq<CR>", { noremap = true, silent = true })
 
 -- remap esc
 map("i", "jk", "<ESC>", { noremap = true, silent = true })
@@ -81,9 +81,8 @@ map("n", "`", "'", { noremap = true, silent = true })
 map("n", "'", "`", { noremap = true, silent = true })
 
 -- Telescope
-map("n", "<C-P>", [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent = true })
 map("n", "<leader>M", [[<Cmd>Telescope marks<CR>]], { noremap = true, silent = true })
-map("n", "<Leader>b", [[<Cmd>Telescope buffers initial_mode=normal<CR>]], { noremap = true, silent = true })
+map("n", "<Leader>b", [[<Cmd>Telescope buffers initial_mode=insert<CR>]], { noremap = true, silent = true })
 map("n", "<Leader>f", [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
 map(
 	"n",
@@ -129,8 +128,8 @@ map("n", "#", "#<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
 map("n", "g*", "g*<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
 map("n", "g#", "g#<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
 
-map("n", "<Left>", ":lua require('plugins.bufjump').backward()<CR>", { noremap = true, silent = true })
-map("n", "<Right>", ":lua require('plugins.bufjump').forward()<CR>", { noremap = true, silent = true })
+map("n", "<Left>", ":lua require('bufjump').backward()<CR>", { noremap = true, silent = true })
+map("n", "<Right>", ":lua require('bufjump').forward()<CR>", { noremap = true, silent = true })
 
 --  Center stuff
 map("n", "n", "nzz", { noremap = true, silent = true })

@@ -41,7 +41,7 @@ font:
   # Italic font face
   italic:
     family: MonoLisa
-    style: Italic
+    style: Regular Italic
 
   # Bold italic font face
   # Note: Since i don't have a font italic version of this font, I just specified
@@ -52,7 +52,7 @@ font:
     style: Bold Italic
 
   # Font size
-  size: 11
+  size: 12
   draw_bold_text_with_bright_colors: true
 
   # Offset is the extra space around each character. `offset.y` can be thought of
@@ -83,6 +83,7 @@ live_config_reload: true
 
 # Setup some amazing custom key bindings here - Best thing is you can setup key bindings
 key_bindings:
+  - { key: V, mods: Control|Command, mode: ~Search, action: ToggleViMode }
   - { key: Key6, mods: Control, chars: "\x1e" }
   - { key: 36, mods: Command, action: ToggleFullscreen }
   - { key: S, mods: Command, chars: ":w\x0D" }
