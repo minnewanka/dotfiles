@@ -86,8 +86,8 @@ map("n", "<Leader>b", [[<Cmd>Telescope buffers initial_mode=insert<CR>]], { nore
 map("n", "<Leader>f", [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
 map(
 	"n",
-	"<Leader>F",
-	[[<Cmd>lua require("telescope").extensions.live_grep_raw.live_grep_raw()<CR>]],
+	"<Leader>sd",
+	[[<Cmd>:lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>]],
 	{ noremap = true, silent = true }
 )
 map(
