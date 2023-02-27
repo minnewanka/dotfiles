@@ -376,7 +376,6 @@ return {
 		"kyazdani42/nvim-tree.lua",
 		keys = { "<leader>e", "<leader>n" },
 		config = function()
-			local tree_cb = require("nvim-tree.config").nvim_tree_callback
 			require("nvim-tree").setup({
 				--[[ sync_root_with_cwd = true,
 				respect_buf_cwd = true,
@@ -396,7 +395,7 @@ return {
 					mappings = {
 						custom_only = true,
 						list = {
-							{ key = "<C-g>", cb = tree_cb("cd") },
+							{ key = "<C-g>", action = "cd" },
 							{ key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
 							{ key = "<C-e>", action = "edit_in_place" },
 							{ key = { "O" }, action = "edit_no_picker" },
