@@ -4,11 +4,11 @@ vim.fn.sign_define("DiagnosticSignInformation", { text = "", numhl = "Diagnostic
 vim.fn.sign_define("DiagnosticSignHint", { text = "", numhl = "DiagnosticSignHint" })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	virtual_text = false,
+	virtual_text = true,
 })
 
 vim.diagnostic.config({
-	virtual_text = false,
+	virtual_text = true,
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
