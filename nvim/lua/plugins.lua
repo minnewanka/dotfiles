@@ -3,6 +3,15 @@ vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappin
 return {
 	"kyazdani42/nvim-web-devicons",
 	"nvim-lua/plenary.nvim",
+	{
+		"jinh0/eyeliner.nvim",
+		config = function()
+			require("eyeliner").setup({
+				highlight_on_key = true,
+				dim = true,
+			})
+		end,
+	},
 	{ "github/copilot.vim", event = "VeryLazy" },
 	{ "tpope/vim-repeat", event = "VeryLazy" },
 	"hrsh7th/cmp-nvim-lsp",
@@ -11,7 +20,6 @@ return {
 	{ "tpope/vim-surround", event = "VeryLazy" },
 	{ "kwkarlwang/bufjump.nvim", event = "VeryLazy" },
 	{ "andymass/vim-matchup", event = "VeryLazy" },
-	{ "arturgoms/moonbow.nvim" },
 	{
 
 		"pwntester/octo.nvim",
@@ -588,6 +596,18 @@ return {
 				[[<Cmd>lua require("harpoon.ui").nav_file(4)<CR>]],
 				{ noremap = true, silent = true }
 			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"[h",
+				[[<Cmd>lua require("harpoon.ui").nav_prev()<CR>]],
+				{ noremap = true, silent = true }
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"]h",
+				[[<Cmd>lua require("harpoon.ui").nav_next()<CR>]],
+				{ noremap = true, silent = true }
+			)
 		end,
 	},
 	{
@@ -863,7 +883,7 @@ return {
 		"sainnhe/gruvbox-material",
 	},
 
-	{
+	--[[ {
 		"ggandor/flit.nvim",
 		event = "VeryLazy",
 		config = function()
@@ -871,17 +891,17 @@ return {
 				multiline = false,
 			})
 		end,
-	},
+	}, ]]
 	{
 		"folke/zen-mode.nvim",
-		keys = { ";z" },
+		keys = { "gz" },
 		config = function()
 			require("zen-mode").setup({
 				window = {
 					height = 0.9,
 				},
 			})
-			vim.api.nvim_set_keymap("n", ";z", ":ZenMode<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "gz", ":ZenMode<CR>", { noremap = true, silent = true })
 		end,
 	},
 }

@@ -28,7 +28,7 @@ require("lspconfig").emmet_ls.setup({
 	},
 })
 
-require("lspconfig").tailwindcss.setup({})
+-- require("lspconfig").tailwindcss.setup({})
 
 require("lspconfig").html.setup({
 	on_attach = on_attach,

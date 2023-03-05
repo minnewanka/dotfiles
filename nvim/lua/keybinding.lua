@@ -36,15 +36,15 @@ map("i", "jk", "<ESC>", { noremap = true, silent = true })
 map("i", "kj", "<ESC>", { noremap = true, silent = true })
 
 -- quickfix & local list
-map("n", ";l", ":copen<CR>", { noremap = true, silent = true })
+--[[ map("n", ";l", ":copen<CR>", { noremap = true, silent = true })
 map("n", ";q", ":cclose<CR>", { noremap = true, silent = true })
 map("n", ";n", ":cn<CR>", { noremap = true, silent = true })
-map("n", ";p", ":cp<CR>", { noremap = true, silent = true })
+map("n", ";p", ":cp<CR>", { noremap = true, silent = true }) ]]
 
 map("n", "<leader>T", ":lua vim.lsp.diagnostic.set_loclist()<CR>", { noremap = true, silent = true })
-map("n", ";ll", ":lopen<CR>", { noremap = true, silent = true })
+--[[ map("n", ";ll", ":lopen<CR>", { noremap = true, silent = true })
 map("n", ";ln", ":lnext<CR>", { noremap = true, silent = true })
-map("n", ";lp", ":lprev<CR>", { noremap = true, silent = true })
+map("n", ";lp", ":lprev<CR>", { noremap = true, silent = true }) ]]
 
 -- line text object
 map("x", "il", "g_o^", { noremap = true, silent = true })
@@ -58,8 +58,8 @@ map("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent
 
 -- git diff
 -- map('n', '<Leader>g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
-map("n", ";g", ":ToggleGStatus<CR>", { noremap = true, silent = true })
-map("n", "<leader>g", ":LazyGit<CR>", { noremap = true, silent = true })
+map("n", "<leader>g", ":ToggleGStatus<CR>", { noremap = true, silent = true })
+map("n", "<leader>l", ":LazyGit<CR>", { noremap = true, silent = true })
 map("n", "<Leader>gd", ":Gdiffsplit<CR>", { noremap = true, silent = true })
 map("n", "<Leader>gD", ":Git difftool<CR>", { noremap = true, silent = true })
 map("n", "<Leader>g;", ":diffget //3<CR>", { noremap = true, silent = true })

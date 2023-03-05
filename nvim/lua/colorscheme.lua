@@ -12,6 +12,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		vim.api.nvim_set_hl(0, "HarpoonWindow", { bg = "NONE" })
 		vim.api.nvim_set_hl(0, "DiagnosticError", { link = "Red" })
 		vim.api.nvim_set_hl(0, "DiagnosticHint", { link = "Green" })
+		vim.api.nvim_set_hl(0, "DiagnosticWarn", { link = "Yellow" })
 	end,
 })
 
