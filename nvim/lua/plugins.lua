@@ -36,7 +36,25 @@ return {
 	{
 		"chrisgrieser/nvim-various-textobjs",
 		config = function()
-			require("various-textobjs").setup({ useDefaultKeymaps = true })
+			require("various-textobjs").setup({ useDefaultKeymaps = false })
+			vim.keymap.set({ "o", "x" }, "ii", function()
+				require("various-textobjs").indentation(true, true)
+			end)
+			vim.keymap.set({ "o", "x" }, "ai", function()
+				require("various-textobjs").indentation(false, true)
+			end)
+			vim.keymap.set({ "o", "x" }, "as", function()
+				require("various-textobjs").subword(false)
+			end)
+			vim.keymap.set({ "o", "x" }, "is", function()
+				require("various-textobjs").subword(true)
+			end)
+			vim.keymap.set({ "o", "x" }, "n", function()
+				require("various-textobjs").nearEoL()
+			end)
+			vim.keymap.set({ "o", "x" }, "r", function()
+				require("various-textobjs").restOfParagraph()
+			end)
 		end,
 	},
 
@@ -393,6 +411,7 @@ return {
 
 				-- BEGIN_DEFAULT_ON_ATTACH
 				vim.keymap.set("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
+				vim.keymap.set("n", "b", api.tree.change_root_to_node, opts("CD"))
 				vim.keymap.set("n", "<C-e>", api.node.open.replace_tree_buffer, opts("Open: In Place"))
 				vim.keymap.set("n", "<C-k>", api.node.show_info_popup, opts("Info"))
 				vim.keymap.set("n", "<C-r>", api.fs.rename_sub, opts("Rename: Omit Filename"))
@@ -435,7 +454,7 @@ return {
 				vim.keymap.set("n", "q", api.tree.close, opts("Close"))
 				vim.keymap.set("n", "r", api.fs.rename, opts("Rename"))
 				vim.keymap.set("n", "R", api.tree.reload, opts("Refresh"))
-				vim.keymap.set("n", "s", api.node.run.system, opts("Run System"))
+				-- vim.keymap.set("n", "s", api.node.run.system, opts("Run System"))
 				vim.keymap.set("n", "S", api.tree.search_node, opts("Search"))
 				vim.keymap.set("n", "U", api.tree.toggle_custom_filter, opts("Toggle Hidden"))
 				vim.keymap.set("n", "W", api.tree.collapse_all, opts("Collapse"))
@@ -454,6 +473,9 @@ return {
 					update_root = true,
 				}, ]]
 				on_attach = on_attach,
+				renderer = {
+					root_folder_label = ":t",
+				},
 				live_filter = {
 					prefix = "> ",
 					always_show_folders = false,
