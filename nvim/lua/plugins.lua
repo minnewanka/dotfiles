@@ -296,8 +296,10 @@ return {
 		end,
 	},
 	{
-		"b3nj5m1n/kommentary",
-		event = "VeryLazy",
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
