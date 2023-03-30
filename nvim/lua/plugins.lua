@@ -21,6 +21,37 @@ return {
 	{ "kwkarlwang/bufjump.nvim", event = "VeryLazy" },
 	{ "andymass/vim-matchup", event = "VeryLazy" },
 	{
+		"jackMort/ChatGPT.nvim",
+		config = function()
+			require("chatgpt").setup({
+				chat_window = {
+					border = {
+						highlight = "FloatBorder",
+						style = "rounded",
+						text = {
+							top = " ChatGPT ",
+						},
+					},
+				},
+				chat_input = {
+					border = {
+						highlight = "FloatBorder",
+						style = "rounded",
+						text = {
+							top_align = "center",
+							top = " Prompt ",
+						},
+					},
+				},
+			})
+		end,
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+	},
+	{
 
 		"pwntester/octo.nvim",
 		cmd = { "Octo" },
@@ -223,7 +254,7 @@ return {
 
 	{
 		"tpope/vim-fugitive",
-		cmd = { "Git", "Glog", "Gdiffsplit", "GBlame" },
+		cmd = { "Git", "Glog", "Gdiffsplit", "GBlame", "GBrowse" },
 		dependencies = { "tpope/vim-rhubarb" },
 	},
 	{
