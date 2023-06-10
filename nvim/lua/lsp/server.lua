@@ -3,17 +3,49 @@ local util = require("lspconfig/util")
 local root_pattern = util.root_pattern
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-require("typescript").setup({
-	disable_commands = false,
-	debug = false,
-	go_to_source_definition = {
-		fallback = true,
-	},
-	server = {
-		on_attach = on_attach,
-		capabilities = capabilities,
+require("typescript-tools").setup({
+	on_attach = on_attach,
+	settings = {
+		tsserver_file_preferences = {
+			includeInlayParameterNameHints = "all",
+			includeInlayEnumMemberValueHints = true,
+			includeInlayFunctionLikeReturnTypeHints = true,
+			includeInlayFunctionParameterTypeHints = true,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayVariableTypeHints = false,
+		},
 	},
 })
+
+-- require("lspconfig").tsserver.setup({
+-- 	on_attach = on_attach,
+-- 	settings = {
+-- 		typescript = {
+-- 			inlayHints = {
+-- 				includeInlayParameterNameHints = "all",
+-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+-- 				includeInlayFunctionParameterTypeHints = true,
+-- 				includeInlayVariableTypeHints = true,
+-- 				includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+-- 				includeInlayPropertyDeclarationTypeHints = true,
+-- 				includeInlayFunctionLikeReturnTypeHints = true,
+-- 				includeInlayEnumMemberValueHints = true,
+-- 			},
+-- 		},
+-- 		javascript = {
+-- 			inlayHints = {
+-- 				includeInlayParameterNameHints = "all",
+-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+-- 				includeInlayFunctionParameterTypeHints = true,
+-- 				includeInlayVariableTypeHints = true,
+-- 				includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+-- 				includeInlayPropertyDeclarationTypeHints = true,
+-- 				includeInlayFunctionLikeReturnTypeHints = true,
+-- 				includeInlayEnumMemberValueHints = true,
+-- 			},
+-- 		},
+-- 	},
+-- })
 
 require("lspconfig").emmet_ls.setup({
 	on_attach = on_attach,

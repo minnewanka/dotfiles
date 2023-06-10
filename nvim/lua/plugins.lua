@@ -13,44 +13,35 @@ return {
 		end,
 	},
 	{ "github/copilot.vim", event = "VeryLazy" },
+	{
+		"nvim-telescope/telescope-frecency.nvim",
+		config = function()
+			require("telescope").load_extension("frecency")
+		end,
+		dependencies = { "kkharji/sqlite.lua" },
+	},
+
+	{
+		"max397574/better-escape.nvim",
+		config = function()
+			require("better_escape").setup()
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
 	{ "tpope/vim-repeat", event = "VeryLazy" },
-	"hrsh7th/cmp-nvim-lsp",
-	{ "jose-elias-alvarez/typescript.nvim", event = "VeryLazy" },
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	},
 	{ "onsails/lspkind-nvim", event = "VeryLazy" },
 	{ "tpope/vim-surround", event = "VeryLazy" },
 	{ "kwkarlwang/bufjump.nvim", event = "VeryLazy" },
 	{ "andymass/vim-matchup", event = "VeryLazy" },
-	{
-		"jackMort/ChatGPT.nvim",
-		config = function()
-			require("chatgpt").setup({
-				chat_window = {
-					border = {
-						highlight = "FloatBorder",
-						style = "rounded",
-						text = {
-							top = " ChatGPT ",
-						},
-					},
-				},
-				chat_input = {
-					border = {
-						highlight = "FloatBorder",
-						style = "rounded",
-						text = {
-							top_align = "center",
-							top = " Prompt ",
-						},
-					},
-				},
-			})
-		end,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	},
 	{
 
 		"pwntester/octo.nvim",
@@ -86,6 +77,11 @@ return {
 			vim.keymap.set({ "o", "x" }, "r", function()
 				require("various-textobjs").restOfParagraph()
 			end)
+			vim.keymap.set({ "o", "x" }, "iv", "<cmd>lua require('various-textobjs').value(true)<CR>")
+			vim.keymap.set({ "o", "x" }, "av", "<cmd>lua require('various-textobjs').value(false)<CR>")
+
+			vim.keymap.set({ "o", "x" }, "ik", "<cmd>lua require('various-textobjs').key(true)<CR>")
+			vim.keymap.set({ "o", "x" }, "ak", "<cmd>lua require('various-textobjs').key(false)<CR>")
 		end,
 	},
 
@@ -208,9 +204,55 @@ return {
 			}
 
 			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "tsx" },
+				autotag = {
+					enable = true,
+				},
 				highlight = {
 					enable = true,
 					additional_vim_regex_highlighting = { "markdown" },
+				},
+				textobjects = {
+					select = {
+						enable = true,
+
+						-- Automatically jump forward to textobj, similar to targets.vim
+						lookahead = true,
+
+						keymaps = {
+							-- You can use the capture groups defined in textobjects.scm
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							-- You can optionally set descriptions to the mappings (used in the desc parameter of
+							-- nvim_buf_set_keymap) which plugins like which-key display
+							["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+							-- You can also use captures from other query groups like `locals.scm`
+							["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+						},
+						-- You can choose the select mode (default is charwise 'v')
+						--
+						-- Can also be a function which gets passed a table with the keys
+						-- * query_string: eg '@function.inner'
+						-- * method: eg 'v' or 'o'
+						-- and should return the mode ('v', 'V', or '<c-v>') or a table
+						-- mapping query_strings to modes.
+						selection_modes = {
+							["@parameter.outer"] = "v", -- charwise
+							["@function.outer"] = "V", -- linewise
+							["@class.outer"] = "<c-v>", -- blockwise
+						},
+						-- If you set this to `true` (default is `false`) then any textobject is
+						-- extended to include preceding or succeeding whitespace. Succeeding
+						-- whitespace has priority in order to act similarly to eg the built-in
+						-- `ap`.
+						--
+						-- Can also be a function which gets passed a table with the keys
+						-- * query_string: eg '@function.inner'
+						-- * selection_mode: eg 'v'
+						-- and should return true of false
+						include_surrounding_whitespace = true,
+					},
 				},
 				indent = { enable = true },
 				incremental_selection = {
@@ -242,10 +284,6 @@ return {
 	},
 	{
 		"windwp/nvim-ts-autotag",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("nvim-ts-autotag").setup()
-		end,
 	},
 	{
 		"nvim-treesitter/playground",
@@ -297,24 +335,62 @@ return {
 				},
 				numhl = false,
 				linehl = false,
-				keymaps = {
-					-- Default keymap options
-					noremap = true,
-					buffer = true,
+				on_attach = function(bufnr)
+					local gs = package.loaded.gitsigns
 
-					["n gn"] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'" },
-					["n gp"] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'" },
+					local function map(mode, l, r, opts)
+						opts = opts or {}
+						opts.buffer = bufnr
+						vim.keymap.set(mode, l, r, opts)
+					end
 
-					["n ghs"] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-					["n ghu"] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-					["n ghr"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-					["n ghR"] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-					["n ghp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-					["n ghb"] = '<cmd>lua require"gitsigns".toggle_current_line_blame()<CR>',
-					-- Text objects
-					["o ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
-					["x ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
-				},
+					-- Navigation
+					map("n", "gn", function()
+						if vim.wo.diff then
+							return "]c"
+						end
+						vim.schedule(function()
+							gs.next_hunk()
+						end)
+						return "<Ignore>"
+					end, { expr = true })
+
+					map("n", "gp", function()
+						if vim.wo.diff then
+							return "[c"
+						end
+						vim.schedule(function()
+							gs.prev_hunk()
+						end)
+						return "<Ignore>"
+					end, { expr = true })
+
+					-- Actions
+					map("n", "ghs", gs.stage_hunk)
+					map("n", "ghr", gs.reset_hunk)
+					map("v", "ghs", function()
+						gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+					end)
+					map("v", "ghr", function()
+						gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+					end)
+					map("n", "ghS", gs.stage_buffer)
+					map("n", "ghu", gs.undo_stage_hunk)
+					map("n", "ghR", gs.reset_buffer)
+					map("n", "ghp", gs.preview_hunk)
+					map("n", "ghb", function()
+						gs.blame_line({ full = true })
+					end)
+					map("n", "gtb", gs.toggle_current_line_blame)
+					map("n", "ghd", gs.diffthis)
+					map("n", "ghD", function()
+						gs.diffthis("~")
+					end)
+					map("n", "gtd", gs.toggle_deleted)
+
+					-- Text object
+					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+				end,
 				watch_gitdir = {
 					interval = 1000,
 				},
@@ -332,8 +408,10 @@ return {
 			require("Comment").setup()
 		end,
 	},
+	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	{
 		"nvim-telescope/telescope.nvim",
+		version = "0.1.2",
 		dependencies = { "nvim-telescope/telescope-live-grep-args.nvim" },
 		cmd = "Telescope",
 		module = "telescope",
@@ -345,13 +423,9 @@ return {
 				defaults = {
 					path_display = { "truncate" },
 					file_sorter = require("telescope.sorters").get_fzy_sorter,
-					file_ignore_patterns = { "docs", "docs-dev" },
+					file_ignore_patterns = { "docs", "docs-dev", "node_modules" },
 					prompt_prefix = " > ",
 					color_devicons = true,
-
-					file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-					grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-					qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
 					mappings = {
 						i = {
@@ -393,7 +467,9 @@ return {
 					buffers = {
 						sort_mru = true,
 						ignore_current_buffer = true,
-						theme = "ivy",
+						theme = "dropdown",
+						previewer = false,
+
 						mappings = {
 							i = {
 								["<c-d>"] = require("telescope.actions").delete_buffer,
@@ -419,8 +495,14 @@ return {
 						-- theme = { }, -- use own theme spec
 						-- layout_config = { mirror=true }, -- mirror preview pane
 					},
+					frecency = {
+						show_scores = false,
+						show_unindexed = false,
+						ignore_patterns = { "*.git/*", "node%_modules/.*" },
+					},
 				},
 			})
+			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("live_grep_args")
 		end,
 	},
@@ -523,7 +605,7 @@ return {
 					custom = {},
 				},
 				git = {
-					ignore = false,
+					ignore = true,
 				},
 				view = {
 					width = 55,
@@ -723,6 +805,7 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-path",
@@ -937,8 +1020,48 @@ return {
 			require("leap").set_default_keymaps()
 		end,
 	},
+	-- {
+	-- 	"folke/flash.nvim",
+	-- 	event = "VeryLazy",
+	-- 	---@type Flash.Config
+	-- 	opts = {
+	-- 		modes = {
+	-- 			char = {
+	-- 				enabled = false,
+	-- 			},
+	-- 		},
+	-- 	},
+	-- 	keys = {
+	-- 		{
+	-- 			"s",
+	-- 			mode = { "n", "x", "o" },
+	-- 			function()
+	-- 				-- default options: exact mode, multi window, all directions, with a backdrop
+	-- 				require("flash").jump()
+	-- 			end,
+	-- 			desc = "Flash",
+	-- 		},
+	-- 		{
+	-- 			"S",
+	-- 			mode = { "n", "o", "x" },
+	-- 			function()
+	-- 				require("flash").treesitter()
+	-- 			end,
+	-- 			desc = "Flash Treesitter",
+	-- 		},
+	-- 		{
+	-- 			"r",
+	-- 			mode = "o",
+	-- 			function()
+	-- 				require("flash").remote()
+	-- 			end,
+	-- 			desc = "Remote Flash",
+	-- 		},
+	-- 	},
+	-- },
 	{
 		"j-hui/fidget.nvim",
+		tag = "legacy",
 		event = "VeryLazy",
 		config = function()
 			require("fidget").setup({
@@ -968,25 +1091,16 @@ return {
 		"sainnhe/gruvbox-material",
 	},
 
-	--[[ {
-		"ggandor/flit.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("flit").setup({
-				multiline = false,
-			})
-		end,
-	}, ]]
 	{
 		"folke/zen-mode.nvim",
-		keys = { "gz" },
+		keys = { "go" },
 		config = function()
 			require("zen-mode").setup({
 				window = {
 					height = 0.9,
 				},
 			})
-			vim.api.nvim_set_keymap("n", "gz", ":ZenMode<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "go", ":ZenMode<CR>", { noremap = true, silent = true })
 		end,
 	},
 }

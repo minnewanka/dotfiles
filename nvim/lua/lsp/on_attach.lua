@@ -1,14 +1,7 @@
--- local function buf_option(...)
---   vim.api.nvim_buf_set_option(bufnr, ...)
--- end
-
 local function on_attach(client, bufnr)
 	-- buf_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true })
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true })
-
-	enable = client.name == "null-ls"
-	client.server_capabilities.documentFormattingProvider = enable
 
 	if client.server_capabilities.documentFormattingProvider then
 		vim.keymap.set(
@@ -39,6 +32,10 @@ local function on_attach(client, bufnr)
 			buffer = bufnr,
 			callback = vim.lsp.buf.clear_references,
 		})
+	end
+
+	if client.server_capabilities.inlayHintProvider then
+		vim.lsp.buf.inlay_hint(bufnr, true)
 	end
 
 	--[[ vim.api.nvim_create_autocmd("CursorHold", {
