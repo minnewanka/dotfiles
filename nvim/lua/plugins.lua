@@ -14,17 +14,23 @@ return {
 	},
 	{ "github/copilot.vim", event = "VeryLazy" },
 	{
-		"nvim-telescope/telescope-frecency.nvim",
-		config = function()
-			require("telescope").load_extension("frecency")
-		end,
-		dependencies = { "kkharji/sqlite.lua" },
-	},
-
-	{
 		"max397574/better-escape.nvim",
 		config = function()
 			require("better_escape").setup()
+		end,
+	},
+	{
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("project_nvim").setup({
+				detection_methods = { "pattern" },
+			})
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>sp",
+				[[<Cmd>Telescope projects<CR>]],
+				{ noremap = true, silent = true }
+			)
 		end,
 	},
 	{
@@ -257,6 +263,12 @@ return {
 				indent = { enable = true },
 				incremental_selection = {
 					enable = true,
+					keymaps = {
+						init_selection = "<CR>",
+						scope_incremental = "<CR>",
+						node_incremental = "<TAB>",
+						node_decremental = "<S-TAB>",
+					},
 				},
 				matchup = {
 					enable = true,
@@ -411,7 +423,6 @@ return {
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	{
 		"nvim-telescope/telescope.nvim",
-		version = "0.1.2",
 		dependencies = { "nvim-telescope/telescope-live-grep-args.nvim" },
 		cmd = "Telescope",
 		module = "telescope",
@@ -504,6 +515,7 @@ return {
 			})
 			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("live_grep_args")
+			require("telescope").load_extension("projects")
 		end,
 	},
 	{
@@ -513,6 +525,23 @@ return {
 			require("nvim-autopairs").setup()
 		end,
 	},
+	{
+		"carbon-steel/detour.nvim",
+		config = function()
+			vim.keymap.set("n", "<c-w><enter>", ":Detour<cr>")
+		end,
+	},
+	-- {
+	-- 	"stevearc/oil.nvim",
+	-- 	opts = {},
+	-- 	-- Optional dependencies
+	-- 	config = function()
+	-- 		require("oil").setup()
+	-- 		vim.api.nvim_set_keymap("n", "<Leader>e", ":Oil<CR>", { noremap = true, silent = true })
+	-- 		vim.api.nvim_set_keymap("n", "<Leader>n", ":Oil<CR>", { noremap = true, silent = true })
+	-- 	end,
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- },
 	{
 		"nvim-tree/nvim-tree.lua",
 		keys = { "<leader>e", "<leader>n" },
@@ -581,12 +610,8 @@ return {
 				-- END_DEFAULT_ON_ATTACH
 			end
 			require("nvim-tree").setup({
-				--[[ sync_root_with_cwd = true,
+				sync_root_with_cwd = true,
 				respect_buf_cwd = true,
-				update_focused_file = {
-					enable = true,
-					update_root = true,
-				}, ]]
 				on_attach = on_attach,
 				renderer = {
 					root_folder_label = ":t",
@@ -624,8 +649,8 @@ return {
 
 			vim.api.nvim_exec(
 				[[
-                    highlight! link NvimTreeFolderIcon Red
-                ]],
+	                   highlight! link NvimTreeFolderIcon Red
+	               ]],
 				false
 			)
 		end,
@@ -951,7 +976,7 @@ return {
 	},
 
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		event = "VeryLazy",
 		config = function()
 			require("lsp/null-ls")
@@ -962,48 +987,7 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		event = "VeryLazy",
 		config = function()
-			vim.opt.list = true
-			-- vim.opt.listchars:append("space:⋅")
-
-			require("indent_blankline").setup({
-				space_char_blankline = " ",
-				show_first_indent_level = true,
-				show_current_context = true,
-				buftype_exclude = { "terminal", "nofile", "NvimTree", "alpha" },
-				filetype_exclude = {
-					"help",
-					"packer",
-					"startify",
-					"NvimTree",
-					"alpha",
-					"git",
-					"fugitive",
-					"gitcommit",
-					"TelescopePrompt",
-				},
-				context_patterns = {
-					"class",
-					"return",
-					"function",
-					"method",
-					"^if",
-					"^while",
-					"jsx_element",
-					"^for",
-					"^object",
-					"^table",
-					"block",
-					"arguments",
-					"if_statement",
-					"else_clause",
-					"jsx_element",
-					"jsx_self_closing_element",
-					"try_statement",
-					"catch_clause",
-					"import_statement",
-					"operation_type",
-				},
-			})
+			require("ibl").setup({ indent = { char = "▏" } })
 		end,
 	},
 

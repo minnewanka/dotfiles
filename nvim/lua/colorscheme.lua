@@ -14,9 +14,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		vim.api.nvim_set_hl(0, "DiagnosticError", { link = "Red" })
 		vim.api.nvim_set_hl(0, "DiagnosticHint", { link = "Green" })
 		vim.api.nvim_set_hl(0, "DiagnosticWarn", { link = "Yellow" })
-		vim.api.nvim_set_hl(0, "FlashMatch", { link = "Comment" })
-		vim.api.nvim_set_hl(0, "FlashCurrent", { link = "Red" })
-		vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#ccff88", bg = "NONE" })
+		-- vim.api.nvim_set_hl(0, "FlashMatch", { link = "Comment" })
+		-- vim.api.nvim_set_hl(0, "FlashCurrent", { link = "Red" })
+		-- vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#ccff88", bg = "NONE" })
 	end,
 })
 

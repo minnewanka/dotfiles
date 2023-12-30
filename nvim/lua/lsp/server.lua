@@ -5,16 +5,6 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 require("typescript-tools").setup({
 	on_attach = on_attach,
-	settings = {
-		tsserver_file_preferences = {
-			includeInlayParameterNameHints = "all",
-			includeInlayEnumMemberValueHints = true,
-			includeInlayFunctionLikeReturnTypeHints = true,
-			includeInlayFunctionParameterTypeHints = true,
-			includeInlayPropertyDeclarationTypeHints = true,
-			includeInlayVariableTypeHints = false,
-		},
-	},
 })
 
 -- require("lspconfig").tsserver.setup({
@@ -47,18 +37,18 @@ require("typescript-tools").setup({
 -- 	},
 -- })
 
-require("lspconfig").emmet_ls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
-	init_options = {
-		html = {
-			options = {
-				["bem.enabled"] = true,
-			},
-		},
-	},
-})
+-- require("lspconfig").emmet_ls.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
+-- 	init_options = {
+-- 		html = {
+-- 			options = {
+-- 				["bem.enabled"] = true,
+-- 			},
+-- 		},
+-- 	},
+-- })
 
 -- require("lspconfig").tailwindcss.setup({})
 
