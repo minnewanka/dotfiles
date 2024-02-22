@@ -16,7 +16,7 @@ map("c", "<Up>", 'pumvisible() ? "<C-p>" : "<Up>"', { noremap = true, expr = tru
 map("c", "<Down>", 'pumvisible() ? "<C-n>" : "<Down>"', { noremap = true, expr = true, silent = false })
 
 -- paste
-map("v", "<leader>p", '"_dP', { noremap = true, silent = true })
+-- map("v", "<leader>p", '"_dP', { noremap = true, silent = true })
 
 -- yank
 -- map('n', 'Y', 'y$', { noremap = true, silent = true })
@@ -87,7 +87,8 @@ map(
 	[[<Cmd>lua require("telescope").extensions.neoclip.default()<CR>]],
 	{ noremap = true, silent = true }
 )
-map("n", "<leader>o", [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent = true })
+map("n", "<leader>o", [[<Cmd>Telescope oldfiles<CR>]], { noremap = true, silent = true })
+map("n", "<leader>p", [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent = true })
 
 --undo break point
 map("i", ",", ",<c-g>u", { noremap = true, silent = true })

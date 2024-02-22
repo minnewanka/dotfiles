@@ -88,9 +88,6 @@ key_bindings:
   - { key: Key6, mods: Control, chars: "\x1e" }
   - { key: 36, mods: Command, action: ToggleFullscreen }
   - { key: S, mods: Command, chars: ":w\x0D" }
-  - { key: P, mods: Command, chars: ":Telescope find_files\x0D" }
-  - { key: O, mods: Command, chars: ":Telescope find_files\x0D" }
-  - { key: E, mods: Command, chars: ":Telescope oldfiles cwd_only=true\x0D" }
   - { key: T, mods: Command, action: CreateNewWindow }
   - { key: J, mods: Command, chars: "\x04" }
   - { key: K, mods: Command, chars: "\x15" }

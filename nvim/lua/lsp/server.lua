@@ -7,6 +7,15 @@ require("typescript-tools").setup({
 	on_attach = on_attach,
 })
 
+require("lspconfig").eslint.setup({
+	on_attach = function(client, bufnr)
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			buffer = bufnr,
+			command = "EslintFixAll",
+		})
+	end,
+})
+
 -- require("lspconfig").tsserver.setup({
 -- 	on_attach = on_attach,
 -- 	settings = {
