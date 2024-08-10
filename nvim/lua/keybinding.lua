@@ -16,7 +16,7 @@ map("c", "<Up>", 'pumvisible() ? "<C-p>" : "<Up>"', { noremap = true, expr = tru
 map("c", "<Down>", 'pumvisible() ? "<C-n>" : "<Down>"', { noremap = true, expr = true, silent = false })
 
 -- paste
--- map("v", "<leader>p", '"_dP', { noremap = true, silent = true })
+map("v", "<leader>p", '"_dP', { noremap = true, silent = true })
 
 -- yank
 -- map('n', 'Y', 'y$', { noremap = true, silent = true })
@@ -43,14 +43,14 @@ map("o", "il", ":normal vil<CR>", { noremap = true, silent = true })
 map("x", "al", "$o0", { noremap = true, silent = true })
 map("o", "al", ":normal val<CR>", { noremap = true, silent = true })
 
--- word wrap
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+-- vim.keymap.set("n", "k", [[(v:count > 1 ? "m'" . v:count : "") . 'k']], { expr = true })
+-- vim.keymap.set("n", "j", [[(v:count > 1 ? "m'" . v:count : "") . 'j']], { expr = true })
+vim.keymap.set("n", "k", [[(v:count > 1 ? "m'" . v:count : "g") . 'k']], { expr = true })
+vim.keymap.set("n", "j", [[(v:count > 1 ? "m'" . v:count : "g") . 'j']], { expr = true })
 
 -- git diff
--- map('n', '<Leader>g',  ':ToggleGStatus<CR>', { noremap = true, silent = true })
-map("n", "<leader>g", ":ToggleGStatus<CR>", { noremap = true, silent = true })
-map("n", "<leader>l", ":LazyGit<CR>", { noremap = true, silent = true })
+map("n", "<leader>gf", ":ToggleGStatus<CR>", { noremap = true, silent = true })
+map("n", "<leader>gl", ":LazyGit<CR>", { noremap = true, silent = true })
 map("n", "<Leader>gd", ":Gdiffsplit<CR>", { noremap = true, silent = true })
 map("n", "<Leader>gD", ":Git difftool<CR>", { noremap = true, silent = true })
 map("n", "<Leader>g;", ":diffget //3<CR>", { noremap = true, silent = true })
@@ -75,6 +75,7 @@ map("n", "'", "`", { noremap = true, silent = true })
 map("n", "<leader>M", [[<Cmd>Telescope marks<CR>]], { noremap = true, silent = true })
 map("n", "<Leader>b", [[<Cmd>Telescope buffers initial_mode=insert<CR>]], { noremap = true, silent = true })
 map("n", "<Leader>f", [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
+map("n", "<Leader>/", [[<Cmd>Telescope current_buffer_fuzzy_find<CR>]], { noremap = true, silent = true })
 map(
 	"n",
 	"<Leader>sd",
@@ -87,9 +88,13 @@ map(
 	[[<Cmd>lua require("telescope").extensions.neoclip.default()<CR>]],
 	{ noremap = true, silent = true }
 )
-map("n", "<leader>o", [[<Cmd>Telescope oldfiles<CR>]], { noremap = true, silent = true })
+-- map("n", "<leader>o", [[<Cmd>Telescope oldfiles<CR>]], { noremap = true, silent = true })
 map("n", "<leader>p", [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent = true })
-
+vim.keymap.set("n", "<leader>o", function()
+	require("telescope").extensions.smart_open.smart_open(
+		require("telescope.themes").get_dropdown({ cwd_only = true, previewer = false, theme = "ivy" })
+	)
+end, { noremap = true, silent = true })
 --undo break point
 map("i", ",", ",<c-g>u", { noremap = true, silent = true })
 map("i", ".", ".<c-g>u", { noremap = true, silent = true })
@@ -99,8 +104,8 @@ map("i", "?", "?<c-g>u", { noremap = true, silent = true })
 map("n", "<F1>", ':lua require"dap".toggle_breakpoint()<CR>', { noremap = true })
 map("n", "<F2>", ':lua require"dap".continue()<CR>', { noremap = true })
 
-map("n", "<leader>j", ":vertical resize -5<CR>", { noremap = true, silent = true })
-map("n", "<leader>k", ":vertical resize +5<CR>", { noremap = true, silent = true })
+map("n", "<leader>k", ':exe "resize " . (winheight(0) * 3/2)<CR>', { noremap = true, silent = true })
+map("n", "<leader>j", ':exe "resize " . (winheight(0) * 2/3)<CR>', { noremap = true, silent = true })
 
 -- HlsLens
 map(
@@ -122,6 +127,8 @@ map("n", "g#", "g#<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
 
 map("n", "<Left>", ":lua require('bufjump').backward()<CR>", { noremap = true, silent = true })
 map("n", "<Right>", ":lua require('bufjump').forward()<CR>", { noremap = true, silent = true })
+map("n", "<M-o>", ":lua require('bufjump').backward_same_buf()<cr>", { noremap = true, silent = true })
+map("n", "<M-i>", ":lua require('bufjump').forward_same_buf()<cr>", { noremap = true, silent = true })
 
 --  Center stuff
 map("n", "n", "nzz", { noremap = true, silent = true })
@@ -132,8 +139,6 @@ map("n", "#", "#zz", { noremap = true, silent = true })
 map("n", "<leader>M", "<cmd>MarksQFListBuf<cr>", { silent = true })
 map("n", "<leader>m", "<cmd>MarksQFListGlobal<cr>", { silent = true })
 
-map("n", "gb", "<cmd>ScrollbarToggle<cr>", { silent = true })
-
 --Trouble
 map("n", "<leader>d", "<cmd>Trouble<cr>", { silent = true, noremap = true })
 
@@ -141,6 +146,7 @@ map("n", "<leader>d", "<cmd>Trouble<cr>", { silent = true, noremap = true })
 map("n", "<leader>tn", ":tabnew %<CR>", { noremap = true, silent = true })
 map("n", "<leader>to", ":tabonly<CR>", { noremap = true, silent = true })
 map("n", "<leader>tq", ":tabclose<CR>", { noremap = true, silent = true })
+map("n", "<leader>tr", ":TabRename ", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<C-q>", function()
 	-- close current win if there are more than 1 win

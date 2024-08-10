@@ -16,7 +16,20 @@ return {
 	{
 		"max397574/better-escape.nvim",
 		config = function()
-			require("better_escape").setup()
+			require("better_escape").setup({
+				mappings = {
+					t = {
+						j = {
+							k = false,
+							j = false,
+						},
+						k = {
+							k = false,
+							j = false,
+						},
+					},
+				},
+			})
 		end,
 	},
 	{
@@ -24,13 +37,15 @@ return {
 		config = function()
 			require("workspaces").setup({
 				hooks = {
-					open = { "lua require('oil').open(vim.fn.getcwd())" },
+					open = {
+						"lua require('telescope').extensions.smart_open.smart_open(require('telescope.themes').get_dropdown({ cwd_only = true, previewer = false, theme = 'ivy' }))",
+					},
 				},
 			})
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>sp",
-				[[<Cmd>Telescope workspaces<CR>]],
+				[[<Cmd>Telescope workspaces theme=ivy<CR>]],
 				{ noremap = true, silent = true }
 			)
 		end,
@@ -68,16 +83,16 @@ return {
 		config = function()
 			require("various-textobjs").setup({ useDefaultKeymaps = false })
 			vim.keymap.set({ "o", "x" }, "ii", function()
-				require("various-textobjs").indentation(true, true)
+				require("various-textobjs").indentation("inner", "inner")
 			end)
 			vim.keymap.set({ "o", "x" }, "ai", function()
-				require("various-textobjs").indentation(false, true)
+				require("various-textobjs").indentation("outer", "inner")
 			end)
 			vim.keymap.set({ "o", "x" }, "as", function()
-				require("various-textobjs").subword(false)
+				require("various-textobjs").subword("outer")
 			end)
 			vim.keymap.set({ "o", "x" }, "is", function()
-				require("various-textobjs").subword(true)
+				require("various-textobjs").subword("inner")
 			end)
 			vim.keymap.set({ "o", "x" }, "n", function()
 				require("various-textobjs").nearEoL()
@@ -85,11 +100,11 @@ return {
 			vim.keymap.set({ "o", "x" }, "r", function()
 				require("various-textobjs").restOfParagraph()
 			end)
-			vim.keymap.set({ "o", "x" }, "iv", "<cmd>lua require('various-textobjs').value(true)<CR>")
-			vim.keymap.set({ "o", "x" }, "av", "<cmd>lua require('various-textobjs').value(false)<CR>")
+			vim.keymap.set({ "o", "x" }, "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>")
+			vim.keymap.set({ "o", "x" }, "av", "<cmd>lua require('various-textobjs').value('outer')<CR>")
 
-			vim.keymap.set({ "o", "x" }, "ik", "<cmd>lua require('various-textobjs').key(true)<CR>")
-			vim.keymap.set({ "o", "x" }, "ak", "<cmd>lua require('various-textobjs').key(false)<CR>")
+			vim.keymap.set({ "o", "x" }, "ik", "<cmd>lua require('various-textobjs').key('inner')<CR>")
+			vim.keymap.set({ "o", "x" }, "ak", "<cmd>lua require('various-textobjs').key('outer')<CR>")
 		end,
 	},
 
@@ -97,60 +112,56 @@ return {
 		"nanozuki/tabby.nvim",
 		event = "VeryLazy",
 		config = function()
-			local filename = require("tabby.filename")
-			local util = require("tabby.util")
-
-			local hl_tabline = util.extract_nvim_hl("TabLine")
-			local hl_tabline_sel = util.extract_nvim_hl("TabLineSel")
-
-			---@type TabbyTablineOpt
-			local tabline = {
-				hl = "TabLineFill",
-				layout = "active_wins_at_tail",
-				active_tab = {
-					label = function(tabid)
-						return {
-							"  " .. vim.api.nvim_tabpage_get_number(tabid) .. "  ",
-							hl = { fg = hl_tabline_sel.fg, bg = hl_tabline_sel.bg, style = "bold" },
-						}
-					end,
-					right_sep = { " ", hl = "TabLineFill" },
-				},
-				inactive_tab = {
-					label = function(tabid)
-						return {
-							"  " .. vim.api.nvim_tabpage_get_number(tabid) .. "  ",
-							hl = { fg = hl_tabline.fg, bg = hl_tabline.bg, style = "bold" },
-						}
-					end,
-					right_sep = { " ", hl = "TabLineFill" },
-				},
-				top_win = {
-					label = function(winid)
-						return {
-							" > " .. filename.unique(winid) .. " ",
-							hl = "TabLine",
-						}
-					end,
-					left_sep = { " ", hl = "TabLineFill" },
-				},
-				win = {
-					label = function(winid)
-						return {
-							" - " .. filename.unique(winid) .. " ",
-							hl = "TabLine",
-						}
-					end,
-					left_sep = { " ", hl = "TabLineFill" },
-				},
+			local theme = {
+				fill = "TabLineFill",
+				-- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+				head = "TabLine",
+				current_tab = "TabLineSel",
+				tab = "TabLine",
+				win = "TabLine",
+				tail = "TabLine",
 			}
-
 			require("tabby").setup({
-				tabline = tabline,
-				opt = {
-					show_at_least = 2,
-				},
+				line = function(line)
+					return {
+						{
+							{ "  ", hl = theme.head },
+							line.sep("", theme.head, theme.fill),
+						},
+						line.tabs().foreach(function(tab)
+							local hl = tab.is_current() and theme.current_tab or theme.tab
+							return {
+								line.sep("", hl, theme.fill),
+								tab.is_current() and "" or "󰆣",
+								tab.number(),
+								tab.name(),
+								tab.close_btn(""),
+								line.sep("", hl, theme.fill),
+								hl = hl,
+								margin = " ",
+							}
+						end),
+						line.spacer(),
+						line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+							return {
+								line.sep("", theme.win, theme.fill),
+								win.is_current() and "" or "",
+								win.buf_name(),
+								line.sep("", theme.win, theme.fill),
+								hl = theme.win,
+								margin = " ",
+							}
+						end),
+						{
+							line.sep("", theme.tail, theme.fill),
+							{ "  ", hl = theme.tail },
+						},
+						hl = theme.fill,
+					}
+				end,
+				-- option = {}, -- setup modules' option,
 			})
+			vim.o.showtabline = 1
 		end,
 	},
 	{
@@ -179,7 +190,7 @@ return {
 				sections = {
 					lualine_a = { "mode" },
 					lualine_b = { "branch" },
-					lualine_c = {},
+					lualine_c = { "buffers" },
 					lualine_x = { "encoding", "fileformat", "filetype" },
 					lualine_y = { "progress" },
 					lualine_z = { "location" },
@@ -213,13 +224,6 @@ return {
 
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = { "tsx" },
-				autotag = {
-					enable = true,
-					enable_rename = true,
-					enable_close = true,
-					enable_close_on_slash = true,
-					filetypes = { "html", "javascript", "typescript", "javascriptreact", "typescriptreact" },
-				},
 				highlight = {
 					enable = true,
 					additional_vim_regex_highlighting = { "markdown" },
@@ -302,6 +306,9 @@ return {
 	},
 	{
 		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup({})
+		end,
 	},
 	{
 		"nvim-treesitter/playground",
@@ -324,35 +331,8 @@ return {
 		branch = "main",
 		config = function()
 			require("gitsigns").setup({
-				signs = {
-					add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-					change = {
-						hl = "GitSignsChange",
-						text = "│",
-						numhl = "GitSignsChangeNr",
-						linehl = "GitSignsChangeLn",
-					},
-					delete = {
-						hl = "GitSignsDelete",
-						text = "_",
-						numhl = "GitSignsDeleteNr",
-						linehl = "GitSignsDeleteLn",
-					},
-					topdelete = {
-						hl = "GitSignsDelete",
-						text = "‾",
-						numhl = "GitSignsDeleteNr",
-						linehl = "GitSignsDeleteLn",
-					},
-					changedelete = {
-						hl = "GitSignsChange",
-						text = "~",
-						numhl = "GitSignsChangeNr",
-						linehl = "GitSignsChangeLn",
-					},
-				},
-				numhl = false,
-				linehl = false,
+				-- numhl = false,
+				-- linehl = false,
 				on_attach = function(bufnr)
 					local gs = package.loaded.gitsigns
 
@@ -462,6 +442,9 @@ return {
 					},
 				},
 				pickers = {
+					current_buffer_fuzzy_find = {
+						previewer = false,
+					},
 					live_grep = {
 						sorting_strategy = "ascending",
 						layout_config = {
@@ -542,7 +525,11 @@ return {
 		opts = {},
 		-- Optional dependencies
 		config = function()
-			require("oil").setup()
+			require("oil").setup({
+				keymaps = {
+					["<C-p>"] = false,
+				},
+			})
 			vim.api.nvim_set_keymap("n", "<Leader>e", ":Oil<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<Leader>n", ":Oil<CR>", { noremap = true, silent = true })
 		end,
@@ -749,13 +736,18 @@ return {
 		config = function()
 			local harpoon = require("harpoon")
 
-			harpoon:setup()
+			harpoon:setup({
+				settings = {
+					save_on_toggle = true,
+					sync_on_ui_close = true,
+				},
+			})
 
 			vim.keymap.set("n", "<leader>a", function()
-				harpoon:list():append()
+				harpoon:list():add()
 			end)
 			vim.keymap.set("n", "<leader>h", function()
-				harpoon.ui:toggle_quick_menu(harpoon:list())
+				harpoon.ui:oggle_quick_menu(harpoon:list())
 			end)
 
 			vim.keymap.set("n", "<leader>1", function()
@@ -936,9 +928,14 @@ return {
 			)
 			vim.api.nvim_set_keymap("n", "<leader>r", [[<Cmd>Lspsaga rename<CR>]], { noremap = true, silent = true })
 			vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
-			vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true, noremap = true })
+			-- vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true, noremap = true })
 			vim.keymap.set("n", "gD", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
-			vim.keymap.set("n", "ge", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true, noremap = true })
+			vim.keymap.set(
+				"n",
+				"<leader>dl",
+				"<cmd>Lspsaga show_line_diagnostics<CR>",
+				{ silent = true, noremap = true }
+			)
 			vim.keymap.set("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
 			vim.keymap.set("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 			vim.keymap.set("n", "<Leader>tt", "<cmd>Lspsaga term_toggle<CR>")
@@ -970,8 +967,11 @@ return {
 		"ggandor/leap.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("leap").setup({})
+			require("leap").setup({ highlight_unlabeled_phase_one_targets = true })
 			require("leap").set_default_keymaps()
+			vim.keymap.set({ "n", "o" }, "gs", function()
+				require("leap.remote").action()
+			end)
 		end,
 	},
 	-- {
@@ -1055,6 +1055,39 @@ return {
 				},
 			})
 			vim.api.nvim_set_keymap("n", "go", ":ZenMode<CR>", { noremap = true, silent = true })
+		end,
+	},
+	{
+		"bloznelis/before.nvim",
+		config = function()
+			local before = require("before")
+			before.setup()
+
+			vim.keymap.set("n", "[c", before.jump_to_last_edit, {})
+			vim.keymap.set("n", "]c", before.jump_to_next_edit, {})
+		end,
+	},
+	{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	{
+		"danielfalk/smart-open.nvim",
+		branch = "0.2.x",
+		config = function()
+			require("telescope").load_extension("smart_open")
+		end,
+		dependencies = {
+			"kkharji/sqlite.lua",
+			-- Only required if using match_algorithm fzf
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			-- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+			{ "nvim-telescope/telescope-fzy-native.nvim" },
+			dfd,
+		},
+	},
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+		config = function()
+			require("dressing").setup()
 		end,
 	},
 }

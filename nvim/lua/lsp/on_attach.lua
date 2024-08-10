@@ -34,9 +34,9 @@ local function on_attach(client, bufnr)
 		})
 	end
 
-	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint(bufnr, true)
-	end
+	-- if client.server_capabilities.inlayHintProvider then
+	-- 	vim.lsp.inlay_hint(bufnr)
+	-- end
 
 	--[[ vim.api.nvim_create_autocmd("CursorHold", {
 		buffer = bufnr,

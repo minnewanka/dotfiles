@@ -9,14 +9,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		-- vim.api.nvim_set_hl(0, "TSProperty", { link = "Green" })
 		vim.api.nvim_set_hl(0, "TSConstructor", { link = "Yellow" })
 		vim.api.nvim_set_hl(0, "LeapBackdrop", { fg = "#777777" })
-		vim.api.nvim_set_hl(0, "CurrentWord", { bg = "#32302f", bold = true })
+		-- vim.api.nvim_set_hl(0, "CurrentWord", { bg = "#32302f", bold = true })
 		vim.api.nvim_set_hl(0, "HarpoonWindow", { bg = "NONE" })
 		vim.api.nvim_set_hl(0, "DiagnosticError", { link = "Red" })
 		vim.api.nvim_set_hl(0, "DiagnosticHint", { link = "Green" })
 		vim.api.nvim_set_hl(0, "DiagnosticWarn", { link = "Yellow" })
+		vim.api.nvim_set_hl(0, "WinBar", { link = "Yellow" })
 		-- vim.api.nvim_set_hl(0, "FlashMatch", { link = "Comment" })
 		-- vim.api.nvim_set_hl(0, "FlashCurrent", { link = "Red" })
 		-- vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#ccff88", bg = "NONE" })
+		vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#2e3b3b" })
 	end,
 })
 
