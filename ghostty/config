@@ -1,0 +1,13 @@
+font-family = MonoLisa 
+font-style = Regular
+font-size = 12
+
+keybind = super+s=text::w\x0D
+
+shell-integration = fish
+
+theme = philippe-theme
+cursor-invert-fg-bg = true
+
+
+

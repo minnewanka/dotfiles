@@ -81,7 +81,9 @@ return {
 	{
 		"chrisgrieser/nvim-various-textobjs",
 		config = function()
-			require("various-textobjs").setup({ useDefaultKeymaps = false })
+			require("various-textobjs").setup({ keymaps = {
+				useDefaults = false,
+			} })
 			vim.keymap.set({ "o", "x" }, "ii", function()
 				require("various-textobjs").indentation("inner", "inner")
 			end)
@@ -468,7 +470,6 @@ return {
 						sort_mru = true,
 						ignore_current_buffer = true,
 						theme = "dropdown",
-						previewer = false,
 
 						mappings = {
 							i = {
@@ -528,6 +529,8 @@ return {
 			require("oil").setup({
 				keymaps = {
 					["<C-p>"] = false,
+					["<C-l>"] = false,
+					["<C-h>"] = false,
 				},
 			})
 			vim.api.nvim_set_keymap("n", "<Leader>e", ":Oil<CR>", { noremap = true, silent = true })
@@ -747,7 +750,7 @@ return {
 				harpoon:list():add()
 			end)
 			vim.keymap.set("n", "<leader>h", function()
-				harpoon.ui:oggle_quick_menu(harpoon:list())
+				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end)
 
 			vim.keymap.set("n", "<leader>1", function()
@@ -974,45 +977,7 @@ return {
 			end)
 		end,
 	},
-	-- {
-	-- 	"folke/flash.nvim",
-	-- 	event = "VeryLazy",
-	-- 	---@type Flash.Config
-	-- 	opts = {
-	-- 		modes = {
-	-- 			char = {
-	-- 				enabled = false,
-	-- 			},
-	-- 		},
-	-- 	},
-	-- 	keys = {
-	-- 		{
-	-- 			"s",
-	-- 			mode = { "n", "x", "o" },
-	-- 			function()
-	-- 				-- default options: exact mode, multi window, all directions, with a backdrop
-	-- 				require("flash").jump()
-	-- 			end,
-	-- 			desc = "Flash",
-	-- 		},
-	-- 		{
-	-- 			"S",
-	-- 			mode = { "n", "o", "x" },
-	-- 			function()
-	-- 				require("flash").treesitter()
-	-- 			end,
-	-- 			desc = "Flash Treesitter",
-	-- 		},
-	-- 		{
-	-- 			"r",
-	-- 			mode = "o",
-	-- 			function()
-	-- 				require("flash").remote()
-	-- 			end,
-	-- 			desc = "Remote Flash",
-	-- 		},
-	-- 	},
-	-- },
+
 	{
 		"j-hui/fidget.nvim",
 		tag = "legacy",
