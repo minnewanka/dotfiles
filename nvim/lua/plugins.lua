@@ -855,6 +855,15 @@ return {
 			--
 			-- See the full "keymap" documentation for information on defining your own keymap.
 			keymap = { preset = "enter", ["<C-D>"] = { "show", "show_documentation", "hide_documentation" } },
+			cmdline = {
+				keymap = {
+					preset = "cmdline",
+					["<Up>"] = { "select_prev", "fallback" },
+					["<Down>"] = { "select_next", "fallback" },
+					["<C-k>"] = { "select_prev", "fallback" },
+					["<C-j>"] = { "select_next", "fallback" },
+				},
+			},
 
 			appearance = {
 				-- Sets the fallback highlight groups to nvim-cmp's highlight groups
