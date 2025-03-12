@@ -50,7 +50,6 @@ vim.keymap.set("n", "j", [[(v:count > 1 ? "m'" . v:count : "g") . 'j']], { expr 
 
 -- git diff
 map("n", "<leader>gf", ":ToggleGStatus<CR>", { noremap = true, silent = true })
-map("n", "<leader>gl", ":LazyGit<CR>", { noremap = true, silent = true })
 map("n", "<Leader>gd", ":Gdiffsplit<CR>", { noremap = true, silent = true })
 map("n", "<Leader>gD", ":Git difftool<CR>", { noremap = true, silent = true })
 map("n", "<Leader>g;", ":diffget //3<CR>", { noremap = true, silent = true })

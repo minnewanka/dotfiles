@@ -954,19 +954,6 @@ return {
 	},
 
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("ibl").setup({ indent = { char = "▏" } })
-		end,
-	},
-
-	{
-		"kdheepak/lazygit.nvim",
-		cmd = "LazyGit",
-	},
-
-	{
 		"ggandor/leap.nvim",
 		event = "VeryLazy",
 		config = function()
@@ -1011,18 +998,6 @@ return {
 	},
 
 	{
-		"folke/zen-mode.nvim",
-		keys = { "go" },
-		config = function()
-			require("zen-mode").setup({
-				window = {
-					height = 0.9,
-				},
-			})
-			vim.api.nvim_set_keymap("n", "go", ":ZenMode<CR>", { noremap = true, silent = true })
-		end,
-	},
-	{
 		"bloznelis/before.nvim",
 		config = function()
 			local before = require("before")
@@ -1049,10 +1024,69 @@ return {
 		},
 	},
 	{
-		"stevearc/dressing.nvim",
-		opts = {},
-		config = function()
-			require("dressing").setup()
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		---@type snacks.Config
+		opts = {
+			bigfile = { enabled = true },
+			dashboard = { enabled = true },
+			indent = { enabled = true },
+			input = { enabled = true },
+			quickfile = { enabled = true },
+			statuscolumn = { enabled = true },
+			words = { enabled = true },
+			zen = {
+				enabled = true,
+				toggles = {
+					dim = false,
+					git_signs = true,
+				},
+			},
+			lazygit = { enabled = true },
+			notifier = { enabled = true },
+		},
+		keys = {
+			{
+				"go",
+				function()
+					Snacks.zen()
+				end,
+			},
+			{
+				"<leader>gl",
+				function()
+					Snacks.lazygit.open()
+				end,
+			},
+			{
+				"]]",
+				function()
+					Snacks.words.jump(vim.v.count1)
+				end,
+				desc = "Next Reference",
+				mode = { "n", "t" },
+			},
+			{
+				"[[",
+				function()
+					Snacks.words.jump(-vim.v.count1)
+				end,
+				desc = "Prev Reference",
+				mode = { "n", "t" },
+			},
+		},
+		init = function()
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "VeryLazy",
+				callback = function()
+					vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+					-- Create some toggle mappings
+					Snacks.toggle.line_number():map("<leader>ul")
+					Snacks.toggle.inlay_hints():map("<leader>uh")
+				end,
+			})
 		end,
 	},
 }
