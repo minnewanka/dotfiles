@@ -14,6 +14,45 @@ return {
 	},
 	{ "github/copilot.vim", event = "VeryLazy" },
 	{
+		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			local conform = require("conform")
+
+			conform.setup({
+				formatters_by_ft = {
+					javascript = { "prettier" },
+					typescript = { "prettier" },
+					javascriptreact = { "prettier" },
+					typescriptreact = { "prettier" },
+					svelte = { "prettier" },
+					css = { "prettier" },
+					html = { "prettier" },
+					json = { "prettier" },
+					yaml = { "prettier" },
+					markdown = { "prettier" },
+					graphql = { "prettier" },
+					liquid = { "prettier" },
+					lua = { "stylua" },
+					python = { "isort", "black" },
+				},
+				format_on_save = {
+					lsp_fallback = true,
+					async = false,
+					timeout_ms = 1000,
+				},
+			})
+
+			vim.keymap.set({ "n", "v" }, "<leader><leader>", function()
+				conform.format({
+					lsp_fallback = true,
+					async = false,
+					timeout_ms = 1000,
+				})
+			end, { desc = "Format file or range (in visual mode)" })
+		end,
+	},
+	{
 		"max397574/better-escape.nvim",
 		config = function()
 			require("better_escape").setup({
@@ -469,7 +508,7 @@ return {
 					buffers = {
 						sort_mru = true,
 						ignore_current_buffer = true,
-						theme = "dropdown",
+						theme = "ivy",
 
 						mappings = {
 							i = {
@@ -897,14 +936,6 @@ return {
 			vim.keymap.set("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
 			vim.keymap.set("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 			vim.keymap.set("n", "<Leader>tt", "<cmd>Lspsaga term_toggle<CR>")
-		end,
-	},
-
-	{
-		"nvimtools/none-ls.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("lsp/null-ls")
 		end,
 	},
 

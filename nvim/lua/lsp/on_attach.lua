@@ -3,14 +3,14 @@ local function on_attach(client, bufnr)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true })
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true })
 
-	if client.server_capabilities.documentFormattingProvider then
-		vim.keymap.set(
-			"n",
-			"<Leader><Leader>",
-			[[<Cmd>lua vim.lsp.buf.format()<CR>]],
-			{ noremap = true, silent = true }
-		)
-	end
+	-- if client.server_capabilities.documentFormattingProvider then
+	-- 	vim.keymap.set(
+	-- 		"n",
+	-- 		"<Leader><Leader>",
+	-- 		[[<Cmd>lua vim.lsp.buf.format()<CR>]],
+	-- 		{ noremap = true, silent = true }
+	-- 	)
+	-- end
 	vim.keymap.set("n", "gi", [[<Cmd>lua vim.lsp.buf.implementation()<CR>]], { noremap = true, silent = true })
 
 	-- Set autocommands conditional on server_capabilities
