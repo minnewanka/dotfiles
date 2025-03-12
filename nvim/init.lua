@@ -2,6 +2,8 @@ vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappin
 
 vim.g.gruvbox_material_foreground = "mix"
 vim.g.gruvbox_material_background = "hard"
+vim.g.gruvbox_material_menu_selection_background = "blue"
+vim.g.gruvbox_material_float_style = "dim"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

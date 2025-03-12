@@ -1,7 +1,7 @@
 local on_attach = require("lsp.on_attach")
 local util = require("lspconfig/util")
 local root_pattern = util.root_pattern
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 require("typescript-tools").setup({
 	on_attach = on_attach,
