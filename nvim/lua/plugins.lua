@@ -1,4 +1,5 @@
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.maplocalleader = ";"
 
 return {
 	"nvim-tree/nvim-web-devicons",
@@ -570,6 +571,27 @@ return {
 					["<C-p>"] = false,
 					["<C-l>"] = false,
 					["<C-h>"] = false,
+					gs = {
+						callback = function()
+							-- get the current directory
+							local prefills = { paths = require("oil").get_current_dir() }
+
+							local grug_far = require("grug-far")
+							-- instance check
+							if not grug_far.has_instance("explorer") then
+								grug_far.open({
+									instanceName = "explorer",
+									prefills = prefills,
+									staticTitle = "Find and Replace from Explorer",
+								})
+							else
+								grug_far.open_instance("explorer")
+								-- updating the prefills without clearing the search and other fields
+								grug_far.update_instance_prefills("explorer", prefills, false)
+							end
+						end,
+						desc = "oil: Search in directory",
+					},
 				},
 			})
 			vim.api.nvim_set_keymap("n", "<Leader>e", ":Oil<CR>", { noremap = true, silent = true })
@@ -741,22 +763,20 @@ return {
 		end,
 	},
 	{
-		"windwp/nvim-spectre",
-		keys = "<leader>s",
+		"MagicDuck/grug-far.nvim",
 		config = function()
-			require("spectre").setup({
-				mapping = {
-					["send_to_qf"] = {
-						map = "<C-q>",
-						cmd = "<cmd>lua require('spectre.actions').send_to_qf()<CR>",
-						desc = "send all item to quickfix",
-					},
-				},
+			-- optional setup call to override plugin options
+			-- alternatively you can set options with vim.g.grug_far = { ... }
+			require("grug-far").setup({
+				-- options, see Configuration section below
+				-- there are no required options atm
+				-- engine = 'ripgrep' is default, but 'astgrep' or 'astgrep-rules' can
+				-- be specified
 			})
 			vim.api.nvim_set_keymap(
 				"n",
 				"<Leader>s",
-				[[<Cmd>lua require('spectre').open()<CR>]],
+				[[<Cmd>lua require("grug-far").open()<CR>]],
 				{ noremap = true, silent = true }
 			)
 		end,
