@@ -35,7 +35,7 @@ return {
 					graphql = { "prettier" },
 					liquid = { "prettier" },
 					lua = { "stylua" },
-					python = { "isort", "black" },
+					python = { "isort" },
 				},
 				format_on_save = {
 					lsp_fallback = true,
@@ -954,7 +954,7 @@ return {
 			)
 			vim.api.nvim_set_keymap("n", "<leader>r", [[<Cmd>Lspsaga rename<CR>]], { noremap = true, silent = true })
 			vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
-			-- vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true, noremap = true })
+			vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true, noremap = true })
 			vim.keymap.set("n", "gD", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
 			vim.keymap.set(
 				"n",
@@ -1022,7 +1022,26 @@ return {
 			vim.keymap.set("n", "]c", before.jump_to_next_edit, {})
 		end,
 	},
-	{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		config = function()
+			require("toggleterm").setup()
+			function _G.set_terminal_keymaps()
+				local opts = { buffer = 0 }
+				vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+				vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+				vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+				vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+				vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+				vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+				vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
+			end
+
+			-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+			vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+		end,
+	},
 	{
 		"danielfalk/smart-open.nvim",
 		branch = "0.2.x",
@@ -1112,4 +1131,24 @@ return {
 			})
 		end,
 	},
+	{
+		"szw/vim-maximizer",
+		keys = { "<leader>m" },
+		config = function()
+			vim.keymap.set("n", "<leader>m", "<cmd>MaximizerToggle<CR>", { noremap = true, silent = true })
+		end,
+	},
+	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		dependencies = {
+			{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+		},
+		build = "make tiktoken", -- Only on MacOS or Linux
+		opts = {
+			-- See Configuration section for options
+		},
+		-- See Commands section for default commands if you want to lazy load on them
+	},
+	{ "mfussenegger/nvim-jdtls" },
 }

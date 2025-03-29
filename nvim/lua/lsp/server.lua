@@ -8,6 +8,8 @@ require("typescript-tools").setup({
 })
 
 require("lspconfig").eslint.setup({})
+require("lspconfig").gopls.setup({})
+require("lspconfig").basedpyright.setup({})
 
 -- require("lspconfig").tsserver.setup({
 -- 	on_attach = on_attach,

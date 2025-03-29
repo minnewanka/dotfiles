@@ -135,9 +135,6 @@ map("n", "N", "Nzz", { noremap = true, silent = true })
 map("n", "*", "*zz", { noremap = true, silent = true })
 map("n", "#", "#zz", { noremap = true, silent = true })
 
-map("n", "<leader>M", "<cmd>MarksQFListBuf<cr>", { silent = true })
-map("n", "<leader>m", "<cmd>MarksQFListGlobal<cr>", { silent = true })
-
 --Trouble
 map("n", "<leader>d", "<cmd>Trouble<cr>", { silent = true, noremap = true })
 
