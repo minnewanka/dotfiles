@@ -1,4 +1,5 @@
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
+-- vim.o.winborder = "rounded"
 
 vim.g.gruvbox_material_foreground = "mix"
 vim.g.gruvbox_material_background = "hard"

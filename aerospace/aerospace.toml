@@ -101,9 +101,8 @@ alt-shift-l = 'move right'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-alt-shift-ctrl-9 = 'resize smart -50'
-alt-shift-ctrl-0 = 'resize smart +50'
-alt-shift-ctrl-f = 'fullscreen'
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-1 = 'workspace 1'
@@ -138,7 +137,14 @@ alt-shift-semicolon = 'mode service'
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'
-5 = 'secondary'
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'main'
+6 = 'secondary'
+7 = 'secondary'
+8 = 'secondary'
+9 = 'secondary'
 
 # 'service' binding mode declaration\ See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
@@ -167,6 +173,10 @@ run = "move-node-to-workspace 1"
 
 [[on-window-detected]]
 if.app-id = "com.mitchellh.ghostty"
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = "com.todesktop.230313mzl4w4u92"
 run = "move-node-to-workspace 2"
 
 [[on-window-detected]]

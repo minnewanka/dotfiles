@@ -852,6 +852,9 @@ return {
 	},
 	{
 		"saghen/blink.cmp",
+		dependencies = {
+			"Kaiser-Yang/blink-cmp-avante",
+		},
 		-- optional: provides snippets for the snippet source
 
 		-- use a release tag to download pre-built binaries
@@ -908,7 +911,13 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = { "avante", "lsp", "path", "snippets", "buffer" },
+				providers = {
+					avante = {
+						module = "blink-cmp-avante",
+						name = "Avante",
+					},
+				},
 			},
 
 			-- Blink.cmp uses a Rust fuzzy matcher by default for typo resistance and significantly better performance
@@ -919,53 +928,6 @@ return {
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
 		opts_extend = { "sources.default" },
-	},
-
-	{
-		"glepnir/lspsaga.nvim",
-		event = "VeryLazy",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		branch = "main",
-		config = function()
-			local saga = require("lspsaga")
-
-			saga.setup({
-				callhierarchy = {
-					show_detail = false,
-					keys = {
-						edit = "<CR>",
-						vsplit = "s",
-						split = "i",
-						tabe = "t",
-						jump = "o",
-						quit = "q",
-						expand_collapse = "u",
-					},
-				},
-			})
-
-			vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true, noremap = true })
-			vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true, noremap = true })
-			vim.keymap.set(
-				"v",
-				"<leader>ca",
-				"<cmd><C-U>Lspsaga range_code_action<CR>",
-				{ silent = true, noremap = true }
-			)
-			vim.api.nvim_set_keymap("n", "<leader>r", [[<Cmd>Lspsaga rename<CR>]], { noremap = true, silent = true })
-			vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
-			vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true, noremap = true })
-			vim.keymap.set("n", "gD", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
-			vim.keymap.set(
-				"n",
-				"<leader>dl",
-				"<cmd>Lspsaga show_line_diagnostics<CR>",
-				{ silent = true, noremap = true }
-			)
-			vim.keymap.set("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-			vim.keymap.set("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
-			vim.keymap.set("n", "<Leader>tt", "<cmd>Lspsaga term_toggle<CR>")
-		end,
 	},
 
 	{
@@ -1079,6 +1041,7 @@ return {
 			},
 			lazygit = { enabled = true },
 			notifier = { enabled = true },
+			picker = { enabled = true },
 		},
 		keys = {
 			{
@@ -1108,6 +1071,13 @@ return {
 				end,
 				desc = "Prev Reference",
 				mode = { "n", "t" },
+			},
+			{
+				"<leader>o",
+				function()
+					Snacks.picker.smart({ layout = { preset = "select" } })
+				end,
+				desc = "Smart Find Files",
 			},
 		},
 		init = function()
@@ -1151,4 +1121,25 @@ return {
 		-- See Commands section for default commands if you want to lazy load on them
 	},
 	{ "mfussenegger/nvim-jdtls" },
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		version = false,
+		opts = {
+			provider = "copilot",
+			auto_suggestions_provider = nil,
+		},
+		build = "make",
+		dependencies = {
+			"zbirenbaum/copilot.lua",
+			"nvim-treesitter/nvim-treesitter",
+			"stevearc/dressing.nvim",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"echasnovski/mini.pick",
+			"nvim-telescope/telescope.nvim",
+			"ibhagwan/fzf-lua",
+		},
+	},
 }

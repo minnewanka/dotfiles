@@ -52,8 +52,8 @@ vim.keymap.set("n", "j", [[(v:count > 1 ? "m'" . v:count : "g") . 'j']], { expr 
 map("n", "<leader>gf", ":ToggleGStatus<CR>", { noremap = true, silent = true })
 map("n", "<Leader>gd", ":Gdiffsplit<CR>", { noremap = true, silent = true })
 map("n", "<Leader>gD", ":Git difftool<CR>", { noremap = true, silent = true })
-map("n", "<Leader>g;", ":diffget //3<CR>", { noremap = true, silent = true })
-map("n", "<Leader>gj", ":diffget //2<CR>", { noremap = true, silent = true })
+map("n", "<Leader>gdl", ":diffget //3<CR>", { noremap = true, silent = true })
+map("n", "<Leader>gdh", ":diffget //2<CR>", { noremap = true, silent = true })
 
 -- Tab
 map(
@@ -87,13 +87,7 @@ map(
 	[[<Cmd>lua require("telescope").extensions.neoclip.default()<CR>]],
 	{ noremap = true, silent = true }
 )
--- map("n", "<leader>o", [[<Cmd>Telescope oldfiles<CR>]], { noremap = true, silent = true })
 map("n", "<leader>p", [[<Cmd>Telescope find_files<CR>]], { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>o", function()
-	require("telescope").extensions.smart_open.smart_open(
-		require("telescope.themes").get_dropdown({ cwd_only = true, previewer = false, theme = "ivy" })
-	)
-end, { noremap = true, silent = true })
 --undo break point
 map("i", ",", ",<c-g>u", { noremap = true, silent = true })
 map("i", ".", ".<c-g>u", { noremap = true, silent = true })
@@ -134,9 +128,6 @@ map("n", "n", "nzz", { noremap = true, silent = true })
 map("n", "N", "Nzz", { noremap = true, silent = true })
 map("n", "*", "*zz", { noremap = true, silent = true })
 map("n", "#", "#zz", { noremap = true, silent = true })
-
---Trouble
-map("n", "<leader>d", "<cmd>Trouble<cr>", { silent = true, noremap = true })
 
 -- tab
 map("n", "<leader>tn", ":tabnew %<CR>", { noremap = true, silent = true })
