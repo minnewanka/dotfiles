@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
 
 --remap toggle file
 map("n", "<BS>", "<C-^>", { noremap = true, silent = true })
@@ -31,9 +32,9 @@ map("n", "<Leader>w", "<cmd>qa!<CR>", { noremap = true, silent = false })
 map("n", "<Leader>q", "<cmd>q!<CR>", { noremap = true, silent = false })
 map("n", "<Leader>z", "<cmd>wq<CR>", { noremap = true, silent = true })
 
--- remap esc
-map("i", "jk", "<ESC>", { noremap = true, silent = true })
-map("i", "kj", "<ESC>", { noremap = true, silent = true })
+-- -- remap esc
+-- map("i", "jk", "<ESC>", { noremap = true, silent = true })
+-- map("i", "kj", "<ESC>", { noremap = true, silent = true })
 
 map("n", "<leader>T", ":lua vim.lsp.diagnostic.set_loclist()<CR>", { noremap = true, silent = true })
 
@@ -43,8 +44,6 @@ map("o", "il", ":normal vil<CR>", { noremap = true, silent = true })
 map("x", "al", "$o0", { noremap = true, silent = true })
 map("o", "al", ":normal val<CR>", { noremap = true, silent = true })
 
--- vim.keymap.set("n", "k", [[(v:count > 1 ? "m'" . v:count : "") . 'k']], { expr = true })
--- vim.keymap.set("n", "j", [[(v:count > 1 ? "m'" . v:count : "") . 'j']], { expr = true })
 vim.keymap.set("n", "k", [[(v:count > 1 ? "m'" . v:count : "g") . 'k']], { expr = true })
 vim.keymap.set("n", "j", [[(v:count > 1 ? "m'" . v:count : "g") . 'j']], { expr = true })
 
@@ -74,6 +73,10 @@ map("n", "'", "`", { noremap = true, silent = true })
 map("n", "<leader>M", [[<Cmd>Telescope marks<CR>]], { noremap = true, silent = true })
 map("n", "<Leader>b", [[<Cmd>Telescope buffers initial_mode=insert<CR>]], { noremap = true, silent = true })
 map("n", "<Leader>f", [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true })
+map("n", "<Leader>fs", [[<Cmd>Telescope grep_string<CR>]], { noremap = true, silent = true })
+map("v", "<Leader>fs", [[<Cmd>Telescope grep_string<CR>]], { noremap = true, silent = true })
+map("n", "<Leader>fo", [[<Cmd>Telescope oldfiles<CR>]], { noremap = true, silent = true })
+map("n", "<Leader>o", [[<Cmd>Telescope smart_open cwd_only=true<CR>]], { noremap = true, silent = true })
 map("n", "<Leader>/", [[<Cmd>Telescope current_buffer_fuzzy_find<CR>]], { noremap = true, silent = true })
 map(
 	"n",
@@ -99,6 +102,7 @@ map("n", "<F2>", ':lua require"dap".continue()<CR>', { noremap = true })
 
 map("n", "<leader>k", ':exe "resize " . (winheight(0) * 3/2)<CR>', { noremap = true, silent = true })
 map("n", "<leader>j", ':exe "resize " . (winheight(0) * 2/3)<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>fr", require("telescope.builtin").resume, {})
 
 -- HlsLens
 map(
@@ -134,6 +138,13 @@ map("n", "<leader>tn", ":tabnew %<CR>", { noremap = true, silent = true })
 map("n", "<leader>to", ":tabonly<CR>", { noremap = true, silent = true })
 map("n", "<leader>tq", ":tabclose<CR>", { noremap = true, silent = true })
 map("n", "<leader>tr", ":TabRename ", { noremap = true, silent = true })
+
+-- unimpaired alternatives
+-- Quickfix list
+map("n", ",qn", ":cnext<CR>", opts)
+map("n", ",qp", ":cprev<CR>", opts)
+map("n", ",qo", ":copen<CR>", opts)
+map("n", ",qc", ":cclose<CR>", opts)
 
 vim.keymap.set("n", "<C-q>", function()
 	-- close current win if there are more than 1 win

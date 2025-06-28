@@ -41,7 +41,7 @@ vim.opt.shell = "/bin/bash"
 opt.laststatus = 2
 vim.o.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
 opt.fillchars:append({ eob = " " })
-vim.opt.signcolumn = "yes:2"
+vim.opt.signcolumn = "yes"
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	pattern = "*",

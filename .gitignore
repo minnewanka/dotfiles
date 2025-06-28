@@ -5,3 +5,4 @@ fish_variables
 **/fzf*.fish
 **/nvm*.fish
 **/_*.fish
+.aider*
