@@ -58,16 +58,8 @@ return {
 		config = function()
 			require("better_escape").setup({
 				mappings = {
-					t = {
-						j = {
-							k = false,
-							j = false,
-						},
-						k = {
-							k = false,
-							j = false,
-						},
-					},
+					t = { j = { false } }, -- lazygit navigation fix
+					v = { j = { false } }, -- lazygit navigation fix
 				},
 			})
 		end,
@@ -385,7 +377,7 @@ return {
 					end
 
 					-- Navigation
-					map("n", "gn", function()
+					map("n", ",gn", function()
 						if vim.wo.diff then
 							return "]c"
 						end
@@ -395,7 +387,7 @@ return {
 						return "<Ignore>"
 					end, { expr = true })
 
-					map("n", "gp", function()
+					map("n", ",gp", function()
 						if vim.wo.diff then
 							return "[c"
 						end
@@ -460,6 +452,15 @@ return {
 
 			require("telescope").setup({
 				defaults = {
+					vimgrep_arguments = {
+						"rg",
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+					},
 					path_display = { "truncate" },
 					file_sorter = require("telescope.sorters").get_fzy_sorter,
 					file_ignore_patterns = { "docs", "docs-dev", "node_modules" },
@@ -473,13 +474,15 @@ return {
 							["<C-q>"] = actions.smart_send_to_qflist,
 							["<C-j>"] = actions.move_selection_next,
 							["<C-k>"] = actions.move_selection_previous,
-							["<leader>q"] = actions.close,
+							["<esc>"] = actions.close,
+							["<C-s>"] = require("telescope.actions").select_horizontal,
+							["<C-v>"] = require("telescope.actions").select_vertical,
+							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
 						},
 						n = {
 							["<C-q>"] = actions.smart_send_to_qflist,
 							["<C-j>"] = actions.move_selection_next,
 							["<C-k>"] = actions.move_selection_previous,
-							["<leader>q"] = actions.close,
 						},
 					},
 				},
@@ -522,6 +525,13 @@ return {
 					},
 				},
 				extensions = {
+					fzf = {
+						fuzzy = true, -- false will only do exact matching
+						override_generic_sorter = true, -- override the generic sorter
+						override_file_sorter = true, -- override the file sorter
+						case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+						-- the default case_mode is "smart_case"
+					},
 					live_grep_args = {
 						auto_quoting = true, -- enable/disable auto-quoting
 						-- define mappings, e.g.
@@ -944,16 +954,9 @@ return {
 
 	{
 		"j-hui/fidget.nvim",
-		tag = "legacy",
 		event = "VeryLazy",
 		config = function()
-			require("fidget").setup({
-				sources = {
-					["null-ls"] = {
-						ignore = true,
-					},
-				},
-			})
+			require("fidget").setup()
 		end,
 	},
 
@@ -984,29 +987,28 @@ return {
 			vim.keymap.set("n", "]c", before.jump_to_next_edit, {})
 		end,
 	},
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		config = function()
-			require("toggleterm").setup()
-			function _G.set_terminal_keymaps()
-				local opts = { buffer = 0 }
-				vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-				vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
-				vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-				vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-				vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-				vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-				vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
-			end
-
-			-- if you only want these mappings for toggle term use term://*toggleterm#* instead
-			vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
-		end,
-	},
+	-- {
+	-- 	"akinsho/toggleterm.nvim",
+	-- 	version = "*",
+	-- 	config = function()
+	-- 		require("toggleterm").setup()
+	-- 		function _G.set_terminal_keymaps()
+	-- 			local opts = { buffer = 0 }
+	-- 			vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+	-- 			vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+	-- 			vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+	-- 			vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+	-- 			vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+	-- 			vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+	-- 			vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
+	-- 		end
+	--
+	-- 		-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+	-- 		vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+	-- 	end,
+	-- },
 	{
 		"danielfalk/smart-open.nvim",
-		branch = "0.2.x",
 		config = function()
 			require("telescope").load_extension("smart_open")
 		end,
@@ -1016,7 +1018,6 @@ return {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			-- Optional.  If installed, native fzy will be used when match_algorithm is fzy
 			{ "nvim-telescope/telescope-fzy-native.nvim" },
-			dfd,
 		},
 	},
 	{
@@ -1072,13 +1073,6 @@ return {
 				desc = "Prev Reference",
 				mode = { "n", "t" },
 			},
-			{
-				"<leader>o",
-				function()
-					Snacks.picker.smart({ layout = { preset = "select" } })
-				end,
-				desc = "Smart Find Files",
-			},
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("User", {
@@ -1128,6 +1122,9 @@ return {
 		opts = {
 			provider = "copilot",
 			auto_suggestions_provider = nil,
+			behaviour = {
+				use_cwd_as_project_root = true,
+			},
 		},
 		build = "make",
 		dependencies = {
@@ -1140,6 +1137,26 @@ return {
 			"echasnovski/mini.pick",
 			"nvim-telescope/telescope.nvim",
 			"ibhagwan/fzf-lua",
+			{
+				-- Make sure to set this up properly if you have lazy=true
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = {
+					file_types = { "markdown", "Avante" },
+				},
+				ft = { "markdown", "Avante" },
+			},
+		},
+	},
+	{ "romainl/vim-cool" },
+
+	{
+		"joshuavial/aider.nvim",
+		opts = {
+			-- your configuration comes here
+			-- if you don't want to use the default settings
+			auto_manage_context = true, -- automatically manage buffer context
+			default_bindings = true, -- use default <leader>A keybindings
+			debug = false, -- enable debug logging
 		},
 	},
 }
