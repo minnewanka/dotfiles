@@ -15,6 +15,17 @@ return {
 	},
 	{ "github/copilot.vim", event = "VeryLazy" },
 	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	},
+	{
 		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
@@ -385,7 +396,7 @@ return {
 							gs.next_hunk()
 						end)
 						return "<Ignore>"
-					end, { expr = true })
+					end, { expr = true, desc = "Next Hunk" })
 
 					map("n", ",gp", function()
 						if vim.wo.diff then
@@ -395,33 +406,33 @@ return {
 							gs.prev_hunk()
 						end)
 						return "<Ignore>"
-					end, { expr = true })
+					end, { expr = true, desc = "Prev Hunk" })
 
 					-- Actions
-					map("n", "ghs", gs.stage_hunk)
-					map("n", "ghr", gs.reset_hunk)
+					map("n", "ghs", gs.stage_hunk, { desc = "Stage Hunk" })
+					map("n", "ghr", gs.reset_hunk, { desc = "Reset Hunk" })
 					map("v", "ghs", function()
 						gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-					end)
+					end, { desc = "Stage Hunk" })
 					map("v", "ghr", function()
 						gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-					end)
-					map("n", "ghS", gs.stage_buffer)
-					map("n", "ghu", gs.undo_stage_hunk)
-					map("n", "ghR", gs.reset_buffer)
-					map("n", "ghp", gs.preview_hunk)
+					end, { desc = "Reset Hunk" })
+					map("n", "ghS", gs.stage_buffer, { desc = "Stage Buffer" })
+					map("n", "ghu", gs.undo_stage_hunk, { desc = "Undo Stage Hunk" })
+					map("n", "ghR", gs.reset_buffer, { desc = "Reset Buffer" })
+					map("n", "ghp", gs.preview_hunk, { desc = "Preview Hunk" })
 					map("n", "ghb", function()
 						gs.blame_line({ full = true })
-					end)
-					map("n", "gtb", gs.toggle_current_line_blame)
-					map("n", "ghd", gs.diffthis)
+					end, { desc = "Blame Line" })
+					map("n", "gtb", gs.toggle_current_line_blame, { desc = "Toggle Current Line Blame" })
+					map("n", "ghd", gs.diffthis, { desc = "Diff This" })
 					map("n", "ghD", function()
 						gs.diffthis("~")
-					end)
-					map("n", "gtd", gs.toggle_deleted)
+					end, { desc = "Diff This ~" })
+					map("n", "gtd", gs.toggle_deleted, { desc = "Toggle Deleted" })
 
 					-- Text object
-					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select Hunk" })
 				end,
 				watch_gitdir = {
 					interval = 1000,
@@ -644,6 +655,11 @@ return {
 			map("n", "<C-k>", "<CMD>lua require('Navigator').up()<CR>", opts)
 			map("n", "<C-l>", "<CMD>lua require('Navigator').right()<CR>", opts)
 			map("n", "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts)
+
+			map("t", "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts)
+			map("t", "<C-k>", "<CMD>lua require('Navigator').up()<CR>", opts)
+			map("t", "<C-l>", "<CMD>lua require('Navigator').right()<CR>", opts)
+			map("t", "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts)
 		end,
 	},
 	{
