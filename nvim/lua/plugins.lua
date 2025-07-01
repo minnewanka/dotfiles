@@ -1002,28 +1002,47 @@ return {
 		-- See Commands section for default commands if you want to lazy load on them
 	},
 	{ "mfussenegger/nvim-jdtls" },
+	-- {
+	-- 	"yetone/avante.nvim",
+	-- 	event = "VeryLazy",
+	-- 	version = false,
+	-- 	opts = {
+	-- 		provider = "copilot",
+	-- 		auto_suggestions_provider = nil,
+	-- 		behaviour = {
+	-- 			use_cwd_as_project_root = true,
+	-- 		},
+	-- 	},
+	-- 	build = "make",
+	-- 	dependencies = {
+	-- 		"zbirenbaum/copilot.lua",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		"stevearc/dressing.nvim",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 		"echasnovski/mini.pick",
+	-- 		"nvim-telescope/telescope.nvim",
+	-- 		"ibhagwan/fzf-lua",
+	-- 		{
+	-- 			-- Make sure to set this up properly if you have lazy=true
+	-- 			"MeanderingProgrammer/render-markdown.nvim",
+	-- 			opts = {
+	-- 				file_types = { "markdown", "Avante" },
+	-- 			},
+	-- 			ft = { "markdown", "Avante" },
+	-- 		},
+	-- 	},
+	-- },
 	{
-		"yetone/avante.nvim",
-		event = "VeryLazy",
-		version = false,
-		opts = {
-			provider = "copilot",
-			auto_suggestions_provider = nil,
-			behaviour = {
-				use_cwd_as_project_root = true,
-			},
-		},
-		build = "make",
+		"olimorris/codecompanion.nvim",
+		opts = {},
+		init = function()
+			require("code-companion-fidget"):init()
+		end,
 		dependencies = {
-			"zbirenbaum/copilot.lua",
-			"nvim-treesitter/nvim-treesitter",
-			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"echasnovski/mini.pick",
-			"nvim-telescope/telescope.nvim",
-			"ibhagwan/fzf-lua",
+			"nvim-treesitter/nvim-treesitter",
 			{
 				-- Make sure to set this up properly if you have lazy=true
 				"MeanderingProgrammer/render-markdown.nvim",
@@ -1035,5 +1054,14 @@ return {
 		},
 	},
 	{ "romainl/vim-cool" },
-
+	{
+		"joshuavial/aider.nvim",
+		opts = {
+			-- your configuration comes here
+			-- if you don't want to use the default settings
+			auto_manage_context = true, -- automatically manage buffer context
+			default_bindings = true, -- use default <leader>A keybindings
+			debug = false, -- enable debug logging
+		},
+	},
 }
