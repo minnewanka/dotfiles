@@ -80,31 +80,21 @@ vim.api.nvim_create_user_command("ToggleGStatus", function()
 	end
 end, {})
 
--- quit if nvimtree last window
--- vim.api.nvim_create_autocmd("QuitPre", {
--- 	callback = function()
--- 		local invalid_win = {}
--- 		local wins = vim.api.nvim_list_wins()
--- 		for _, w in ipairs(wins) do
--- 			local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
--- 			if bufname:match("NvimTree_") ~= nil then
--- 				table.insert(invalid_win, w)
--- 			end
--- 		end
--- 		if #invalid_win == #wins - 1 then
--- 			-- Should quit, so we close all invalid windows.
--- 			for _, w in ipairs(invalid_win) do
--- 				vim.api.nvim_win_close(w, true)
--- 			end
--- 		end
--- 	end,
--- })
-
 -- auto save
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 	callback = function()
 		if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
 			vim.api.nvim_command("silent update")
 		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(event)
+		vim.keymap.set("n", "K", function()
+			vim.lsp.buf.hover({
+				border = "rounded",
+			})
+		end, { buffer = event.buf })
 	end,
 })

@@ -1,5 +1,10 @@
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
-vim.g.maplocalleader = ";"
+vim.keymap.set(
+	"n",
+	"<leader>m",
+	"<cmd>MaximizerToggle<CR>",
+	{ noremap = true, silent = true, desc = "Toggle window maximizer" }
+)
 
 return {
 	"nvim-tree/nvim-web-devicons",
@@ -89,7 +94,7 @@ return {
 				"n",
 				"<leader>sp",
 				[[<Cmd>Telescope workspaces theme=ivy<CR>]],
-				{ noremap = true, silent = true }
+				{ noremap = true, silent = true, desc = "Open workspaces picker" }
 			)
 		end,
 	},
@@ -129,27 +134,47 @@ return {
 			} })
 			vim.keymap.set({ "o", "x" }, "ii", function()
 				require("various-textobjs").indentation("inner", "inner")
-			end)
+			end, { desc = "Select inner indentation" })
 			vim.keymap.set({ "o", "x" }, "ai", function()
 				require("various-textobjs").indentation("outer", "inner")
-			end)
+			end, { desc = "Select outer indentation" })
 			vim.keymap.set({ "o", "x" }, "as", function()
 				require("various-textobjs").subword("outer")
-			end)
+			end, { desc = "Select outer subword" })
 			vim.keymap.set({ "o", "x" }, "is", function()
 				require("various-textobjs").subword("inner")
-			end)
+			end, { desc = "Select inner subword" })
 			vim.keymap.set({ "o", "x" }, "n", function()
 				require("various-textobjs").nearEoL()
-			end)
+			end, { desc = "Select near end of line" })
 			vim.keymap.set({ "o", "x" }, "r", function()
 				require("various-textobjs").restOfParagraph()
-			end)
-			vim.keymap.set({ "o", "x" }, "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>")
-			vim.keymap.set({ "o", "x" }, "av", "<cmd>lua require('various-textobjs').value('outer')<CR>")
+			end, { desc = "Select rest of paragraph" })
+			vim.keymap.set(
+				{ "o", "x" },
+				"iv",
+				"<cmd>lua require('various-textobjs').value('inner')<CR>",
+				{ desc = "Select inner value" }
+			)
+			vim.keymap.set(
+				{ "o", "x" },
+				"av",
+				"<cmd>lua require('various-textobjs').value('outer')<CR>",
+				{ desc = "Select outer value" }
+			)
 
-			vim.keymap.set({ "o", "x" }, "ik", "<cmd>lua require('various-textobjs').key('inner')<CR>")
-			vim.keymap.set({ "o", "x" }, "ak", "<cmd>lua require('various-textobjs').key('outer')<CR>")
+			vim.keymap.set(
+				{ "o", "x" },
+				"ik",
+				"<cmd>lua require('various-textobjs').key('inner')<CR>",
+				{ desc = "Select inner key" }
+			)
+			vim.keymap.set(
+				{ "o", "x" },
+				"ak",
+				"<cmd>lua require('various-textobjs').key('outer')<CR>",
+				{ desc = "Select outer key" }
+			)
 		end,
 	},
 
@@ -472,7 +497,7 @@ return {
 						"--column",
 						"--smart-case",
 					},
-					path_display = { "truncate" },
+					path_display = { "filename_first" },
 					file_sorter = require("telescope.sorters").get_fzy_sorter,
 					file_ignore_patterns = { "docs", "docs-dev", "node_modules" },
 					prompt_prefix = " > ",
@@ -579,7 +604,7 @@ return {
 	{
 		"carbon-steel/detour.nvim",
 		config = function()
-			vim.keymap.set("n", "<c-w><enter>", ":Detour<cr>")
+			vim.keymap.set("n", "<c-w><enter>", ":Detour<cr>", { desc = "Open Detour window" })
 		end,
 	},
 	{
@@ -615,8 +640,18 @@ return {
 					},
 				},
 			})
-			vim.api.nvim_set_keymap("n", "<Leader>e", ":Oil<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<Leader>n", ":Oil<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap(
+				"n",
+				"<Leader>e",
+				":Oil<CR>",
+				{ noremap = true, silent = true, desc = "Open Oil file explorer" }
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"<Leader>n",
+				":Oil<CR>",
+				{ noremap = true, silent = true, desc = "Open Oil file explorer" }
+			)
 		end,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
@@ -690,7 +725,7 @@ return {
 				"n",
 				"<Leader>s",
 				[[<Cmd>lua require("grug-far").open()<CR>]],
-				{ noremap = true, silent = true }
+				{ noremap = true, silent = true, desc = "Open Grug-Far search" }
 			)
 		end,
 	},
@@ -699,7 +734,12 @@ return {
 		cmd = "UndotreeToggle",
 		keys = "<leader>u",
 		config = function()
-			vim.api.nvim_set_keymap("n", "<leader>u", ":UndotreeToggle<CR>", { silent = true, noremap = true })
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>u",
+				":UndotreeToggle<CR>",
+				{ silent = true, noremap = true, desc = "Toggle Undotree" }
+			)
 			vim.g.undotree_WindowLayout = 2
 			vim.g.undotree_SplitWidth = 50
 		end,
@@ -720,23 +760,23 @@ return {
 
 			vim.keymap.set("n", "<leader>a", function()
 				harpoon:list():add()
-			end)
+			end, { desc = "Add file to Harpoon" })
 			vim.keymap.set("n", "<leader>h", function()
 				harpoon.ui:toggle_quick_menu(harpoon:list())
-			end)
+			end, { desc = "Toggle Harpoon quick menu" })
 
 			vim.keymap.set("n", "<leader>1", function()
 				harpoon:list():select(1)
-			end)
+			end, { desc = "Go to Harpoon file 1" })
 			vim.keymap.set("n", "<leader>2", function()
 				harpoon:list():select(2)
-			end)
+			end, { desc = "Go to Harpoon file 2" })
 			vim.keymap.set("n", "<leader>3", function()
 				harpoon:list():select(3)
-			end)
+			end, { desc = "Go to Harpoon file 3" })
 			vim.keymap.set("n", "<leader>4", function()
 				harpoon:list():select(4)
-			end)
+			end, { desc = "Go to Harpoon file 4" })
 		end,
 	},
 	{
@@ -886,30 +926,10 @@ return {
 			local before = require("before")
 			before.setup()
 
-			vim.keymap.set("n", "[c", before.jump_to_last_edit, {})
-			vim.keymap.set("n", "]c", before.jump_to_next_edit, {})
+			vim.keymap.set("n", "[c", before.jump_to_last_edit, { desc = "Jump to last edit" })
+			vim.keymap.set("n", "]c", before.jump_to_next_edit, { desc = "Jump to next edit" })
 		end,
 	},
-	-- {
-	-- 	"akinsho/toggleterm.nvim",
-	-- 	version = "*",
-	-- 	config = function()
-	-- 		require("toggleterm").setup()
-	-- 		function _G.set_terminal_keymaps()
-	-- 			local opts = { buffer = 0 }
-	-- 			vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-	-- 			vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
-	-- 			vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-	-- 			vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-	-- 			vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-	-- 			vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-	-- 			vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
-	-- 		end
-	--
-	-- 		-- if you only want these mappings for toggle term use term://*toggleterm#* instead
-	-- 		vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
-	-- 	end,
-	-- },
 	{
 		"danielfalk/smart-open.nvim",
 		config = function()
@@ -1018,38 +1038,6 @@ return {
 		-- See Commands section for default commands if you want to lazy load on them
 	},
 	{ "mfussenegger/nvim-jdtls" },
-	-- {
-	-- 	"yetone/avante.nvim",
-	-- 	event = "VeryLazy",
-	-- 	version = false,
-	-- 	opts = {
-	-- 		provider = "copilot",
-	-- 		auto_suggestions_provider = nil,
-	-- 		behaviour = {
-	-- 			use_cwd_as_project_root = true,
-	-- 		},
-	-- 	},
-	-- 	build = "make",
-	-- 	dependencies = {
-	-- 		"zbirenbaum/copilot.lua",
-	-- 		"nvim-treesitter/nvim-treesitter",
-	-- 		"stevearc/dressing.nvim",
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		"nvim-tree/nvim-web-devicons",
-	-- 		"echasnovski/mini.pick",
-	-- 		"nvim-telescope/telescope.nvim",
-	-- 		"ibhagwan/fzf-lua",
-	-- 		{
-	-- 			-- Make sure to set this up properly if you have lazy=true
-	-- 			"MeanderingProgrammer/render-markdown.nvim",
-	-- 			opts = {
-	-- 				file_types = { "markdown", "Avante" },
-	-- 			},
-	-- 			ft = { "markdown", "Avante" },
-	-- 		},
-	-- 	},
-	-- },
 	{
 		"olimorris/codecompanion.nvim",
 		opts = {},
