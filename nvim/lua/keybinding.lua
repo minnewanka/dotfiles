@@ -36,13 +36,6 @@ map(
 	{ noremap = true, expr = true, silent = false, desc = "Completion next" }
 )
 
--- paste
-map("v", "<leader>p", '"_dP', { noremap = true, silent = true, desc = "Paste without yanking" })
-
--- yank
-map("n", "<Leader>y", '"*y', { noremap = true, silent = true, desc = "Yank to clipboard" })
-map("v", "<Leader>y", '"*y', { noremap = true, silent = true, desc = "Yank to clipboard" })
-
 -- hlsearch
 map("n", "ghl", ":noh<CR>", { noremap = true, silent = true, desc = "Clear highlight" })
 
@@ -50,10 +43,6 @@ map("n", "ghl", ":noh<CR>", { noremap = true, silent = true, desc = "Clear highl
 map("n", "<Leader>w", "<cmd>qa!<CR>", { noremap = true, silent = false, desc = "Quit all" })
 map("n", "<Leader>q", "<cmd>q!<CR>", { noremap = true, silent = false, desc = "Quit" })
 map("n", "<Leader>z", "<cmd>wq<CR>", { noremap = true, silent = true, desc = "Save and quit" })
-
--- -- remap esc
--- map("i", "jk", "<ESC>", { noremap = true, silent = true })
--- map("i", "kj", "<ESC>", { noremap = true, silent = true })
 
 map(
 	"n",
@@ -75,8 +64,8 @@ vim.keymap.set("n", "j", [[(v:count > 1 ? "m'" . v:count : "g") . 'j']], { expr 
 map("n", "<leader>gf", ":ToggleGStatus<CR>", { noremap = true, silent = true, desc = "Toggle git status" })
 map("n", "<Leader>gd", ":Gdiffsplit<CR>", { noremap = true, silent = true, desc = "Git diff split" })
 map("n", "<Leader>gD", ":Git difftool<CR>", { noremap = true, silent = true, desc = "Git diff tool" })
-map("n", "<Leader>gdl", ":diffget //3<CR>", { noremap = true, silent = true, desc = "Git diff get local" })
-map("n", "<Leader>gdh", ":diffget //2<CR>", { noremap = true, silent = true, desc = "Git diff get remote" })
+map("n", "<Leader>gdl", ":diffget //3<CR>", { noremap = true, silent = true, desc = "Git diff get local //3" })
+map("n", "<Leader>gdh", ":diffget //2<CR>", { noremap = true, silent = true, desc = "Git diff get remote //2" })
 
 -- Tab
 map(
@@ -122,8 +111,8 @@ map(
 map("n", "<Leader>fo", [[<Cmd>Telescope oldfiles<CR>]], { noremap = true, silent = true, desc = "Telescope old files" })
 map(
 	"n",
-	"<Leader>o",
-	[[<Cmd>Telescope smart_open cwd_only=true<CR>]],
+	"<C-p>",
+	[[<Cmd>Telescope smart_open cwd_only=true theme=dropdown previewer=false <CR>]],
 	{ noremap = true, silent = true, desc = "Telescope smart open" }
 )
 map(
@@ -143,12 +132,6 @@ map(
 	"<leader>cc",
 	[[<Cmd>lua require("telescope").extensions.neoclip.default()<CR>]],
 	{ noremap = true, silent = true, desc = "Telescope neoclip" }
-)
-map(
-	"n",
-	"<leader>p",
-	[[<Cmd>Telescope find_files<CR>]],
-	{ noremap = true, silent = true, desc = "Telescope find files" }
 )
 --undo break point
 map("i", ",", ",<c-g>u", { noremap = true, silent = true, desc = "Undo break point" })
@@ -247,3 +230,7 @@ vim.keymap.set("n", "<C-q>", function()
 		vim.cmd([[qa]])
 	end
 end, { desc = "Super <C-q>" })
+
+map("n", "ghl", ":noh<CR>", { noremap = true, silent = true, desc = "Clear highlight" })
+
+map("n", "<leader>p", "<Nop>", { noremap = true, silent = true, desc = "Temporary keymap to unlearn muscle memory" })

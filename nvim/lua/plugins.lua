@@ -413,7 +413,7 @@ return {
 					end
 
 					-- Navigation
-					map("n", ",gn", function()
+					map("n", "gn", function()
 						if vim.wo.diff then
 							return "]c"
 						end
@@ -423,7 +423,7 @@ return {
 						return "<Ignore>"
 					end, { expr = true, desc = "Next Hunk" })
 
-					map("n", ",gp", function()
+					map("n", "gp", function()
 						if vim.wo.diff then
 							return "[c"
 						end
