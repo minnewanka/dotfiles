@@ -19,6 +19,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		-- vim.api.nvim_set_hl(0, "FlashCurrent", { link = "Red" })
 		-- vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#ccff88", bg = "NONE" })
 		vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#2e3b3b" })
+		vim.api.nvim_set_hl(0, "LspSignatureActiveParameter", { bg = "#2e3b3b" })
 	end,
 })
 

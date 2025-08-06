@@ -1,4 +1,5 @@
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.maplocalleader = ";"
 vim.keymap.set(
 	"n",
 	"<leader>m",
@@ -339,6 +340,44 @@ return {
 						-- and should return true of false
 						include_surrounding_whitespace = true,
 					},
+					move = {
+						enable = true,
+						set_jumps = true, -- whether to set jumps in the jumplist
+						goto_next_start = {
+							["]m"] = "@function.outer",
+							["]]"] = { query = "@class.outer", desc = "Next class start" },
+							--
+							-- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queries.
+							["]o"] = "@loop.*",
+							-- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
+							--
+							-- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
+							-- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
+							["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
+							["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+						},
+						goto_next_end = {
+							["]M"] = "@function.outer",
+							["]["] = "@class.outer",
+						},
+						goto_previous_start = {
+							["[m"] = "@function.outer",
+							["[["] = "@class.outer",
+						},
+						goto_previous_end = {
+							["[M"] = "@function.outer",
+							["[]"] = "@class.outer",
+						},
+						-- Below will go to either the start or the end, whichever is closer.
+						-- Use if you want more granular movements
+						-- Make it even more gradual by adding multiple queries and regex.
+						goto_next = {
+							["]d"] = "@conditional.outer",
+						},
+						goto_previous = {
+							["[d"] = "@conditional.outer",
+						},
+					},
 				},
 				indent = { enable = true },
 				incremental_selection = {
@@ -449,12 +488,12 @@ return {
 					map("n", "ghb", function()
 						gs.blame_line({ full = true })
 					end, { desc = "Blame Line" })
-					map("n", "gtb", gs.toggle_current_line_blame, { desc = "Toggle Current Line Blame" })
+					-- map("n", "gtb", gs.toggle_current_line_blame, { desc = "Toggle Current Line Blame" })
 					map("n", "ghd", gs.diffthis, { desc = "Diff This" })
 					map("n", "ghD", function()
 						gs.diffthis("~")
 					end, { desc = "Diff This ~" })
-					map("n", "gtd", gs.toggle_deleted, { desc = "Toggle Deleted" })
+					-- map("n", "gtd", gs.toggle_deleted, { desc = "Toggle Deleted" })
 
 					-- Text object
 					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select Hunk" })
@@ -859,7 +898,7 @@ return {
 				menu = { border = "single" },
 				documentation = { window = { border = "single" } },
 			},
-			signature = { window = { border = "single" } },
+			signature = { enabled = true, window = { border = "single", show_documentation = true } },
 
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
@@ -885,10 +924,9 @@ return {
 
 	{
 		"ggandor/leap.nvim",
-		event = "VeryLazy",
 		config = function()
 			require("leap").setup({ highlight_unlabeled_phase_one_targets = true })
-			require("leap").set_default_keymaps()
+			require("leap").set_default_mappings()
 			vim.keymap.set({ "n", "o" }, "gs", function()
 				require("leap.remote").action()
 			end)
@@ -1067,5 +1105,19 @@ return {
 			default_bindings = true, -- use default <leader>A keybindings
 			debug = false, -- enable debug logging
 		},
+	},
+	{
+		"greggh/claude-code.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim", -- Required for git operations
+		},
+		config = function()
+			require("claude-code").setup({
+				window = {
+					split_ratio = 0.4,
+					position = "vertical",
+				},
+			})
+		end,
 	},
 }

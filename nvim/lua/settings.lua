@@ -34,6 +34,7 @@ opt.ignorecase = true
 opt.undofile = true
 opt.updatetime = 300
 opt.scrolloff = 10
+opt.sidescrolloff = 8
 opt.formatoptions = vim.opt.formatoptions + { "cro" }
 opt.shortmess:append("c")
 opt.swapfile = false
@@ -69,6 +70,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 
 vim.api.nvim_create_user_command("BufOnly", 'silent! execute "%bd|e#|bd#"', {})
 vim.api.nvim_create_user_command("TSFix", ":write | edit | TSBufEnable highlight", {})
+vim.api.nvim_create_user_command("PrAll", ":Octo search archived:false is:pr state:open", {})
 vim.api.nvim_create_user_command("Pr", ":Octo search archived:false is:pr state:open review-requested:minnewanka", {})
 vim.api.nvim_create_user_command("MyPr", ":Octo search assignee:minnewanka is:pr", {})
 

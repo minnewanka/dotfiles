@@ -127,12 +127,7 @@ map(
 	[[<Cmd>:lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>]],
 	{ noremap = true, silent = true, desc = "Telescope live grep args" }
 )
-map(
-	"n",
-	"<leader>cc",
-	[[<Cmd>lua require("telescope").extensions.neoclip.default()<CR>]],
-	{ noremap = true, silent = true, desc = "Telescope neoclip" }
-)
+map("n", "<leader>cc", "<cmd>ClaudeCode<CR>", { noremap = true, silent = true, desc = "Toggle Claude Code" })
 --undo break point
 map("i", ",", ",<c-g>u", { noremap = true, silent = true, desc = "Undo break point" })
 map("i", ".", ".<c-g>u", { noremap = true, silent = true, desc = "Undo break point" })
@@ -234,3 +229,4 @@ end, { desc = "Super <C-q>" })
 map("n", "ghl", ":noh<CR>", { noremap = true, silent = true, desc = "Clear highlight" })
 
 map("n", "<leader>p", "<Nop>", { noremap = true, silent = true, desc = "Temporary keymap to unlearn muscle memory" })
+vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
