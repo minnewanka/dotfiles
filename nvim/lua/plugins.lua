@@ -1097,27 +1097,32 @@ return {
 	},
 	{ "romainl/vim-cool" },
 	{
-		"joshuavial/aider.nvim",
+		"coder/claudecode.nvim",
+		dependencies = { "folke/snacks.nvim" },
+		config = true,
 		opts = {
-			-- your configuration comes here
-			-- if you don't want to use the default settings
-			auto_manage_context = true, -- automatically manage buffer context
-			default_bindings = true, -- use default <leader>A keybindings
-			debug = false, -- enable debug logging
+			terminal = {
+				split_width_percentage = 0.4,
+			},
 		},
-	},
-	{
-		"greggh/claude-code.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- Required for git operations
+		keys = {
+			{ "<leader>c", nil, desc = "AI/Claude Code" },
+			{ "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+			{ "<leader>cf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+			{ "<leader>cr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+			{ "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+			{ "<leader>cm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+			{ "<leader>cb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+			{ "<leader>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+			{
+				"<leader>cs",
+				"<cmd>ClaudeCodeTreeAdd<cr>",
+				desc = "Add file",
+				ft = { "NvimTree", "neo-tree", "oil", "minifiles" },
+			},
+			-- Diff management
+			{ "<leader>ca", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+			{ "<leader>cd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
 		},
-		config = function()
-			require("claude-code").setup({
-				window = {
-					split_ratio = 0.4,
-					position = "vertical",
-				},
-			})
-		end,
 	},
 }

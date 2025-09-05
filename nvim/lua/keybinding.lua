@@ -61,7 +61,7 @@ vim.keymap.set("n", "k", [[(v:count > 1 ? "m'" . v:count : "g") . 'k']], { expr 
 vim.keymap.set("n", "j", [[(v:count > 1 ? "m'" . v:count : "g") . 'j']], { expr = true, desc = "Move down" })
 
 -- git diff
-map("n", "<leader>gf", ":ToggleGStatus<CR>", { noremap = true, silent = true, desc = "Toggle git status" })
+map("n", "<leader>gs", ":ToggleGStatus<CR>", { noremap = true, silent = true, desc = "Toggle git status" })
 map("n", "<Leader>gd", ":Gdiffsplit<CR>", { noremap = true, silent = true, desc = "Git diff split" })
 map("n", "<Leader>gD", ":Git difftool<CR>", { noremap = true, silent = true, desc = "Git diff tool" })
 map("n", "<Leader>gdl", ":diffget //3<CR>", { noremap = true, silent = true, desc = "Git diff get local //3" })

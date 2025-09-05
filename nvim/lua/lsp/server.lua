@@ -5,12 +5,23 @@ local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 require("typescript-tools").setup({
 	on_attach = on_attach,
+	capabilities = capabilities,
 })
 
-require("lspconfig").eslint.setup({})
-require("lspconfig").gopls.setup({})
-require("lspconfig").basedpyright.setup({})
+require("lspconfig").eslint.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
 
+require("lspconfig").gopls.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
+require("lspconfig").basedpyright.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
 
 -- require("lspconfig").tailwindcss.setup({})
 
