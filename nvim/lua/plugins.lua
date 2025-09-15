@@ -1099,12 +1099,18 @@ return {
 	{
 		"coder/claudecode.nvim",
 		dependencies = { "folke/snacks.nvim" },
-		config = true,
-		opts = {
-			terminal = {
-				split_width_percentage = 0.4,
-			},
-		},
+		lazy = false,
+		config = function()
+			require("claudecode").setup({
+				terminal = {
+					split_width_percentage = 0.4,
+				},
+				diff_opts = {
+					open_in_new_tab = true,
+					hide_terminal_in_new_tab = true,
+				},
+			})
+		end,
 		keys = {
 			{ "<leader>c", nil, desc = "AI/Claude Code" },
 			{ "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
