@@ -19,18 +19,76 @@ return {
 			})
 		end,
 	},
-	{ "github/copilot.vim", event = "VeryLazy" },
 	{
-		"folke/which-key.nvim",
+		"github/copilot.vim",
 		event = "VeryLazy",
 		config = function()
-			require("which-key").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
+			vim.api.nvim_set_keymap("i", "<C-c>", "copilot#Dismiss()", { silent = true, expr = true })
+			vim.api.nvim_set_keymap("i", "<C-s>", "copilot#Suggest()", { silent = true, expr = true })
+			vim.api.nvim_set_keymap("i", "<C-n>", "copilot#Next()", { silent = true, expr = true })
+			vim.api.nvim_set_keymap("i", "<C-p>", "copilot#Previous()", { silent = true, expr = true })
 		end,
 	},
+	-- {
+	-- 	"nvim-mini/mini.nvim",
+	-- 	version = false,
+	-- 	config = function()
+	-- 		require("mini.files").setup()
+	-- 		vim.keymap.set("n", "<leader>fe", function()
+	-- 			local buf_name = vim.api.nvim_buf_get_name(0)
+	-- 			local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+	-- 			MiniFiles.open(path)
+	-- 			MiniFiles.reveal_cwd()
+	-- 		end, { desc = "Open Mini Files" })
+	--
+	-- 		require("mini.ai").setup()
+	--
+	-- 		local miniclue = require("mini.clue")
+	-- 		miniclue.setup({
+	-- 			triggers = {
+	-- 				-- Leader triggers
+	-- 				{ mode = "n", keys = "<Leader>" },
+	-- 				{ mode = "x", keys = "<Leader>" },
+	--
+	-- 				-- Built-in completion
+	-- 				{ mode = "i", keys = "<C-x>" },
+	--
+	-- 				-- `g` key
+	-- 				{ mode = "n", keys = "g" },
+	-- 				{ mode = "x", keys = "g" },
+	--
+	-- 				-- Marks
+	-- 				{ mode = "n", keys = "'" },
+	-- 				{ mode = "n", keys = "`" },
+	-- 				{ mode = "x", keys = "'" },
+	-- 				{ mode = "x", keys = "`" },
+	--
+	-- 				-- Registers
+	-- 				{ mode = "n", keys = '"' },
+	-- 				{ mode = "x", keys = '"' },
+	-- 				{ mode = "i", keys = "<C-r>" },
+	-- 				{ mode = "c", keys = "<C-r>" },
+	--
+	-- 				-- Window commands
+	-- 				{ mode = "n", keys = "<C-w>" },
+	--
+	-- 				-- `z` key
+	-- 				{ mode = "n", keys = "z" },
+	-- 				{ mode = "x", keys = "z" },
+	-- 			},
+	--
+	-- 			clues = {
+	-- 				-- Enhance this by adding descriptions for <Leader> mapping groups
+	-- 				miniclue.gen_clues.builtin_completion(),
+	-- 				miniclue.gen_clues.g(),
+	-- 				miniclue.gen_clues.marks(),
+	-- 				miniclue.gen_clues.registers(),
+	-- 				miniclue.gen_clues.windows(),
+	-- 				miniclue.gen_clues.z(),
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
@@ -550,7 +608,6 @@ return {
 							["<C-j>"] = actions.move_selection_next,
 							["<C-k>"] = actions.move_selection_previous,
 							["<esc>"] = actions.close,
-							["<C-s>"] = require("telescope.actions").select_horizontal,
 							["<C-v>"] = require("telescope.actions").select_vertical,
 							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
 						},
@@ -587,7 +644,7 @@ return {
 					buffers = {
 						sort_mru = true,
 						ignore_current_buffer = true,
-						theme = "ivy",
+						theme = "dropdown",
 
 						mappings = {
 							i = {
@@ -676,6 +733,13 @@ return {
 							end
 						end,
 						desc = "oil: Search in directory",
+					},
+					yp = {
+						desc = "Copy filepath to system clipboard",
+						callback = function()
+							require("oil.actions").copy_entry_path.callback()
+							vim.fn.setreg("+", vim.fn.getreg(vim.v.register))
+						end,
 					},
 				},
 			})
@@ -1063,38 +1127,26 @@ return {
 			vim.keymap.set("n", "<leader>m", "<cmd>MaximizerToggle<CR>", { noremap = true, silent = true })
 		end,
 	},
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		dependencies = {
-			{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-		},
-		build = "make tiktoken", -- Only on MacOS or Linux
-		opts = {
-			-- See Configuration section for options
-		},
-		-- See Commands section for default commands if you want to lazy load on them
-	},
 	{ "mfussenegger/nvim-jdtls" },
-	{
-		"olimorris/codecompanion.nvim",
-		opts = {},
-		init = function()
-			require("code-companion-fidget"):init()
-		end,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			{
-				-- Make sure to set this up properly if you have lazy=true
-				"MeanderingProgrammer/render-markdown.nvim",
-				opts = {
-					file_types = { "markdown", "Avante" },
-				},
-				ft = { "markdown", "Avante" },
-			},
-		},
-	},
+	-- {
+	-- 	"olimorris/codecompanion.nvim",
+	-- 	opts = {},
+	-- 	init = function()
+	-- 		require("code-companion-fidget"):init()
+	-- 	end,
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		{
+	-- 			-- Make sure to set this up properly if you have lazy=true
+	-- 			"MeanderingProgrammer/render-markdown.nvim",
+	-- 			opts = {
+	-- 				file_types = { "markdown", "Avante" },
+	-- 			},
+	-- 			ft = { "markdown", "Avante" },
+	-- 		},
+	-- 	},
+	-- },
 	{ "romainl/vim-cool" },
 	{
 		"coder/claudecode.nvim",

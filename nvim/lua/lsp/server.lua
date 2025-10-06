@@ -8,34 +8,22 @@ require("typescript-tools").setup({
 	capabilities = capabilities,
 })
 
-require("lspconfig").eslint.setup({
+vim.lsp.config("eslint", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
 
-require("lspconfig").gopls.setup({
+vim.lsp.config("html", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
 
-require("lspconfig").basedpyright.setup({
+vim.lsp.config("cssls", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
 
--- require("lspconfig").tailwindcss.setup({})
-
-require("lspconfig").html.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-
-require("lspconfig").cssls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-
-require("lspconfig").jsonls.setup({
+vim.lsp.config("jsonls", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
@@ -53,3 +41,5 @@ require("lspconfig").jsonls.setup({
 		},
 	},
 })
+
+vim.lsp.enable("marksman")
