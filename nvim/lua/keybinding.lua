@@ -1,4 +1,3 @@
-vim.g.mapleader = " "
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
@@ -43,13 +42,6 @@ map("n", "ghl", ":noh<CR>", { noremap = true, silent = true, desc = "Clear highl
 map("n", "<Leader>w", "<cmd>qa!<CR>", { noremap = true, silent = false, desc = "Quit all" })
 map("n", "<Leader>q", "<cmd>q!<CR>", { noremap = true, silent = false, desc = "Quit" })
 map("n", "<Leader>z", "<cmd>wq<CR>", { noremap = true, silent = true, desc = "Save and quit" })
-
-map(
-	"n",
-	"<leader>T",
-	":lua vim.lsp.diagnostic.set_loclist()<CR>",
-	{ noremap = true, silent = true, desc = "LSP set loclist" }
-)
 
 -- line text object
 map("x", "il", "g_o^", { noremap = true, silent = true, desc = "Inside line" })
@@ -194,12 +186,6 @@ map(
 	{ noremap = true, silent = true, desc = "Bufjump forward same buf" }
 )
 
---  Center stuff
-map("n", "n", "nzz", { noremap = true, silent = true, desc = "Center next search" })
-map("n", "N", "Nzz", { noremap = true, silent = true, desc = "Center prev search" })
-map("n", "*", "*zz", { noremap = true, silent = true, desc = "Center next search" })
-map("n", "#", "#zz", { noremap = true, silent = true, desc = "Center prev search" })
-
 -- tab
 map("n", "<leader>tn", ":tabnew %<CR>", { noremap = true, silent = true, desc = "New tab" })
 map("n", "<leader>to", ":tabonly<CR>", { noremap = true, silent = true, desc = "Tab only" })
@@ -225,8 +211,6 @@ vim.keymap.set("n", "<C-q>", function()
 		vim.cmd([[qa]])
 	end
 end, { desc = "Super <C-q>" })
-
-map("n", "ghl", ":noh<CR>", { noremap = true, silent = true, desc = "Clear highlight" })
 
 map("n", "<leader>p", "<Nop>", { noremap = true, silent = true, desc = "Temporary keymap to unlearn muscle memory" })
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })

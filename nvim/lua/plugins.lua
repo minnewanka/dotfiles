@@ -1,12 +1,3 @@
-vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
-vim.g.maplocalleader = ";"
-vim.keymap.set(
-	"n",
-	"<leader>m",
-	"<cmd>MaximizerToggle<CR>",
-	{ noremap = true, silent = true, desc = "Toggle window maximizer" }
-)
-
 return {
 	"nvim-tree/nvim-web-devicons",
 	"nvim-lua/plenary.nvim",
@@ -1004,16 +995,15 @@ return {
 			require("fidget").setup()
 		end,
 	},
-
-	{
-		"MunifTanjim/prettier.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("prettier").setup({
-				bin = "prettierd",
-			})
-		end,
-	},
+	-- {
+	-- 	"MunifTanjim/prettier.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("prettier").setup({
+	-- 			bin = "prettierd",
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"folke/trouble.nvim",
 		cmd = "Trouble",
