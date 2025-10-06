@@ -3,8 +3,10 @@ vim.g.maplocalleader = ";"
 
 local indent = 4
 
+local cmd = vim.cmd
 local opt = vim.opt
 local g = vim.g
+local nvim_exec = vim.api.nvim_exec
 local fn, cmd = vim.fn, vim.cmd
 
 cmd("set nomodeline")
@@ -36,6 +38,7 @@ opt.undofile = true
 opt.updatetime = 300
 opt.scrolloff = 10
 opt.sidescrolloff = 8
+opt.formatoptions = vim.opt.formatoptions + { "cro" }
 opt.shortmess:append("c")
 opt.swapfile = false
 vim.opt.shell = "/bin/bash"
@@ -88,5 +91,15 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 		if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
 			vim.api.nvim_command("silent update")
 		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(event)
+		vim.keymap.set("n", "K", function()
+			vim.lsp.buf.hover({
+				border = "rounded",
+			})
+		end, { buffer = event.buf })
 	end,
 })

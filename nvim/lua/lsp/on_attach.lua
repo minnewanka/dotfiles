@@ -2,7 +2,9 @@ local function on_attach(client, bufnr)
 	-- buf_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 	vim.keymap.set("n", "grd", vim.lsp.buf.definition, { noremap = true, silent = true })
 	-- vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true })
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })
+	vim.keymap.set("n", "K", function()
+		vim.lsp.buf.hover({ border = "rounded" })
+	end, { noremap = true, silent = true })
 
 	-- Set autocommands conditional on server_capabilities
 	if client.server_capabilities.documentHighlightProvider then

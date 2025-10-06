@@ -1,4 +1,6 @@
-vim.g.gruvbox_material_foreground = "mix"
+vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.maplocalleader = ";"
+
 vim.g.gruvbox_material_background = "hard"
 vim.g.gruvbox_material_menu_selection_background = "blue"
 vim.g.gruvbox_material_float_style = "dim"
