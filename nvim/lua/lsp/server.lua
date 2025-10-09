@@ -6,6 +6,19 @@ local capabilities = require("blink.cmp").get_lsp_capabilities()
 require("typescript-tools").setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
+	settings = {
+		tsserver_file_preferences = {
+			includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+			includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+			includeInlayFunctionParameterTypeHints = true,
+			includeInlayVariableTypeHints = true,
+			includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayFunctionLikeReturnTypeHints = true,
+			includeInlayEnumMemberValueHints = true,
+		},
+		expose_as_code_action = "all", -- Exposes some features as code actions
+	},
 })
 
 vim.lsp.config("eslint", {
