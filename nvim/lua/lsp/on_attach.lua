@@ -6,6 +6,12 @@ local function on_attach(client, bufnr)
 		vim.lsp.buf.hover({ border = "rounded" })
 	end, { noremap = true, silent = true })
 
+	vim.keymap.set("n", "gry", vim.lsp.buf.incoming_calls, opts)
+	vim.keymap.set("n", "gro", vim.lsp.buf.outgoing_calls, opts)
+	vim.keymap.set("n", "grh", function()
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+	end)
+
 	-- Set autocommands conditional on server_capabilities
 	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_create_augroup("lsp_document_highlight", {
@@ -25,25 +31,12 @@ local function on_attach(client, bufnr)
 			buffer = bufnr,
 			callback = vim.lsp.buf.clear_references,
 		})
-	end
-
-	-- ========== CodeLens ==========
-	if client.server_capabilities.codeLensProvider then
-		local codelens_group = vim.api.nvim_create_augroup("lsp_codelens_" .. bufnr, {
-			clear = true,
-		})
-
-		vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost" }, {
-			group = codelens_group,
-			buffer = bufnr,
-			callback = function()
-				vim.lsp.codelens.refresh({ bufnr = bufnr })
-			end,
-		})
-
-		vim.keymap.set("n", "<leader>ll", vim.lsp.codelens.run, { buffer = bufnr, desc = "LSP: Run codelens" })
-
-		vim.lsp.codelens.refresh({ bufnr = bufnr })
+		-- Peek in smaller horizontal split (my favorite)
+		vim.keymap.set("n", "grp", function()
+			vim.cmd("split")
+			vim.cmd("resize 15") -- Small peek window
+			vim.lsp.buf.definition()
+		end, opts)
 	end
 
 	-- ========== Inlay Hints ==========

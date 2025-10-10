@@ -7,6 +7,7 @@ require("typescript-tools").setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
+		code_lens = "off",
 		tsserver_file_preferences = {
 			includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
 			includeInlayParameterNameHintsWhenArgumentMatchesName = false,
