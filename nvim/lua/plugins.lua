@@ -194,8 +194,6 @@ return {
 								line.sep("", hl, theme.fill),
 								tab.is_current() and "" or "󰆣",
 								tab.number(),
-								tab.name(),
-								tab.close_btn(""),
 								line.sep("", hl, theme.fill),
 								hl = hl,
 								margin = " ",
@@ -925,7 +923,8 @@ return {
 		"ggandor/leap.nvim",
 		config = function()
 			require("leap").setup({ highlight_unlabeled_phase_one_targets = true })
-			require("leap").set_default_mappings()
+			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+			vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
 			vim.keymap.set({ "n", "o" }, "gs", function()
 				require("leap.remote").action()
 			end)
@@ -1052,13 +1051,6 @@ return {
 					Snacks.toggle.diagnostics():map("<leader>ud")
 				end,
 			})
-		end,
-	},
-	{
-		"szw/vim-maximizer",
-		keys = { "<leader>m" },
-		config = function()
-			vim.keymap.set("n", "<leader>m", "<cmd>MaximizerToggle<CR>", { noremap = true, silent = true })
 		end,
 	},
 	{ "mfussenegger/nvim-jdtls" },
