@@ -1,0 +1,90 @@
+{
+  "Styled Component": {
+    "prefix": "sc",
+    "body": [
+      "const ${1:ComponentName} = styled.${2:div}`",
+      "  $0",
+      "`"
+    ],
+    "description": "Create a styled-component"
+  },
+  "Styled Component with Props": {
+    "prefix": "scp",
+    "body": [
+      "const ${1:ComponentName} = styled.${2:div}<{ ${3:propName}: ${4:string} }>`",
+      "  $0",
+      "`"
+    ],
+    "description": "Create a styled-component with TypeScript props"
+  },
+  "Styled Component Attrs": {
+    "prefix": "sca",
+    "body": [
+      "const ${1:ComponentName} = styled.${2:div}.attrs({",
+      "  $3",
+      "})`",
+      "  $0",
+      "`"
+    ],
+    "description": "Create a styled-component with attrs"
+  },
+  "Styled Extend": {
+    "prefix": "sce",
+    "body": [
+      "const ${1:NewComponent} = styled(${2:BaseComponent})`",
+      "  $0",
+      "`"
+    ],
+    "description": "Extend existing styled-component"
+  },
+  "Styled Import": {
+    "prefix": "ims",
+    "body": [
+      "import styled from 'styled-components'"
+    ],
+    "description": "Import styled-components"
+  },
+  "Styled Keyframes": {
+    "prefix": "sck",
+    "body": [
+      "const ${1:animationName} = keyframes`",
+      "  from {",
+      "    $2",
+      "  }",
+      "  to {",
+      "    $0",
+      "  }",
+      "`"
+    ],
+    "description": "Create keyframes animation"
+  },
+  "Styled CSS Helper": {
+    "prefix": "scc",
+    "body": [
+      "const ${1:cssHelper} = css`",
+      "  $0",
+      "`"
+    ],
+    "description": "Create reusable CSS with css helper"
+  },
+  "Styled Theme Props": {
+    "prefix": "sctp",
+    "body": [
+      "\\${({ theme }) => theme.${1:property}}$0"
+    ],
+    "description": "Access theme properties"
+  },
+  "React Functional Component Custom": {
+    "prefix": "rfcc",
+    "body": [
+      "export const ${1:ComponentName} = ({ ${2} }) => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t$0",
+      "\t\t</div>",
+      "\t)",
+      "}"
+    ],
+    "description": "React functional component with destructured props (custom)"
+  }
+}

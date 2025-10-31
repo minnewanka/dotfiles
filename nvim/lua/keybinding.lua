@@ -66,6 +66,7 @@ map(
 	"luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump':'<Tab>'",
 	{ expr = true, silent = true, desc = "Luasnip expand or jump" }
 )
+map("i", "<S-TAB>", "<cmd>lua require'luasnip'.jump(-1)<Cr>", { silent = true, desc = "ump back" })
 
 -- reselect map
 map(

@@ -18,6 +18,10 @@ return {
 			vim.api.nvim_set_keymap("i", "<C-s>", "copilot#Suggest()", { silent = true, expr = true })
 			vim.api.nvim_set_keymap("i", "<C-n>", "copilot#Next()", { silent = true, expr = true })
 			vim.api.nvim_set_keymap("i", "<C-p>", "copilot#Previous()", { silent = true, expr = true })
+			vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
+				expr = true,
+				replace_keycodes = false,
+			})
 		end,
 	},
 	{
@@ -843,7 +847,10 @@ return {
 				delete_check_events = "TextChanged,InsertEnter",
 			})
 
+			-- Load friendly-snippets first
 			require("luasnip/loaders/from_vscode").load()
+			-- Then load custom snippets (will override duplicates)
+			require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
 			require("luasnip").filetype_extend("typescript", { "javascript" })
 			require("luasnip").filetype_extend("typescriptreact", { "javascript" })
 		end,
@@ -1108,5 +1115,17 @@ return {
 			{ "<leader>ca", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
 			{ "<leader>cd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
 		},
+	},
+	{
+		"ThePrimeagen/refactoring.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		lazy = false,
+		opts = {},
+		config = function(_, opts)
+			require("refactoring").setup(opts)
+		end,
 	},
 }
