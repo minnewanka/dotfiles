@@ -96,6 +96,8 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
+		vim.keymap.set("n", "grd", vim.lsp.buf.definition, { noremap = true, silent = true, buffer = bufnr })
+		vim.keymap.set("n", "gry", vim.lsp.buf.incoming_calls, { noremap = true, silent = true, buffer = bufnr })
 		vim.keymap.set("n", "K", function()
 			vim.lsp.buf.hover({
 				border = "rounded",

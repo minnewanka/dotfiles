@@ -1,31 +1,21 @@
-local on_attach = require("lsp.on_attach")
 local util = require("lspconfig/util")
 local root_pattern = util.root_pattern
-local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 require("typescript-tools").setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
+	settings = {
+		expose_as_code_action = "all", -- your settings here
+		tsserver_plugins = {
+			"@styled/typescript-styled-plugin",
+		},
+	},
 })
 
-vim.lsp.config("eslint", {
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-
-vim.lsp.config("html", {
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-
-vim.lsp.config("cssls", {
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
+vim.lsp.enable("eslint")
+vim.lsp.enable("html")
+vim.lsp.enable("cssls")
+vim.lsp.enable("marksman")
 
 vim.lsp.config("jsonls", {
-	on_attach = on_attach,
-	capabilities = capabilities,
 	settings = {
 		json = {
 			schemas = {
@@ -41,5 +31,3 @@ vim.lsp.config("jsonls", {
 		},
 	},
 })
-
-vim.lsp.enable("marksman")
