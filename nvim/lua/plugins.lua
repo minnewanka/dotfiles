@@ -2,15 +2,6 @@ return {
 	"nvim-tree/nvim-web-devicons",
 	"nvim-lua/plenary.nvim",
 	{
-		"jinh0/eyeliner.nvim",
-		config = function()
-			require("eyeliner").setup({
-				highlight_on_key = true,
-				dim = true,
-			})
-		end,
-	},
-	{
 		"github/copilot.vim",
 		event = "VeryLazy",
 		config = function()
@@ -924,18 +915,6 @@ return {
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
 		opts_extend = { "sources.default" },
-	},
-
-	{
-		"ggandor/leap.nvim",
-		config = function()
-			require("leap").setup({ highlight_unlabeled_phase_one_targets = true })
-			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
-			vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
-			vim.keymap.set({ "n", "o" }, "gs", function()
-				require("leap.remote").action()
-			end)
-		end,
 	},
 
 	{

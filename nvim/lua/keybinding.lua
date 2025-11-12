@@ -195,11 +195,6 @@ map("n", "<leader>tr", ":TabRename ", { noremap = true, silent = true, desc = "T
 
 -- unimpaired alternatives
 -- Quickfix list
-map("n", ",qn", ":cnext<CR>", { noremap = true, silent = true, desc = "Quickfix next" })
-map("n", ",qp", ":cprev<CR>", { noremap = true, silent = true, desc = "Quickfix prev" })
-map("n", ",qo", ":copen<CR>", { noremap = true, silent = true, desc = "Quickfix open" })
-map("n", ",qc", ":cclose<CR>", { noremap = true, silent = true, desc = "Quickfix close" })
-
 vim.keymap.set("n", "<C-q>", function()
 	-- close current win if there are more than 1 win
 	-- else close current tab if there are more than 1 tab
