@@ -9,5 +9,10 @@ shell-integration = fish
 theme = philippe-theme
 cursor-invert-fg-bg = true
 
+macos-titlebar-style = hidden
+
+window-padding-x = 8
+window-padding-y = 4
+
 
 
