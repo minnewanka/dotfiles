@@ -1,4 +1,3 @@
-vim.env.PATH = vim.fn.expand("~/.local/share/nvm/v22.20.0/bin") .. ":" .. vim.env.PATH
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.maplocalleader = ";"
 

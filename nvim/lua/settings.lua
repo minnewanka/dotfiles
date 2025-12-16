@@ -77,13 +77,6 @@ vim.api.nvim_create_user_command("PrAll", ":Octo search archived:false is:pr sta
 vim.api.nvim_create_user_command("Pr", ":Octo search archived:false is:pr state:open review-requested:minnewanka", {})
 vim.api.nvim_create_user_command("MyPr", ":Octo search assignee:minnewanka is:pr", {})
 
-vim.api.nvim_create_user_command("ToggleGStatus", function()
-	if vim.fn.buflisted(vim.fn.bufname(".git/index")) ~= 0 then
-		vim.cmd("bd .git/index")
-	else
-		vim.cmd("Git")
-	end
-end, {})
 
 -- auto save
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
