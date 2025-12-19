@@ -233,7 +233,7 @@ return {
 			require("lualine").setup({
 				options = {
 					icons_enabled = true,
-					theme = "gruvbox-material",
+					theme = "tokyonight",
 					component_separators = { left = "", right = "" },
 					section_separators = { left = "", right = "" },
 					disabled_filetypes = {},
@@ -939,6 +939,13 @@ return {
 	},
 	{
 		"sainnhe/gruvbox-material",
+	},
+	{
+		"folke/tokyonight.nvim",
+		-- set transparent to true
+		opts = {
+			transparent = true,
+		},
 	},
 
 	{

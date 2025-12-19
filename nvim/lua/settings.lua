@@ -64,12 +64,12 @@ vim.api.nvim_create_autocmd({ "WinLeave" }, {
 	command = "setlocal nocursorline",
 })
 
-vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-	command = "highlight CursorLine guibg=#374141",
-})
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-	command = "highlight CursorLine guibg=#32302f",
-})
+-- vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+-- 	command = "highlight CursorLine guibg=#374141",
+-- })
+-- vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+-- 	command = "highlight CursorLine guibg=#32302f",
+-- })
 
 vim.api.nvim_create_user_command("BufOnly", 'silent! execute "%bd|e#|bd#"', {})
 vim.api.nvim_create_user_command("TSFix", ":write | edit | TSBufEnable highlight", {})
