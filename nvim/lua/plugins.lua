@@ -959,17 +959,6 @@ return {
 	{
 		"sainnhe/gruvbox-material",
 	},
-
-	{
-		"bloznelis/before.nvim",
-		config = function()
-			local before = require("before")
-			before.setup()
-
-			vim.keymap.set("n", "[c", before.jump_to_last_edit, { desc = "Jump to last edit" })
-			vim.keymap.set("n", "]c", before.jump_to_next_edit, { desc = "Jump to next edit" })
-		end,
-	},
 	{
 		"danielfalk/smart-open.nvim",
 		config = function()
@@ -1131,5 +1120,23 @@ return {
 		config = function()
 			require("ts-error-translator").setup({})
 		end,
+	},
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
+		},
 	},
 }

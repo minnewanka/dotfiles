@@ -16,3 +16,5 @@ window-padding-y = 4
 
 
 
+keybind = shift+enter=text:\x1b\r
+macos-option-as-alt = true

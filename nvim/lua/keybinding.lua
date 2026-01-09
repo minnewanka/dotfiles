@@ -54,7 +54,7 @@ vim.keymap.set("n", "j", [[(v:count > 1 ? "m'" . v:count : "g") . 'j']], { expr 
 
 -- git diff
 map("n", "<leader>gs", ":ToggleGStatus<CR>", { noremap = true, silent = true, desc = "Toggle git status" })
-map("n", "<Leader>gd", ":Gdiffsplit<CR>", { noremap = true, silent = true, desc = "Git diff split" })
+map("n", "<Leader>gd", ":tab Gdiffsplit<CR>", { noremap = true, silent = true, desc = "Git diff split" })
 map("n", "<Leader>gD", ":Git difftool<CR>", { noremap = true, silent = true, desc = "Git diff tool" })
 map("n", "<Leader>gdl", ":diffget //3<CR>", { noremap = true, silent = true, desc = "Git diff get local //3" })
 map("n", "<Leader>gdh", ":diffget //2<CR>", { noremap = true, silent = true, desc = "Git diff get remote //2" })
@@ -209,4 +209,5 @@ vim.keymap.set("n", "<C-q>", function()
 end, { desc = "Super <C-q>" })
 
 map("n", "<leader>p", "<Nop>", { noremap = true, silent = true, desc = "Temporary keymap to unlearn muscle memory" })
-vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("t", "<C-w>n", "<C-\\><C-n>", { noremap = true, silent = true })
