@@ -132,15 +132,15 @@ map("n", "<F2>", ':lua require"dap".continue()<CR>', { noremap = true, desc = "D
 
 map(
 	"n",
-	"<leader>k",
-	':exe "resize " . (winheight(0) * 3/2)<CR>',
-	{ noremap = true, silent = true, desc = "Increase window height" }
+	"<leader>=",
+	':exe "vertical resize " . (winwidth(0) * 3/2)<CR>',
+	{ noremap = true, silent = true, desc = "Increase window width" }
 )
 map(
 	"n",
-	"<leader>j",
-	':exe "resize " . (winheight(0) * 2/3)<CR>',
-	{ noremap = true, silent = true, desc = "Decrease window height" }
+	"<leader>-",
+	':exe "vertical resize " . (winwidth(0) * 2/3)<CR>',
+	{ noremap = true, silent = true, desc = "Decrease window width" }
 )
 vim.keymap.set("n", "<leader>fr", require("telescope.builtin").resume, { desc = "Telescope resume" })
 
@@ -210,4 +210,4 @@ end, { desc = "Super <C-q>" })
 
 map("n", "<leader>p", "<Nop>", { noremap = true, silent = true, desc = "Temporary keymap to unlearn muscle memory" })
 
-vim.api.nvim_set_keymap("t", "<C-w>n", "<C-\\><C-n>", { noremap = true, silent = true })
+vim.keymap.set("t", "<M-n>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode" })

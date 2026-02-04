@@ -17,6 +17,7 @@ cmd("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")
 cmd("set grepformat=%f:%l:%c:%m")
 cmd("set clipboard=unnamedplus")
 
+opt.conceallevel = 2
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
@@ -76,7 +77,6 @@ vim.api.nvim_create_user_command("TSFix", ":write | edit | TSBufEnable highlight
 vim.api.nvim_create_user_command("PrAll", ":Octo search archived:false is:pr state:open", {})
 vim.api.nvim_create_user_command("Pr", ":Octo search archived:false is:pr state:open review-requested:minnewanka", {})
 vim.api.nvim_create_user_command("MyPr", ":Octo search assignee:minnewanka is:pr", {})
-
 
 -- auto save
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {

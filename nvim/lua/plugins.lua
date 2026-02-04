@@ -991,6 +991,9 @@ return {
 					dim = false,
 					git_signs = true,
 				},
+				win = {
+					backdrop = { transparent = false, blend = 80 },
+				},
 			},
 			lazygit = { enabled = true },
 			notifier = { enabled = true },
@@ -998,7 +1001,7 @@ return {
 		},
 		keys = {
 			{
-				"go",
+				"gz",
 				function()
 					Snacks.zen()
 				end,
@@ -1136,6 +1139,40 @@ return {
 					require("which-key").show({ global = false })
 				end,
 				desc = "Buffer Local Keymaps (which-key)",
+			},
+		},
+	},
+	{
+		"obsidian-nvim/obsidian.nvim",
+		---@module 'obsidian'
+		---@type obsidian.config
+		keys = {
+			{
+				"<leader>o",
+				"<cmd>Obsidian<cr>",
+				desc = "Obsidian",
+			},
+			{
+				"<leader>ot",
+				"<cmd>Obsidian today<cr>",
+				desc = "obsidian today",
+			},
+			{
+				"<leader>on",
+				"<cmd>Obsidian new<cr>",
+				desc = "obsidian new",
+			},
+		},
+		opts = {
+			note_id_func = function(title)
+				return title:gsub(" ", "-"):gsub("\\[\\^A-Za-z0-9-\\]", ""):lower()
+			end,
+			legacy_commands = false, -- this will be removed in the next major release
+			workspaces = {
+				{
+					name = "work",
+					path = "~/vaults/work",
+				},
 			},
 		},
 	},

@@ -31,3 +31,33 @@ vim.lsp.config("jsonls", {
 		},
 	},
 })
+
+vim.lsp.config("jdtls", {
+	root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" }),
+	settings = {
+		java = {
+			configuration = {
+				runtimes = {
+					{
+						name = "JavaSE-1.8",
+						path = "/Users/Pro/.sdkman/candidates/java/8.0.472-amzn",
+					},
+					{
+						name = "JavaSE-11",
+						path = "/Users/Pro/.sdkman/candidates/java/11.0.29-amzn",
+					},
+					{
+						name = "JavaSE-17",
+						path = "/Users/Pro/.sdkman/candidates/java/17.0.17-amzn",
+						default = true,
+					},
+					{
+						name = "JavaSE-21",
+						path = "/Users/Pro/.sdkman/candidates/java/21.0.9-amzn",
+					},
+				},
+			},
+		},
+	},
+})
+vim.lsp.enable("jdtls")
