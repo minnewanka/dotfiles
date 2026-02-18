@@ -163,10 +163,8 @@ highlight! link NvimTreeGitStaged Blue
 highlight! link NvimTreeGitRenamed Purple
 highlight! link Directory Green
 highlight! link MoreMsg Yellow
-highlight! link TelescopeSelectionCaret Green
-highlight! link TelescopeSelection Green
-highlight! link TelescopePromptPrefix Orange
-highlight! link TelescopeBorder Grey
+highlight! link SnacksPickerBorder Grey
+highlight! link SnacksPickerCursorLine Green
 highlight! link NvimTreeGitDeleted Red
 highlight! link NvimTreeGitNew Aqua
 highlight! link NvimTreeGitMerge Orange

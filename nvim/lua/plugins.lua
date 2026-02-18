@@ -70,17 +70,32 @@ return {
 		config = function()
 			require("workspaces").setup({
 				hooks = {
-					open = {
-						"lua require('telescope').extensions.smart_open.smart_open(require('telescope.themes').get_dropdown({ cwd_only = true, previewer = false, theme = 'ivy' }))",
-					},
+					open = function()
+						Snacks.picker.files()
+					end,
 				},
 			})
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>sp",
-				[[<Cmd>Telescope workspaces theme=ivy<CR>]],
-				{ noremap = true, silent = true, desc = "Open workspaces picker" }
-			)
+			vim.keymap.set("n", "<leader>sp", function()
+				local workspaces = require("workspaces").get()
+				local items = {}
+				for _, ws in ipairs(workspaces) do
+					items[#items + 1] = {
+						text = ws.name .. " :: " .. ws.path,
+						file = ws.path,
+					}
+				end
+				Snacks.picker({
+					title = "Workspaces",
+					items = items,
+					layout = { preset = "select" },
+					confirm = function(picker, item)
+						picker:close()
+						if item then
+							require("workspaces").open(item.file)
+						end
+					end,
+				})
+			end, { desc = "Open workspaces picker" })
 		end,
 	},
 	{
@@ -99,16 +114,15 @@ return {
 	{ "kwkarlwang/bufjump.nvim", event = "VeryLazy" },
 	{ "andymass/vim-matchup", event = "VeryLazy" },
 	{
-
 		"pwntester/octo.nvim",
 		cmd = { "Octo" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
+			"folke/snacks.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
-			require("octo").setup()
+			require("octo").setup({ picker = "snacks" })
 		end,
 	},
 	{
@@ -516,123 +530,6 @@ return {
 			require("Comment").setup()
 		end,
 	},
-	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = { "nvim-telescope/telescope-live-grep-args.nvim" },
-		cmd = "Telescope",
-		module = "telescope",
-		config = function()
-			local actions = require("telescope.actions")
-			local lga_actions = require("telescope-live-grep-args.actions")
-
-			require("telescope").setup({
-				defaults = {
-					vimgrep_arguments = {
-						"rg",
-						"--color=never",
-						"--no-heading",
-						"--with-filename",
-						"--line-number",
-						"--column",
-						"--smart-case",
-					},
-					path_display = { "filename_first" },
-					file_sorter = require("telescope.sorters").get_fzy_sorter,
-					file_ignore_patterns = { "docs", "docs-dev", "node_modules" },
-					prompt_prefix = " > ",
-					color_devicons = true,
-
-					mappings = {
-						i = {
-							["<C-e>"] = require("telescope.actions").cycle_history_next,
-							["<C-f>"] = require("telescope.actions").cycle_history_prev,
-							["<C-q>"] = actions.smart_send_to_qflist,
-							["<C-j>"] = actions.move_selection_next,
-							["<C-k>"] = actions.move_selection_previous,
-							["<esc>"] = actions.close,
-							["<C-v>"] = require("telescope.actions").select_vertical,
-							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
-						},
-						n = {
-							["<C-q>"] = actions.smart_send_to_qflist,
-							["<C-j>"] = actions.move_selection_next,
-							["<C-k>"] = actions.move_selection_previous,
-						},
-					},
-				},
-				pickers = {
-					current_buffer_fuzzy_find = {
-						previewer = false,
-					},
-					live_grep = {
-						sorting_strategy = "ascending",
-						layout_config = {
-							prompt_position = "top",
-							width = 0.87,
-							height = 0.80,
-							preview_cutoff = 120,
-							horizontal = { mirror = false },
-							vertical = { mirror = false },
-						},
-					},
-					oldfiles = {
-						theme = "ivy",
-					},
-					find_files = {
-						sort_mru = true,
-						theme = "dropdown",
-						previewer = false,
-					},
-					buffers = {
-						sort_mru = true,
-						ignore_current_buffer = true,
-						theme = "dropdown",
-
-						mappings = {
-							i = {
-								["<c-d>"] = require("telescope.actions").delete_buffer,
-							},
-							n = {
-								["<c-d>"] = require("telescope.actions").delete_buffer,
-							},
-						},
-					},
-				},
-				extensions = {
-					fzf = {
-						fuzzy = true, -- false will only do exact matching
-						override_generic_sorter = true, -- override the generic sorter
-						override_file_sorter = true, -- override the file sorter
-						case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-						-- the default case_mode is "smart_case"
-					},
-					live_grep_args = {
-						auto_quoting = true, -- enable/disable auto-quoting
-						-- define mappings, e.g.
-						mappings = { -- extend mappings
-							i = {
-								["<C-k>"] = lga_actions.quote_prompt(),
-								["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-							},
-						},
-						-- ... also accepts theme settings, for example:
-						-- theme = "dropdown", -- use dropdown theme
-						-- theme = { }, -- use own theme spec
-						-- layout_config = { mirror=true }, -- mirror preview pane
-					},
-					frecency = {
-						show_scores = false,
-						show_unindexed = false,
-						ignore_patterns = { "*.git/*", "node%_modules/.*" },
-					},
-				},
-			})
-			require("telescope").load_extension("fzf")
-			require("telescope").load_extension("live_grep_args")
-			require("telescope").load_extension("workspaces")
-		end,
-	},
 	{
 		"windwp/nvim-autopairs",
 		event = "VeryLazy",
@@ -960,19 +857,6 @@ return {
 		"sainnhe/gruvbox-material",
 	},
 	{
-		"danielfalk/smart-open.nvim",
-		config = function()
-			require("telescope").load_extension("smart_open")
-		end,
-		dependencies = {
-			"kkharji/sqlite.lua",
-			-- Only required if using match_algorithm fzf
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-			-- Optional.  If installed, native fzy will be used when match_algorithm is fzy
-			{ "nvim-telescope/telescope-fzy-native.nvim" },
-		},
-	},
-	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
@@ -997,9 +881,46 @@ return {
 			},
 			lazygit = { enabled = true },
 			notifier = { enabled = true },
-			picker = { enabled = true },
+			picker = {
+				enabled = true,
+				formatters = {
+					file = {
+						filename_first = true,
+					},
+				},
+				sources = {
+					buffers = {
+						current = false,
+						win = {
+							input = {
+								keys = {
+									["<c-d>"] = { "bufdelete", mode = { "n", "i" } },
+								},
+							},
+							list = { keys = { ["dd"] = "bufdelete" } },
+						},
+					},
+				},
+				win = {
+					input = {
+						keys = {
+							["<Esc>"] = { "close", mode = { "n", "i" } },
+							["<c-e>"] = { "history_forward", mode = { "i", "n" } },
+							["<c-f>"] = { "history_back", mode = { "i", "n" } },
+							["<c-p>"] = { "toggle_preview", mode = { "i", "n" } },
+						},
+					},
+				},
+			},
 		},
 		keys = {
+			{
+				"<C-p>",
+				function()
+					Snacks.picker.smart({ layout = "dropdown" })
+				end,
+				desc = "Smart Find Files",
+			},
 			{
 				"gz",
 				function()
@@ -1176,4 +1097,5 @@ return {
 			},
 		},
 	},
+
 }

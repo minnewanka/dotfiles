@@ -80,46 +80,16 @@ map(
 map("n", "`", "'", { noremap = true, silent = true, desc = "Go to mark" })
 map("n", "'", "`", { noremap = true, silent = true, desc = "Go to mark" })
 
--- Telescope
-map("n", "<leader>M", [[<Cmd>Telescope marks<CR>]], { noremap = true, silent = true, desc = "Telescope marks" })
-map(
-	"n",
-	"<Leader>b",
-	[[<Cmd>Telescope buffers initial_mode=insert<CR>]],
-	{ noremap = true, silent = true, desc = "Telescope buffers" }
-)
-map("n", "<Leader>f", [[<Cmd>Telescope live_grep<CR>]], { noremap = true, silent = true, desc = "Telescope live grep" })
-map(
-	"n",
-	"<Leader>fs",
-	[[<Cmd>Telescope grep_string<CR>]],
-	{ noremap = true, silent = true, desc = "Telescope grep string" }
-)
-map(
-	"v",
-	"<Leader>fs",
-	[[<Cmd>Telescope grep_string<CR>]],
-	{ noremap = true, silent = true, desc = "Telescope grep string" }
-)
-map("n", "<Leader>fo", [[<Cmd>Telescope oldfiles<CR>]], { noremap = true, silent = true, desc = "Telescope old files" })
-map(
-	"n",
-	"<C-p>",
-	[[<Cmd>Telescope smart_open cwd_only=true theme=dropdown previewer=false <CR>]],
-	{ noremap = true, silent = true, desc = "Telescope smart open" }
-)
-map(
-	"n",
-	"<Leader>/",
-	[[<Cmd>Telescope current_buffer_fuzzy_find<CR>]],
-	{ noremap = true, silent = true, desc = "Telescope current buffer fuzzy find" }
-)
-map(
-	"n",
-	"<Leader>sd",
-	[[<Cmd>:lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>]],
-	{ noremap = true, silent = true, desc = "Telescope live grep args" }
-)
+-- snacks picker
+local kmap = vim.keymap.set
+kmap("n", "<leader>M", function() Snacks.picker.marks() end, { noremap = true, silent = true, desc = "Snacks marks" })
+kmap("n", "<Leader>b", function() Snacks.picker.buffers() end, { noremap = true, silent = true, desc = "Snacks buffers" })
+kmap("n", "<Leader>f", function() Snacks.picker.grep() end, { noremap = true, silent = true, desc = "Snacks live grep" })
+kmap("n", "<Leader>fs", function() Snacks.picker.grep_word() end, { noremap = true, silent = true, desc = "Snacks grep word under cursor" })
+kmap("v", "<Leader>fs", function() Snacks.picker.grep_word() end, { noremap = true, silent = true, desc = "Snacks grep visual selection" })
+kmap("n", "<Leader>fo", function() Snacks.picker.recent() end, { noremap = true, silent = true, desc = "Snacks recent files" })
+kmap("n", "<Leader>/", function() Snacks.picker.lines() end, { noremap = true, silent = true, desc = "Snacks buffer lines" })
+kmap("n", "<Leader>sd", function() Snacks.picker.grep() end, { noremap = true, silent = true, desc = "Snacks live grep (glob)" })
 map("n", "<leader>cc", "<cmd>ClaudeCode<CR>", { noremap = true, silent = true, desc = "Toggle Claude Code" })
 --undo break point
 map("i", ",", ",<c-g>u", { noremap = true, silent = true, desc = "Undo break point" })
@@ -142,7 +112,7 @@ map(
 	':exe "vertical resize " . (winwidth(0) * 2/3)<CR>',
 	{ noremap = true, silent = true, desc = "Decrease window width" }
 )
-vim.keymap.set("n", "<leader>fr", require("telescope.builtin").resume, { desc = "Telescope resume" })
+kmap("n", "<leader>fr", function() Snacks.picker.resume() end, { noremap = true, silent = true, desc = "Snacks resume" })
 
 -- HlsLens
 map(
