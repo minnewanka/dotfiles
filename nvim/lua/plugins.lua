@@ -66,39 +66,6 @@ return {
 		end,
 	},
 	{
-		"natecraddock/workspaces.nvim",
-		config = function()
-			require("workspaces").setup({
-				hooks = {
-					open = function()
-						Snacks.picker.files()
-					end,
-				},
-			})
-			vim.keymap.set("n", "<leader>sp", function()
-				local workspaces = require("workspaces").get()
-				local items = {}
-				for _, ws in ipairs(workspaces) do
-					items[#items + 1] = {
-						text = ws.name .. " :: " .. ws.path,
-						file = ws.path,
-					}
-				end
-				Snacks.picker({
-					title = "Workspaces",
-					items = items,
-					layout = { preset = "select" },
-					confirm = function(picker, item)
-						picker:close()
-						if item then
-							require("workspaces").open(item.file)
-						end
-					end,
-				})
-			end, { desc = "Open workspaces picker" })
-		end,
-	},
-	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -341,7 +308,7 @@ return {
 						set_jumps = true, -- whether to set jumps in the jumplist
 						goto_next_start = {
 							["]m"] = "@function.outer",
-							["]]"] = { query = "@class.outer", desc = "Next class start" },
+							-- ["]]"] = { query = "@class.outer", desc = "Next class start" },
 							--
 							-- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queries.
 							["]o"] = "@loop.*",
@@ -358,7 +325,7 @@ return {
 						},
 						goto_previous_start = {
 							["[m"] = "@function.outer",
-							["[["] = "@class.outer",
+							-- ["[["] = "@class.outer",
 						},
 						goto_previous_end = {
 							["[M"] = "@function.outer",
@@ -597,19 +564,6 @@ return {
 			)
 		end,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-	},
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons", -- optional, but recommended
-		},
-		lazy = false, -- neo-tree will lazily load itself
-		keys = {
-			{ "<leader>nt", "<cmd>Neotree toggle<cr>", desc = "Toggle Neotree" },
-		},
 	},
 
 	{
@@ -864,6 +818,7 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			dashboard = { enabled = true },
+			explorer = { enabled = true },
 			indent = { enabled = true },
 			input = { enabled = true },
 			quickfile = { enabled = true },
@@ -948,6 +903,20 @@ return {
 				end,
 				desc = "Prev Reference",
 				mode = { "n", "t" },
+			},
+			{
+				"<leader>nt",
+				function()
+					Snacks.explorer()
+				end,
+				desc = "File Explorer",
+			},
+			{
+				"<leader>sp",
+				function()
+					Snacks.picker.projects()
+				end,
+				desc = "Open project",
 			},
 		},
 		init = function()
@@ -1097,5 +1066,4 @@ return {
 			},
 		},
 	},
-
 }
