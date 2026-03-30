@@ -82,15 +82,33 @@ map("n", "'", "`", { noremap = true, silent = true, desc = "Go to mark" })
 
 -- snacks picker
 local kmap = vim.keymap.set
-kmap("n", "<leader>M", function() Snacks.picker.marks() end, { noremap = true, silent = true, desc = "Snacks marks" })
-kmap("n", "<Leader>b", function() Snacks.picker.buffers() end, { noremap = true, silent = true, desc = "Snacks buffers" })
-kmap("n", "<Leader>f", function() Snacks.picker.grep() end, { noremap = true, silent = true, desc = "Snacks live grep" })
-kmap("n", "<Leader>fs", function() Snacks.picker.grep_word() end, { noremap = true, silent = true, desc = "Snacks grep word under cursor" })
-kmap("v", "<Leader>fs", function() Snacks.picker.grep_word() end, { noremap = true, silent = true, desc = "Snacks grep visual selection" })
-kmap("n", "<Leader>fo", function() Snacks.picker.recent() end, { noremap = true, silent = true, desc = "Snacks recent files" })
-kmap("n", "<Leader>/", function() Snacks.picker.lines() end, { noremap = true, silent = true, desc = "Snacks buffer lines" })
-kmap("n", "<Leader>sd", function() Snacks.picker.grep() end, { noremap = true, silent = true, desc = "Snacks live grep (glob)" })
-map("n", "<leader>cc", "<cmd>ClaudeCode<CR>", { noremap = true, silent = true, desc = "Toggle Claude Code" })
+kmap("n", "<leader>M", function()
+	Snacks.picker.marks()
+end, { noremap = true, silent = true, desc = "Snacks marks" })
+kmap("n", "<Leader>b", function()
+	Snacks.picker.buffers()
+end, { noremap = true, silent = true, desc = "Snacks buffers" })
+kmap("n", "<Leader>f", function()
+	Snacks.picker.grep()
+end, { noremap = true, silent = true, desc = "Snacks live grep" })
+kmap("n", "<Leader>fs", function()
+	Snacks.picker.grep_word()
+end, { noremap = true, silent = true, desc = "Snacks grep word under cursor" })
+kmap("v", "<Leader>fs", function()
+	Snacks.picker.grep_word()
+end, { noremap = true, silent = true, desc = "Snacks grep visual selection" })
+kmap("n", "<Leader>fo", function()
+	Snacks.picker.recent()
+end, { noremap = true, silent = true, desc = "Snacks recent files" })
+kmap("n", "<Leader>fh", function()
+	Snacks.picker.search_history()
+end, { noremap = true, silent = true, desc = "Snacks search history" })
+kmap("n", "<Leader>/", function()
+	Snacks.picker.lines()
+end, { noremap = true, silent = true, desc = "Snacks buffer lines" })
+kmap("n", "<Leader>sd", function()
+	Snacks.picker.grep()
+end, { noremap = true, silent = true, desc = "Snacks live grep (glob)" })
 --undo break point
 map("i", ",", ",<c-g>u", { noremap = true, silent = true, desc = "Undo break point" })
 map("i", ".", ".<c-g>u", { noremap = true, silent = true, desc = "Undo break point" })
@@ -112,7 +130,9 @@ map(
 	':exe "vertical resize " . (winwidth(0) * 2/3)<CR>',
 	{ noremap = true, silent = true, desc = "Decrease window width" }
 )
-kmap("n", "<leader>fr", function() Snacks.picker.resume() end, { noremap = true, silent = true, desc = "Snacks resume" })
+kmap("n", "<leader>fr", function()
+	Snacks.picker.resume()
+end, { noremap = true, silent = true, desc = "Snacks resume" })
 
 -- HlsLens
 map(
@@ -178,6 +198,4 @@ vim.keymap.set("n", "<C-q>", function()
 	end
 end, { desc = "Super <C-q>" })
 
-map("n", "<leader>p", "<Nop>", { noremap = true, silent = true, desc = "Temporary keymap to unlearn muscle memory" })
-
-vim.keymap.set("t", "<M-n>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode" })
+vim.keymap.set("t", "<C-x>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode" })

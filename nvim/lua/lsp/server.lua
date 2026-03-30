@@ -1,11 +1,18 @@
-local util = require("lspconfig/util")
-local root_pattern = util.root_pattern
-
 require("typescript-tools").setup({
 	settings = {
-		expose_as_code_action = "all", -- your settings here
+		expose_as_code_action = "all",
 		tsserver_plugins = {
 			"@styled/typescript-styled-plugin",
+		},
+		tsserver_file_preferences = {
+			includeInlayParameterNameHints = false,
+			includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+			includeInlayFunctionParameterTypeHints = false,
+			includeInlayVariableTypeHints = false,
+			includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+			includeInlayPropertyDeclarationTypeHints = false,
+			includeInlayFunctionLikeReturnTypeHints = false,
+			includeInlayEnumMemberValueHints = true,
 		},
 	},
 })

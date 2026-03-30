@@ -3,7 +3,7 @@ local winbar = {}
 -- vim.api.nvim_set_hl(0, "WinBarContent", { fg = '#bbc2cf', bold=true })
 
 winbar.eval = function()
-	f_icon, f_hl = require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype)
+	local f_icon, f_hl = require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype)
 	f_icon = f_icon == nil and "" or (f_icon .. " ")
 	f_hl = f_hl == nil and "" or f_hl
 	if vim.api.nvim_eval_statusline("%f", {})["str"] == "[No Name]" then

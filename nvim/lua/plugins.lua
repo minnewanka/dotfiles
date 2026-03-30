@@ -1,6 +1,4 @@
 return {
-	"nvim-tree/nvim-web-devicons",
-	"nvim-lua/plenary.nvim",
 	{
 		"github/copilot.vim",
 		event = "VeryLazy",
@@ -39,7 +37,7 @@ return {
 					python = { "isort" },
 				},
 				format_on_save = {
-					lsp_fallback = true,
+					lsp_format = "fallback",
 					async = false,
 					timeout_ms = 1000,
 				},
@@ -47,7 +45,7 @@ return {
 
 			vim.keymap.set({ "n", "v" }, "<leader><leader>", function()
 				conform.format({
-					lsp_fallback = true,
+					lsp_format = "fallback",
 					async = false,
 					timeout_ms = 1000,
 				})
@@ -66,6 +64,13 @@ return {
 		end,
 	},
 	{
+		url = "https://codeberg.org/andyg/leap.nvim",
+		config = function()
+			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)", { desc = "Leap" })
+			vim.keymap.set("n", "S", "<Plug>(leap-from-window)", { desc = "Leap from window" })
+		end,
+	},
+	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -75,6 +80,10 @@ return {
 	{
 		"pmizio/typescript-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		config = function()
+			require("lsp/config")
+			require("lsp/server")
+		end,
 	},
 	{ "onsails/lspkind-nvim", event = "VeryLazy" },
 	{ "tpope/vim-surround", event = "VeryLazy" },
@@ -198,13 +207,6 @@ return {
 			vim.o.showtabline = 1
 		end,
 	},
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			require("lsp/config")
-			require("lsp/server")
-		end,
-	},
 
 	{
 		"nvim-lualine/lualine.nvim",
@@ -225,7 +227,7 @@ return {
 					lualine_a = { "mode" },
 					lualine_b = { "branch" },
 					lualine_c = { "buffers" },
-					lualine_x = { "encoding", "fileformat", "filetype" },
+					lualine_x = { "encoding", "fileformat", "filetype", { function() return vim.lsp.status() end } },
 					lualine_y = { "progress" },
 					lualine_z = { "location" },
 				},
@@ -335,16 +337,17 @@ return {
 						-- Use if you want more granular movements
 						-- Make it even more gradual by adding multiple queries and regex.
 						goto_next = {
-							["]d"] = "@conditional.outer",
+							["]c"] = "@conditional.outer",
 						},
 						goto_previous = {
-							["[d"] = "@conditional.outer",
+							["[c"] = "@conditional.outer",
 						},
 					},
 				},
 				indent = { enable = true },
 				incremental_selection = {
 					enable = true,
+					disable = { "norg" },
 					keymaps = {
 						init_selection = "<CR>",
 						scope_incremental = "<CR>",
@@ -355,24 +358,6 @@ return {
 				matchup = {
 					enable = true,
 				},
-				playground = {
-					enable = true,
-					disable = {},
-					updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-					persist_queries = false, -- Whether the query persists across vim sessions
-					keybindings = {
-						toggle_query_editor = "o",
-						toggle_hl_groups = "i",
-						toggle_injected_languages = "t",
-						toggle_anonymous_nodes = "a",
-						toggle_language_display = "I",
-						focus_language = "f",
-						unfocus_language = "F",
-						update = "R",
-						goto_node = "<cr>",
-						show_help = "?",
-					},
-				},
 			})
 		end,
 	},
@@ -381,10 +366,6 @@ return {
 		config = function()
 			require("nvim-ts-autotag").setup({})
 		end,
-	},
-	{
-		"nvim-treesitter/playground",
-		cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" },
 	},
 
 	{
@@ -412,10 +393,13 @@ return {
 		end,
 	},
 	{
-		"tpope/vim-unimpaired",
-		event = "VeryLazy",
+		"rbong/vim-flog",
+		lazy = true,
+		cmd = { "Flog", "Flogsplit", "Floggit" },
+		dependencies = {
+			"tpope/vim-fugitive",
+		},
 	},
-
 	{
 		"lewis6991/gitsigns.nvim",
 		event = "BufReadPre",
@@ -492,12 +476,6 @@ return {
 		end,
 	},
 	{
-		"numToStr/Comment.nvim",
-		config = function()
-			require("Comment").setup()
-		end,
-	},
-	{
 		"windwp/nvim-autopairs",
 		event = "VeryLazy",
 		config = function()
@@ -567,19 +545,19 @@ return {
 	},
 
 	{
-		"norcalli/nvim-colorizer.lua",
-		cmd = "ColorizerToggle",
-		config = function()
-			require("colorizer").setup({ "*" }, {
-				RGB = true, -- #RGB hex codes --blue
-				RRGGBB = true, -- #RRGGBB hex codes
-				RRGGBBAA = true, -- #RRGGBBAA hex codes
-				rgb_fn = true, -- CSS rgb() and rgba() functions
-				hsl_fn = true, -- CSS hsl() and hsla() functions
-				css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-				css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-			})
-		end,
+		"catgoose/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = {
+			user_default_options = {
+				RGB = true,
+				RRGGBB = true,
+				RRGGBBAA = true,
+				rgb_fn = true,
+				hsl_fn = true,
+				css = true,
+				css_fn = true,
+			},
+		},
 	},
 	{
 		"kevinhwang91/nvim-bqf",
@@ -787,13 +765,6 @@ return {
 		opts_extend = { "sources.default" },
 	},
 
-	{
-		"j-hui/fidget.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("fidget").setup()
-		end,
-	},
 	-- {
 	-- 	"MunifTanjim/prettier.nvim",
 	-- 	event = "VeryLazy",
@@ -817,7 +788,7 @@ return {
 		---@type snacks.Config
 		opts = {
 			bigfile = { enabled = true },
-			dashboard = { enabled = true },
+			dashboard = { enabled = false },
 			explorer = { enabled = true },
 			indent = { enabled = true },
 			input = { enabled = true },
@@ -1009,12 +980,6 @@ return {
 		end,
 	},
 	{
-		"dmmulroy/ts-error-translator.nvim",
-		config = function()
-			require("ts-error-translator").setup({})
-		end,
-	},
-	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {
@@ -1032,38 +997,50 @@ return {
 			},
 		},
 	},
+	"benlubas/neorg-interim-ls",
 	{
-		"obsidian-nvim/obsidian.nvim",
-		---@module 'obsidian'
-		---@type obsidian.config
-		keys = {
-			{
-				"<leader>o",
-				"<cmd>Obsidian<cr>",
-				desc = "Obsidian",
-			},
-			{
-				"<leader>ot",
-				"<cmd>Obsidian today<cr>",
-				desc = "obsidian today",
-			},
-			{
-				"<leader>on",
-				"<cmd>Obsidian new<cr>",
-				desc = "obsidian new",
-			},
-		},
-		opts = {
-			note_id_func = function(title)
-				return title:gsub(" ", "-"):gsub("\\[\\^A-Za-z0-9-\\]", ""):lower()
-			end,
-			legacy_commands = false, -- this will be removed in the next major release
-			workspaces = {
-				{
-					name = "work",
-					path = "~/vaults/work",
+		"nvim-neorg/neorg",
+		lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+		version = "*", -- Pin Neorg to the latest stable release
+		config = function()
+			require("neorg").setup({
+				load = {
+					["core.defaults"] = {},
+					["core.concealer"] = {},
+					["core.dirman"] = {
+						config = {
+							default_workspace = "neorg",
+							workspaces = {
+								neorg = "~/neorg", -- Format: <name_of_workspace> = <path_to_workspace_root>
+							},
+							index = "index.norg", -- The name of the main (root) .norg file
+						},
+					},
+					["external.interim-ls"] = {
+						config = {
+							completion_provider = {
+								enable = true,
+								documentation = true,
+								categories = false,
+								people = {
+									enable = false,
+									path = "people",
+								},
+							},
+						},
+					},
+					["core.completion"] = {
+						config = { engine = { module_name = "external.lsp-completion" } },
+					},
 				},
-			},
-		},
+			})
+			vim.keymap.set("n", "<leader>ot", "<cmd>Neorg journal today<cr>", { desc = "Neorg: Open today's journal" })
+			vim.keymap.set("n", "<leader>of", function()
+				Snacks.picker.files({ cwd = "~/neorg" })
+			end, { desc = "Find notes" })
+			vim.keymap.set("n", "<leader>og", function()
+				Snacks.picker.grep({ cwd = "~/neorg" })
+			end, { desc = "Grep notes" })
+		end,
 	},
 }

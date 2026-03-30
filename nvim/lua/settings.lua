@@ -1,28 +1,19 @@
-vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
-vim.g.maplocalleader = ";"
-
 local indent = 4
-
-local cmd = vim.cmd
 local opt = vim.opt
-local g = vim.g
-local nvim_exec = vim.api.nvim_exec
-local fn, cmd = vim.fn, vim.cmd
 
-cmd("set nomodeline")
-cmd("set jumpoptions+=stack")
-cmd("set inccommand=split")
-cmd("set noshowmode")
-cmd("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case")
-cmd("set grepformat=%f:%l:%c:%m")
-cmd("set clipboard=unnamedplus")
+opt.modeline = false
+opt.jumpoptions = "stack"
+opt.inccommand = "split"
+opt.showmode = false
+opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+opt.grepformat = "%f:%l:%c:%m"
+opt.clipboard = "unnamedplus"
 
 opt.conceallevel = 2
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
 opt.expandtab = true
-opt.termguicolors = true
 opt.mouse = "a"
 opt.splitbelow = true
 opt.splitright = true
@@ -39,18 +30,19 @@ opt.undofile = true
 opt.updatetime = 300
 opt.scrolloff = 10
 opt.sidescrolloff = 8
-opt.formatoptions = vim.opt.formatoptions + { "cro" }
+opt.formatoptions:append("cro")
 opt.shortmess:append("c")
 opt.swapfile = false
-vim.opt.shell = "/bin/bash"
+opt.shell = "/bin/bash"
 opt.laststatus = 2
 vim.o.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
 opt.fillchars:append({ eob = " " })
-vim.opt.signcolumn = "yes"
+opt.signcolumn = "yes"
 
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-	pattern = "*",
-	command = 'silent! lua vim.highlight.on_yank{higroup="YankHighlight", timeout=700}',
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.hl.on_yank({ higroup = "YankHighlight", timeout = 700 })
+	end,
 })
 
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
@@ -89,8 +81,12 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
-		vim.keymap.set("n", "grd", vim.lsp.buf.definition, { noremap = true, silent = true, buffer = bufnr })
-		vim.keymap.set("n", "gry", vim.lsp.buf.incoming_calls, { noremap = true, silent = true, buffer = bufnr })
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		if client and client:supports_method("textDocument/inlayHint") then
+			vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+		end
+		vim.keymap.set("n", "grd", vim.lsp.buf.definition, { noremap = true, silent = true, buffer = event.buf })
+		vim.keymap.set("n", "gry", vim.lsp.buf.incoming_calls, { noremap = true, silent = true, buffer = event.buf })
 		vim.keymap.set("n", "K", function()
 			vim.lsp.buf.hover({
 				border = "rounded",
