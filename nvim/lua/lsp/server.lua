@@ -1,26 +1,25 @@
-require("typescript-tools").setup({
+local ts_inlay_hints = {
+	parameterNames = { enabled = "none" },
+	parameterTypes = { enabled = false },
+	variableTypes = { enabled = false },
+	propertyDeclarationTypes = { enabled = false },
+	functionLikeReturnTypes = { enabled = false },
+	enumMemberValues = { enabled = true },
+}
+
+vim.lsp.config("vtsls", {
 	settings = {
-		expose_as_code_action = "all",
-		tsserver_plugins = {
-			"@styled/typescript-styled-plugin",
-		},
-		tsserver_file_preferences = {
-			includeInlayParameterNameHints = false,
-			includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-			includeInlayFunctionParameterTypeHints = false,
-			includeInlayVariableTypeHints = false,
-			includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-			includeInlayPropertyDeclarationTypeHints = false,
-			includeInlayFunctionLikeReturnTypeHints = false,
-			includeInlayEnumMemberValueHints = true,
-		},
+		typescript = { inlayHints = ts_inlay_hints },
+		javascript = { inlayHints = ts_inlay_hints },
 	},
 })
+vim.lsp.enable("vtsls")
 
 vim.lsp.enable("eslint")
 vim.lsp.enable("html")
 vim.lsp.enable("cssls")
 vim.lsp.enable("marksman")
+vim.lsp.enable("zls")
 
 vim.lsp.config("jsonls", {
 	settings = {

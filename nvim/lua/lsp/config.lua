@@ -18,6 +18,10 @@ vim.diagnostic.config({
 })
 
 
-vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, { noremap = true, silent = true })
-vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, { noremap = true, silent = true })
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1 })
+end, { noremap = true, silent = true })
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1 })
+end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, { noremap = true, silent = true })

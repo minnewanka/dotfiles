@@ -39,6 +39,25 @@ vim.o.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
 opt.fillchars:append({ eob = " " })
 opt.signcolumn = "yes"
 
+-- Experimental ui2 (Neovim 0.12+): redesigned messages/cmdline UI.
+-- Avoids "Press ENTER" prompts, highlights cmdline as you type, pager as buffer+window.
+-- Deferred to VimEnter because ui2.enable() silently no-ops if no UI is attached yet.
+vim.api.nvim_create_autocmd("VimEnter", {
+	once = true,
+	callback = function()
+		require("vim._core.ui2").enable({
+			enable = true,
+			msg = {
+				target = "cmd",
+				cmd = { height = 0.5 },
+				dialog = { height = 0.5 },
+				msg = { height = 0.5, timeout = 4000 },
+				pager = { height = 1 },
+			},
+		})
+	end,
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		vim.hl.on_yank({ higroup = "YankHighlight", timeout = 700 })
@@ -65,7 +84,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 })
 
 vim.api.nvim_create_user_command("BufOnly", 'silent! execute "%bd|e#|bd#"', {})
-vim.api.nvim_create_user_command("TSFix", ":write | edit | TSBufEnable highlight", {})
+vim.api.nvim_create_user_command("TSFix", "write | edit", {})
 vim.api.nvim_create_user_command("PrAll", ":Octo search archived:false is:pr state:open", {})
 vim.api.nvim_create_user_command("Pr", ":Octo search archived:false is:pr state:open review-requested:minnewanka", {})
 vim.api.nvim_create_user_command("MyPr", ":Octo search assignee:minnewanka is:pr", {})

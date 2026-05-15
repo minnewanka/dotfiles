@@ -72,14 +72,59 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 		},
+		config = function()
+			require("nvim-treesitter-textobjects").setup({
+				select = {
+					enable = true,
+					lookahead = true,
+					keymaps = {
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["ac"] = "@class.outer",
+						["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+					},
+					selection_modes = {
+						["@parameter.outer"] = "v",
+						["@function.outer"] = "V",
+						["@class.outer"] = "<c-v>",
+					},
+					include_surrounding_whitespace = true,
+				},
+				move = {
+					enable = true,
+					set_jumps = true,
+					goto_next_start = {
+						["]m"] = "@function.outer",
+						["]o"] = "@loop.*",
+					},
+					goto_next_end = {
+						["]M"] = "@function.outer",
+						["]["] = "@class.outer",
+					},
+					goto_previous_start = {
+						["[m"] = "@function.outer",
+					},
+					goto_previous_end = {
+						["[M"] = "@function.outer",
+						["[]"] = "@class.outer",
+					},
+					goto_next = {
+						["]c"] = "@conditional.outer",
+					},
+					goto_previous = {
+						["[c"] = "@conditional.outer",
+					},
+				},
+			})
+		end,
 	},
 	{ "tpope/vim-repeat", event = "VeryLazy" },
 	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		"neovim/nvim-lspconfig",
 		config = function()
 			require("lsp/config")
 			require("lsp/server")
@@ -87,6 +132,7 @@ return {
 	},
 	{ "onsails/lspkind-nvim", event = "VeryLazy" },
 	{ "tpope/vim-surround", event = "VeryLazy" },
+	{ "tpope/vim-unimpaired", event = "VeryLazy" },
 	{ "kwkarlwang/bufjump.nvim", event = "VeryLazy" },
 	{ "andymass/vim-matchup", event = "VeryLazy" },
 	{
@@ -227,7 +273,17 @@ return {
 					lualine_a = { "mode" },
 					lualine_b = { "branch" },
 					lualine_c = { "buffers" },
-					lualine_x = { "encoding", "fileformat", "filetype", { function() return vim.lsp.status() end } },
+					lualine_x = {
+						{
+							function()
+								return " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+							end,
+							color = { fg = "#a89984" },
+						},
+						"encoding",
+						"fileformat",
+						"filetype",
+					},
 					lualine_y = { "progress" },
 					lualine_z = { "location" },
 				},
@@ -246,118 +302,31 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-
-			parser_configs.norg = {
-				install_info = {
-					url = "https://github.com/vhyrro/tree-sitter-norg",
-					files = { "src/parser.c" },
-					branch = "main",
+			require("nvim-treesitter").setup({
+				ensure_installed = { "tsx", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+				auto_install = true,
+			})
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = {
+					"typescript",
+					"typescriptreact",
+					"javascript",
+					"javascriptreact",
+					"html",
+					"css",
+					"json",
+					"jsonc",
+					"markdown",
+					"java",
+					"lua",
 				},
-			}
-
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "tsx" },
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = { "markdown" },
-				},
-				textobjects = {
-					select = {
-						enable = true,
-
-						-- Automatically jump forward to textobj, similar to targets.vim
-						lookahead = true,
-
-						keymaps = {
-							-- You can use the capture groups defined in textobjects.scm
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-							["ac"] = "@class.outer",
-							-- You can optionally set descriptions to the mappings (used in the desc parameter of
-							-- nvim_buf_set_keymap) which plugins like which-key display
-							["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-							-- You can also use captures from other query groups like `locals.scm`
-							["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-						},
-						-- You can choose the select mode (default is charwise 'v')
-						--
-						-- Can also be a function which gets passed a table with the keys
-						-- * query_string: eg '@function.inner'
-						-- * method: eg 'v' or 'o'
-						-- and should return the mode ('v', 'V', or '<c-v>') or a table
-						-- mapping query_strings to modes.
-						selection_modes = {
-							["@parameter.outer"] = "v", -- charwise
-							["@function.outer"] = "V", -- linewise
-							["@class.outer"] = "<c-v>", -- blockwise
-						},
-						-- If you set this to `true` (default is `false`) then any textobject is
-						-- extended to include preceding or succeeding whitespace. Succeeding
-						-- whitespace has priority in order to act similarly to eg the built-in
-						-- `ap`.
-						--
-						-- Can also be a function which gets passed a table with the keys
-						-- * query_string: eg '@function.inner'
-						-- * selection_mode: eg 'v'
-						-- and should return true of false
-						include_surrounding_whitespace = true,
-					},
-					move = {
-						enable = true,
-						set_jumps = true, -- whether to set jumps in the jumplist
-						goto_next_start = {
-							["]m"] = "@function.outer",
-							-- ["]]"] = { query = "@class.outer", desc = "Next class start" },
-							--
-							-- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queries.
-							["]o"] = "@loop.*",
-							-- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
-							--
-							-- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-							-- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
-							["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
-							["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-						},
-						goto_next_end = {
-							["]M"] = "@function.outer",
-							["]["] = "@class.outer",
-						},
-						goto_previous_start = {
-							["[m"] = "@function.outer",
-							-- ["[["] = "@class.outer",
-						},
-						goto_previous_end = {
-							["[M"] = "@function.outer",
-							["[]"] = "@class.outer",
-						},
-						-- Below will go to either the start or the end, whichever is closer.
-						-- Use if you want more granular movements
-						-- Make it even more gradual by adding multiple queries and regex.
-						goto_next = {
-							["]c"] = "@conditional.outer",
-						},
-						goto_previous = {
-							["[c"] = "@conditional.outer",
-						},
-					},
-				},
-				indent = { enable = true },
-				incremental_selection = {
-					enable = true,
-					disable = { "norg" },
-					keymaps = {
-						init_selection = "<CR>",
-						scope_incremental = "<CR>",
-						node_incremental = "<TAB>",
-						node_decremental = "<S-TAB>",
-					},
-				},
-				matchup = {
-					enable = true,
-				},
+				callback = function()
+					vim.treesitter.start()
+				end,
 			})
 		end,
 	},
@@ -809,6 +778,7 @@ return {
 			notifier = { enabled = true },
 			picker = {
 				enabled = true,
+				filter = { cwd = true },
 				formatters = {
 					file = {
 						filename_first = true,
@@ -825,6 +795,10 @@ return {
 							},
 							list = { keys = { ["dd"] = "bufdelete" } },
 						},
+					},
+					smart = {
+						multi = { "buffers", "recent", "files" },
+						sort = { fields = { "source_id" } },
 					},
 				},
 				win = {
@@ -967,18 +941,18 @@ return {
 			{ "<leader>cd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
 		},
 	},
-	{
-		"ThePrimeagen/refactoring.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		lazy = false,
-		opts = {},
-		config = function(_, opts)
-			require("refactoring").setup(opts)
-		end,
-	},
+	-- {
+	-- 	"ThePrimeagen/refactoring.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 	},
+	-- 	lazy = false,
+	-- 	opts = {},
+	-- 	config = function(_, opts)
+	-- 		require("refactoring").setup(opts)
+	-- 	end,
+	-- },
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -997,50 +971,24 @@ return {
 			},
 		},
 	},
-	"benlubas/neorg-interim-ls",
 	{
-		"nvim-neorg/neorg",
-		lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-		version = "*", -- Pin Neorg to the latest stable release
+		"j-hui/fidget.nvim",
+		event = "LspAttach",
+		opts = {},
+	},
+	{
+		"dlyongemallo/diffview.nvim",
+		version = "*",
 		config = function()
-			require("neorg").setup({
-				load = {
-					["core.defaults"] = {},
-					["core.concealer"] = {},
-					["core.dirman"] = {
-						config = {
-							default_workspace = "neorg",
-							workspaces = {
-								neorg = "~/neorg", -- Format: <name_of_workspace> = <path_to_workspace_root>
-							},
-							index = "index.norg", -- The name of the main (root) .norg file
-						},
-					},
-					["external.interim-ls"] = {
-						config = {
-							completion_provider = {
-								enable = true,
-								documentation = true,
-								categories = false,
-								people = {
-									enable = false,
-									path = "people",
-								},
-							},
-						},
-					},
-					["core.completion"] = {
-						config = { engine = { module_name = "external.lsp-completion" } },
+			require("diffview").setup({
+				file_panel = {
+					listing_style = "list",
+					win_config = {
+						position = "bottom",
+						height = 25,
 					},
 				},
 			})
-			vim.keymap.set("n", "<leader>ot", "<cmd>Neorg journal today<cr>", { desc = "Neorg: Open today's journal" })
-			vim.keymap.set("n", "<leader>of", function()
-				Snacks.picker.files({ cwd = "~/neorg" })
-			end, { desc = "Find notes" })
-			vim.keymap.set("n", "<leader>og", function()
-				Snacks.picker.grep({ cwd = "~/neorg" })
-			end, { desc = "Grep notes" })
 		end,
 	},
 }

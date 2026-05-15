@@ -1,3 +1,3 @@
 function zn
-    z $argv[1]; and nvim
+    z $argv; and nvim
 end

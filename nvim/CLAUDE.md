@@ -34,17 +34,16 @@ Uses lazy.nvim with optimized loading:
 
 ## LSP Configuration
 
-LSP servers are configured in `lua/lsp/server.lua`:
-- TypeScript: typescript-tools.nvim (not standard tsserver)
+LSP servers are configured in `lua/lsp/server.lua` using Neovim 0.11+'s native `vim.lsp.config()` / `vim.lsp.enable()` APIs:
+- TypeScript: vtsls (@vtsls/language-server)
 - Python: pyright
 - Go: gopls
 - Web: html, cssls, jsonls, eslint
 - Uses blink.cmp for completion capabilities
 
-When adding new LSP servers:
-1. Add server configuration to `lua/lsp/server.lua`
-2. Ensure mason-lspconfig includes the server name
-3. Custom on_attach logic goes in `lua/lsp/on_attach.lua`
+LSP server binaries are installed manually (via Homebrew / npm), not via mason. When adding a new server:
+1. Install the binary externally
+2. Add `vim.lsp.config("<name>", {...})` (if customizing) and `vim.lsp.enable("<name>")` to `lua/lsp/server.lua`
 
 ## AI Integration
 
