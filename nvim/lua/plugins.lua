@@ -133,7 +133,36 @@ return {
 	{ "onsails/lspkind-nvim", event = "VeryLazy" },
 	{ "tpope/vim-surround", event = "VeryLazy" },
 	{ "tpope/vim-unimpaired", event = "VeryLazy" },
-	{ "kwkarlwang/bufjump.nvim", event = "VeryLazy" },
+	{
+		"kwkarlwang/bufjump.nvim",
+		event = "VeryLazy",
+		config = function()
+			vim.keymap.set(
+				"n",
+				"<Left>",
+				":lua require('bufjump').backward()<CR>",
+				{ noremap = true, silent = true, desc = "Bufjump backward" }
+			)
+			vim.keymap.set(
+				"n",
+				"<Right>",
+				":lua require('bufjump').forward()<CR>",
+				{ noremap = true, silent = true, desc = "Bufjump forward" }
+			)
+			vim.keymap.set(
+				"n",
+				"<M-o>",
+				":lua require('bufjump').backward_same_buf()<cr>",
+				{ noremap = true, silent = true, desc = "Bufjump backward same buf" }
+			)
+			vim.keymap.set(
+				"n",
+				"<M-i>",
+				":lua require('bufjump').forward_same_buf()<cr>",
+				{ noremap = true, silent = true, desc = "Bufjump forward same buf" }
+			)
+		end,
+	},
 	{ "andymass/vim-matchup", event = "VeryLazy" },
 	{
 		"pwntester/octo.nvim",
@@ -341,6 +370,13 @@ return {
 		"tpope/vim-fugitive",
 		cmd = { "Git", "Glog", "Gdiffsplit", "GBlame", "GBrowse" },
 		dependencies = { "tpope/vim-rhubarb" },
+		keys = {
+			{ "<leader>gs", ":ToggleGStatus<CR>", desc = "Toggle git status" },
+			{ "<Leader>gd", ":tab Gdiffsplit<CR>", desc = "Git diff split" },
+			{ "<Leader>gD", ":Git difftool<CR>", desc = "Git diff tool" },
+			{ "<Leader>gdl", ":diffget //3<CR>", desc = "Git diff get local //3" },
+			{ "<Leader>gdh", ":diffget //2<CR>", desc = "Git diff get remote //2" },
+		},
 		init = function()
 			vim.api.nvim_create_user_command("ToggleGStatus", function()
 				require("lazy").load({ plugins = { "vim-fugitive" } })
@@ -641,6 +677,24 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("hlslens").setup({ calm_down = true })
+
+			local map = vim.api.nvim_set_keymap
+			map(
+				"n",
+				"n",
+				"<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>",
+				{ noremap = true, silent = true, desc = "Hlslens next" }
+			)
+			map(
+				"n",
+				"N",
+				"<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>",
+				{ noremap = true, silent = true, desc = "Hlslens prev" }
+			)
+			map("n", "*", "*<Cmd>lua require('hlslens').start()<CR>", { noremap = true, desc = "Hlslens next" })
+			map("n", "#", "#<Cmd>lua require('hlslens').start()<CR>", { noremap = true, desc = "Hlslens prev" })
+			map("n", "g*", "g*<Cmd>lua require('hlslens').start()<CR>", { noremap = true, desc = "Hlslens next" })
+			map("n", "g#", "g#<Cmd>lua require('hlslens').start()<CR>", { noremap = true, desc = "Hlslens prev" })
 		end,
 	},
 	{
@@ -661,6 +715,16 @@ return {
 			require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
 			require("luasnip").filetype_extend("typescript", { "javascript" })
 			require("luasnip").filetype_extend("typescriptreact", { "javascript" })
+
+			vim.keymap.set(
+				"i",
+				"<TAB>",
+				"luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump':'<Tab>'",
+				{ expr = true, silent = true, desc = "Luasnip expand or jump" }
+			)
+			vim.keymap.set("i", "<S-TAB>", function()
+				require("luasnip").jump(-1)
+			end, { silent = true, desc = "Luasnip jump back" })
 		end,
 	},
 	{
@@ -891,6 +955,121 @@ return {
 					Snacks.picker.projects()
 				end,
 				desc = "Open project",
+			},
+			{
+				"<leader>M",
+				function()
+					Snacks.picker.marks()
+				end,
+				desc = "Snacks marks",
+			},
+			{
+				"<Leader>b",
+				function()
+					Snacks.picker.buffers({ current = true })
+				end,
+				desc = "Snacks buffers",
+			},
+			{
+				"<Leader>fg",
+				function()
+					Snacks.picker.grep()
+				end,
+				desc = "Snacks live grep",
+			},
+			{
+				"<Leader>ff",
+				function()
+					Snacks.picker.files()
+				end,
+				desc = "Snacks find files",
+			},
+			{
+				"<Leader>fs",
+				function()
+					Snacks.picker.grep_word()
+				end,
+				mode = { "n", "v" },
+				desc = "Snacks grep word under cursor",
+			},
+			{
+				"<Leader>fo",
+				function()
+					Snacks.picker.recent()
+				end,
+				desc = "Snacks recent files",
+			},
+			{
+				"<Leader>fh",
+				function()
+					Snacks.picker.search_history()
+				end,
+				desc = "Snacks search history",
+			},
+			{
+				"<Leader>/",
+				function()
+					Snacks.picker.lines()
+				end,
+				desc = "Snacks buffer lines",
+			},
+			{
+				"<Leader>fb",
+				function()
+					Snacks.picker.grep_buffers()
+				end,
+				desc = "Snacks grep open buffers",
+			},
+			{
+				"<Leader>fS",
+				function()
+					Snacks.picker.lsp_symbols()
+				end,
+				desc = "Snacks document symbols",
+			},
+			{
+				"<Leader>fw",
+				function()
+					Snacks.picker.lsp_workspace_symbols()
+				end,
+				desc = "Snacks workspace symbols",
+			},
+			{
+				"<Leader>fd",
+				function()
+					Snacks.picker.diagnostics()
+				end,
+				desc = "Snacks diagnostics",
+			},
+			{
+				"<leader>sd",
+				function()
+					Snacks.picker.grep()
+				end,
+				desc = "Snacks live grep (glob)",
+			},
+			{
+				"<leader>fr",
+				function()
+					Snacks.picker.resume()
+				end,
+				desc = "Snacks resume",
+			},
+			{
+				"<leader>cs",
+				function()
+					local word = vim.fn.expand("<cword>")
+					local ft = vim.bo.filetype
+					local lines = vim.fn.systemlist("curl -s cheat.sh/" .. ft .. "/" .. word .. "?T")
+					Snacks.win({
+						text = lines,
+						ft = ft,
+						title = " cheat.sh/" .. ft .. "/" .. word .. " ",
+						width = 0.7,
+						height = 0.7,
+					})
+				end,
+				desc = "Cheat.sh lookup",
 			},
 		},
 		init = function()

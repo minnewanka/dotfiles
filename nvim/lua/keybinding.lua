@@ -52,22 +52,6 @@ map("o", "al", ":normal val<CR>", { noremap = true, silent = true, desc = "Aroun
 vim.keymap.set("n", "k", [[(v:count > 1 ? "m'" . v:count : "g") . 'k']], { expr = true, desc = "Move up" })
 vim.keymap.set("n", "j", [[(v:count > 1 ? "m'" . v:count : "g") . 'j']], { expr = true, desc = "Move down" })
 
--- git diff
-map("n", "<leader>gs", ":ToggleGStatus<CR>", { noremap = true, silent = true, desc = "Toggle git status" })
-map("n", "<Leader>gd", ":tab Gdiffsplit<CR>", { noremap = true, silent = true, desc = "Git diff split" })
-map("n", "<Leader>gD", ":Git difftool<CR>", { noremap = true, silent = true, desc = "Git diff tool" })
-map("n", "<Leader>gdl", ":diffget //3<CR>", { noremap = true, silent = true, desc = "Git diff get local //3" })
-map("n", "<Leader>gdh", ":diffget //2<CR>", { noremap = true, silent = true, desc = "Git diff get remote //2" })
-
--- Tab
-map(
-	"i",
-	"<TAB>",
-	"luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump':'<Tab>'",
-	{ expr = true, silent = true, desc = "Luasnip expand or jump" }
-)
-map("i", "<S-TAB>", "<cmd>lua require'luasnip'.jump(-1)<Cr>", { silent = true, desc = "ump back" })
-
 -- reselect map
 map(
 	"n",
@@ -80,59 +64,11 @@ map(
 map("n", "`", "'", { noremap = true, silent = true, desc = "Go to mark" })
 map("n", "'", "`", { noremap = true, silent = true, desc = "Go to mark" })
 
--- snacks picker
-local kmap = vim.keymap.set
-kmap("n", "<leader>M", function()
-	Snacks.picker.marks()
-end, { noremap = true, silent = true, desc = "Snacks marks" })
-kmap("n", "<Leader>b", function()
-	Snacks.picker.buffers({ current = true })
-end, { noremap = true, silent = true, desc = "Snacks buffers" })
-kmap("n", "<Leader>fg", function()
-	Snacks.picker.grep()
-end, { noremap = true, silent = true, desc = "Snacks live grep" })
-kmap("n", "<Leader>ff", function()
-	Snacks.picker.files()
-end, { noremap = true, silent = true, desc = "Snacks find files" })
-
-kmap("n", "<Leader>fs", function()
-	Snacks.picker.grep_word()
-end, { noremap = true, silent = true, desc = "Snacks grep word under cursor" })
-kmap("v", "<Leader>fs", function()
-	Snacks.picker.grep_word()
-end, { noremap = true, silent = true, desc = "Snacks grep visual selection" })
-kmap("n", "<Leader>fo", function()
-	Snacks.picker.recent()
-end, { noremap = true, silent = true, desc = "Snacks recent files" })
-kmap("n", "<Leader>fh", function()
-	Snacks.picker.search_history()
-end, { noremap = true, silent = true, desc = "Snacks search history" })
-kmap("n", "<Leader>/", function()
-	Snacks.picker.lines()
-end, { noremap = true, silent = true, desc = "Snacks buffer lines" })
-kmap("n", "<Leader>fb", function()
-	Snacks.picker.grep_buffers()
-end, { noremap = true, silent = true, desc = "Snacks grep open buffers" })
-kmap("n", "<Leader>fS", function()
-	Snacks.picker.lsp_symbols()
-end, { noremap = true, silent = true, desc = "Snacks document symbols" })
-kmap("n", "<Leader>fw", function()
-	Snacks.picker.lsp_workspace_symbols()
-end, { noremap = true, silent = true, desc = "Snacks workspace symbols" })
-kmap("n", "<Leader>fd", function()
-	Snacks.picker.diagnostics()
-end, { noremap = true, silent = true, desc = "Snacks diagnostics" })
-kmap("n", "<Leader>sd", function()
-	Snacks.picker.grep()
-end, { noremap = true, silent = true, desc = "Snacks live grep (glob)" })
 --undo break point
 map("i", ",", ",<c-g>u", { noremap = true, silent = true, desc = "Undo break point" })
 map("i", ".", ".<c-g>u", { noremap = true, silent = true, desc = "Undo break point" })
 map("i", "!", "!<c-g>u", { noremap = true, silent = true, desc = "Undo break point" })
 map("i", "?", "?<c-g>u", { noremap = true, silent = true, desc = "Undo break point" })
-
-map("n", "<F1>", ':lua require"dap".toggle_breakpoint()<CR>', { noremap = true, desc = "DAP toggle breakpoint" })
-map("n", "<F2>", ':lua require"dap".continue()<CR>', { noremap = true, desc = "DAP continue" })
 
 map(
 	"n",
@@ -146,58 +82,11 @@ map(
 	':exe "vertical resize " . (winwidth(0) * 2/3)<CR>',
 	{ noremap = true, silent = true, desc = "Decrease window width" }
 )
-kmap("n", "<leader>fr", function()
-	Snacks.picker.resume()
-end, { noremap = true, silent = true, desc = "Snacks resume" })
-
--- HlsLens
-map(
-	"n",
-	"n",
-	"<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>",
-	{ noremap = true, silent = true, desc = "Hlslens next" }
-)
-map(
-	"n",
-	"N",
-	"<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>",
-	{ noremap = true, silent = true, desc = "Hlslens prev" }
-)
-map("n", "*", "*<Cmd>lua require('hlslens').start()<CR>", { noremap = true, desc = "Hlslens next" })
-map("n", "#", "#<Cmd>lua require('hlslens').start()<CR>", { noremap = true, desc = "Hlslens prev" })
-map("n", "g*", "g*<Cmd>lua require('hlslens').start()<CR>", { noremap = true, desc = "Hlslens next" })
-map("n", "g#", "g#<Cmd>lua require('hlslens').start()<CR>", { noremap = true, desc = "Hlslens prev" })
-
-map(
-	"n",
-	"<Left>",
-	":lua require('bufjump').backward()<CR>",
-	{ noremap = true, silent = true, desc = "Bufjump backward" }
-)
-map(
-	"n",
-	"<Right>",
-	":lua require('bufjump').forward()<CR>",
-	{ noremap = true, silent = true, desc = "Bufjump forward" }
-)
-map(
-	"n",
-	"<M-o>",
-	":lua require('bufjump').backward_same_buf()<cr>",
-	{ noremap = true, silent = true, desc = "Bufjump backward same buf" }
-)
-map(
-	"n",
-	"<M-i>",
-	":lua require('bufjump').forward_same_buf()<cr>",
-	{ noremap = true, silent = true, desc = "Bufjump forward same buf" }
-)
 
 -- tab
 map("n", "<leader>tn", ":tabnew %<CR>", { noremap = true, silent = true, desc = "New tab" })
 map("n", "<leader>to", ":tabonly<CR>", { noremap = true, silent = true, desc = "Tab only" })
 map("n", "<leader>tq", ":tabclose<CR>", { noremap = true, silent = true, desc = "Tab close" })
-map("n", "<leader>tr", ":TabRename ", { noremap = true, silent = true, desc = "Tab rename" })
 
 -- unimpaired alternatives
 -- Quickfix list
@@ -215,17 +104,3 @@ vim.keymap.set("n", "<C-q>", function()
 end, { desc = "Super <C-q>" })
 
 vim.keymap.set("t", "<C-x>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode" })
-
--- cheat.sh syntax lookup
-kmap("n", "<leader>cs", function()
-	local word = vim.fn.expand("<cword>")
-	local ft = vim.bo.filetype
-	local lines = vim.fn.systemlist("curl -s cheat.sh/" .. ft .. "/" .. word .. "?T")
-	Snacks.win({
-		text = lines,
-		ft = ft,
-		title = " cheat.sh/" .. ft .. "/" .. word .. " ",
-		width = 0.7,
-		height = 0.7,
-	})
-end, { desc = "Cheat.sh lookup" })
