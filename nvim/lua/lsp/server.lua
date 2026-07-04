@@ -15,6 +15,20 @@ vim.lsp.config("vtsls", {
 })
 vim.lsp.enable("vtsls")
 
+vim.lsp.config("basedpyright", {
+	settings = {
+		basedpyright = {
+			analysis = {
+				typeCheckingMode = "basic",
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+				diagnosticMode = "openFilesOnly",
+			},
+		},
+	},
+})
+vim.lsp.enable("basedpyright")
+
 vim.lsp.enable("eslint")
 vim.lsp.enable("html")
 vim.lsp.enable("cssls")

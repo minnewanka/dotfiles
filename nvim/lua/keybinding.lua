@@ -88,9 +88,13 @@ end, { noremap = true, silent = true, desc = "Snacks marks" })
 kmap("n", "<Leader>b", function()
 	Snacks.picker.buffers({ current = true })
 end, { noremap = true, silent = true, desc = "Snacks buffers" })
-kmap("n", "<Leader>f", function()
+kmap("n", "<Leader>fg", function()
 	Snacks.picker.grep()
 end, { noremap = true, silent = true, desc = "Snacks live grep" })
+kmap("n", "<Leader>ff", function()
+	Snacks.picker.files()
+end, { noremap = true, silent = true, desc = "Snacks find files" })
+
 kmap("n", "<Leader>fs", function()
 	Snacks.picker.grep_word()
 end, { noremap = true, silent = true, desc = "Snacks grep word under cursor" })
@@ -106,6 +110,18 @@ end, { noremap = true, silent = true, desc = "Snacks search history" })
 kmap("n", "<Leader>/", function()
 	Snacks.picker.lines()
 end, { noremap = true, silent = true, desc = "Snacks buffer lines" })
+kmap("n", "<Leader>fb", function()
+	Snacks.picker.grep_buffers()
+end, { noremap = true, silent = true, desc = "Snacks grep open buffers" })
+kmap("n", "<Leader>fS", function()
+	Snacks.picker.lsp_symbols()
+end, { noremap = true, silent = true, desc = "Snacks document symbols" })
+kmap("n", "<Leader>fw", function()
+	Snacks.picker.lsp_workspace_symbols()
+end, { noremap = true, silent = true, desc = "Snacks workspace symbols" })
+kmap("n", "<Leader>fd", function()
+	Snacks.picker.diagnostics()
+end, { noremap = true, silent = true, desc = "Snacks diagnostics" })
 kmap("n", "<Leader>sd", function()
 	Snacks.picker.grep()
 end, { noremap = true, silent = true, desc = "Snacks live grep (glob)" })
@@ -199,3 +215,17 @@ vim.keymap.set("n", "<C-q>", function()
 end, { desc = "Super <C-q>" })
 
 vim.keymap.set("t", "<C-x>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode" })
+
+-- cheat.sh syntax lookup
+kmap("n", "<leader>cs", function()
+	local word = vim.fn.expand("<cword>")
+	local ft = vim.bo.filetype
+	local lines = vim.fn.systemlist("curl -s cheat.sh/" .. ft .. "/" .. word .. "?T")
+	Snacks.win({
+		text = lines,
+		ft = ft,
+		title = " cheat.sh/" .. ft .. "/" .. word .. " ",
+		width = 0.7,
+		height = 0.7,
+	})
+end, { desc = "Cheat.sh lookup" })

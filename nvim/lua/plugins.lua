@@ -805,9 +805,31 @@ return {
 					input = {
 						keys = {
 							["<Esc>"] = { "close", mode = { "n", "i" } },
-							["<c-e>"] = { "history_forward", mode = { "i", "n" } },
-							["<c-f>"] = { "history_back", mode = { "i", "n" } },
+							-- history nav on <c-k>/<c-j> (overrides default list_up/list_down);
+							-- leaves the default preview scroll on <c-b>/<c-f> intact.
+							["<c-k>"] = { "history_back", mode = { "i", "n" } },
+							["<c-j>"] = { "history_forward", mode = { "i", "n" } },
 							["<c-p>"] = { "toggle_preview", mode = { "i", "n" } },
+							-- <c-h>/<c-l> move focus between windows. These shadow the global
+							-- Navigator <C-h/l> maps so focus stays inside the picker instead
+							-- of jumping to a neighbouring window (which auto-closes it).
+							["<c-l>"] = { "focus_preview", mode = { "i", "n" } },
+							["<c-h>"] = { "focus_list", mode = { "i", "n" } },
+						},
+					},
+					-- Shadow the global Navigator <C-h/j/k/l> maps inside the list and
+					-- preview windows too, otherwise focusing them and pressing a nav key
+					-- jumps out of the picker and auto-closes it.
+					list = {
+						keys = {
+							["<c-h>"] = "focus_input",
+							["<c-l>"] = "focus_preview",
+						},
+					},
+					preview = {
+						keys = {
+							["<c-h>"] = "focus_list",
+							["<c-l>"] = "focus_input",
 						},
 					},
 				},
@@ -820,6 +842,13 @@ return {
 					Snacks.picker.smart({ layout = "dropdown" })
 				end,
 				desc = "Smart Find Files",
+			},
+			{
+				"<C-z>",
+				function()
+					Snacks.picker.zoxide({ layout = "dropdown" })
+				end,
+				desc = "Zoxide",
 			},
 			{
 				"gz",
@@ -957,6 +986,8 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {
+			delay = 300,
+			preset = "helix",
 			-- your configuration comes here
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
@@ -976,6 +1007,7 @@ return {
 		event = "LspAttach",
 		opts = {},
 	},
+	{ "nanotee/zoxide.vim" },
 	{
 		"dlyongemallo/diffview.nvim",
 		version = "*",
