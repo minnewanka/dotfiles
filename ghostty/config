@@ -6,7 +6,7 @@ keybind = super+s=text::w\x0D
 
 shell-integration = fish
 
-theme = Nvim Dark
+theme = alabaster-dark
 cursor-invert-fg-bg = true
 
 macos-titlebar-style = hidden

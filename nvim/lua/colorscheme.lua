@@ -2,6 +2,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	pattern = "*",
 	callback = function()
 		vim.api.nvim_set_hl(0, "YankHighlight", { link = "Search" })
+
+		-- Extend Alabaster's LSP semantic-token theming for TS/JS/React.
+		-- Alabaster's model: color definitions (blue) + named constants (purple), leave usages plain.
+		local def_fg = "#71ade7" -- Alabaster's definition blue
+		local const_fg = "#cc8bc9" -- Alabaster's constant purple
+		-- Definitions -> blue
+		vim.api.nvim_set_hl(0, "@lsp.typemod.interface.declaration", { fg = def_fg }) -- interface Foo (gap in Alabaster's set)
+		-- Named constants -> purple
+		vim.api.nvim_set_hl(0, "@lsp.type.enumMember", { fg = const_fg })
+		vim.api.nvim_set_hl(0, "@lsp.typemod.enumMember.defaultLibrary", { fg = const_fg })
 		-- vim.api.nvim_set_hl(0, "LspInlayHint", { link = "Comment" })
 		-- vim.api.nvim_set_hl(0, "NormalFloat", { fg = "#e2cca9", bg = "NONE" })
 		-- vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#928374", bg = "NONE" })
@@ -23,4 +33,5 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
-vim.cmd("colorscheme default")
+vim.o.background = "dark"
+vim.cmd("colorscheme alabaster")
