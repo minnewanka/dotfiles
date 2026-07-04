@@ -77,10 +77,10 @@ vim.api.nvim_create_autocmd({ "WinLeave" }, {
 })
 
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-	command = "highlight CursorLine guibg=#374141",
+	command = "highlight CursorLine guibg=#293334",
 })
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-	command = "highlight CursorLine guibg=#32302f",
+	command = "highlight CursorLine guibg=#182325",
 })
 
 vim.api.nvim_create_user_command("BufOnly", 'silent! execute "%bd|e#|bd#"', {})
