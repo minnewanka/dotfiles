@@ -8,6 +8,7 @@ shell-integration = fish
 
 theme = alabaster-dark
 cursor-invert-fg-bg = true
+bold-is-bright = true
 
 macos-titlebar-style = hidden
 
