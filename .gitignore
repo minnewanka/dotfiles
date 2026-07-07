@@ -6,3 +6,7 @@ fish_variables
 **/nvm*.fish
 **/_*.fish
 .aider*
+
+# OS / editor cruft
+**/.DS_Store
+*.log
