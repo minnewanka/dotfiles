@@ -1,3 +1,5 @@
+config-version = 2
+
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
@@ -12,9 +14,7 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = [
-  'exec-and-forget borders active_color=0xffddc7a1 inactive_color=0xff504945 width=5.0'
-]
+after-startup-command = []
 
 # Start AeroSpace at login
 start-at-login = true
@@ -182,10 +182,6 @@ alt-shift-l = ['join-with right', 'mode main']
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = "com.1password.1password"
-run = "move-node-to-workspace 0"
 
 [[on-window-detected]]
 if.app-id = "com.apple.Safari"
