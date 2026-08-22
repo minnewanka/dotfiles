@@ -61,7 +61,7 @@ return {
 			require("lualine").setup({
 				options = {
 					icons_enabled = true,
-					theme = "gruvbox-material",
+					theme = "alabaster",
 					component_separators = { left = "", right = "" },
 					section_separators = { left = "", right = "" },
 					disabled_filetypes = {},
@@ -353,6 +353,13 @@ return {
 				desc = "Snacks recent files",
 			},
 			{
+				"<Leader>fm",
+				function()
+					require("modules.ui.rush").pick()
+				end,
+				desc = "Jump to Rush module root",
+			},
+			{
 				"<Leader>fh",
 				function()
 					Snacks.picker.search_history()
@@ -467,3 +474,4 @@ return {
 		},
 	},
 }
+

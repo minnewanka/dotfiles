@@ -2,6 +2,12 @@ return {
 	{
 		"github/copilot.vim",
 		event = "VeryLazy",
+		-- LuaSnip must set its <Tab> insert map before copilot.vim sources, so
+		-- copilot#Accept() wraps the luasnip mapping as its fallback (accept a
+		-- suggestion if present, otherwise luasnip expand/jump). Without this the
+		-- alphabetical plugin-dir import loads copilot first and luasnip then
+		-- overwrites <Tab>, breaking Tab-to-accept.
+		dependencies = { "L3MON4D3/LuaSnip" },
 		config = function()
 			vim.api.nvim_set_keymap("i", "<C-c>", "copilot#Dismiss()", { silent = true, expr = true })
 			vim.api.nvim_set_keymap("i", "<C-s>", "copilot#Suggest()", { silent = true, expr = true })
@@ -35,8 +41,8 @@ return {
 			{ "<leader>cr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
 			{ "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
 			{ "<leader>cm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-			{ "<leader>cb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-			{ "<leader>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+			{ "<leader>cb", "<cmd>lua require('claude_route').add_file()<cr>", desc = "Send buffer ref to project Claude" },
+			{ "<leader>cs", "<Esc><cmd>lua require('claude_route').send_selection()<cr>", mode = "v", desc = "Send selection to project Claude" },
 			{
 				"<leader>cs",
 				"<cmd>ClaudeCodeTreeAdd<cr>",

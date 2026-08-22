@@ -86,7 +86,9 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 vim.api.nvim_create_user_command("BufOnly", 'silent! execute "%bd|e#|bd#"', {})
 vim.api.nvim_create_user_command("TSFix", "write | edit", {})
 vim.api.nvim_create_user_command("PrAll", ":Octo search archived:false is:pr state:open", {})
-vim.api.nvim_create_user_command("Pr", ":Octo search archived:false is:pr state:open review-requested:minnewanka", {})
+vim.api.nvim_create_user_command("PR", function()
+	vim.cmd("Octo search is:pr state:open archived:false involves:minnewanka -author:minnewanka -review:approved")
+end, {})
 vim.api.nvim_create_user_command("MyPr", ":Octo search assignee:minnewanka is:pr", {})
 
 -- auto save
@@ -112,4 +114,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			})
 		end, { buffer = event.buf })
 	end,
+})
+
+-- Create a custom command to copy relative file path + line range
+vim.api.nvim_create_user_command("CopyFileRange", function(opts)
+	-- '%:.' gets the relative path. Use '%:p' for full path, or '%:t' for filename only.
+	local file = vim.fn.expand("%:.")
+	local line1, line2 = opts.line1, opts.line2
+
+	-- Format as file:line (single line) or file:start-end (range)
+	local result = (line1 == line2) and string.format("%s:%d", file, line1)
+		or string.format("%s:%d-%d", file, line1, line2)
+
+	-- Copy to system clipboard (+)
+	vim.fn.setreg("+", result)
+	vim.notify("Copied: " .. result, vim.log.levels.INFO)
+end, { range = true })
+
+vim.keymap.set("v", "<leader>yr", ":<C-u>CopyFileRange<CR>", {
+	desc = "Copy file path and visual selection range to clipboard",
 })

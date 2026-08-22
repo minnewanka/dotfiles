@@ -47,13 +47,9 @@ LSP server binaries are installed manually (via Homebrew / npm), not via mason. 
 
 ## AI Integration
 
-Multiple AI tools are integrated:
-- GitHub Copilot with CopilotChat
-- CodeCompanion with custom Fidget integration (see plugins.lua:1175-1221)
-- Claude Code support
-- Aider integration
-
-CodeCompanion has special Fidget progress integration that bridges status updates.
+AI tools are configured in `lua/plugins/ai.lua`:
+- GitHub Copilot (copilot.vim) for inline completions
+- Claude Code integration via claudecode.nvim
 
 ## Testing Changes
 
