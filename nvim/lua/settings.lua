@@ -30,11 +30,10 @@ opt.undofile = true
 opt.updatetime = 300
 opt.scrolloff = 10
 opt.sidescrolloff = 8
-opt.formatoptions:append("cro")
 opt.shortmess:append("c")
 opt.swapfile = false
-opt.shell = "/bin/bash"
-opt.laststatus = 2
+opt.shell = "/opt/homebrew/bin/fish"
+-- laststatus is owned by lualine's `globalstatus = true` (which forces 3).
 vim.o.winbar = "%{%v:lua.require'modules.ui.winbar'.eval()%}"
 opt.fillchars:append({ eob = " " })
 opt.signcolumn = "yes"
@@ -45,7 +44,14 @@ opt.signcolumn = "yes"
 vim.api.nvim_create_autocmd("VimEnter", {
 	once = true,
 	callback = function()
-		require("vim._core.ui2").enable({
+		-- Private API (underscore): guard it so a rename or removal in a future
+		-- Neovim degrades to the stock message UI instead of erroring on every
+		-- startup.
+		local ok, ui2 = pcall(require, "vim._core.ui2")
+		if not ok then
+			return
+		end
+		pcall(ui2.enable, {
 			enable = true,
 			msg = {
 				target = "cmd",
@@ -64,9 +70,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-	pattern = "*",
-	command = "set formatoptions-=cro",
+-- Stop comment leaders from being continued onto the next line. This has to be
+-- an autocmd because ftplugins set formatoptions on FileType, overwriting
+-- anything set here at startup -- so hook FileType and run after them.
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function()
+		vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+	end,
 })
 
 vim.api.nvim_create_autocmd({ "WinEnter" }, {
@@ -76,12 +86,8 @@ vim.api.nvim_create_autocmd({ "WinLeave" }, {
 	command = "setlocal nocursorline",
 })
 
-vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-	command = "highlight CursorLine guibg=#293334",
-})
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-	command = "highlight CursorLine guibg=#182325",
-})
+-- Insert-mode cursorline highlighting lives in lua/colorscheme.lua, where it can
+-- be derived from the active theme.
 
 vim.api.nvim_create_user_command("BufOnly", 'silent! execute "%bd|e#|bd#"', {})
 vim.api.nvim_create_user_command("TSFix", "write | edit", {})
@@ -131,6 +137,19 @@ vim.api.nvim_create_user_command("CopyFileRange", function(opts)
 	vim.notify("Copied: " .. result, vim.log.levels.INFO)
 end, { range = true })
 
-vim.keymap.set("v", "<leader>yr", ":<C-u>CopyFileRange<CR>", {
+vim.keymap.set("v", "<leader>yr", ":CopyFileRange<CR>", {
 	desc = "Copy file path and visual selection range to clipboard",
+})
+
+-- Create a custom command to copy just the relative file path
+vim.api.nvim_create_user_command("CopyFilePath", function()
+	local file = vim.fn.expand("%:.")
+
+	-- Copy to system clipboard (+)
+	vim.fn.setreg("+", file)
+	vim.notify("Copied: " .. file, vim.log.levels.INFO)
+end, {})
+
+vim.keymap.set("n", "<leader>yp", ":<C-u>CopyFilePath<CR>", {
+	desc = "Copy file path to clipboard",
 })

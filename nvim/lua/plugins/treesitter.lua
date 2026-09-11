@@ -71,26 +71,34 @@ return {
 		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter").setup({
-				ensure_installed = { "tsx", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-				auto_install = true,
+			-- The `main` rewrite dropped `ensure_installed`/`auto_install`: setup()
+			-- accepts only `install_dir`, so passing them was a silent no-op.
+			-- Parsers are requested explicitly instead (a no-op once installed) and
+			-- highlighting is opt-in per buffer, via the autocmd below.
+			require("nvim-treesitter").install({
+				"tsx",
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"markdown",
+				"markdown_inline",
 			})
+
+			-- Start treesitter for whatever we actually have a parser for, rather
+			-- than a hand-maintained filetype list that silently falls back to
+			-- regex syntax for anything missing from it.
+			--
+			-- get_lang() returns the filetype unchanged when it knows no mapping,
+			-- so language.add() -- false when no parser is installed -- is what
+			-- filters unknown filetypes. It also keeps snacks' bigfile handling
+			-- intact: that sets filetype=bigfile, for which there is no parser.
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = {
-					"typescript",
-					"typescriptreact",
-					"javascript",
-					"javascriptreact",
-					"html",
-					"css",
-					"json",
-					"jsonc",
-					"markdown",
-					"java",
-					"lua",
-				},
-				callback = function()
-					vim.treesitter.start()
+				callback = function(ev)
+					local lang = vim.treesitter.language.get_lang(ev.match)
+					if lang and vim.treesitter.language.add(lang) then
+						vim.treesitter.start(ev.buf, lang)
+					end
 				end,
 			})
 		end,
