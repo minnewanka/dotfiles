@@ -1,0 +1,10 @@
+# Neovim writes these into the config dir; regenerable, never worth committing.
+nvim.log
+*.log
+
+# Scratch files
+test
+test.md
+
+# macOS
+.DS_Store

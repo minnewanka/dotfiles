@@ -7,33 +7,14 @@ map("n", "<BS>", "<C-^>", { noremap = true, silent = true, desc = "Toggle file" 
 map("n", "Q", "q", { noremap = true, silent = true, desc = "Disable ex mode" })
 
 -- selection
-map("i", "<C-j>", "<C-n>", { noremap = true, silent = true, desc = "Completion next" })
+-- No insert-mode <C-j> here: copilot.vim binds it to copilot#Accept() on
+-- VeryLazy, which loads after this file and wins.
 map("i", "<C-k>", "<C-p>", { noremap = true, desc = "Completion prev" })
 
-map(
-	"c",
-	"<C-k>",
-	'pumvisible() ? "<C-p>" : "<C-k>"',
-	{ noremap = true, expr = true, silent = false, desc = "Completion prev" }
-)
-map(
-	"c",
-	"<C-j>",
-	'pumvisible() ? "<C-n>" : "<C-j>"',
-	{ noremap = true, expr = true, silent = false, desc = "Completion next" }
-)
-map(
-	"c",
-	"<Up>",
-	'pumvisible() ? "<C-p>" : "<Up>"',
-	{ noremap = true, expr = true, silent = false, desc = "Completion prev" }
-)
-map(
-	"c",
-	"<Down>",
-	'pumvisible() ? "<C-n>" : "<Down>"',
-	{ noremap = true, expr = true, silent = false, desc = "Completion next" }
-)
+-- The cmdline <C-j>/<C-k>/<Up>/<Down> maps that used to live here tested
+-- pumvisible(), which only reports the legacy wildmenu popup. blink.cmp owns
+-- the cmdline menu and already binds all four (see plugins/completion.lua), so
+-- they were dead.
 
 -- hlsearch
 map("n", "ghl", ":noh<CR>", { noremap = true, silent = true, desc = "Clear highlight" })

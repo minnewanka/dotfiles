@@ -48,7 +48,6 @@ return {
 						hl = theme.fill,
 					}
 				end,
-				-- option = {}, -- setup modules' option,
 			})
 			vim.o.showtabline = 1
 		end,
@@ -164,10 +163,6 @@ return {
 		end,
 	},
 	{
-		"folke/trouble.nvim",
-		cmd = "Trouble",
-	},
-	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
@@ -180,6 +175,7 @@ return {
 			input = { enabled = true },
 			quickfile = { enabled = true },
 			statuscolumn = { enabled = true },
+			terminal = { enabled = true },
 			words = { enabled = true },
 			zen = {
 				enabled = true,
@@ -266,6 +262,14 @@ return {
 					Snacks.picker.zoxide({ layout = "dropdown" })
 				end,
 				desc = "Zoxide",
+			},
+			{
+				"<leader>tt",
+				function()
+					Snacks.terminal.toggle()
+				end,
+				desc = "Toggle terminal",
+				mode = { "n", "t" },
 			},
 			{
 				"gz",
@@ -402,13 +406,6 @@ return {
 				desc = "Snacks diagnostics",
 			},
 			{
-				"<leader>sd",
-				function()
-					Snacks.picker.grep()
-				end,
-				desc = "Snacks live grep (glob)",
-			},
-			{
 				"<leader>fr",
 				function()
 					Snacks.picker.resume()
@@ -474,4 +471,3 @@ return {
 		},
 	},
 }
-

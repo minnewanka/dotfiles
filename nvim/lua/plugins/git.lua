@@ -56,8 +56,6 @@ return {
 		branch = "main",
 		config = function()
 			require("gitsigns").setup({
-				-- numhl = false,
-				-- linehl = false,
 				on_attach = function(bufnr)
 					local gs = package.loaded.gitsigns
 
@@ -104,12 +102,10 @@ return {
 					map("n", "ghb", function()
 						gs.blame_line({ full = true })
 					end, { desc = "Blame Line" })
-					-- map("n", "gtb", gs.toggle_current_line_blame, { desc = "Toggle Current Line Blame" })
 					map("n", "ghd", gs.diffthis, { desc = "Diff This" })
 					map("n", "ghD", function()
 						gs.diffthis("~")
 					end, { desc = "Diff This ~" })
-					-- map("n", "gtd", gs.toggle_deleted, { desc = "Toggle Deleted" })
 
 					-- Text object
 					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select Hunk" })

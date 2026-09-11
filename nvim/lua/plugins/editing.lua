@@ -22,11 +22,16 @@ return {
 					lua = { "stylua" },
 					python = { "isort" },
 				},
-				format_on_save = {
-					lsp_format = "fallback",
-					async = false,
-					timeout_ms = 1000,
-				},
+				-- No formatter is configured for java, so "fallback" would hand the buffer
+				-- to jdtls's stock Eclipse profile. None of the Swingvy repos ship a
+				-- formatter config, so that rewrites decade-old files wholesale on save.
+				-- Format java deliberately with <leader><leader> instead.
+				format_on_save = function(bufnr)
+					if vim.bo[bufnr].filetype == "java" then
+						return
+					end
+					return { lsp_format = "fallback", timeout_ms = 1000 }
+				end,
 			})
 
 			vim.keymap.set({ "n", "v" }, "<leader><leader>", function()
@@ -156,8 +161,8 @@ return {
 	},
 	{
 		"stevearc/oil.nvim",
-		opts = {},
-		-- Optional dependencies
+		-- No `opts` here: a `config` function receives it but calls setup()
+		-- itself, so an opts table would silently do nothing.
 		config = function()
 			require("oil").setup({
 				keymaps = {
@@ -194,15 +199,11 @@ return {
 					},
 				},
 			})
+			-- <Leader>e only. The old <Leader>n alias was a duplicate that also
+			-- made <Leader>nt (snacks explorer) wait out 'timeoutlen' first.
 			vim.api.nvim_set_keymap(
 				"n",
 				"<Leader>e",
-				":Oil<CR>",
-				{ noremap = true, silent = true, desc = "Open Oil file explorer" }
-			)
-			vim.api.nvim_set_keymap(
-				"n",
-				"<Leader>n",
 				":Oil<CR>",
 				{ noremap = true, silent = true, desc = "Open Oil file explorer" }
 			)
@@ -225,13 +226,8 @@ return {
 	{
 		"MagicDuck/grug-far.nvim",
 		config = function()
-			-- optional setup call to override plugin options
-			-- alternatively you can set options with vim.g.grug_far = { ... }
 			require("grug-far").setup({
 				-- options, see Configuration section below
-				-- there are no required options atm
-				-- engine = 'ripgrep' is default, but 'astgrep' or 'astgrep-rules' can
-				-- be specified
 			})
 			vim.api.nvim_set_keymap(
 				"n",
@@ -259,7 +255,7 @@ return {
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
-		keys = { "<leader>h", "<leader>a", "<leader>1", "<leader>2", "<leader>3", "<leader>4", "<leader>5" },
+		keys = { "<leader>h", "<leader>a", "<leader>1", "<leader>2", "<leader>3", "<leader>4" },
 		config = function()
 			local harpoon = require("harpoon")
 
