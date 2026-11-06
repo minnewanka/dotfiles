@@ -12,6 +12,19 @@ return {
 		opts = {},
 	},
 	{
+		"dnlhc/glance.nvim",
+		cmd = "Glance",
+		keys = {
+			{ "grd", "<cmd>Glance definitions<CR>", desc = "Glance definitions" },
+			{ "grr", "<cmd>Glance references<CR>", desc = "Glance references" },
+			{ "gri", "<cmd>Glance implementations<CR>", desc = "Glance implementations" },
+			{ "grt", "<cmd>Glance type_definitions<CR>", desc = "Glance type definitions" },
+		},
+		opts = {
+			border = { enable = true },
+		},
+	},
+	{
 		"mfussenegger/nvim-jdtls",
 		ft = "java",
 		dependencies = { "mfussenegger/nvim-dap" },

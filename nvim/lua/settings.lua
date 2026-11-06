@@ -112,8 +112,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		if client and client:supports_method("textDocument/inlayHint") then
 			vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
 		end
-		vim.keymap.set("n", "grd", vim.lsp.buf.definition, { noremap = true, silent = true, buffer = event.buf })
-		vim.keymap.set("n", "gry", vim.lsp.buf.incoming_calls, { noremap = true, silent = true, buffer = event.buf })
+		vim.keymap.set("n", "gry", function()
+			Snacks.picker.lsp_incoming_calls()
+		end, { noremap = true, silent = true, buffer = event.buf, desc = "Incoming calls" })
+		vim.keymap.set("n", "grY", function()
+			Snacks.picker.lsp_outgoing_calls()
+		end, { noremap = true, silent = true, buffer = event.buf, desc = "Outgoing calls" })
 		vim.keymap.set("n", "K", function()
 			vim.lsp.buf.hover({
 				border = "rounded",

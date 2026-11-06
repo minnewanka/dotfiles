@@ -12,6 +12,52 @@ return {
 		end,
 	},
 	{
+		"emrearmagan/atlas.nvim",
+		cmd = { "Atlas" },
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"dlyongemallo/diffview.nvim",
+		},
+		keys = {
+			{ "<leader>Ap", "<cmd>Atlas pulls github<CR>", desc = "Atlas: GitHub PRs" },
+			{ "<leader>Ai", "<cmd>Atlas issues github<CR>", desc = "Atlas: GitHub issues" },
+			{ "<leader>Ar", "<cmd>Atlas review<CR>", desc = "Atlas: review PR" },
+			{ "<leader>As", "<cmd>Atlas search<CR>", desc = "Atlas: search" },
+		},
+		---@type AtlasConfig
+		opts = {
+			ui = { picker = "snacks" },
+			providers = {
+				github = {}, -- uses `gh` auth
+			},
+			pulls = {
+				github = {
+					views = {
+						{
+							name = "Review requested",
+							key = "1",
+							layout = "compact",
+							search = "is:open review-requested:@me sort:updated-desc",
+						},
+						{
+							name = "My PRs",
+							key = "2",
+							layout = "plain",
+							search = "is:open author:@me sort:updated-desc",
+						},
+						{
+							name = "This repo",
+							key = "3",
+							layout = "plain",
+							current_repo = true,
+							search = "is:open sort:updated-desc",
+						},
+					},
+				},
+			},
+		},
+	},
+	{
 		"tpope/vim-fugitive",
 		cmd = { "Git", "Glog", "Gdiffsplit", "GBlame", "GBrowse" },
 		dependencies = { "tpope/vim-rhubarb" },
@@ -122,12 +168,19 @@ return {
 		end,
 	},
 	{
+		"esmuellert/codediff.nvim",
+		cmd = "CodeDiff",
+		opts = {},
+	},
+	{
 		"dlyongemallo/diffview.nvim",
 		version = "*",
 		config = function()
 			require("diffview").setup({
+				enhanced_diff_hl = true, -- Better syntax highlighting inside the diffs
+				use_icons = true, -- Requires a Nerd Font for visual file tree anchors
 				file_panel = {
-					listing_style = "list",
+					listing_style = "tree",
 					win_config = {
 						position = "bottom",
 						height = 25,

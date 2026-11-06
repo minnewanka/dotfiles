@@ -27,6 +27,7 @@ return {
 			require("claudecode").setup({
 				terminal = {
 					split_width_percentage = 0.4,
+					auto_insert = false,
 				},
 				diff_opts = {
 					open_in_new_tab = true,

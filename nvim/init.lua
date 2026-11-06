@@ -2,6 +2,10 @@ vim.loader.enable()
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.maplocalleader = ";"
 
+-- must be set before lazy.setup() so plugins loading on early events
+-- (e.g. nvim-colorizer on BufReadPre) see it; `require("settings")` runs too late
+vim.opt.termguicolors = true
+
 vim.g.gruvbox_material_background = "hard"
 -- vim.g.gruvbox_material_foreground = "mix"
 vim.g.gruvbox_material_menu_selection_background = "blue"

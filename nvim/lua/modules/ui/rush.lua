@@ -5,7 +5,48 @@
 -- libs/voyagers/packages/*, are nested deeper than a shallow scan would find).
 local M = {}
 
---- Parse rush.json's projects list into { text, file } picker items.
+--- Read the "name" field out of a package.json, if present.
+---@param dir string
+---@return string?
+local function package_name(dir)
+	local path = dir .. "/package.json"
+	if vim.fn.filereadable(path) == 0 then
+		return nil
+	end
+	for line in io.lines(path) do
+		local name = line:match('"name"%s*:%s*"([^"]+)"')
+		if name then
+			return name
+		end
+	end
+	return nil
+end
+
+--- Find app/lib folders that have a package.json but aren't listed in
+--- rush.json yet — projects that exist in the monorepo but aren't wired up.
+---@param base string
+---@param wired table<string, boolean> projectFolder -> true, from rush.json
+---@return string[] folders, relative to base, sorted
+local function unwired_projects(base, wired)
+	local candidates = {}
+	for _, pat in ipairs({ "/apps/*", "/libs/*", "/libs/*/packages/*" }) do
+		vim.list_extend(candidates, vim.fn.glob(base .. pat, false, true))
+	end
+
+	local folders = {}
+	for _, dir in ipairs(candidates) do
+		local folder = dir:sub(#base + 2)
+		if not wired[folder] and vim.fn.filereadable(dir .. "/package.json") == 1 then
+			folders[#folders + 1] = folder
+		end
+	end
+	table.sort(folders)
+	return folders
+end
+
+--- Parse rush.json's projects list into { text, file } picker items, plus
+--- any apps/libs folders that have a package.json but aren't wired to rush
+--- yet (tagged "[unwired]" so they're easy to spot/skip).
 ---@return table[]
 function M.projects()
 	local rush_json = vim.fs.find("rush.json", { upward = true, path = vim.fn.getcwd() })[1]
@@ -14,7 +55,7 @@ function M.projects()
 	end
 	local base = vim.fs.dirname(rush_json)
 
-	local items, pkg = {}, nil
+	local items, pkg, wired = {}, nil, {}
 	for line in io.lines(rush_json) do
 		if not line:match("^%s*//") then -- skip the commented-out template entry
 			local name = line:match('"packageName"%s*:%s*"([^"]+)"')
@@ -24,13 +65,23 @@ function M.projects()
 			end
 			if folder then
 				items[#items + 1] = {
-					text = string.format("%-30s %s", pkg or "?", folder),
+					text = string.format("%-30s %-10s %s", pkg or "?", "", folder),
 					file = base .. "/" .. folder,
 				}
+				wired[folder] = true
 				pkg = nil
 			end
 		end
 	end
+
+	for _, folder in ipairs(unwired_projects(base, wired)) do
+		local name = package_name(base .. "/" .. folder) or vim.fs.basename(folder)
+		items[#items + 1] = {
+			text = string.format("%-30s %-10s %s", name, "[unwired]", folder),
+			file = base .. "/" .. folder,
+		}
+	end
+
 	return items
 end
 

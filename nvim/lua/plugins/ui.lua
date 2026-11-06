@@ -307,6 +307,13 @@ return {
 				desc = "File Explorer",
 			},
 			{
+				"<leader>nf",
+				function()
+					Snacks.explorer.reveal()
+				end,
+				desc = "Reveal File in Explorer",
+			},
+			{
 				"<leader>sp",
 				function()
 					Snacks.picker.projects()
